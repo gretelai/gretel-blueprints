@@ -26,7 +26,7 @@ GITHUB_URL = "github_url"
 NAME = "name"
 SAMPLE_DATA_KEY = "sample_data_key"
 FEATURED = "featured"
-SHIP_S3 = "ship-s3"
+SHIP = "ship-gretel"
 
 REPO_BASE = "https://github.com/gretelai/gretel-blueprints"
 
@@ -154,7 +154,7 @@ def create_manifest(base_dir: str) -> dict:
 
 
 def deploy_manifest(manifest: dict, deploy_mode: str, manifest_type: str):
-    if deploy_mode == SHIP_S3:
+    if deploy_mode == SHIP:
         for store in stores:
             dest = store + manifest_type + ".json"
             with smart_open(dest, "w") as fout:
@@ -170,5 +170,5 @@ if __name__ == "__main__":
     for base in (GRETEL,):
         manifest_dict = create_manifest(base)
 
-        if deploy_mode in (SHIP_S3,):
+        if deploy_mode in (SHIP,):
             deploy_manifest(manifest_dict, deploy_mode, base)
