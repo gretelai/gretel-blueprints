@@ -118,8 +118,7 @@ def process_manifest_dir(manifest_dir: str, subdir: str, sample_data_map: dict) 
 
 
 def get_gretel_sample_data_map() -> dict:
-    api_key = os.environ["GRETEL_API_KEY"]
-    headers = {"Authorization": api_key}
+    headers = {"Authorization": gretel_api_key}
     return requests.get(
         "https://api.gretel.cloud/records/samples", headers=headers
     ).json()["data"]["samples"]
