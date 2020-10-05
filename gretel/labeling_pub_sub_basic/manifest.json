@@ -1,0 +1,8 @@
+{
+    "name": "Introduction to data labeling with Gretel APIs",
+    "description": "This blueprint gives a basic introduction in using the Gretel python client to use Gretel Cloud APIs for automatic data labeling.",
+    "tags": ["pubsub", "python", "pii-detection"],
+    "language": "python",
+    "featured": false,
+    "blog_url": null
+}

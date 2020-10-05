@@ -1,0 +1,4 @@
+marshmallow
+smart-open==2.2.1
+requests
+aws-secretsmanager-caching
