@@ -1,0 +1,8 @@
+{
+    "name": "Create synthetic data from a saved model",
+    "description": "This blueprint shows you how to download an archived synthetic model and easily generate new data.",
+    "tags": ["synthetic-data", "ai"],
+    "sample_data_key": null,
+    "language": "python",
+    "featured": false
+}
