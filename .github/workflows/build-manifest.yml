@@ -1,0 +1,57 @@
+name: Check manifest
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+  release:
+    types: [published]
+
+jobs:
+  build-manifest:
+    runs-on: ubuntu-latest
+    steps:
+
+    # Setup and install deps
+    - uses: actions/checkout@v1
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install deps
+      run: | 
+        pip install -r requirements.txt
+        pip install -r test-requirements.txt
+    - name: Configure AWS
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+
+    # Run unit tests first
+    - name: Unit tests
+      run: pytest -s -vv test_construct_manifest.py
+
+    # Build manifest but no deploy
+    - name: Build manifest 
+      run: make manifest-check
+      if: github.event_name == 'push'
+
+    # Build and deploy manifest
+    - name: Deploy manifest
+      run: make manifest-ship-gretel
+      if: github.event_name == 'release'
+
+
+    # job notif
+    - uses: 8398a7/action-slack@v2
+      with:
+        status: ${{ job.status }}
+        author_name: unit test, flake8
+        only_mention_fail: here
+      env:
+        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: always()
