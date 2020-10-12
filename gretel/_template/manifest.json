@@ -2,7 +2,7 @@
     "name": "My short blueprint name",
     "description": "A longer description of what the blueprint does, and a use case description",
     "tags": ["a", "list", "of", "tags"],
-    "sample_data_key": "safecast",
+    "sample_data_key": "safecast (or null) if BYO DF or S3 hosted CSV, etc",
     "language": "python",
     "featured": false
 }

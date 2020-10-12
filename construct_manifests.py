@@ -7,7 +7,6 @@ from dataclasses import dataclass, field, asdict
 from typing import Dict, List
 from pathlib import Path
 import json
-import os
 
 from marshmallow import Schema, fields, validate, ValidationError
 import requests
