@@ -30,12 +30,19 @@ SHIP = "ship-gretel"
 REPO_BASE = "https://github.com/gretelai/gretel-blueprints"
 
 
-client = botocore.session.get_session().create_client("secretsmanager", region_name="us-west-2")  # noqa
-cache_config = SecretCacheConfig()
-cache = SecretCache(config=cache_config, client=client)
-store_data = json.loads(cache.get_secret_string("blueprints/storage"))
-gretel_api_key = store_data["gretel"]
-stores = (store_data["store_1"], store_data["store_2"])
+GRETEL_API_KEY = None
+STORES = None
+
+
+def set_remote_stores():
+    global GRETEL_API_KEY
+    global STORES
+    client = botocore.session.get_session().create_client("secretsmanager", region_name="us-west-2")  # noqa
+    cache_config = SecretCacheConfig()
+    cache = SecretCache(config=cache_config, client=client)
+    store_data = json.loads(cache.get_secret_string("blueprints/storage"))
+    GRETEL_API_KEY = store_data["gretel"]
+    STORES = (store_data["store_1"], store_data["store_2"])
 
 
 class ManifestError(Exception):
@@ -117,7 +124,7 @@ def process_manifest_dir(manifest_dir: str, subdir: str, sample_data_map: dict) 
 
 
 def get_gretel_sample_data_map() -> dict:
-    headers = {"Authorization": gretel_api_key}
+    headers = {"Authorization": GRETEL_API_KEY}
     return requests.get(
         "https://api.gretel.cloud/records/samples", headers=headers
     ).json()["data"]["samples"]
@@ -153,13 +160,14 @@ def create_manifest(base_dir: str) -> dict:
 
 def deploy_manifest(manifest: dict, deploy_mode: str, manifest_type: str):
     if deploy_mode == SHIP:
-        for store in stores:
+        for store in STORES:
             dest = store + manifest_type + ".json"
             with smart_open(dest, "w") as fout:
                 fout.write(json.dumps(manifest))
 
 
 if __name__ == "__main__":
+    set_remote_stores()
     try:
         deploy_mode = sys.argv[1]
     except IndexError:

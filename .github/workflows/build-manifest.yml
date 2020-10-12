@@ -20,13 +20,19 @@ jobs:
       with:
         python-version: 3.7
     - name: Install deps
-      run: pip install -r requirements.txt
+      run: | 
+        pip install -r requirements.txt
+        pip install -r test-requirements.txt
     - name: Configure AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
+
+    # Run unit tests first
+    - name: Unit tests
+      run: pytest -s -vv test_construct_manifest.py
 
     # Build manifest but no deploy
     - name: Build manifest 
