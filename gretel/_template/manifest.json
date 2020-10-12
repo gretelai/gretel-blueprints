@@ -4,5 +4,6 @@
     "tags": ["a", "list", "of", "tags"],
     "sample_data_key": "safecast",
     "language": "python",
-    "featured": false
+    "featured": false,
+    "blog_url": "https://your.blog.link"
 }
