@@ -1,6 +1,6 @@
 {
     "name": "Create synthetic data from your own CSV or DataFrame",
-    "description": "This blueprint shows you how to create a synthetic dataset from an existing CSV or DataFrame with Gretel's premium SDKs.",
+    "description": "Create a synthetic dataset from an existing CSV or DataFrame with Gretel's premium SDKs.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": null,
     "language": "python",
