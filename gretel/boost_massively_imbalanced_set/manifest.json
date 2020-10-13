@@ -1,0 +1,8 @@
+{
+    "name": "Boost a massively imbalanced set",
+    "description": "This blueprint shows you how to boost accuracy of a classifiation model by augmenting the training dataset with synthetic data.",
+    "tags": ["synthetic-data", "ai"],
+    "sample_data_key": null,
+    "language": "python",
+    "featured": true
+}
