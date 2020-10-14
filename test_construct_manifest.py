@@ -29,11 +29,20 @@ def default_manifest(name: str):
     }
 
 
-def create_manifest(target_dir: str, manifest: dict, bp_fname: str):
+def create_manifest(
+    target_dir: str,
+    manifest: dict,
+    bp_fname: str,
+    readme_fname: str = cm.README_FILE,
+    readme_contents: str = "booyah"
+):
     dest = Path(target_dir / uuid.uuid4().hex)
     dest.mkdir()
     with open(dest / bp_fname, "w") as fout:
         fout.write("# nada")
+
+    with open(dest / readme_fname, "w") as fout:
+        fout.write(readme_contents)
 
     with open(dest / "manifest.json", "w") as fout:
         fout.write(json.dumps(manifest))
@@ -88,3 +97,21 @@ def test_bad_data_sample_name(tmpdir):
 
     with pytest.raises(cm.ManifestError):
         cm.create_manifest(tmpdir)
+
+
+def test_missing_readme(tmpdir):
+    m1 = default_manifest("one")
+    create_manifest(tmpdir, m1, "blueprint.py", readme_fname="nope.md")
+
+    with pytest.raises(cm.ManifestError):
+        cm.create_manifest(tmpdir)
+
+
+def test_readme_too_big(tmpdir):
+    m1 = default_manifest("one")
+    contents = "A" * (cm.README_MAX + 1)
+    create_manifest(tmpdir, m1, "blueprint.py", readme_contents=contents)
+
+    with pytest.raises(cm.ManifestError) as err:
+        cm.create_manifest(tmpdir)
+    assert "README must be less" in str(err.value)

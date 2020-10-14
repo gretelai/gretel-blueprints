@@ -7,6 +7,7 @@ from dataclasses import dataclass, field, asdict
 from typing import Dict, List
 from pathlib import Path
 import json
+import base64
 
 from marshmallow import Schema, fields, validate, ValidationError
 import requests
@@ -26,6 +27,9 @@ NAME = "name"
 SAMPLE_DATA_KEY = "sample_data_key"
 FEATURED = "featured"
 SHIP = "ship-gretel"
+README_FILE = "README.md"
+README = "readme"
+README_MAX = 64 * 1024
 
 REPO_BASE = "https://github.com/gretelai/gretel-blueprints"
 
@@ -60,6 +64,10 @@ class ManifestSchema(Schema):
     blueprint_url = fields.String()
     language = fields.String(required=True, validate=validate.OneOf(LANGS))
     blog_url = fields.String(missing=None)
+
+    # NOTE: This gets added separately as its not part of the
+    # manifest.json file
+    readme = fields.String(missing=None)
 
 
 @dataclass
@@ -120,6 +128,17 @@ def process_manifest_dir(manifest_dir: str, subdir: str, sample_data_map: dict) 
             f"Invalid sample data key: {sample_data} in {manifest_dir}"
         )  # noqa
 
+    # scrape the README contents from the directory and b64 encode it
+    readme_file = _base / README_FILE
+    if not readme_file.is_file():
+        raise ManifestError(f"Directory {manifest_dir} missing {README_FILE}!")  # noqa
+
+    readme_contents = open(readme_file).read()
+    if len(readme_contents) > README_MAX:
+        raise ManifestError(f"README must be less than f{README_MAX} bytes")
+
+    manifest_dict[README] = base64.b64encode(readme_contents.encode()).decode()
+
     return manifest_dict
 
 
@@ -175,6 +194,9 @@ if __name__ == "__main__":
 
     for base in (GRETEL,):
         manifest_dict = create_manifest(base)
+
+        if not deploy_mode:
+            print(json.dumps(manifest_dict))
 
         if deploy_mode in (SHIP,):
             deploy_manifest(manifest_dict, deploy_mode, base)
