@@ -1,0 +1,9 @@
+{
+    "name": "Load NER results to Elasticsearch",
+    "description": "Understand the NER record format and learn how to load records into an Elasticsearch cluster.",
+    "tags": ["python"],
+    "sample_data_key": "bike-customer-orders",
+    "language": "python",
+    "featured": false,
+    "blog_url": null
+}
