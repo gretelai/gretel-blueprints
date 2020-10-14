@@ -1,6 +1,6 @@
 {
-    "name": "Boost a massively imbalanced set",
-    "description": "This blueprint shows you how to boost accuracy of a classifiation model by augmenting the training dataset with synthetic data.",
+    "name": "Boost a massively imbalanced dataset",
+    "description": "Boost the accuracy of a classification model by augmenting the training dataset with synthetic data.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": null,
     "blog_url": "https://gretel.ai/blog/improving-massively-imbalanced-datasets-in-machine-learning-with-synthetic-data",
