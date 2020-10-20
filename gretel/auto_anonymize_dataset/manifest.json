@@ -1,6 +1,6 @@
 {
     "name": "Auto-anonymize production datasets for development",
-    "description": "Builds a data pipeline that will auto-anonymize datasets using Gretel's data catalog and transformation features.",
+    "description": "Build a data pipeline that will auto-anonymize datasets using Gretel's data catalog and transformation features.",
     "tags": ["pii-detection", "anonymization", "transformers", "dev", "staging"],
     "sample_data_key": "bike-customer-orders",
     "language": "python",
