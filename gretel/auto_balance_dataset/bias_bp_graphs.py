@@ -4,7 +4,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 
-_GRETEL_PALETTE = ['#C18DFC', '#47E0B3']
+_GRETEL_PALETTE = ['#A051FA', '#18E7AA']
 _GRAPH_OPACITY = 0.75
 _GRAPH_BARGAP = 0.2  
 _GRAPH_BARGROUPGAP = .1 
