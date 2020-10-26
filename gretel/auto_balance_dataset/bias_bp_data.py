@@ -1,5 +1,5 @@
 import os
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 import numpy as np
 import pandas as pd
@@ -12,7 +12,7 @@ from gretel_client.projects import Project
 F_RATIO_THRESHOLD = .7
 
 
-def get_field_type(types: List):
+def get_field_type(types: List[dict]) -> Optional[str]:
     """
     If the field contains any numeric values, return numeric.  
     We want to return type string only when the field contains strings
@@ -22,7 +22,7 @@ def get_field_type(types: List):
     found_categorical = False
     for next_type in types:
         if next_type["type"] == "numeric":
-            return("numeric")
+            return "numeric"
         if next_type["type"] == "string":
             found_categorical = True
             
@@ -32,7 +32,7 @@ def get_field_type(types: List):
         return None
 
     
-def get_entities(entities: dict) -> list:
+def get_entities(entities: dict) -> List[str]:
     """
     We only want to list an entity with a field if it is pervasively 
     tagged in the column.
@@ -46,7 +46,7 @@ def get_entities(entities: dict) -> list:
     return entity_list
 
 
-def get_distrib(class_cnts: Dict[str, int], count: int) -> dict:
+def get_distrib(class_cnts: Dict[str, int], count: int) -> Dict[str, float]:
   
     distribution = {}
     for k in class_cnts.keys():
@@ -57,7 +57,7 @@ def get_distrib(class_cnts: Dict[str, int], count: int) -> dict:
     return sorted_distrib
 
 
-def get_field_cnts(field: pd.Series) -> dict:
+def get_field_cnts(field: pd.Series) -> Dict[str, int]:
     
     distribution = {}
     field_clean = field.dropna()
@@ -79,7 +79,7 @@ def get_project_facts(project: Project, num_records: int) -> "ProjectFacts":
     return ProjectFacts.from_project(project, config)
 
 
-def get_project_info(project: Project, mode = "full", num_records = 5000, gen_lines = None):
+def get_project_info(project: Project, mode = "full", num_records = 5000, gen_lines = None) -> dict:
     """
     This gathers the necessary information from a Project to support synthetic auto-balance
     
@@ -122,7 +122,7 @@ def get_project_info(project: Project, mode = "full", num_records = 5000, gen_li
     return project_info
 
 
-def bias_fields(project_info: dict) -> list:
+def bias_fields(project_info: dict) -> List[str]:
     """
     This functions returns the list of fields that were chosen
     by the user in the notebook to remove bias from

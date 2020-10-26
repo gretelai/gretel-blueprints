@@ -1,17 +1,18 @@
 import math
+from typing import Tuple, Dict
 
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 
-_GRETEL_PALETTE = ['#A051FA', '#18E7AA']
+_GRETEL_PALETTE = ['#C18DFC', '#47E0B3']
 _GRAPH_OPACITY = 0.75
 _GRAPH_BARGAP = 0.2  
 _GRAPH_BARGROUPGAP = .1 
 _GRAPH_MAX_BARS = 1000
 
 
-def get_graph_dimen(fields: dict, uniq_cnt_threshold: int):
+def get_graph_dimen(fields: dict, uniq_cnt_threshold: int) -> Tuple[int,int]:
     """
     Helper function to first figure out how many graphs we'll be
     displaying, and then based on that determine the appropriate
@@ -35,7 +36,7 @@ def get_graph_dimen(fields: dict, uniq_cnt_threshold: int):
     return row_cnt, col_cnt
 
  
-def get_distrib_show(distrib: dict) -> dict:
+def get_distrib_show(distrib: Dict[str, float]) -> Dict[str, float]:
     """
     Plotly slighly freaks with more than 1000 bars, so in the remote
     chance they chose to see graphs with more than 1000 unique values
@@ -70,7 +71,7 @@ def show_field_graphs(fields: dict, uniq_cnt_threshold=10):
             titles.append(field)
     
     shared_yaxes = True
-    if (col_cnt == 1):
+    if col_cnt == 1:
         shared_yaxes = False
         
     fig = make_subplots(rows=row_cnt, cols=col_cnt, shared_yaxes=shared_yaxes, subplot_titles=titles)
@@ -110,7 +111,7 @@ def show_field_graphs(fields: dict, uniq_cnt_threshold=10):
     fig.show()
 
     
-def get_new_distrib(field: pd.Series) -> dict:
+def get_new_distrib(field: pd.Series) -> Dict[str, float]:
     """
     Even though we know what the new distribution will be, here
     we compute it fresh from the new data as a sanity check
@@ -126,7 +127,7 @@ def get_new_distrib(field: pd.Series) -> dict:
     return distribution   
 
 
-def show_bar_chart(orig: dict, new: dict, field: str, mode: str):
+def show_bar_chart(orig: Dict[str, float], new: Dict[str, float], field: str, mode: str):
     """
     This function takes two distributions (orig and new), along
     with the name of the field and mode and plots the 
@@ -184,7 +185,4 @@ def show_new_graphs(project_info: dict, synth_df: pd.DataFrame):
             new = pd.Series(new_df[field]).dropna()           
             new_distrib = get_new_distrib(new)
             show_bar_chart(project_info["field_stats"][field]["distrib"], new_distrib, field, project_info["mode"])
-
-  
-    
     

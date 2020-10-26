@@ -1,10 +1,11 @@
 import random
+from typing import List, Dict
 
 import pandas as pd
 import itertools
 
 
-def get_mode_full_seeds(project_info: dict) -> list:
+def get_mode_full_seeds(project_info: dict) -> List[dict]:
     """
     This function gets the smarts seeds needed to generate synthetic data
     when the user has chosen mode "full" (generate a full synthetic dataset).
@@ -43,7 +44,7 @@ def get_mode_full_seeds(project_info: dict) -> list:
     return seed_fields
 
 
-def get_seed_amts(field: dict) -> dict:
+def get_seed_amts(field: dict) -> Dict[str, int]:
     
     seed_needs = {}
     max = 0
@@ -56,7 +57,7 @@ def get_seed_amts(field: dict) -> dict:
     return seed_needs
 
 
-def get_mode_additive_seeds(project_info: dict) -> list:
+def get_mode_additive_seeds(project_info: dict) -> List[dict]:
     """
     This function gets the smarts seeds needed to generate synthetic data
     when the user has chosen mode "additive" (generate only enough synthetic data, such
@@ -140,7 +141,7 @@ def get_mode_additive_seeds(project_info: dict) -> list:
     return seed_fields
 
 
-def gen_smart_seeds(project_info: dict):
+def gen_smart_seeds(project_info: dict) -> dict:
 
     if project_info["mode"] == "full":
         seeds = get_mode_full_seeds(project_info)
@@ -166,7 +167,7 @@ def compute_synth_needs(project_info: dict) -> dict:
     return(project_info)
 
 
-def gen_synth_nobias(bundle, project_info) -> pd.DataFrame:
+def gen_synth_nobias(bundle, project_info: dict) -> pd.DataFrame:
     """
     This is the main routine called in the synth auto-balance notebook for
     generating balanced synthetic data.  It returns the final synthetic

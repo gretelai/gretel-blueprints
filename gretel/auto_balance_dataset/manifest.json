@@ -1,0 +1,9 @@
+{
+    "name": "Auto-Balance Dataset",
+    "description": "Use Gretel-Synthetics to automatically balance your project data. This blueprint can be used in support of fair AI and generally any imbalanced dataset to boost minority classes. In one pass, bias will be completely removed from as many fields as you like.",
+    "tags": ["synthetic-data", "ai"],
+    "sample_data_key": null,
+    "blog_url": "",
+    "language": "python",
+    "featured": false
+}

@@ -1,6 +1,7 @@
+from functools import partial
+
 from tabulate import tabulate
 from ipywidgets import HBox, VBox, widgets, Layout, HTML
-from functools import partial
 
 
 def choose_bias_fields(project_info: dict) -> dict:
@@ -65,4 +66,4 @@ def choose_bias_fields(project_info: dict) -> dict:
         )
     )
     
-    return(project_info)
+    return project_info
