@@ -31,7 +31,7 @@ README_FILE = "README.md"
 README = "readme"
 README_MAX = 64 * 1024
 
-REPO_BASE = "https://github.com/gretelai/gretel-blueprints"
+REPO_BASE = "https://github.com/gretelai/gretel-blueprints/blob/master"
 
 
 GRETEL_API_KEY = None
