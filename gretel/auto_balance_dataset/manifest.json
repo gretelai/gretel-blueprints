@@ -1,0 +1,9 @@
+{
+    "name": "Automatically balance your data",
+    "description": "Automatically balance minority classes in a dataset. Easily remove bias from as many fields as you like.",
+    "tags": ["synthetic-data", "ai"],
+    "sample_data_key": "us-adult-income",
+    "blog_url": "",
+    "language": "python",
+    "featured": true
+}
