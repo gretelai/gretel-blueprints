@@ -46,8 +46,18 @@ jobs:
         status: ${{ job.status }}
         author_name: Release 
         only_mention_fail: here
-        text: ':rocket: Deployed Blueprint Manifests'
+        text: 'DEV - :rocket: Deployed Blueprint Manifests'
       env:
-        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: always()
+      if: github.event_name == 'push'
+
+    # job notif
+    - uses: 8398a7/action-slack@v2
+      with:
+        status: ${{ job.status }}
+        author_name: Release 
+        only_mention_fail: here
+        text: 'PROD - :rocket: Deployed Blueprint Manifests'
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: github.event_name == 'release'
