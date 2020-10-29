@@ -1,4 +1,4 @@
-name: Check manifest
+name: Release manifest
 
 on:
   push:
