@@ -196,7 +196,7 @@ def gen_synth_nobias(bundle, project_info: dict) -> pd.DataFrame:
     for seed in seeds:
         print("Balancing combination " + str(cnt) + " of " + str(seed_cnt) + ":")
         cnt += 1
-        bundle.generate(num_lines=seed["cnt"], max_invalid=max_invalid, seed_fields=seed["seed"])
+        bundle.generate(num_lines=int(seed["cnt"]), max_invalid=max_invalid, seed_fields=seed["seed"])
         tempdf = bundle.get_synthetic_df()
         synth_df = synth_df.append(tempdf, ignore_index=True)
 
