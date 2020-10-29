@@ -27,26 +27,38 @@ NAME = "name"
 SAMPLE_DATA_KEY = "sample_data_key"
 FEATURED = "featured"
 SHIP = "ship-gretel"
+STAGE = "stage"
+PROD = "prod"
 README_FILE = "README.md"
 README = "readme"
 README_MAX = 64 * 1024
 
 REPO_BASE = "https://github.com/gretelai/gretel-blueprints/blob/master"
 
+@dataclass
+class Stores:
+    stage: str = None
+    prod: str = None
+    api_key: str = None
 
-GRETEL_API_KEY = None
-STORES = None
+    def get_by_stage(self, stage: str):
+        _map = {
+            STAGE: self.stage,
+            PROD: self.prod
+        }
+        return _map.get(stage)
+
+STORES = Stores()
 
 
 def set_remote_stores():
-    global GRETEL_API_KEY
-    global STORES
     client = botocore.session.get_session().create_client("secretsmanager", region_name="us-west-2")  # noqa
     cache_config = SecretCacheConfig()
     cache = SecretCache(config=cache_config, client=client)
     store_data = json.loads(cache.get_secret_string("blueprints/storage"))
-    GRETEL_API_KEY = store_data["gretel"]
-    STORES = (store_data["store_1"], store_data["store_2"])
+    STORES.api_key = store_data["gretel"]
+    STORES.stage = store_data["store_1"]
+    STORES.prod = store_data["store_2"]
 
 
 class ManifestError(Exception):
@@ -143,10 +155,11 @@ def process_manifest_dir(manifest_dir: str, subdir: str, sample_data_map: dict) 
 
 
 def get_gretel_sample_data_map() -> dict:
-    headers = {"Authorization": GRETEL_API_KEY}
-    return requests.get(
+    headers = {"Authorization": STORES.api_key}
+    res = requests.get(
         "https://api.gretel.cloud/records/samples", headers=headers
-    ).json()["data"]["samples"]
+    )
+    return res.json()["data"]["samples"]
 
 
 def create_manifest(base_dir: str) -> dict:
@@ -177,20 +190,21 @@ def create_manifest(base_dir: str) -> dict:
     return asdict(manifest)
 
 
-def deploy_manifest(manifest: dict, deploy_mode: str, manifest_type: str):
+def deploy_manifest(manifest: dict, deploy_mode: str, manifest_type: str, store: str):
     if deploy_mode == SHIP:
-        for store in STORES:
-            dest = store + manifest_type + ".json"
-            with smart_open(dest, "w") as fout:
-                fout.write(json.dumps(manifest))
+        dest = store + manifest_type + ".json"
+        with smart_open(dest, "w") as fout:
+            fout.write(json.dumps(manifest))
 
 
 if __name__ == "__main__":
     set_remote_stores()
     try:
         deploy_mode = sys.argv[1]
+        deploy_stage = sys.argv[2]
     except IndexError:
         deploy_mode = None
+        deploy_stage = None
 
     for base in (GRETEL,):
         manifest_dict = create_manifest(base)
@@ -199,4 +213,5 @@ if __name__ == "__main__":
             print(json.dumps(manifest_dict))
 
         if deploy_mode in (SHIP,):
-            deploy_manifest(manifest_dict, deploy_mode, base)
+            store = STORES.get_by_stage(deploy_stage)
+            deploy_manifest(manifest_dict, deploy_mode, base, store)

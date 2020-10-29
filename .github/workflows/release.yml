@@ -3,8 +3,7 @@ name: Check manifest
 on:
   push:
     branches:
-      - '**'
-      - '!master'
+      - 'master'
   release:
     types: [published]
 
@@ -30,18 +29,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    # Run unit tests first
-    - name: Unit tests
-      run: pytest -s -vv test_construct_manifest.py
-
-    # Build manifest but no deploy
-    - name: Build manifest 
-      run: make manifest-check
+    # On master: Build and deploy manifest
+    - name: Deploy manifest to staging
+      run: make manifest-ship-gretel
       if: github.event_name == 'push'
 
-    # Build and deploy manifest
-    - name: Deploy manifest
-      run: make manifest-ship-gretel
+    # On release: Build and deploy manifest
+    - name: Deploy manifest to prod
+      run: make manifest-ship-gretel STAGE=prod
       if: github.event_name == 'release'
 
 
@@ -49,8 +44,9 @@ jobs:
     - uses: 8398a7/action-slack@v2
       with:
         status: ${{ job.status }}
-        author_name: unit test, flake8
+        author_name: Release 
         only_mention_fail: here
+        text: ':rocket: Deployed Blueprint Manifests'
       env:
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
