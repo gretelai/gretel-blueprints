@@ -91,7 +91,7 @@ def get_mode_additive_seeds(project_info: dict) -> List[dict]:
             #Idea is to keep looping through the field's class values, incrementing the corresponding seed
             #amount by one each time, until the "diff" has been used up.  Once the "diff" is used up, we
             #must exit the loop immediately so that all field lists are of the same length.
-            while (more):
+            while more:
                 for class_value in seed_amts[field]:
                     if used == diff:
                         more = False
@@ -164,7 +164,7 @@ def compute_synth_needs(project_info: dict) -> dict:
             
         print("Total synthetic records required to fix bias is: " + str(synth_needs))
               
-    return(project_info)
+    return project_info
 
 
 def gen_synth_nobias(bundle, project_info: dict) -> pd.DataFrame:

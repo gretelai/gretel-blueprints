@@ -44,7 +44,7 @@ def get_distrib_show(distrib: Dict[str, float]) -> Dict[str, float]:
     """
  
     if len(distrib) <= _GRAPH_MAX_BARS:
-        return(distrib)
+        return distrib
 
     cnt = 0
     new_distrib = {}
@@ -52,7 +52,7 @@ def get_distrib_show(distrib: Dict[str, float]) -> Dict[str, float]:
         new_distrib[field] = distrib[field]
         cnt += 1
         if cnt == _GRAPH_MAX_BARS:
-            return(new_distrib) 
+            return new_distrib 
     
     
 def show_field_graphs(fields: dict, uniq_cnt_threshold=10):
