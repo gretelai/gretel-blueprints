@@ -35,7 +35,9 @@ spec:
                 name: api-token
                 key: token
           - name: GRETEL_DEV_EP
-            value: "yes"
+            value: {{ quote .Values.devMode }}
+          - name: DETECTION_MODE
+            value: {{ quote .Values.detectionMode }}
           ports:
             - name: http
               containerPort: 8000

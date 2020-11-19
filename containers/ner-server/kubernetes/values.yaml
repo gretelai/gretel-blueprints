@@ -6,7 +6,8 @@ image:
   # Overrides the image tag that defaults to the Chart version
   tag: "latest"
 
-imagePullSecrets: ["gretel"]
+imagePullSecrets:
+- name: "gretel"
 
 service:
   type: ClusterIP
@@ -20,6 +21,11 @@ resources:
     cpu: 1
     memory: 1Gi
 
+# Options are no or yes
+devMode: "no"
+
+# Options are all or fast
+detectionMode: "all"
 
 # Only used if autoscaling is disabled
 replicaCount: 1
