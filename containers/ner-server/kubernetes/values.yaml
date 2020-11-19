@@ -1,0 +1,31 @@
+# These values parameterize the values in the templates
+
+image:
+  repository: gretelai/ner
+  pullPolicy: IfNotPresent
+  # Overrides the image tag that defaults to the Chart version
+  tag: "latest"
+
+imagePullSecrets: ["gretel"]
+
+service:
+  type: ClusterIP
+  port: 8000
+
+resources:
+  limits:
+    cpu: 1
+    memory: 1Gi
+  requests:
+    cpu: 1
+    memory: 1Gi
+
+
+# Only used if autoscaling is disabled
+replicaCount: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
