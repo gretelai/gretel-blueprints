@@ -35,3 +35,23 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
+
+customRegexes:
+  prefix: acme  # required prefix for all entity names
+
+  predictors:
+    user_id:  # the name of the entity that will be created
+      patterns:
+          - score: high  # one of high, med, low
+            regex: "^user_id[\\d]{8}_[A-Z]{3}"  # the actual regex
+            header_match:  # regexes for header matches
+              - uid
+              - user
+              - member
+          - score: med
+            regex: "[\\d]{8}"
+            header_skip: trans  # skip transaction IDs
+    special_phone:
+      patterns:
+        - score: high
+          regex: "^8675309" # super important phone number should not be leaked

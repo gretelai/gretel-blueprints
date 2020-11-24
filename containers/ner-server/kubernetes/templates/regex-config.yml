@@ -1,0 +1,8 @@
+{{ if .Values.customRegexes }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: regex-config
+data:
+{{ toYaml .Values.customRegexes | indent 2 }}
+{{- end}}
