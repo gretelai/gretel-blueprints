@@ -3,5 +3,5 @@
     "description": "Label and anonymize free text chat logs.",
     "tags": ["ner", "nlp", "transformers"],
     "language": "python",
-    "featured": false,
+    "featured": false
 }
