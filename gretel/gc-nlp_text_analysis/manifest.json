@@ -1,0 +1,7 @@
+{
+    "name": "Working Safely with Sensitive Free Text Using Gretel.ai and NLP",
+    "description": "Label and anonymize free text chat logs.",
+    "tags": ["ner", "nlp", "transformers"],
+    "language": "python",
+    "featured": false,
+}
