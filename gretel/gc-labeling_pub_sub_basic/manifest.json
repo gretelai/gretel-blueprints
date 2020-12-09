@@ -1,6 +1,6 @@
 {
-    "name": "Introduction to data labeling with Gretel APIs",
-    "description": "A basic introduction in using the Gretel python client to use Gretel Cloud APIs for automatic data labeling.",
+    "name": "Label data with Gretel APIs",
+    "description": "A basic introduction using the Gretel client and cloud APIs for automatic data labeling.",
     "tags": ["pubsub", "python", "pii-detection"],
     "language": "python",
     "featured": false,

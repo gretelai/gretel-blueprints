@@ -1,6 +1,6 @@
 {
-    "name": "Create synthetic data from a saved model",
-    "description": "Download an archived synthetic model and easily generate new data.",
+    "name": "Save and load synthetic models",
+    "description": "Save and load your synthetic data models.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": null,
     "language": "python",

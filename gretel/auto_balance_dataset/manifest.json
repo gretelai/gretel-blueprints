@@ -1,9 +1,9 @@
 {
-    "name": "Automatically balance your data",
-    "description": "Automatically balance minority classes in a dataset. Easily remove bias from as many fields as you like.",
+    "name": "Balance race, gender, and income in a dataset",
+    "description": "Create a more fair and balanced version of the 1994 US Census dataset using synthetic data.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": "us-adult-income",
-    "blog_url": "",
+    "blog_url": "https://gretel.ai/blog/automatically-reducing-ai-bias-with-synthetic-data",
     "language": "python",
     "featured": true
 }
