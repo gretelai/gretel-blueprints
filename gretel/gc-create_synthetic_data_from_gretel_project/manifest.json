@@ -1,6 +1,6 @@
 {
     "name": "Create synthetic data from a Gretel Cloud Project",
-    "description": "Create a synthetic dataset from an existing Gretel Cloud Project that utilizes records in your project stream.",
+    "description": "Create a synthetic dataset from records in your project stream.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": "safecast",
     "language": "python",

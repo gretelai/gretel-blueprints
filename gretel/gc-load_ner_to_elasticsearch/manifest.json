@@ -1,9 +1,9 @@
 {
-    "name": "Load NER results to Elasticsearch",
-    "description": "Understand the NER record format and learn how to load records into an Elasticsearch cluster.",
+    "name": "Label data for Elasticsearch",
+    "description": "Label data using Gretel's named entity recognition APIs and explore results in Elastic.",
     "tags": ["python"],
     "sample_data_key": "bike-customer-orders",
     "language": "python",
     "featured": false,
-    "blog_url": null
+    "blog_url": "https://gretel.ai/blog/load-ner-data-into-elasticsearch"
 }
