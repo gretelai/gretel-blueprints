@@ -1,6 +1,6 @@
 {
     "name": "Create synthetic data from a CSV or DataFrame",
-    "description": "Use Gretel's SDK to create a synthetic dataset from a CSV or DataFrame.",
+    "description": "Use Gretel's SDKs to create a synthetic dataset from a CSV or DataFrame.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": null,
     "language": "python",
