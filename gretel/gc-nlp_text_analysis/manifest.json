@@ -1,7 +1,8 @@
 {
-    "name": "Work Safely with Sensitive Free Text Using Gretel",
-    "description": "Label and anonymize free text chat logs using Gretel NER and NLP pipelines.",
+    "name": "Automate detecting sensitive Personally Identifiable Information (PII)",
+    "description": "Label and anonymize unstructured text chat logs using Gretel NER and NLP pipelines.",
     "tags": ["ner", "nlp", "transformers"],
     "language": "python",
-    "featured": false
+    "featured": false,
+    "blog_url": "https://gretel.ai/blog/automate-detecting-sensitive-personally-identifiable-information-pii-with-gretel"
 }
