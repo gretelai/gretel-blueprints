@@ -1,5 +1,5 @@
 {
-    "name": "Automate detecting sensitive Personally Identifiable Information (PII)",
+    "name": "Automate Personally Identifiable Information (PII) detection",
     "description": "Label and anonymize unstructured text chat logs using Gretel NER and NLP pipelines.",
     "tags": ["ner", "nlp", "transformers"],
     "language": "python",
