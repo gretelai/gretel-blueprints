@@ -21,3 +21,59 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{"message": "Update: user_id12345678_BAL has completed working on operation ROCKYBALBOA as of 12/28/2020"}'
 ```
+
+Resulting predictions:
+
+```
+[
+  {
+    "data": {
+      "message": "Update: user_id12345678_BAL as completed working on operation ROCKYBALBOA as of 12/28/2020"
+    },
+    "metadata": {
+      "gretel_id": "4a5223dfe38348b6bbf99aae1441c773",
+      "fields": {
+        "message": {
+          "ner": {
+            "labels": [
+              {
+                "start": 8,
+                "end": 27,
+                "label": "acme/user_id",
+                "score": 0.8,
+                "source": "acme/user_id",
+                "text": "user_id12345678_BAL"
+              },
+              {
+                "start": 62,
+                "end": 73,
+                "label": "acme/codewords",
+                "score": 0.9,
+                "source": "acme/codewords",
+                "text": "ROCKYBALBOA"
+              }
+            ]
+          }
+        }
+      },
+      "entities": {
+        "score_high": [
+          "acme/user_id",
+          "acme/codewords"
+        ],
+        "score_med": [],
+        "score_low": [],
+        "fields_by_entity": {
+          "acme/user_id": [
+            "message"
+          ],
+          "acme/codewords": [
+            "message"
+          ]
+        }
+      },
+      "received_at": "2021-01-05T21:08:47.935139Z"
+    }
+  }
+]
+```
