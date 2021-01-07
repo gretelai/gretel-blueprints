@@ -3,6 +3,8 @@
 This blueprint demonstrates how to launch the Gretel NER container with custom predictors. This assumes you have already
 pulled the container image from DockerHub.
 
+**NOTE**: You must set your `GRETEL_API_KEY` in `docker-compose.yml`
+
 The following files are volume mounted into the container(s):
 
 - `config.yml`: Defines all custom predictors that should be loaded for use by the API.
