@@ -7,7 +7,7 @@ The following files are volume mounted into the container(s):
 
 - `config.yml`: Defines all custom predictors that should be loaded for use by the API.
 
-- `codewords.txt`: Is a example phrase list that can be used by the phrase predictor. Each phrase much be on a its own line.
+- `codewords.txt`: Is an example phrase list that can be used by the phrase predictor. Each phrase much be on a its own line.
 
 To launch the container and test:
 
