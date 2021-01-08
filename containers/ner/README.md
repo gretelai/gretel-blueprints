@@ -21,7 +21,7 @@ docker-compose up --scale ner=1
 curl --request POST \
   --url http://localhost:8000/records/detect_entities \
   --header 'Content-Type: application/json' \
-  --data '{"message": "Update: user_id12345678_BAL has completed working on operation ROCKYBALBOA as of 12/28/2020"}'
+  --data '{"message": "Update: user_id12345678_BAL has completed working on operation ROCKYBALBOA as of 12/28/2020"}' | python -m json.tool
 ```
 
 Resulting predictions:
