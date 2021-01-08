@@ -1,0 +1,21 @@
+# Required, must be 3-16 chars, start with a letter, 
+# and only contain letters and underscores. All predictions
+# yielded from this config will start with "acme/..."
+namespace: acme  
+
+regex: # required key if defining custom regular expressions
+  # This custom value will be used create the predictor name and label, all
+  # predictions that match from here will be labeled as "acme/user_id"
+  user_id:  
+    patterns: # required key
+      - score: high  # one of: high, med, low
+        regex: "user_id[\\d]{8}_[A-Z]{3}"  # the actual regex
+        
+phrase:  # required key if defining custom phrases / wordlists
+  # This custom value will be used to create the name / label for
+  # predictions. In this example, phrases that match this predictor
+  # will be labeled as "acme/codewords"
+  codewords:
+    paths:  # required key to specify phrase list files
+      - path: /gretel/codewords.txt  # NOTE: this is the absolute path to the mounted file in the running container
+        case: no  # flip to "yes" if phrases should be case sensitive (as defined)
