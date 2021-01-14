@@ -11,4 +11,4 @@ model.save("my_model.tar.gz")
 
 The same `SyntheticDataBundle` class has a factory method that can load an unarchived model and generate data from it.
 
-This blueprint has sample code to download a remotely saved model, decmpress and un-tar it and load it back into the bundle interface.
+This blueprint has sample code to download a remotely saved model, decompress and un-tar it and load it back into the bundle interface.
