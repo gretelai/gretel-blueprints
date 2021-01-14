@@ -167,7 +167,7 @@ def compute_synth_needs(project_info: dict) -> dict:
     return project_info
 
 
-def gen_synth_nobias(bundle, project_info: dict) -> pd.DataFrame:
+def gen_synth_nobias(model, project_info: dict) -> pd.DataFrame:
     """
     This is the main routine called in the synth auto-balance notebook for
     generating balanced synthetic data.  It returns the final synthetic
@@ -196,8 +196,8 @@ def gen_synth_nobias(bundle, project_info: dict) -> pd.DataFrame:
     for seed in seeds:
         print("Balancing combination " + str(cnt) + " of " + str(seed_cnt) + ":")
         cnt += 1
-        bundle.generate(num_lines=int(seed["cnt"]), max_invalid=max_invalid, seed_fields=seed["seed"])
-        tempdf = bundle.get_synthetic_df()
+        model.generate(num_lines=int(seed["cnt"]), max_invalid=max_invalid, seed_fields=seed["seed"])
+        tempdf = model.get_synthetic_df()
         synth_df = synth_df.append(tempdf, ignore_index=True)
 
     return synth_df
