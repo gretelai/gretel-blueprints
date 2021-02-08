@@ -9,8 +9,8 @@ services:
     networks:
       - "gretel"
     volumes:
-      - ./config.yml:/gretel/config.yml:ro
-      - ./codewords.txt:/gretel/codewords.txt:ro
+      - ./config.yml:/etc/gretel/config.yml:ro
+      - ./codewords.txt:/etc/gretel/codewords.txt:ro
   nginx:
     image: nginx:latest
     volumes:
