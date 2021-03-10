@@ -1,0 +1,8 @@
+{
+    "name": "Create synthetic data with Gretel smart seeding",
+    "description": "Create a synthetic dataset with partial data from a CSV or DataFrame",
+    "tags": ["synthetic-data", "ai"],
+    "sample_data_key": null,
+    "language": "python",
+    "featured": false
+}
