@@ -1,6 +1,6 @@
 {
-    "name": "Label data for Elasticsearch",
-    "description": "Label data using Gretel's named entity recognition APIs and explore results in Elastic.",
+    "name": "Label data for Elastic",
+    "description": "Label data and explore results in Elastic.",
     "tags": ["python"],
     "sample_data_key": "bike-customer-orders",
     "language": "python",

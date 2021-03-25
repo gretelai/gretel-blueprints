@@ -1,6 +1,6 @@
 {
-    "name": "Create time series synthetic data with Gretel smart seeding",
-    "description": "Create a synthetic dataset from a source timeseries CSV or DataFrame",
+    "name": "Synthesize time series data",
+    "description": "Create synthetic time series data",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": null,
     "language": "python",

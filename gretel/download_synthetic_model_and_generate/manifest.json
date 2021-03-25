@@ -1,6 +1,6 @@
 {
-    "name": "Save and load synthetic models",
-    "description": "Save and load your synthetic data models.",
+    "name": "Load a synthetic model",
+    "description": "Load a saved synthetic model.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": null,
     "language": "python",

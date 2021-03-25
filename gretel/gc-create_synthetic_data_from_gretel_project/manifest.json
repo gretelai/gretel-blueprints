@@ -1,8 +1,8 @@
 {
     "name": "Create synthetic data",
-    "description": "Create synthetic data from records in your project stream.",
+    "description": "Create synthetic data from a project stream.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": "safecast",
     "language": "python",
-    "featured": true
+    "featured": false
 }

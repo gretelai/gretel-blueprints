@@ -1,8 +1,8 @@
 {
-    "name": "Automate Personally Identifiable Information (PII) detection",
-    "description": "Label and anonymize unstructured text chat logs using Gretel NER and NLP pipelines.",
+    "name": "Label and replace PII",
+    "description": "Replace names, addresses, and PII in chat logs.",
     "tags": ["ner", "nlp", "transformers"],
     "language": "python",
-    "featured": false,
+    "featured": true,
     "blog_url": "https://gretel.ai/blog/automate-detecting-sensitive-personally-identifiable-information-pii-with-gretel"
 }

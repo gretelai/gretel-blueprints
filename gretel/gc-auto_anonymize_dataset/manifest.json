@@ -1,9 +1,9 @@
 {
     "name": "Anonymize sensitive data",
-    "description": "Build a pipeline to automatically anonymize sensitive data.",
+    "description": "Build a pipeline to anonymize sensitive data.",
     "tags": ["pii-detection", "anonymization", "transformers"],
     "sample_data_key": "bike-customer-orders",
     "blog_url": "https://gretel.ai/blog/auto-anonymize-production-datasets-for-development",
     "language": "python",
-    "featured": true
+    "featured": false
 }
