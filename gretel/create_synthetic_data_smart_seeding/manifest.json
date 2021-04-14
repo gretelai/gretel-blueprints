@@ -1,6 +1,6 @@
 {
-    "name": "Seed a synthetic model",
-    "description": "Seed a model with data you wish to retain.",
+    "name": "Smart-seed a synthetic model",
+    "description": "Seed a model with columns you wish to retain.",
     "tags": ["synthetic-data", "ai"],
     "sample_data_key": null,
     "language": "python",
