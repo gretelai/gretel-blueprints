@@ -1,0 +1,21 @@
+schema_version: 1.0
+
+models:
+  - synthetics:
+      data_source: "__tmp__"
+      params:
+        epochs: 100
+        batch_size: 1
+        vocab_size: 0
+        reset_states: null
+        learning_rate: .001
+        rnn_units: 64
+        dropout_rate: null
+
+      validators:
+        in_set_count: 10
+        pattern_count: 10
+
+      generate:
+        num_records: 5000
+        max_invalid: 1000
