@@ -1,5 +1,8 @@
 # Default configuration for Synthetic model creation.
-# The parameter settings below match the default settings in Gretel's open source synthetic package
+
+# The parameter settings below match the default settings 
+# in Gretel's open source synthetic package
+
 schema_version: 1.0
 
 models:
@@ -7,17 +10,3 @@ models:
       data_source: "__tmp__"
       params:
         epochs: 100
-        batch_size: null
-        vocab_size: null
-        reset_states: null
-        learning_rate: null
-        rnn_units: null
-        dropout_rate: null
-
-      validators:
-        in_set_count: 10
-        pattern_count: 10
-
-      generate:
-        num_records: 5000
-        max_invalid: 1000
