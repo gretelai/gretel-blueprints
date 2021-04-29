@@ -1,0 +1,24 @@
+# For datasets that have a low number of records, in the hundreds or so.
+#
+# Here we lower our NN batch size to 1 and set our vocab size to 0
+# which will automatically set Gretel Synthetics to use a character
+# based tokenizer.
+#
+# Additionally we use a lower learning rate which can significantly
+# slow down model training but will help the model arrive
+# at a more optimal set of weights.
+#
+# We also lower the RNN units since less complexity is needed
+# to learn from the training data.
+
+schema_version: 1.0
+
+models:
+  - synthetics:
+      data_source: "__tmp__"
+      params:
+        epochs: 100
+        batch_size: 1
+        vocab_size: 0
+        learning_rate: .001
+        rnn_units: 64
