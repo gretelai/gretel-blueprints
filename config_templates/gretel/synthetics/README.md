@@ -7,6 +7,7 @@ The templates in this directory can be used for a variety training data characte
  - `high-record-count`: When working with datasets with extremely high record counts, potentially in tens of millions and above. Records still have a mix of data types.
  - `numeric-data`: When working with data that is mostly numerical (integers, floating point data, etc). Typical examples are time series data.
    - **NOTE**: If any data is one-hot encoded, we recommend encoding those fields back to a single field then splitting it back into one-hot encoded fields after generation is done.
+   - **NOTE**: For floating point numbers, we recommend reducing the precision to as low as it can go without disrupting the downstream use case.
 - `high-field-count`: For highly dimensional or sparse data with many fields / columns.
   - **NOTE**: We recommend removing columns that are unnecessary for the downstream use case (such as ML modeling, etc) and also applying consolidation of one-hot encoded fields like mentioned above.
 - `complex-or-free-text`: If you have higly complex data such as free text data, chat logs, etc.
