@@ -1,0 +1,22 @@
+# For training on floating point data, PCA data, etc.
+#
+# Before training, consider crounding all floating points
+# to the minimal precision necessary for your use case. This
+# will help prevent the model from trying to memorize
+# inconsequential data and learn separations in record better.
+#
+# Set vocab_size to 0 to help the model learn the numerical structures better
+#
+# Increasing rnn_units allows the network to learn more complex patterns, but
+# at the expense of increased training and generation time.
+
+schema_version: 1.0
+
+models:
+  - synthetics:
+      data_source: "__tmp__"
+      params:
+        epochs: 100
+        vocab_size: 0
+        learning_rate: .001
+        rnn_units: 256

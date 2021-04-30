@@ -33,7 +33,7 @@ README_FILE = "README.md"
 README = "readme"
 README_MAX = 64 * 1024
 
-REPO_BASE = "https://github.com/gretelai/gretel-blueprints/blob/master"
+REPO_BASE = "https://github.com/gretelai/gretel-blueprints/blob/main"
 
 @dataclass
 class Stores:

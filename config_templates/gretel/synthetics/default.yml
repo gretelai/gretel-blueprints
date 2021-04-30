@@ -1,0 +1,12 @@
+# Default configuration for Synthetic model creation.
+
+# The parameter settings below match the default settings 
+# in Gretel's open source synthetic package
+
+schema_version: 1.0
+
+models:
+  - synthetics:
+      data_source: "__tmp__"
+      params:
+        epochs: 100

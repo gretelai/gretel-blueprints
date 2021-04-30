@@ -1,4 +1,4 @@
-name: Test manifest
+name: Tests
 
 on:
   push:
@@ -29,7 +29,11 @@ jobs:
 
     # Run unit tests first
     - name: Unit tests
-      run: pytest -s -vv test_construct_manifest.py
+      run: |
+        pytest -s -vv test_construct_manifest.py
+        pytest -s -vv test_config_templates.py
+      env:
+        GRETEL_API_KEY: ${{ secrets.GRETEL_API_KEY }}
 
     # Build manifest but no deploy
     - name: Build manifest 

@@ -1,0 +1,21 @@
+# When training on complex data such as free text or complex data with
+# high field / column counts.
+#
+# We use a higher RNN to better learn the structures with a tradeoff
+# in longer training and generation times.
+# 
+# For free text, to recreate full dialgues or text, you
+# may also try setting "reset_stats: false" to allow the
+# model to continue to generate new data after each line.
+
+schema_version: 1.0
+
+models:
+  - synthetics:
+      data_source: "__tmp__"
+      params:
+        epochs: 100
+        batch_size: 64
+        vocab_size: 20000
+        learning_rate: .001
+        rnn_units: 1024

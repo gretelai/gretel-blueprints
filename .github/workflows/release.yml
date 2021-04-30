@@ -3,7 +3,7 @@ name: Release manifest
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
   release:
     types: [published]
 
@@ -29,7 +29,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    # On master: Build and deploy manifest
+    # On main: Build and deploy manifest
     - name: Deploy manifest to staging
       run: make manifest-ship-gretel
       if: github.event_name == 'push'
