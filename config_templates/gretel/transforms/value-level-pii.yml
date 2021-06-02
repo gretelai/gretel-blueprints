@@ -1,0 +1,29 @@
+# Running a transform model based on this config, will label each record and transform that
+# record according to the labels that were detected in that particular record:
+#  - fake values that are labeled with an entity that can be faked
+#  - generate secure hash for everything else
+
+# Configuration options:
+#  - "fake" transform, see https://python.docs.gretel.ai/en/latest/transformers/xf_fake_constant.html
+#  - "hash" transform, see https://python.docs.gretel.ai/en/latest/transformers/xf_secure_hash.html
+
+# This config is useful for working with unstructured data, with free-form text, etc.
+
+schema_version: 1.0
+
+models:
+  - transforms:
+      data_source: "__tmp__"
+      policies:
+        - name: remove_pii
+          rules:
+            - name: fake_or_hash_pii
+              conditions:
+                value_label:
+                  - "*"
+              transforms:
+                - type: fake
+                  attrs:
+                    seed: 1234
+                - type: hash
+

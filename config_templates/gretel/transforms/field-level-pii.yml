@@ -1,0 +1,35 @@
+# Training a transform model with this config will create transforms for all of the fields for which a field
+# label has been assigned. Field label is assigned to a field, if its values are labeled with the same label
+# and the ratio of values that were labeled to all values for that field is more than `field_label_threshold`
+# specified in the `label_predictors` section (default is 0.9).
+
+# Once the label is assigned to a field, one of two transforms will be added for that field:
+#  - fake values that are labeled with an entity that can be faked
+#  - generate secure hash for everything else
+
+# Configuration options:
+#  - "fake" transform, see https://python.docs.gretel.ai/en/latest/transformers/xf_fake_constant.html
+#  - "hash" transform, see https://python.docs.gretel.ai/en/latest/transformers/xf_secure_hash.html
+
+# This config is useful for working with structured data, where each field contains the same type of information.
+
+schema_version: 1.0
+
+models:
+  - transforms:
+      data_source: "__tmp__"
+      policies:
+        - name: remove_pii
+          rules:
+            - name: fake_or_hash_pii
+              conditions:
+                field_label:
+                  - "*"
+              transforms:
+                - type: fake
+                  attrs:
+                    seed: 1234
+                - type: hash
+
+label_predictors:
+  field_label_threshold: 0.9
