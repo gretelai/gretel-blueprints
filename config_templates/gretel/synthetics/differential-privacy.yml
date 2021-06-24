@@ -1,0 +1,30 @@
+# This is a default configuration for enabling differential privacy during
+# model training via DP-SGD.
+#
+# Differential privacy helps prevent unintended memorization of secrets in 
+# the training data, by limiting the amount that any training example, or 
+# small set of training examples can affect the model.
+#
+# Even though the analytical epsilon upper bound does not offer strong
+# privacy guarantees, the benefits of differentially private training
+# can be clearly observed by examining the trained model. 
+# 
+# For more details, https://gretel.ai/blog/practical-privacy-with-synthetic-data
+
+schema_version: 1.0
+
+models:
+  - synthetics:
+      data_source: "__tmp__"
+      params:
+        epochs: 50
+        vocab_size: 0
+        learning_rate: .001
+        rnn_units: 256
+        batch_size: 32
+        predict_batch_size: 1
+        dp: True
+        dp_noise_multiplier: 0.001
+        dp_l2_norm_clip: 5.0
+        dp_microbatches: 1
+        
