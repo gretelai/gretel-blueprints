@@ -10,4 +10,4 @@ The templates in this directory can be used for a variety training data characte
  |`differential-privacy` | Differential privacy helps prevent unintended memorization of secrets in the training data, by limiting the amount that any training example, or small set of training examples can affect the model.|
  |`high-record-count`| When working with datasets with extremely high record counts, potentially in tens of millions and above. Records still have a mix of data types.|
  |`low-record-count`| For datasets that have record counts in the hundreds and a mix of categorical, numerical, and continuous values.    |
- |`numeric-data`| When working with data that is mostly numeric (integers, floating point data, etc). Typical examples are time series, financial data, and GPS coordinates.|
+ |`mostly-numeric-data`| When working with data that is mostly numeric (integers, floating point data, etc). Typical examples are time series, financial data, and GPS coordinates.|
