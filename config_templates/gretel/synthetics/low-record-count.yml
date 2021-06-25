@@ -10,12 +10,18 @@
 #
 # We also lower the RNN units since less complexity is needed
 # to learn from the training data.
+#
+# Privacy filtering is disabled as low record counts will lead
+# to higher amounts of repeated data.
 
 schema_version: 1.0
 
 models:
   - synthetics:
       data_source: "__tmp__"
+      privacy_filters:
+        outliers: null
+        similarity: null
       params:
         epochs: 100
         batch_size: 1
