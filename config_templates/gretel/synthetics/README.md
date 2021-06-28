@@ -4,7 +4,7 @@ The templates in this directory contain configurations to train synthetic models
 
 Templates can be downloaded and modified for use with Gretel synthetics, or imported directly from the Gretel CLI via:
 
-`gretel models create --config synthetics/[template_name]`
+`gretel models create --config synthetics/[template_name] ...`
 
 
  | template_name      | description |
