@@ -10,6 +10,9 @@
 #
 # We also lower the RNN units since less complexity is needed
 # to learn from the training data.
+#
+# Privacy filtering is disabled as low record counts will lead
+# to higher amounts of repeated data.
 
 schema_version: 1.0
 
@@ -22,3 +25,6 @@ models:
         vocab_size: 0
         learning_rate: .001
         rnn_units: 64
+      privacy_filters:
+        outliers: null
+        similarity: null
