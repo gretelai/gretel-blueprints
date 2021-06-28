@@ -1,9 +1,13 @@
 # Gretel Synthetics Configuration Templates
 
-The templates in this directory can be used for a variety training data characteristics.  Here is a short outline of the potential options:
+The templates in this directory contain configurations to train synthetic models on data with a variety of characteristics and to enforce various levels of privacy protections.
+
+Templates can be downloaded and modified for use with Gretel synthetics, or imported directly from the Gretel CLI via:
+
+`gretel models create --config synthetics/[template_name]`
 
 
- | Template name      | Description |
+ | template_name      | description |
  | ----------- |  ----------- |
  |`default`| General purpose configuration, which uses our default settings from Gretel's open source package. Works for a variety of datasets. Generally useful for a few thousand records and upward. Dataset generally has a mix of categorical, continuous, and numerical values.      |
  |`complex-or-free-text` | Best for large and highly complex datasets, or those  containing plain text such as tweets and conversations.
