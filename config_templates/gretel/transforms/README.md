@@ -9,4 +9,4 @@ Templates can be downloaded and modified for use with Gretel transform APIs, or 
 
  | template_name      | description |
  | ----------- |  ----------- |
- |`redact-sensitive-pii`| This template contains a simple policy to replace personally identifiable information (PII) with a fake value or secure hash.|
+ |`redact-sensitive-pii`| This template contains a simple policy to replace personally identifiable information (PII) with a fake value or redact with a pre-defined character.|
