@@ -1,11 +1,12 @@
 # Gretel Transforms Configuration Templates
 
-The templates in this directory can be used for a variety of potential use-cases.  Here is a short outline of the potential options:
-* `value-level-pii`: this config is useful for working with unstructured data, for example one containing free-form text, etc.
-  * **NOTE** This kind of transform requires labeling of each record, so it will be slower than field-level transform only.
-* `field-level-pii`: this config is useful for working with structured data, where each field contains the same type of information.
-  * It's much faster than value-level one, because it transforms each record without labeling it.
+Templates in this directory contain configurations to transform data with a variety of characteristics and to enforce various levels of privacy protections.
 
-# Backwards Compatability with Gretel Beta SDKs
+Templates can be downloaded and modified for use with Gretel transform APIs, or imported directly from the Gretel CLI via:
 
-TODO
+`gretel models create --config transforms/[template_name] ...`
+
+
+ | template_name      | description |
+ | ----------- |  ----------- |
+ |`redact-sensitive-pii`| This template contains a simple policy to replace personally identifiable information (PII) with a fake value or secure hash.|
