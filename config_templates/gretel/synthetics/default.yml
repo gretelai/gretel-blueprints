@@ -13,7 +13,7 @@ models:
         batch_size: 64
         vocab_size: 20000
         reset_states: False
-        learning_rate: 0.001
+        learning_rate: 0.01
         rnn_units: 256
         dropout_rate: 0.2
         overwrite: True
