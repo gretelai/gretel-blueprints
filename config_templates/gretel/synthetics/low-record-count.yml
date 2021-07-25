@@ -35,6 +35,9 @@ models:
       validators:
         in_set_count: 10
         pattern_count: 10
+      privacy_filters:
+        outliers: null
+        similarity: null
       generate:
         num_records: 1000
         max_invalid: 1000
