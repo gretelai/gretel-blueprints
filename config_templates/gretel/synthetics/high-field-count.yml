@@ -11,7 +11,7 @@
 # Also lowering the vocab size to 0, which will use a character-based
 # tokenizer may help the model learn semantics one character at a time
 
-schema_version: 1.0
+schema_version: "1.0"
 
 models:
   - synthetics:

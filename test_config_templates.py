@@ -3,8 +3,12 @@ from pathlib import Path
 
 import pytest
 import requests
-from gretel_client import get_cloud_client
+from gretel_client import configure_session, ClientConfig, create_project
 import yaml
+
+configure_session(
+    ClientConfig(endpoint="https://api-dev.gretel.cloud", api_key=_api_key)
+)
 
 
 _api_key = os.getenv("GRETEL_API_KEY")
@@ -14,8 +18,7 @@ if not _api_key:
 
 @pytest.fixture(scope="module")
 def project_name():
-    client = get_cloud_client("api-dev", _api_key)
-    proj = client.get_project(create=True)
+    proj = create_project()
     yield proj.name
     proj.delete()
 
