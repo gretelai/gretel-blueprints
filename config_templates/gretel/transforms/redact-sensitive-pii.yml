@@ -2,7 +2,7 @@
 # a custom defined regular expression for user IDs. 
 #
 # https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
-schema_version: 1.0
+schema_version: "1.0"
 name: "Redact PII"
 models:
   - transforms:

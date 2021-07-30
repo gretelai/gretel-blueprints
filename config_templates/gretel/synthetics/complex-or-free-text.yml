@@ -4,7 +4,7 @@
 # We use a higher RNN to better learn the structures with a tradeoff
 # in longer training and generation times.
 
-schema_version: 1.0
+schema_version: "1.0"
 
 models:
   - synthetics:

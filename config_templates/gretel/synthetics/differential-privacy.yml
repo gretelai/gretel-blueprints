@@ -11,7 +11,7 @@
 # 
 # For more details, https://gretel.ai/blog/practical-privacy-with-synthetic-data
 
-schema_version: 1.0
+schema_version: "1.0"
 
 models:
   - synthetics:

@@ -1,8 +1,0 @@
-{
-    "name": "Synthesize project data",
-    "description": "Create synthetic data from a project stream.",
-    "tags": ["synthetic-data", "ai"],
-    "sample_data_key": "safecast",
-    "language": "python",
-    "featured": false
-}

@@ -1,6 +1,2 @@
-marshmallow
-smart-open==2.2.1
-requests
-aws-secretsmanager-caching
-pyyaml==5.4.1
-gretel-client
+gretel-client>0.8.0
+pytest
