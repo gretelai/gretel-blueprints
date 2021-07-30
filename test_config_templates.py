@@ -6,14 +6,10 @@ import requests
 from gretel_client import configure_session, ClientConfig, create_project
 import yaml
 
+
 configure_session(
-    ClientConfig(endpoint="https://api-dev.gretel.cloud", api_key=_api_key)
+    ClientConfig(endpoint="https://api-dev.gretel.cloud")
 )
-
-
-_api_key = os.getenv("GRETEL_API_KEY")
-if not _api_key:
-    raise RuntimeError("API key env not set")
 
 
 @pytest.fixture(scope="module")
