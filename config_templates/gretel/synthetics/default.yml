@@ -3,9 +3,6 @@
 # The parameter settings below match the default settings 
 # in Gretel's open source synthetic package
 
-# Privacy filtering is disabled as it's still an experimental
-# feature. Proceed with caution. Allowed values: null, medium, high
-
 schema_version: "1.0"
 
 models:
@@ -35,5 +32,5 @@ models:
         num_records: 5000
         max_invalid: 5000
       privacy_filters:
-        outliers: null
-        similarity: null
+        outliers: medium
+        similarity: medium
