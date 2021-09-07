@@ -29,7 +29,7 @@ models:
         in_set_count: 10
         pattern_count: 10
       generate:
-        num_records: 5000
+        num_records: 50000
         max_invalid: 5000
       privacy_filters:
         outliers: medium
