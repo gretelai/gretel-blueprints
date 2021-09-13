@@ -1,8 +1,0 @@
-{
-    "name": "Label streaming data",
-    "description": "Intro to labeling streaming data.",
-    "tags": ["pubsub", "python", "pii-detection"],
-    "language": "python",
-    "featured": false,
-    "blog_url": null
-}

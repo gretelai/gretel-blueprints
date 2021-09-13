@@ -3,12 +3,8 @@
 #
 # We use a higher RNN to better learn the structures with a tradeoff
 # in longer training and generation times.
-# 
-# For free text, to recreate full dialgues or text, you
-# may also try setting "reset_stats: false" to allow the
-# model to continue to generate new data after each line.
 
-schema_version: 1.0
+schema_version: "1.0"
 
 models:
   - synthetics:
@@ -19,3 +15,4 @@ models:
         vocab_size: 20000
         learning_rate: .001
         rnn_units: 1024
+        reset_states: False

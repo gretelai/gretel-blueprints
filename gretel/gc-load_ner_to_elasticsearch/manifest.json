@@ -1,9 +1,0 @@
-{
-    "name": "Label data for Elastic",
-    "description": "Label data and explore results in Elastic.",
-    "tags": ["python"],
-    "sample_data_key": "bike-customer-orders",
-    "language": "python",
-    "featured": false,
-    "blog_url": "https://gretel.ai/blog/load-ner-data-into-elasticsearch"
-}

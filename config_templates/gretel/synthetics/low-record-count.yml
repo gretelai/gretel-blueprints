@@ -10,15 +10,34 @@
 #
 # We also lower the RNN units since less complexity is needed
 # to learn from the training data.
+#
+# Privacy filtering is disabled as low record counts will lead
+# to higher amounts of repeated data.
 
-schema_version: 1.0
+schema_version: "1.0"
 
 models:
   - synthetics:
-      data_source: "__tmp__"
+      data_source: __tmp__
       params:
-        epochs: 100
+        epochs: 300
         batch_size: 1
         vocab_size: 0
-        learning_rate: .001
+        reset_states: False
+        learning_rate: 0.001
         rnn_units: 64
+        dropout_rate: 0.2
+        overwrite: True
+        early_stopping: True
+        gen_temp: 1.0
+        predict_batch_size: 1
+        validation_split: False
+      validators:
+        in_set_count: 10
+        pattern_count: 10
+      privacy_filters:
+        outliers: null
+        similarity: null
+      generate:
+        num_records: 1000
+        max_invalid: 1000

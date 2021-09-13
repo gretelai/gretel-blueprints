@@ -3,10 +3,34 @@
 # The parameter settings below match the default settings 
 # in Gretel's open source synthetic package
 
-schema_version: 1.0
+schema_version: "1.0"
 
 models:
   - synthetics:
-      data_source: "__tmp__"
+      data_source: __tmp__
       params:
         epochs: 100
+        batch_size: 64
+        vocab_size: 20000
+        reset_states: False
+        learning_rate: 0.01
+        rnn_units: 256
+        dropout_rate: 0.2
+        overwrite: True
+        early_stopping: True
+        gen_temp: 1.0
+        predict_batch_size: 64
+        validation_split: False
+        dp: False
+        dp_noise_multiplier: 0.001
+        dp_l2_norm_clip: 5.0
+        dp_microbatches: 1
+      validators:
+        in_set_count: 10
+        pattern_count: 10
+      generate:
+        num_records: 5000
+        max_invalid: 5000
+      privacy_filters:
+        outliers: medium
+        similarity: medium
