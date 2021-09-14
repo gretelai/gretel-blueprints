@@ -30,7 +30,7 @@ models:
         pattern_count: 10
       generate:
         num_records: 5000
-        max_invalid: 5000
+        max_invalid: null
       privacy_filters:
         outliers: medium
         similarity: medium
