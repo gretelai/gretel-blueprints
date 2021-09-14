@@ -39,5 +39,5 @@ models:
         outliers: null
         similarity: null
       generate:
-        num_records: 1000
-        max_invalid: 1000
+        num_records: null
+        max_invalid: null
