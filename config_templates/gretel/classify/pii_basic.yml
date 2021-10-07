@@ -1,0 +1,23 @@
+# Policy to search for "sensitive PII" as defined by
+# https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
+
+schema_version: 1.0
+name: "classify-pii"
+models:
+  - classify:
+      data_source: "_"
+      labels:
+        - person_name
+        - credit_card_number
+        - phone_number
+        - us_social_security_number
+        - email_address
+        - acme/*
+
+label_predictors:
+  namespace: acme
+  regex:
+    user_id:
+      patterns:
+        - score: high
+          regex: "user_[\\d]{5}"
