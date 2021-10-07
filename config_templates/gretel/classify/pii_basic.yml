@@ -1,6 +1,9 @@
 # Policy to search for "sensitive PII" as defined by
 # https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
 
+# Use optional label_predictors and regular expressions to define custom predictors 
+# See https://docs.gretel.ai/classify/classify-model-configuration
+
 schema_version: 1.0
 name: "classify-pii"
 models:
