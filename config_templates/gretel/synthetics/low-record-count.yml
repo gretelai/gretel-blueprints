@@ -1,15 +1,7 @@
 # For datasets that have a low number of records, in the hundreds or so.
 #
-# Here we lower our NN batch size to 1 and set our vocab size to 0
-# which will automatically set Gretel Synthetics to use a character
-# based tokenizer.
-#
-# Additionally we use a lower learning rate which can significantly
-# slow down model training but will help the model arrive
-# at a more optimal set of weights.
-#
-# We also lower the RNN units since less complexity is needed
-# to learn from the training data.
+# Here we set our vocab size to 0 which will automatically set 
+# Gretel Synthetics to use a character based tokenizer.
 #
 # Privacy filtering is disabled as low record counts will lead
 # to higher amounts of repeated data.
@@ -20,24 +12,23 @@ models:
   - synthetics:
       data_source: __tmp__
       params:
-        epochs: 300
-        batch_size: 1
+        epochs: 100
+        batch_size: 64
         vocab_size: 0
-        reset_states: False
-        learning_rate: 0.001
-        rnn_units: 64
+        learning_rate: 0.01
+        rnn_units: 256
         dropout_rate: 0.2
-        overwrite: True
         early_stopping: True
         gen_temp: 1.0
-        predict_batch_size: 1
+        predict_batch_size: 64
         validation_split: False
+        data_upsample_limit: 10000
       validators:
         in_set_count: 10
         pattern_count: 10
-      privacy_filters:
-        outliers: null
-        similarity: null
       generate:
         num_records: null
         max_invalid: null
+      privacy_filters:
+        outliers: null
+        similarity: null
