@@ -4,11 +4,15 @@
 # Use optional label_predictors and regular expressions to define custom predictors 
 # See https://docs.gretel.ai/classify/classify-model-configuration
 
+# NLP is turned on using "use_nlp: true". Set to false if you're experiencing performance issues
+# https://docs.gretel.ai/classify/classify-model-configuration#classifying-data-using-nlp
+
 schema_version: "1.0"
 name: "classify-pii"
 models:
   - classify:
       data_source: "_"
+      use_nlp: true
       labels:
         - person_name
         - credit_card_number
