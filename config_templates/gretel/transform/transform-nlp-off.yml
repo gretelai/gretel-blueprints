@@ -24,6 +24,7 @@ models:
                   - phone_number
                   - us_social_security_number
                   - email_address
+                  - location
               transforms:
                 - type: fake
                 - type: redact_with_char

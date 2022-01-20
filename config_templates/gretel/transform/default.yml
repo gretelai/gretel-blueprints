@@ -22,7 +22,7 @@ models:
                   - credit_card_number
                   - phone_number
                   - email_address
-                    location
+                  - location
               transforms:
                 - type: fake
                 - type: redact_with_char
