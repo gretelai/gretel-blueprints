@@ -27,9 +27,7 @@ models:
                   - custom/*
               transforms:
                 - type: fake
-                - type: redact_with_char
-                  attrs:
-                    char: X
+                - type: hash
 label_predictors:
   namespace: custom
   regex:

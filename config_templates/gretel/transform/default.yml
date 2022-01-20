@@ -22,10 +22,8 @@ models:
                   - credit_card_number
                   - phone_number
                   - email_address
+                  - us_social_security_number
                   - location
               transforms:
                 - type: fake
-                - type: redact_with_char
-                  attrs:
-                    char: X
-
+                - type: hash
