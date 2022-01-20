@@ -21,4 +21,3 @@ models:
         - us_social_security_number
         - email_address
           location
-
