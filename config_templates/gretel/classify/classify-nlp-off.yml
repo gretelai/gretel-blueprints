@@ -4,21 +4,19 @@
 # Use optional label_predictors and regular expressions to define custom predictors 
 # See https://docs.gretel.ai/classify/classify-model-configuration
 
-# NLP is turned on using "use_nlp: true" to provide better person name and 
-# location detection. Set to false if you're experiencing performance issues
+# NLP is turned off using "use_nlp: false" for better performance. 
+# Set to true to improve detection or if dataset contains unstructured text.
 # https://docs.gretel.ai/classify/classify-model-configuration#classifying-data-using-nlp
 
 schema_version: "1.0"
-name: "classify-pii-nlp-on"
+name: "classify-pii-nlp-off"
 models:
   - classify:
       data_source: "_"
-      use_nlp: true
+      use_nlp: false
       labels:
         - person_name
         - credit_card_number
         - phone_number
         - us_social_security_number
         - email_address
-          location
-

@@ -1,5 +1,6 @@
 # Policy to search for and redact "sensitive PII" as defined by `ask-experian` as well as
 # a custom defined regular expression for user IDs. 
+#
 # https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
 
 # NLP is turned on using "use_nlp: true" to provide better person name and 
@@ -7,7 +8,7 @@
 # https://docs.gretel.ai/classify/classify-model-configuration#classifying-data-using-nlp
 
 schema_version: "1.0"
-name: "redact-pii-nlp-on"
+name: "redact-pii-regex"
 models:
   - transforms:
       data_source: "_"
@@ -21,11 +22,18 @@ models:
                   - person_name
                   - credit_card_number
                   - phone_number
+                  - us_social_security_number
                   - email_address
-                    location
+                  - custom/*
               transforms:
                 - type: fake
                 - type: redact_with_char
                   attrs:
                     char: X
-
+label_predictors:
+  namespace: custom
+  regex:
+    user_id:
+      patterns:
+        - score: high
+          regex: "user_[\\d]{5}"
