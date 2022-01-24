@@ -1,8 +1,0 @@
-{
-    "name": "Synthesize time series data",
-    "description": "Create synthetic time series data",
-    "tags": ["synthetic-data", "ai"],
-    "sample_data_key": null,
-    "language": "python",
-    "featured": false
-}

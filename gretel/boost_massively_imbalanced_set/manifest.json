@@ -1,9 +1,0 @@
-{
-    "name": "Augment datasets",
-    "description": "Boost limited training sets with synthetic data.",
-    "tags": ["synthetic-data", "ai"],
-    "sample_data_key": null,
-    "blog_url": "https://gretel.ai/blog/improving-massively-imbalanced-datasets-in-machine-learning-with-synthetic-data",
-    "language": "python",
-    "featured": false
-}

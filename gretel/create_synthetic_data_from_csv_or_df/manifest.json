@@ -1,8 +1,0 @@
-{
-    "name": "Create synthetic data",
-    "description": "Create a synthetic dataset from a CSV or DataFrame.",
-    "tags": ["synthetic-data", "ai"],
-    "sample_data_key": null,
-    "language": "python",
-    "featured": true
-}
