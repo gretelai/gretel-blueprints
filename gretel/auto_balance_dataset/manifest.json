@@ -1,9 +1,0 @@
-{
-    "name": "Balance a dataset",
-    "description": "Remove biases in a dataset.",
-    "tags": ["synthetic-data", "ai"],
-    "sample_data_key": "us-adult-income",
-    "blog_url": "https://gretel.ai/blog/automatically-reducing-ai-bias-with-synthetic-data",
-    "language": "python",
-    "featured": true
-}
