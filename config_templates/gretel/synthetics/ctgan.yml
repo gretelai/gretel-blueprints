@@ -7,6 +7,6 @@ models:
       batch_size: 200
       discriminator_dim: [256, 256]
       discriminator_lr: 0.00033
-      epochs: 50
+      epochs: 300
       generator_dim: [256, 256]
       generator_lr: 1.0e-05
