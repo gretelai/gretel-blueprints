@@ -1,12 +1,21 @@
-schema_version: '1.0'
+schema_version: 1.0
 
 models:
-- ctgan:
-    data_source: __tmp__
-    params:
-      batch_size: 200
-      discriminator_dim: [256, 256]
-      discriminator_lr: 0.00033
-      epochs: 300
-      generator_dim: [256, 256]
-      generator_lr: 1.0e-05
+  - ctgan:
+        data_source: __tmp__
+        params:
+            epochs: 100
+            generator_dim: [256, 256]
+            discriminator_dim: [256, 256]
+            generator_lr: 2e-4
+            discriminator_lr: .00001
+            batch_size: 500
+            verbose: true
+        # Gretel validation pre-/post- processing
+        validators:
+            use_numeric_iqr: true
+            in_set_count: 50
+        # Gretel privacy filtering
+        privacy_filters:
+            outliers: null
+            similarity: high
