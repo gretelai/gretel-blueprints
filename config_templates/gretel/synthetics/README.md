@@ -9,10 +9,9 @@ Templates can be downloaded and modified for use with Gretel synthetics, or impo
 
  | template_name      | description |
  | ----------- |  ----------- |
- |`default`| Use the `gretel-synthetics` LSTM model. This model works for a variety of synthetic data tasks including time-series, tabular, and text data. Generally useful for a few thousand records and upward. Dataset generally has a mix of categorical, continuous, and numerical values.      |
- |`complex-or-free-text` | Best for large and highly complex datasets, or those  containing plain text such as tweets and conversations.
- |`differential-privacy` | Differential privacy helps prevent unintended memorization of secrets in the training data, by limiting the amount that any training example, or small set of training examples can affect the model.|
- |`high-record-count`| When working with datasets with extremely high record counts, potentially in tens of millions and above. Records still have a mix of data types.|
- |`low-record-count`| For datasets that have record counts in the hundreds and a mix of categorical, numerical, and continuous values.    |
- |`mostly-numeric-data`| When working with data that is mostly numeric (integers, floating point data, etc). Typical examples are time series, financial data, and GPS coordinates.|
- |`ctgan`| Use the CTGAN synthetic data model. This model works well for largely numeric datasets with high columns and row counts, but does not support free text fields, and can struggle with high numbers of unique categorical values.|
+ |`default`| Use the `gretel-synthetics` LSTM model. This model works for a variety of synthetic data tasks including time-series, tabular, and text data. Generally useful for a few thousand records and upward. Dataset generally has a mix of categorical, continuous, and numerical values.  |
+ |`complex-or-free-text` | Best for highly complex datasets, or those containing plain text such as tweets and conversations.  |
+ |`differential-privacy` | Differential privacy helps prevent unintended memorization of secrets in the training data, by limiting the amount that any training example, or small set of training examples, can affect the model. Works best on large datasets with 50,000 or more records. |
+ |`high-dimensionality`| Use for datasets with more than 20 columns and/or 50,000 rows. Works well for largely numeric data. Avoid if dataset contains free text fields.  |
+ |`high-accuracy`| Useful for optimizing data for downstream ML tasks, at possible cost of higher compute. |
+ |`low-record-count`| For datasets that have fewer than 1000 rows and/or 4 columns, and a mix of categorical, numerical, and continuous values.  |

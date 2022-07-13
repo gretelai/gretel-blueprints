@@ -1,6 +1,7 @@
-# For training on floating point data, PCA data, etc.
+# For training synthetic datasets for maximum accuracy.
+# Useful for optimizing data for downstream ML tasks, at possible cost of higher compute.
 #
-# Before training, consider crounding all floating points
+# Before training, consider rounding all floating points
 # to the minimal precision necessary for your use case. This
 # will help prevent the model from trying to memorize
 # inconsequential data and learn separations in record better.
@@ -11,7 +12,7 @@
 # at the expense of increased training and generation time.
 
 schema_version: "1.0"
-
+name: "high-accuracy"
 models:
   - synthetics:
       data_source: "__tmp__"
@@ -20,3 +21,8 @@ models:
         vocab_size: 0
         learning_rate: .001
         rnn_units: 256
+        reset_states: false
+      # Gretel privacy filtering
+      privacy_filters:
+        outliers: null
+        similarity: medium
