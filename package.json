@@ -1,0 +1,10 @@
+{
+  "name": "gretel-blueprints",
+  "version": "1.0.0",
+  "repository": "git@github.com:gretelai/gretel-blueprints.git",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js > manifest.json"
+  }
+}
