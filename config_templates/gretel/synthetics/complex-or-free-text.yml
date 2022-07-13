@@ -5,7 +5,7 @@
 # in longer training and generation times.
 
 schema_version: "1.0"
-
+name: "complex-or-free-text"
 models:
   - synthetics:
       data_source: "__tmp__"

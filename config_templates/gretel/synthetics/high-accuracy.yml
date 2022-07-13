@@ -11,7 +11,7 @@
 # at the expense of increased training and generation time.
 
 schema_version: "1.0"
-
+name: "high-accuracy"
 models:
   - synthetics:
       data_source: "__tmp__"
@@ -20,3 +20,7 @@ models:
         vocab_size: 0
         learning_rate: .001
         rnn_units: 256
+        # Gretel privacy filtering
+        privacy_filters:
+            outliers: null
+            similarity: medium

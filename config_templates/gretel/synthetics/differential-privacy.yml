@@ -12,7 +12,7 @@
 # For more details, https://gretel.ai/blog/practical-privacy-with-synthetic-data
 
 schema_version: "1.0"
-
+name: "differential-privacy"
 models:
   - synthetics:
       data_source: "__tmp__"
