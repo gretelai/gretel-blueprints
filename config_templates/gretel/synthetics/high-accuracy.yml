@@ -1,6 +1,6 @@
-# For training on floating point data, PCA data, etc.
+# For training synthetic datasets for maximum accuracy.
 #
-# Before training, consider crounding all floating points
+# Before training, consider rounding all floating points
 # to the minimal precision necessary for your use case. This
 # will help prevent the model from trying to memorize
 # inconsequential data and learn separations in record better.
@@ -20,6 +20,7 @@ models:
         vocab_size: 0
         learning_rate: .001
         rnn_units: 256
+        reset_states: False
         # Gretel privacy filtering
         privacy_filters:
             outliers: null
