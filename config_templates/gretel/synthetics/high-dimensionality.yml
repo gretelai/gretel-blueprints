@@ -7,7 +7,7 @@ models:
   - ctgan:
         data_source: __tmp__
         params:
-            epochs: 300
+            epochs: 400
             generator_dim: [256, 256]
             discriminator_dim: [256, 256]
             generator_lr: 2e-4
