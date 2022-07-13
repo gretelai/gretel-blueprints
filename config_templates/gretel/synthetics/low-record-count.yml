@@ -14,10 +14,6 @@ models:
             discriminator_lr: .00001
             batch_size: 500
             verbose: true
-        # Gretel validation pre-/post- processing
-        validators:
-            use_numeric_iqr: true
-            in_set_count: 50
         # Gretel privacy filtering
         privacy_filters:
             outliers: null
