@@ -1,12 +1,12 @@
-name: Tests
+name: Validate Configs
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'main'
 
 jobs:
-  build-manifest:
+  validate-configs:
     runs-on: ubuntu-latest
     steps:
 
@@ -20,7 +20,7 @@ jobs:
       run: | 
         pip install -r requirements.txt
 
-    # Run tests first
+    # Run tests
     - name: Unit tests
       run: |
         pytest -s -vv test_config_templates.py
@@ -31,7 +31,7 @@ jobs:
     - uses: 8398a7/action-slack@v2
       with:
         status: ${{ job.status }}
-        author_name: Tests, Check Manifest
+        author_name: Validate Configs
         only_mention_fail: here
       env:
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
