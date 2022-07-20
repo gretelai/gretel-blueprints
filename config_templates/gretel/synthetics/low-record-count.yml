@@ -1,7 +1,7 @@
 # deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-actgan" configuration.
 
 schema_version: "1.0"
-name: "high-dimensionality"
+name: "low-record-count"
 models:
   - actgan:
       data_source: __tmp__
