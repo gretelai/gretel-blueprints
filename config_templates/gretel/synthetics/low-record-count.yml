@@ -1,8 +1,7 @@
-# Data with a record count of > 50K or 
-# highly dimensional data
+# For datasets that have a low number of records, in the hundreds or so.
 
 schema_version: "1.0"
-name: "high-dimensionality"
+name: "low-record-count"
 models:
   - ctgan:
         data_source: __tmp__
