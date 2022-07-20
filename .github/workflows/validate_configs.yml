@@ -2,8 +2,8 @@ name: Validate Configs
 
 on:
   push:
-    branches-ignore:
-      - 'main'
+    branches:
+      - '**'
 
 jobs:
   validate-configs:
