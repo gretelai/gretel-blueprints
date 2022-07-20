@@ -16,4 +16,4 @@ models:
         # Gretel privacy filtering
         privacy_filters:
             outliers: null
-            similarity: high
+            similarity: null
