@@ -2,8 +2,8 @@ name: Validate Configs
 
 on:
   push:
-    branches-ignore:
-      - 'main'
+    branches:
+      - '**'    
 
 jobs:
   validate-configs:
@@ -20,12 +20,23 @@ jobs:
       run: | 
         pip install -r requirements.txt
 
-    # Run tests
+    # Run tests in DEV
     - name: Unit tests
       run: |
         pytest -s -vv test_config_templates.py
+      if: ${{ github.ref != 'refs/heads/main' }}
       env:
         GRETEL_API_KEY: ${{ secrets.GRETEL_API_KEY }}
+        GRETEL_CLOUD_URL: "https://api-dev.gretel.cloud"
+
+    # Run tests in PROD
+    - name: Unit tests
+      run: |
+        pytest -s -vv test_config_templates.py
+      if: ${{ github.ref == 'refs/heads/main' }}
+      env:
+        GRETEL_API_KEY: ${{ secrets.GRETEL_PROD_API_KEY }}
+        GRETEL_CLOUD_URL: "https://api.gretel.cloud"
 
     # job notif
     - uses: 8398a7/action-slack@v2
