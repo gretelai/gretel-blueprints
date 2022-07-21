@@ -1,0 +1,21 @@
+name: Create PR from develop to main
+
+on:
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "main"                           # If blank, default: master
+        pr_title: "${{ github.event.pull_request.title }}"   # Title of pull request
+        pr_body: "${{ github.event.pull_request.body }}"     # Full markdown support, requires pr_title to be set
+        pr_draft: false                                      # Creates pull request as draft
+        pr_allow_empty: false                                # Creates pull request even if there are no changes
+        github_token: ${{ secrets.PAT }}                     # Using Personal Access Token in order to trigger workflows on the created pr
