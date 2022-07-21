@@ -1,9 +1,10 @@
 name: Validate Configs
 
 on:
-  push:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
     branches:
-      - '**'    
+      - '**'  
 
 jobs:
   validate-configs:
@@ -24,16 +25,16 @@ jobs:
     - name: Unit tests
       run: |
         pytest -s -vv test_config_templates.py
-      if: ${{ github.ref != 'refs/heads/main' }}
+      if: ${{ github.base_ref != 'main' }}
       env:
-        GRETEL_API_KEY: ${{ secrets.GRETEL_API_KEY }}
+        GRETEL_API_KEY: ${{ secrets.GRETEL_DEV_API_KEY }}
         GRETEL_CLOUD_URL: "https://api-dev.gretel.cloud"
 
     # Run tests in PROD
     - name: Unit tests
       run: |
         pytest -s -vv test_config_templates.py
-      if: ${{ github.ref == 'refs/heads/main' }}
+      if: ${{ github.base_ref == 'main' }}
       env:
         GRETEL_API_KEY: ${{ secrets.GRETEL_PROD_API_KEY }}
         GRETEL_CLOUD_URL: "https://api.gretel.cloud"
