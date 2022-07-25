@@ -1,0 +1,11 @@
+# Gretel Configuration for Amplification model creation
+#
+# Once this model is created, you may run the model to generate high
+# volumes of synthetic data
+
+schema_version: '1.0'
+name: "data-amplification-model"
+
+models:
+    - amplify:
+        data_source: __tmp__
