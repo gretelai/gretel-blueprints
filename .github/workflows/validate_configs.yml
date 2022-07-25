@@ -1,12 +1,13 @@
-name: Tests
+name: Validate Configs
 
 on:
-  push:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
     branches:
-      - '**'
+      - '**'  
 
 jobs:
-  build-manifest:
+  validate-configs:
     runs-on: ubuntu-latest
     steps:
 
@@ -20,18 +21,29 @@ jobs:
       run: | 
         pip install -r requirements.txt
 
-    # Run tests first
+    # Run tests in DEV
     - name: Unit tests
       run: |
         pytest -s -vv test_config_templates.py
+      if: ${{ github.base_ref != 'main' }}
       env:
-        GRETEL_API_KEY: ${{ secrets.GRETEL_API_KEY }}
+        GRETEL_API_KEY: ${{ secrets.GRETEL_DEV_API_KEY }}
+        GRETEL_CLOUD_URL: "https://api-dev.gretel.cloud"
+
+    # Run tests in PROD
+    - name: Unit tests
+      run: |
+        pytest -s -vv test_config_templates.py
+      if: ${{ github.base_ref == 'main' }}
+      env:
+        GRETEL_API_KEY: ${{ secrets.GRETEL_PROD_API_KEY }}
+        GRETEL_CLOUD_URL: "https://api.gretel.cloud"
 
     # job notif
     - uses: 8398a7/action-slack@v2
       with:
         status: ${{ job.status }}
-        author_name: Tests, Check Manifest
+        author_name: Validate Configs
         only_mention_fail: here
       env:
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
