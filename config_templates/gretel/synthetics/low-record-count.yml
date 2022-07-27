@@ -1,5 +1,4 @@
 # For datasets that have a low number of records, in the hundreds or so.
-#
 
 schema_version: "1.0"
 name: "low-record-count"
@@ -7,13 +6,12 @@ models:
   - ctgan:
         data_source: __tmp__
         params:
-            epochs: 400
-            generator_dim: [256, 256]
-            discriminator_dim: [256, 256]
-            generator_lr: 2e-4
-            discriminator_lr: .00001
-            batch_size: 500
-            verbose: true
+            epochs: 600
+            generator_dim: [1024, 1024]
+            discriminator_dim: [1024, 1024]
+            generator_lr: 0.0001
+            discriminator_lr: .00033
+            batch_size: 600
         # Gretel privacy filtering
         privacy_filters:
             outliers: null
