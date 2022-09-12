@@ -1,4 +1,4 @@
-# Default Configuration File for Gretel DoppelGanger
+# Default Configuration File for Gretel DGAN
 
 schema_version: 1.0
 name: "dgan-default-configuration"
