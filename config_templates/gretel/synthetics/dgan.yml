@@ -1,10 +1,13 @@
-# Default Configuration File for Gretel DGAN
+# Default configuration for specialized time series model.
 
 schema_version: 1.0
 name: "dgan-default-configuration"
 models:
   - timeseries_dgan:
         data_source: "_"
+
+        # Replace with the column name containing the date or time
+        # values in your dataset.
         time_column: "Date"
         df_style: "long"
         params:
