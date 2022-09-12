@@ -1,0 +1,23 @@
+# Default Configuration File for Gretel DoppelGanger
+
+schema_version: 1.0
+name: "dgan-default-configuration"
+models:
+  - timeseries_dgan:
+        data_source: "_"
+        time_column: "Date"
+        df_style: "long"
+        params:
+            sample_len: 1
+            max_sequence_len: 10
+            feature_noise_dim: 32
+            feature_num_layers: 1
+            feature_num_units: 100
+            apply_feature_scaling: True
+            generator_learning_rate: 1e-5
+            discriminator_learning_rate: 1e-5
+            attribute_discriminator_learning_rate: 1e-5
+            batch_size: 100
+            epochs: 5000
+            apply_example_scaling: False
+            attribute_loss_coef: 10
