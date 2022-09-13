@@ -1,0 +1,40 @@
+{
+  "cards": [
+    {
+      "title": "Generate synthetic data",
+      "description": "Generate and share unlimited amounts of realistic synthetic data to shorten long lead times.",
+      "imageName": "syntheticdata.png",
+      "model": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/default.yml",
+      "sampleDataset": "sample_data/sample-synthetic-healthcare.csv",
+      "gtmId": "use-case-synthetic"
+    },
+    {
+      "title": "Identify PII in tabular data",
+      "description": "Detect sensitive information. Extend 40+ managed detections.",
+      "imageName": "identifypii.png",
+      "model": "classify",
+      "defaultConfig": "config_templates/gretel/classify/default.yml",
+      "sampleDataset": "sample_data/sample-classify-bike-sales.csv",
+      "gtmId": "use-case-identifypii"
+    },
+    {
+      "title": "Redact PII in sensitive data",
+      "description": "Create real-time transformations to anonymize and power development, test, and staging pipelines.",
+      "imageName": "redactpii.png",
+      "model": "transform",
+      "defaultConfig": "config_templates/gretel/transform/default.yml",
+      "sampleDataset": "sample_data/sample-transform-emails.csv",
+      "gtmId": "use-case-redactpii"
+    },
+    {
+      "title": "Amplify existing data",
+      "description": "Create a high volume of records from real world data or data that has already been processed.",
+      "imageName": "amplify.png",
+      "model": "amplify",
+      "defaultConfig": "config_templates/gretel/amplify/default.yml",
+      "gtmId": "use-case-amplify",
+      "tag": "New"
+    }
+  ]
+}
