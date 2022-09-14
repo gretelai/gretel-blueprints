@@ -38,4 +38,6 @@ def test_configs(_config_file, project: Project):
         params={"dry_run": "yes"},
         headers={"Authorization": _api_key},
     )
+    if resp.status_code != 200:
+        print(f"Error for {_cloud_url}, got response: {resp.text}")
     assert resp.status_code == 200
