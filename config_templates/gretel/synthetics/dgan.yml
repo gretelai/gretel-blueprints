@@ -9,6 +9,9 @@ models:
         # Replace with the column name containing the date or time
         # values in your dataset.
         time_column: "Date"
+        
+        # Replace with "wide" if time series data is in a wide 
+        # format.
         df_style: "long"
         params:
             sample_len: 1
