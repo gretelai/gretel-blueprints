@@ -14,8 +14,13 @@ models:
         # format.
         df_style: "long"
         params:
-            sample_len: 1
+     
+            # Replace max_sequence_len with value of length of time series sequences
             max_sequence_len: 10
+            
+            # sample_len must be divisible by max_sequence_len
+            sample_len: 1
+            
             feature_noise_dim: 32
             feature_num_layers: 1
             feature_num_units: 100
