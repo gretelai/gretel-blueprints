@@ -1,7 +1,9 @@
 # Default configuration for Synthetic model creation.
 
 # The parameter settings below match the default settings 
-# in Gretel's open source synthetic package
+# in Gretel's open source synthetics package
+
+# Customize privacy filters https://docs.gretel.ai/gretel.ai/synthetics/synthetics-faqs/privacy-protection
 
 schema_version: "1.0"
 name: "default-config"
@@ -33,5 +35,5 @@ models:
         num_records: 5000
         max_invalid: null
       privacy_filters:
-        outliers: medium
-        similarity: medium
+        outliers: auto
+        similarity: auto

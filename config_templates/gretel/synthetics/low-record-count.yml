@@ -1,5 +1,7 @@
 # For datasets that have a low number of records, in the hundreds or so.
 
+# Customize privacy filters https://docs.gretel.ai/gretel.ai/synthetics/synthetics-faqs/privacy-protection
+
 schema_version: "1.0"
 name: "low-record-count"
 models:
@@ -14,5 +16,5 @@ models:
             batch_size: 600
         # Gretel privacy filtering
         privacy_filters:
-            outliers: null
-            similarity: null
+            outliers: auto
+            similarity: auto
