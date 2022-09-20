@@ -1,7 +1,7 @@
 # Default configuration for specialized time series model.
 
 schema_version: "1.0"
-name: "time-series-default"
+name: "time-series-dgan"
 models:
   - timeseries_dgan:
         data_source: "_"

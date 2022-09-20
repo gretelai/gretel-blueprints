@@ -1,7 +1,7 @@
 # Default configuration for Synthetic model creation.
 
 # The parameter settings below match the default settings 
-# in Gretel's open source synthetics package
+# in Gretel's source available synthetics package
 
 # Customize privacy filters https://docs.gretel.ai/gretel.ai/synthetics/synthetics-faqs/privacy-protection
 
