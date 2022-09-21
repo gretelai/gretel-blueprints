@@ -1,0 +1,38 @@
+name: Validate Use Cases
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - "**"
+
+jobs:
+  validate-configs:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup and install deps
+      - uses: actions/checkout@v1
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+
+      # Run tests
+      - name: Unit tests
+        run: |
+          pytest -s -vv test_use_cases.py
+        if: ${{ github.base_ref != 'main' }}
+
+      # job notif
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          author_name: Validate Use Cases
+          only_mention_fail: here
+        env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
