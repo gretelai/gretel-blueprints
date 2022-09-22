@@ -1,9 +1,7 @@
 import json
-import os
 from pathlib import Path
 
 import jsonschema
-import pytest
 from jsonschema import validate
 
 card_schema = {
@@ -90,6 +88,6 @@ def validate_images_exist(image_name):
     two_x = split_name[0] + "@2x."+  split_name[1]
     three_x = split_name[0] + "@3x."+  split_name[1]
   
-    assert os.path.exists((Path(__file__).parent / dir_path / image_name))
-    assert os.path.exists((Path(__file__).parent / dir_path / two_x))
-    assert os.path.exists((Path(__file__).parent / dir_path / three_x))
+    assert (Path(__file__).parent / dir_path / image_name).is_file()
+    assert(Path(__file__).parent / dir_path / two_x).is_file()
+    assert(Path(__file__).parent / dir_path / three_x).is_file()
