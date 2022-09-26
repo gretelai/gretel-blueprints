@@ -15,3 +15,5 @@ Templates can be downloaded and modified for use with Gretel synthetics, or impo
  |`high-dimensionality`| Use for datasets with more than 20 columns and/or 50,000 rows. Works well for largely numeric data. Avoid if dataset contains free text fields.  |
  |`high-accuracy`| Useful for optimizing data for downstream ML tasks, at possible cost of higher compute. |
  |`low-record-count`| For datasets that have fewer than 1000 rows and/or 4 columns, and a mix of categorical, numerical, and continuous values.  |
+ |`time-series`| Specialized model for time-series datasets. Modify this config with values that fit your dataset.  |
+ |`natural-language-gtp`| Useful for single-column natural language datasets such as reviews, tweets, and conversations. Dataset must be single-column. |

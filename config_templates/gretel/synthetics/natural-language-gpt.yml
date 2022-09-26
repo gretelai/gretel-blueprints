@@ -1,0 +1,17 @@
+# When training on single-column natural language data such as reviews, tweets, and conversations
+
+# Use only with single-column natural language datasets
+
+schema_version: "1.0"
+name: "natural-language-gpt"
+
+models:
+  - gpt_x:
+      data_source: "__tmp__"
+      pretrained_model: 'EleutherAI/gpt-neo-125M'
+      batch_size: 4
+      epochs: 3
+      weight_decay: 0.1
+      warmup_steps: 100
+      lr_scheduler: "cosine"
+      learning_rate: 5e-6
