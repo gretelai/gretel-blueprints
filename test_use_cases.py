@@ -7,15 +7,9 @@ from jsonschema import validate
 card_schema = {
     "type": "object",
     "properties": {
-        "title": {
-            "type": "string",
-        },
-        "description": {
-            "type": "string",
-        },
-        "imageName": {
-            "type": "string",
-        },
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "imageName": {"type": "string"},
         "model": {
             "type": "string",
             "enum": [
@@ -28,22 +22,30 @@ card_schema = {
                 "evaluate",
             ],
         },
-        "defaultConfig": {
-            "type": "string",
-        },
+        "defaultConfig": {"type": "string"},
         "sampleDataset": {
-            "type": "string",
+            "type": "object",
+            "properties": {
+                "fileName": {"type": "string"},
+                "description": {"type": "string"},
+                "records": {"type": "number"},
+                "fields": {"type": "number"},
+                "trainingTime": {"type": "string"},
+            },
+            "required": [
+                "fileName",
+                "description",
+                "records",
+                "fields",
+                "trainingTime",
+            ],
         },
-        "docsUrl": {
-            "type": "string",
-        },
+        "docsUrl": {"type": "string"},
         "tag": {
             "type": "string",
             "enum": ["New", "Beta", "Preview", "Popular", "Deprecated"],
         },
-        "gtmId": {
-            "type": "string",
-        },
+        "gtmId": {"type": "string"},
     },
     "required": ["title", "description", "gtmId", "imageName"],
 }

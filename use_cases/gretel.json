@@ -2,39 +2,73 @@
   "cards": [
     {
       "title": "Generate synthetic data",
-      "description": "Generate and share unlimited amounts of realistic synthetic data to shorten long lead times.",
+      "description": "Convert your real-world data into private, shareable, synthetic data.",
       "imageName": "syntheticdata.png",
       "model": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/default.yml",
-      "sampleDataset": "sample_data/sample-synthetic-healthcare.csv",
+      "sampleDataset": {
+        "fileName": "sample-synthetic-healthcare.csv",
+        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
+        "records": 9999,
+        "fields": 18,
+        "trainingTime": "6 minutes"
+      },
       "gtmId": "use-case-synthetic"
     },
     {
+      "title": "Amplify data",
+      "description": "Create a high volume of synthetic records from real-world data or data that has already been synthesized.",
+      "imageName": "amplify.png",
+      "model": "amplify",
+      "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
+      "gtmId": "use-case-amplify",
+      "tag": "New"
+    },
+    {
+      "title": "Generate natural language data",
+      "description": "Use GPT to create high quality free form synthetic text from single column datasets.",
+      "imageName": "amplify.png",
+      "model": "amplify",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language-gpt.yml",
+      "gtmId": "use-case-natural-lang-gpt"
+    },
+    {
       "title": "Identify PII in tabular data",
-      "description": "Detect sensitive information. Extend 40+ managed detections.",
+      "description": "Use NLP to find and label sensitive information. More than 40 entities supported.",
       "imageName": "identifypii.png",
       "model": "classify",
       "defaultConfig": "config_templates/gretel/classify/default.yml",
-      "sampleDataset": "sample_data/sample-classify-bike-sales.csv",
-      "gtmId": "use-case-identifypii"
+      "sampleDataset": {
+        "fileName": "sample-classify-bike-sales.csv",
+        "description": "This public dataset of bicycle sales provides a good example of commonly found sensitive data in sales records. Use it to quickly label names, emails, social security numbers, etc.",
+        "records": 99,
+        "fields": 23,
+        "trainingTime": "< 1 min"
+      },
+      "gtmId": "use-case-identify-pii"
     },
     {
       "title": "Redact PII in sensitive data",
-      "description": "Create real-time transformations to anonymize and power development, test, and staging pipelines.",
+      "description": "Perform privacy preserving transformations on your sensitive data.",
       "imageName": "redactpii.png",
       "model": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
-      "sampleDataset": "sample_data/sample-transform-emails.csv",
-      "gtmId": "use-case-redactpii"
+      "sampleDataset": {
+        "fileName": "sample-transform-emails.csv",
+        "description": "Unstructured text datasets are useful for training chatbots or other models that need large amounts of data. The emails in this public dataset need to be de-identified before they can be used to train ML models.",
+        "records": 100,
+        "fields": 2,
+        "trainingTime": "< 1 min"
+      },
+      "gtmId": "use-case-redact-pii"
     },
     {
-      "title": "Amplify existing data",
-      "description": "Create a high volume of records from real world data or data that has already been processed.",
-      "imageName": "amplify.png",
-      "model": "amplify",
-      "defaultConfig": "config_templates/gretel/amplify/default.yml",
-      "gtmId": "use-case-amplify",
-      "tag": "New"
+      "title": "Generate differentially private synthetic data",
+      "description": "Achieve the highest level of safety by adding differential privacy.",
+      "imageName": "syntheticdata.png",
+      "model": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/differential-privacy.yml",
+      "gtmId": "use-case-synthetic-dp"
     }
   ]
 }
