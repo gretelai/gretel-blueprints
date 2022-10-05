@@ -27,7 +27,7 @@
     {
       "title": "Generate natural language data",
       "description": "Use GPT to create high quality free form synthetic text from single column datasets.",
-      "imageName": "amplify.png",
+      "imageName": "natural-lang-gpt.png",
       "model": "amplify",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language-gpt.yml",
       "gtmId": "use-case-natural-lang-gpt"
@@ -65,7 +65,7 @@
     {
       "title": "Generate differentially private synthetic data",
       "description": "Achieve the highest level of safety by adding differential privacy.",
-      "imageName": "syntheticdata.png",
+      "imageName": "synthetic-dp.png",
       "model": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/differential-privacy.yml",
       "gtmId": "use-case-synthetic-dp"
