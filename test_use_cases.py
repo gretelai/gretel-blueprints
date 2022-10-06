@@ -31,6 +31,7 @@ card_schema = {
                 "records": {"type": "number"},
                 "fields": {"type": "number"},
                 "trainingTime": {"type": "string"},
+                "bytes": {"type": "number"},
             },
             "required": [
                 "fileName",
@@ -38,6 +39,7 @@ card_schema = {
                 "records",
                 "fields",
                 "trainingTime",
+                "bytes",
             ],
         },
         "docsUrl": {"type": "string"},
