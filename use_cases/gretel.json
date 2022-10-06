@@ -11,7 +11,8 @@
         "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
         "records": 9999,
         "fields": 18,
-        "trainingTime": "6 minutes"
+        "trainingTime": "6 minutes",
+        "bytes": 830021
       },
       "gtmId": "use-case-synthetic"
     },
@@ -43,7 +44,8 @@
         "description": "This public dataset of bicycle sales provides a good example of commonly found sensitive data in sales records. Use it to quickly label names, emails, social security numbers, etc.",
         "records": 99,
         "fields": 23,
-        "trainingTime": "< 1 min"
+        "trainingTime": "< 1 min",
+        "bytes": 15996
       },
       "gtmId": "use-case-identify-pii"
     },
@@ -58,7 +60,8 @@
         "description": "Unstructured text datasets are useful for training chatbots or other models that need large amounts of data. The emails in this public dataset need to be de-identified before they can be used to train ML models.",
         "records": 100,
         "fields": 2,
-        "trainingTime": "< 1 min"
+        "trainingTime": "< 1 min",
+        "bytes": 65300
       },
       "gtmId": "use-case-redact-pii"
     },
