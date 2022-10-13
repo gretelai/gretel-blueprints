@@ -101,5 +101,6 @@ def validate_images_exist(image_name):
     assert (Path(__file__).parent / dir_path / two_x).is_file()
     assert (Path(__file__).parent / dir_path / three_x).is_file()
 
+
 def validate_config_files_exist(config_path):
     assert (Path(__file__).parent / config_path).is_file()
