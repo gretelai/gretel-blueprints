@@ -20,7 +20,7 @@
       "title": "Amplify data",
       "description": "Create a high volume of synthetic records from real-world data or data that has already been synthesized.",
       "imageName": "amplify.png",
-      "model": "amplify",
+      "model": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
       "gtmId": "use-case-amplify",
       "tag": "New"
@@ -29,8 +29,8 @@
       "title": "Generate natural language data",
       "description": "Use GPT to create high quality free form synthetic text from single column datasets.",
       "imageName": "natural-lang-gpt.png",
-      "model": "amplify",
-      "defaultConfig": "config_templates/gretel/synthetics/natural-language-gpt.yml",
+      "model": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "gtmId": "use-case-natural-lang-gpt"
     },
     {
