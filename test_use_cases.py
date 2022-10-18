@@ -10,12 +10,38 @@ card_schema = {
         "title": {"type": "string"},
         "description": {"type": "string"},
         "imageName": {"type": "string"},
+        # "model" is deprecated, will be removed soon. replaced by "modelType"
         "model": {
             "type": "string",
             "enum": [
                 "synthetics",
                 "transform",
                 "classify",
+                "ctgan",
+                "amplify",
+                "gpt_x",
+                "evaluate",
+            ],
+        },
+        "modelType": {
+            "type": "string",
+            "enum": [
+                "synthetics",
+                "transform",
+                "classify",
+                "ctgan",
+                "amplify",
+                "gpt_x",
+                "evaluate",
+            ],
+        },
+        "modelCategory": {
+            "type": "string",
+            "enum": [
+                "synthetics",
+                "transform",
+                "classify",
+                "evaluate",
             ],
         },
         "defaultConfig": {"type": "string"},

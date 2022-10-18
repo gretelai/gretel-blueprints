@@ -5,6 +5,8 @@
       "description": "Convert your real-world data into private, shareable, synthetic data.",
       "imageName": "syntheticdata.png",
       "model": "synthetics",
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/default.yml",
       "sampleDataset": {
         "fileName": "sample-synthetic-healthcare.csv",
@@ -20,7 +22,9 @@
       "title": "Amplify data",
       "description": "Create a high volume of synthetic records from real-world data or data that has already been synthesized.",
       "imageName": "amplify.png",
-      "model": "synthetics",
+      "model": "amplify",
+      "modelType": "amplify",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
       "gtmId": "use-case-amplify",
       "tag": "New"
@@ -29,7 +33,9 @@
       "title": "Generate natural language data",
       "description": "Use GPT to create high quality free form synthetic text from single column datasets.",
       "imageName": "natural-lang-gpt.png",
-      "model": "synthetics",
+      "model": "amplify",
+      "modelType": "amplify",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "gtmId": "use-case-natural-lang-gpt"
     },
@@ -38,6 +44,8 @@
       "description": "Use NLP to find and label sensitive information. More than 40 entities supported.",
       "imageName": "identifypii.png",
       "model": "classify",
+      "modelType": "classify",
+      "modelCategory": "classify",
       "defaultConfig": "config_templates/gretel/classify/default.yml",
       "sampleDataset": {
         "fileName": "sample-classify-bike-sales.csv",
@@ -54,6 +62,8 @@
       "description": "Perform privacy preserving transformations on your sensitive data.",
       "imageName": "redactpii.png",
       "model": "transform",
+      "modelType": "transform",
+      "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
       "sampleDataset": {
         "fileName": "sample-transform-emails.csv",
@@ -70,6 +80,8 @@
       "description": "Achieve the highest level of safety by adding differential privacy.",
       "imageName": "synthetic-dp.png",
       "model": "synthetics",
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/differential-privacy.yml",
       "gtmId": "use-case-synthetic-dp"
     }
