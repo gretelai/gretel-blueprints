@@ -10,6 +10,7 @@ card_schema = {
         "title": {"type": "string"},
         "description": {"type": "string"},
         "imageName": {"type": "string"},
+        # "model" is deprecated, will be removed soon. replaced by "modelType"
         "model": {
             "type": "string",
             "enum": [
@@ -17,8 +18,33 @@ card_schema = {
                 "transform",
                 "classify",
                 "ctgan",
+                "actgan",
                 "amplify",
                 "gpt_x",
+                "evaluate",
+                "lstm",
+            ],
+        },
+        "modelType": {
+            "type": "string",
+            "enum": [
+                "synthetics",
+                "transform",
+                "classify",
+                "ctgan",
+                "actgan",
+                "amplify",
+                "gpt_x",
+                "evaluate",
+                "lstm",
+            ],
+        },
+        "modelCategory": {
+            "type": "string",
+            "enum": [
+                "synthetics",
+                "transform",
+                "classify",
                 "evaluate",
             ],
         },
@@ -68,6 +94,7 @@ def test_use_cases():
         gtm_ids.append(card["gtmId"])
         titles.append(card["title"])
         validate_images_exist(card["imageName"])
+        validate_config_files_exist(card["defaultConfig"])
 
     validate_unique(gtm_ids)
     validate_unique(titles)
@@ -103,3 +130,7 @@ def validate_images_exist(image_name):
     assert (Path(__file__).parent / dir_path / image_name).is_file()
     assert (Path(__file__).parent / dir_path / two_x).is_file()
     assert (Path(__file__).parent / dir_path / three_x).is_file()
+
+
+def validate_config_files_exist(config_path):
+    assert (Path(__file__).parent / config_path).is_file()
