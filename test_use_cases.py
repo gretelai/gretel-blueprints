@@ -18,9 +18,11 @@ card_schema = {
                 "transform",
                 "classify",
                 "ctgan",
+                "actgan",
                 "amplify",
                 "gpt_x",
                 "evaluate",
+                "lstm",
             ],
         },
         "modelType": {
@@ -30,9 +32,11 @@ card_schema = {
                 "transform",
                 "classify",
                 "ctgan",
+                "actgan",
                 "amplify",
                 "gpt_x",
                 "evaluate",
+                "lstm",
             ],
         },
         "modelCategory": {
