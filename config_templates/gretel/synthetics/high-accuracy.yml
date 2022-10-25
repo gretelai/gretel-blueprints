@@ -11,19 +11,14 @@
 # Increasing rnn_units allows the network to learn more complex patterns, but
 # at the expense of increased training and generation time.
 
-# Customize privacy filters https://docs.gretel.ai/gretel.ai/synthetics/synthetics-faqs/privacy-protection
-
 schema_version: "1.0"
 name: "high-accuracy"
 models:
   - synthetics:
-      data_source: "__tmp__"
       params:
         epochs: 100
         vocab_size: 0
         learning_rate: .001
-        rnn_units: 256
-        reset_states: false
       # Gretel privacy filtering
       privacy_filters:
         outliers: null
