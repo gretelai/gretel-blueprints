@@ -13,6 +13,7 @@ schema_version: "1.0"
 name: "differential-privacy"
 models:
   - synthetics:
+      data_source: __tmp__
       params:
         epochs: 50
         vocab_size: 0
