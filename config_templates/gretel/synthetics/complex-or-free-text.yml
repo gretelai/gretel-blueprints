@@ -11,7 +11,7 @@ models:
       data_source: "__tmp__"
       params:
         epochs: 100
-        batch_size: 64
         vocab_size: 20000
         learning_rate: .001
         rnn_units: 1024
+        batch_size: 256
