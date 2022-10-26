@@ -6,10 +6,11 @@
 # will help prevent the model from trying to memorize
 # inconsequential data and learn separations in record better.
 #
-# Set vocab_size to 0 to help the model learn the numerical structures better
+# Tip: Set vocab_size to 0 to help the model learn the numerical structures better,
+# Or, set vocab_size to 20000 for datasets with categorical or text data.
 #
-# Increasing rnn_units allows the network to learn more complex patterns, but
-# at the expense of increased training and generation time.
+# Tip: Increasing rnn_units to 1024 and batch_size to 256 allows the network to learn 
+# more complex patterns, but at the expense of increased training and generation time.
 
 schema_version: "1.0"
 name: "high-accuracy"
@@ -20,8 +21,8 @@ models:
         epochs: 100
         vocab_size: 0
         learning_rate: .001
-        rnn_units: 1024
-        batch_size: 256
+        rnn_units: 256
+        batch_size: 64
       privacy_filters:
         outliers: null
         similarity: null
