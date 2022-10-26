@@ -18,16 +18,6 @@
       "gtmId": "use-case-synthetic"
     },
     {
-      "title": "Amplify data",
-      "description": "Create a high volume of synthetic records from real-world data or data that has already been synthesized.",
-      "imageName": "amplify.png",
-      "modelType": "amplify",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
-      "gtmId": "use-case-amplify",
-      "tag": "New"
-    },
-    {
       "title": "Generate natural language data",
       "description": "Use GPT to create high quality free form synthetic text from single column datasets.",
       "imageName": "natural-lang-gpt.png",
@@ -35,23 +25,6 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "gtmId": "use-case-natural-lang-gpt"
-    },
-    {
-      "title": "Identify PII in tabular data",
-      "description": "Use NLP to find and label sensitive information. More than 40 entities supported.",
-      "imageName": "identifypii.png",
-      "modelType": "classify",
-      "modelCategory": "classify",
-      "defaultConfig": "config_templates/gretel/classify/default.yml",
-      "sampleDataset": {
-        "fileName": "sample-classify-bike-sales.csv",
-        "description": "This public dataset of bicycle sales provides a good example of commonly found sensitive data in sales records. Use it to quickly label names, emails, social security numbers, etc.",
-        "records": 99,
-        "fields": 23,
-        "trainingTime": "< 1 min",
-        "bytes": 15996
-      },
-      "gtmId": "use-case-identify-pii"
     },
     {
       "title": "Redact PII in sensitive data",
@@ -69,6 +42,25 @@
         "bytes": 65300
       },
       "gtmId": "use-case-redact-pii"
+    },
+    {
+      "title": "Generate high-quality time series data",
+      "description": "Use DoppelGANger to create accurate and correlated time-series data.",
+      "imageName": "timeseries.png",
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
+      "gtmId": "use-case-timeseries-dgan"
+    },
+    {
+      "title": "Amplify data",
+      "description": "Create a high volume of synthetic records from real-world data or data that has already been synthesized.",
+      "imageName": "amplify.png",
+      "modelType": "amplify",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
+      "gtmId": "use-case-amplify",
+      "tag": "New"
     },
     {
       "title": "Generate differentially private synthetic data",
