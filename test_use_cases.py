@@ -13,15 +13,16 @@ card_schema = {
         "modelType": {
             "type": "string",
             "enum": [
-                "synthetics",
-                "transform",
-                "classify",
-                "ctgan",
                 "actgan",
                 "amplify",
-                "gpt_x",
+                "classify",
+                "ctgan",
                 "evaluate",
+                "gpt_x",
                 "lstm",
+                "synthetics",
+                "timeseries_dgan",
+                "transform",
             ],
         },
         "modelCategory": {
