@@ -27,3 +27,7 @@ The `utils` directory contains helper scripts and tools for environment configur
 # Support
 
 Please open a support ticket at `support [at] gretel.ai` or create a GitHub issue in this repository.
+
+You can also join the Synthetic Data Community Discord to ask questions or suggest new Blueprints.
+
+[![Discord](https://img.shields.io/discord/1007817822614847500?label=Discord&logo=Discord)](https://gretel.ai/discord)
