@@ -47,7 +47,7 @@
       "title": "Generate high-quality time series data",
       "description": "Use DoppelGANger to create accurate and correlated time-series data.",
       "imageName": "timeseries.png",
-      "modelType": "synthetics",
+      "modelType": "timeseries_dgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
       "gtmId": "use-case-timeseries-dgan"
