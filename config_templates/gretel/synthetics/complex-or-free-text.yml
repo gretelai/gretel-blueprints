@@ -1,5 +1,5 @@
-# When training on complex data such as free text or complex data with
-# high field / column counts.
+# Use when training on complex data such as free text or when achieving
+# maximum downstream accuracy for ML tasks is a goal.
 #
 # We use a higher RNN to better learn the structures with a tradeoff
 # in longer training and generation times.
@@ -11,8 +11,7 @@ models:
       data_source: "__tmp__"
       params:
         epochs: 100
-        batch_size: 64
         vocab_size: 20000
         learning_rate: .001
         rnn_units: 1024
-        reset_states: False
+        batch_size: 256

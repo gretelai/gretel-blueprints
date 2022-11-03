@@ -3,8 +3,6 @@
 # The parameter settings below match the default settings 
 # in Gretel's source available synthetics package
 
-# Customize privacy filters https://docs.gretel.ai/gretel.ai/synthetics/synthetics-faqs/privacy-protection
-
 schema_version: "1.0"
 name: "default-config"
 models:
@@ -12,28 +10,11 @@ models:
       data_source: __tmp__
       params:
         epochs: 100
-        batch_size: 64
         vocab_size: 20000
-        reset_states: False
         learning_rate: 0.01
-        rnn_units: 256
-        dropout_rate: 0.2
-        overwrite: True
-        early_stopping: True
-        gen_temp: 1.0
-        predict_batch_size: 64
         validation_split: False
-        dp: False
-        dp_noise_multiplier: 0.001
-        dp_l2_norm_clip: 5.0
-        dp_microbatches: 1
-        data_upsample_limit: 10000
-      validators:
-        in_set_count: 10
-        pattern_count: 10
       generate:
         num_records: 5000
-        max_invalid: null
       privacy_filters:
         outliers: auto
         similarity: auto
