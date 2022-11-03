@@ -6,7 +6,7 @@
 schema_version: "1.0"
 name: "high-dimensionality"
 models:
-  - ctgan:
+  - actgan:
         data_source: __tmp__
         params:
             epochs: 600
