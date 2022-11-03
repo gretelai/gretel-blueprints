@@ -1,6 +1,8 @@
 # Data with a record count of > 50K or 
 # highly dimensional data
 
+# Customize privacy filters https://docs.gretel.ai/gretel.ai/synthetics/synthetics-faqs/privacy-protection
+
 schema_version: "1.0"
 name: "high-dimensionality"
 models:
@@ -16,4 +18,4 @@ models:
         # Gretel privacy filtering
         privacy_filters:
             outliers: null
-            similarity: high
+            similarity: auto
