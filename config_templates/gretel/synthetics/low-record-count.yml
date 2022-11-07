@@ -5,7 +5,7 @@
 schema_version: "1.0"
 name: "low-record-count"
 models:
-  - ctgan:
+  - actgan:
         data_source: __tmp__
         params:
             epochs: 600
