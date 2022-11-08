@@ -7,9 +7,15 @@ from jsonschema import validate
 card_schema = {
     "type": "object",
     "properties": {
+        "gtmId": {"type": "string"},
         "title": {"type": "string"},
         "description": {"type": "string"},
+        "cardType": {"type": "string", "enum": ["Console", "Notebook"]},
         "imageName": {"type": "string"},
+        "tag": {
+            "type": "string",
+            "enum": ["New", "Beta", "Preview", "Popular", "Deprecated"],
+        },
         "modelType": {
             "type": "string",
             "enum": [
@@ -54,14 +60,17 @@ card_schema = {
                 "bytes",
             ],
         },
-        "docsUrl": {"type": "string"},
-        "tag": {
-            "type": "string",
-            "enum": ["New", "Beta", "Preview", "Popular", "Deprecated"],
+        "detailsFileName": {"type": "string"},
+        "button1": {
+            "type": "object",
+            "properties": {"label": {"type": "string"}, "link": {"type": "string"}},
         },
-        "gtmId": {"type": "string"},
+        "button2": {
+            "type": "object",
+            "properties": {"label": {"type": "string"}, "link": {"type": "string"}},
+        },
     },
-    "required": ["title", "description", "gtmId", "imageName"],
+    "required": ["gtmId", "title", "description", "cardType", "imageName"],
 }
 
 
@@ -77,10 +86,11 @@ def test_use_cases():
     for card in cards_data["cards"]:
         card_is_valid = validate_use_case_JSON(card)
         assert card_is_valid
-        gtm_ids.append(card["gtmId"])
-        titles.append(card["title"])
-        validate_images_exist(card["imageName"])
-        validate_config_files_exist(card["defaultConfig"])
+        gtm_ids.append(card.get("gtmId"))
+        titles.append(card.get("title"))
+        validate_images_exist(card.get("imageName"))
+        validate_config_file_exists(card.get("defaultConfig"))
+        validate_details_file_exists(card.get("detailsFileName"))
 
     validate_unique(gtm_ids)
     validate_unique(titles)
@@ -118,5 +128,12 @@ def validate_images_exist(image_name):
     assert (Path(__file__).parent / dir_path / three_x).is_file()
 
 
-def validate_config_files_exist(config_path):
-    assert (Path(__file__).parent / config_path).is_file()
+def validate_config_file_exists(config_path):
+    if config_path:
+        assert (Path(__file__).parent / config_path).is_file()
+
+
+def validate_details_file_exists(fileName):
+    dir_path = "use_cases/details"
+    if fileName:
+        assert (Path(__file__).parent / dir_path / fileName).is_file()
