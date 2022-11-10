@@ -1,12 +1,10 @@
 # Data with a record count of > 50K or 
-# highly dimensional data
-
-# Customize privacy filters https://docs.gretel.ai/gretel.ai/synthetics/synthetics-faqs/privacy-protection
+# highly dimensional data. 
 
 schema_version: "1.0"
 name: "high-dimensionality"
 models:
-  - ctgan:
+  - actgan:
         data_source: __tmp__
         params:
             epochs: 600
@@ -15,7 +13,6 @@ models:
             generator_lr: 0.0001
             discriminator_lr: .00033
             batch_size: 600
-        # Gretel privacy filtering
         privacy_filters:
             outliers: null
             similarity: auto
