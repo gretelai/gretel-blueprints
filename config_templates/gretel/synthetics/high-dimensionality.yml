@@ -1,4 +1,5 @@
-# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-actgan" configuration.
+# Data with a record count of > 50K or 
+# highly dimensional data. 
 
 schema_version: "1.0"
 name: "high-dimensionality"
@@ -6,12 +7,12 @@ models:
   - actgan:
         data_source: __tmp__
         params:
-            epochs: auto
+            epochs: 600
             generator_dim: [1024, 1024]
             discriminator_dim: [1024, 1024]
             generator_lr: 0.0001
             discriminator_lr: .00033
-            batch_size: auto
+            batch_size: 600
         privacy_filters:
-            outliers: auto
+            outliers: null
             similarity: auto
