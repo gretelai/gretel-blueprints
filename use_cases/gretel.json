@@ -1,8 +1,10 @@
 {
   "cards": [
     {
+      "gtmId": "use-case-synthetic",
       "title": "Generate synthetic data",
       "description": "Convert your real-world data into private, shareable, synthetic data.",
+      "cardType": "Console",
       "imageName": "syntheticdata.png",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
@@ -14,21 +16,23 @@
         "fields": 18,
         "trainingTime": "6 minutes",
         "bytes": 830021
-      },
-      "gtmId": "use-case-synthetic"
+      }
     },
     {
+      "gtmId": "use-case-natural-lang-gpt",
       "title": "Generate natural language data",
       "description": "Use GPT to create high quality free form synthetic text from single column datasets.",
+      "cardType": "Console",
       "imageName": "natural-lang-gpt.png",
       "modelType": "amplify",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
-      "gtmId": "use-case-natural-lang-gpt"
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml"
     },
     {
+      "gtmId": "use-case-redact-pii",
       "title": "Redact PII in sensitive data",
       "description": "Perform privacy preserving transformations on your sensitive data.",
+      "cardType": "Console",
       "imageName": "redactpii.png",
       "modelType": "transform",
       "modelCategory": "transform",
@@ -40,36 +44,50 @@
         "fields": 2,
         "trainingTime": "< 1 min",
         "bytes": 65300
-      },
-      "gtmId": "use-case-redact-pii"
+      }
     },
     {
+      "gtmId": "use-case-timeseries-dgan",
       "title": "Generate high-quality time series data",
       "description": "Use DoppelGANger to create accurate and correlated time-series data.",
+      "cardType": "Console",
       "imageName": "timeseries.png",
       "modelType": "timeseries_dgan",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
-      "gtmId": "use-case-timeseries-dgan"
+      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml"
     },
     {
+      "gtmId": "use-case-amplify",
       "title": "Amplify data",
       "description": "Create a high volume of synthetic records from real-world data or data that has already been synthesized.",
+      "cardType": "Console",
       "imageName": "amplify.png",
       "modelType": "amplify",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
-      "gtmId": "use-case-amplify",
       "tag": "New"
     },
     {
+      "gtmId": "use-case-synthetic-dp",
       "title": "Generate differentially private synthetic data",
       "description": "Achieve the highest level of safety by adding differential privacy.",
+      "cardType": "Console",
       "imageName": "synthetic-dp.png",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/differential-privacy.yml",
-      "gtmId": "use-case-synthetic-dp"
+      "defaultConfig": "config_templates/gretel/synthetics/differential-privacy.yml"
+    },
+    {
+      "gtmId": "use-case-balance-biased-data",
+      "title": "Balance biased data",
+      "description": "Use conditional data generation to remove bias and balance datasets.",
+      "cardType": "Notebook",
+      "imageName": "notebook.png",
+      "detailsFileName": "balance-biased-data.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/gretel-blueprints/blob/develop/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
+      }
     }
   ]
 }
