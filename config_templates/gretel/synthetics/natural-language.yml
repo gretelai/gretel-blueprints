@@ -13,4 +13,6 @@ models:
       weight_decay: 0.01
       warmup_steps: 100
       lr_scheduler: "linear"
-      learning_rate: 0.0002     
+      learning_rate: 0.0002
+      generate:
+        num_records: 10
