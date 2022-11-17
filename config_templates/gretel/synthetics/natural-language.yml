@@ -4,7 +4,6 @@
 
 schema_version: "1.0"
 name: "natural-language-gpt"
-
 models:
   - gpt_x:
       data_source: "__temp__"
@@ -14,5 +13,4 @@ models:
       weight_decay: 0.01
       warmup_steps: 100
       lr_scheduler: "linear"
-      learning_rate: 0.0002
-      
+      learning_rate: 0.0002     
