@@ -4,15 +4,13 @@
 
 schema_version: "1.0"
 name: "natural-language-gpt"
-
 models:
   - gpt_x:
-      data_source: "__tmp__"
+      data_source: "__temp__"
       pretrained_model: 'EleutherAI/gpt-neo-125M'
       batch_size: 4
       epochs: 3
-      weight_decay: 0.1
+      weight_decay: 0.01
       warmup_steps: 100
-      lr_scheduler: "cosine"
-      learning_rate: 5e-6
-      
+      lr_scheduler: "linear"
+      learning_rate: 0.0002     
