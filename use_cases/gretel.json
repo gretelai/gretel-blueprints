@@ -42,7 +42,7 @@
       "description": "Quickly create new labeled examples for natural language tasks.",
       "cardType": "Console",
       "imageName": "natural-lang-gpt.png",
-      "modelType": "gpt",
+      "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "sampleDataset": {
