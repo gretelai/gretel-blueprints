@@ -3,7 +3,7 @@
     {
       "gtmId": "use-case-synthetic",
       "title": "Generate synthetic data",
-      "description": "Convert your real-world data into private, shareable, synthetic data.",
+      "description": "Create highly accurate synthetic training data for ML models.",
       "cardType": "Console",
       "imageName": "syntheticdata.png",
       "modelType": "synthetics",
@@ -14,19 +14,9 @@
         "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
         "records": 9999,
         "fields": 18,
-        "trainingTime": "6 minutes",
+        "trainingTime": "6 mins",
         "bytes": 830021
       }
-    },
-    {
-      "gtmId": "use-case-natural-lang-gpt",
-      "title": "Generate natural language data",
-      "description": "Use GPT to create high quality free form synthetic text from single column datasets.",
-      "cardType": "Console",
-      "imageName": "natural-lang-gpt.png",
-      "modelType": "amplify",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml"
     },
     {
       "gtmId": "use-case-redact-pii",
@@ -47,6 +37,43 @@
       }
     },
     {
+      "gtmId": "use-case-natural-lang-gpt",
+      "title": "Generate natural language text using GPT",
+      "description": "Quickly create new labeled examples for natural language tasks.",
+      "cardType": "Console",
+      "imageName": "natural-lang-gpt.png",
+      "modelType": "gpt_x",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "sampleDataset": {
+        "fileName": "taylor-swift-lyrics.csv",
+        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
+        "records": 246,
+        "fields": 1,
+        "trainingTime": "< 5 mins",
+        "bytes": 405000
+      }
+    },
+    {
+      "gtmId": "use-case-amplify",
+      "title": "Amplify data",
+      "description": "Create large volumes of synthetic records for demos and scale testing.",
+      "cardType": "Console",
+      "imageName": "amplify.png",
+      "modelType": "amplify",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
+      "tag": "New",
+      "sampleDataset": {
+        "fileName": "safe-driver-prediction.csv",
+        "description": "Use this dataset to predict if a driver will file an insurance claim in the following year. Specify an output size in the config. By default, the model will create as many records as the input dataset.",
+        "records": 595212,
+        "fields": 59,
+        "trainingTime": "< 5 mins",
+        "bytes": 116000000
+      }
+    },
+    {
       "gtmId": "use-case-timeseries-dgan",
       "title": "Generate high-quality time series data",
       "description": "Use DoppelGANger to create accurate and correlated time-series data.",
@@ -54,28 +81,33 @@
       "imageName": "timeseries.png",
       "modelType": "timeseries_dgan",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml"
+      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
+      "sampleDataset": {
+        "fileName": "daily-website-visitors.csv",
+        "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
+        "records": 595212,
+        "fields": 59,
+        "trainingTime": "3 mins",
+        "bytes": 116000000
+      }
     },
     {
-      "gtmId": "use-case-amplify",
-      "title": "Amplify data",
-      "description": "Create a high volume of synthetic records from real-world data or data that has already been synthesized.",
+      "gtmId": "use-case-synthetic-hi-dim",
+      "title": "Synthesize highly dimensional data",
+      "description": "Train a synthetic ACTGAN model designed to easily handle datasets with 50k+ records and 100+ columns.",
       "cardType": "Console",
-      "imageName": "amplify.png",
-      "modelType": "amplify",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
-      "tag": "New"
-    },
-    {
-      "gtmId": "use-case-synthetic-dp",
-      "title": "Generate differentially private synthetic data",
-      "description": "Achieve the highest level of safety by adding differential privacy.",
-      "cardType": "Console",
-      "imageName": "synthetic-dp.png",
+      "imageName": "syntheticdata.png",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/differential-privacy.yml"
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "sampleDataset": {
+        "fileName": "monthly-customer-payments.csv",
+        "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
+        "records": 7032,
+        "fields": 23,
+        "trainingTime": "3 mins",
+        "bytes": 1000000
+      }
     },
     {
       "gtmId": "use-case-balance-biased-data",
@@ -87,6 +119,10 @@
       "button1": {
         "label": "Open in GitHub",
         "link": "https://github.com/gretelai/gretel-blueprints/blob/develop/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/develop/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
       }
     }
   ]
