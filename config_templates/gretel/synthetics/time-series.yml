@@ -1,14 +1,19 @@
 # Default configuration for specialized time series model.
 
+# See https://docs.gretel.ai/synthetics/models/gretel-dgan for detailed info on
+# all config options.
+
 schema_version: "1.0"
 name: "time-series-dgan"
 models:
   - timeseries_dgan:
         data_source: "_"
 
-        # Replace with the column name containing the date or time
-        # values in your dataset.
-        time_column: "Date"
+        # "auto" will infer the time column from the input data. Alternately,
+        # replace with a specific column name to use as the time column. Or
+        # remove the field, equivalently set to null, if the input data does not
+        # have a time column (and is already sorted by increasing time).
+        time_column: "auto"
         
         # Replace with "wide" if time series data is in a wide 
         # format.
