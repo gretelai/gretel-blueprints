@@ -28,4 +28,3 @@ models:
       privacy_filters:
         similarity: auto
         outliers: auto
-        
