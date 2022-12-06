@@ -67,10 +67,10 @@
       "sampleDataset": {
         "fileName": "safe-driver-prediction.csv",
         "description": "Use this dataset to predict if a driver will file an insurance claim in the following year. Specify an output size in the config. By default, the model will create as many records as the input dataset.",
-        "records": 595212,
+        "records": 547827,
         "fields": 59,
         "trainingTime": "< 5 mins",
-        "bytes": 116000000
+        "bytes": 100000000
       }
     },
     {
@@ -85,10 +85,10 @@
       "sampleDataset": {
         "fileName": "daily-website-visitors.csv",
         "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
-        "records": 595212,
-        "fields": 59,
+        "records": 2167,
+        "fields": 5,
         "trainingTime": "3 mins",
-        "bytes": 116000000
+        "bytes": 63000
       }
     },
     {
