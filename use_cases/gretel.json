@@ -8,7 +8,7 @@
       "imageName": "syntheticdata.png",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/default.yml",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm.yml",
       "sampleDataset": {
         "fileName": "sample-synthetic-healthcare.csv",
         "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
