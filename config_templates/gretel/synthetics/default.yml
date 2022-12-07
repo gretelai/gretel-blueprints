@@ -1,5 +1,3 @@
-# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-lstm" configuration.
-
 schema_version: "1.0"
 name: "default-config"
 models:
