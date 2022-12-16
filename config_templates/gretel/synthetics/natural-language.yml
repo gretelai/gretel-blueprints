@@ -1,6 +1,7 @@
-# When training on single-column natural language data such as reviews, tweets, and conversations
+# When training on natural language data such as reviews, tweets, and conversations
 
-# Use only with single-column natural language datasets
+# If training data contains multiple columns, specify the column containing natural language text
+# using the column_name parameter
 
 schema_version: "1.0"
 name: "natural-language-gpt"
@@ -14,5 +15,6 @@ models:
       warmup_steps: 100
       lr_scheduler: "linear"
       learning_rate: 0.0002
+      column_name: null
       generate:
         num_records: 10
