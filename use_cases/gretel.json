@@ -128,7 +128,7 @@
     {
       "gtmId": "use-case-downstream-ml",
       "title": "Evaluate downstream ML accuracy",
-      "description": "Use conditional data generation to remove bias and balance datasets.",
+      "description": "Validate the quality of synthetic data for downstream tasks.",
       "cardType": "Notebook",
       "imageName": "downstream-accuracy.png",
       "detailsFileName": "evaluate-downstream-ml-accuracy.md",
