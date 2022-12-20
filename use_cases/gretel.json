@@ -56,7 +56,7 @@
     },
     {
       "gtmId": "use-case-amplify",
-      "title": "Amplify data",
+      "title": "Synthesize data at scale",
       "description": "Create large volumes of synthetic records for demos and scale testing.",
       "cardType": "Console",
       "imageName": "amplify.png",
@@ -118,11 +118,43 @@
       "detailsFileName": "balance-biased-data.md",
       "button1": {
         "label": "Open in GitHub",
-        "link": "https://github.com/gretelai/gretel-blueprints/blob/develop/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
+        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
       },
       "button2": {
         "label": "Run in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/develop/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-downstream-ml",
+      "title": "Evaluate downstream ML accuracy",
+      "description": "Use conditional data generation to remove bias and balance datasets.",
+      "cardType": "Notebook",
+      "imageName": "downstream-accuracy.png",
+      "detailsFileName": "evaluate-downstream-ml-accuracy.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/numerics_and_downstream_ml.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/numerics_and_downstream_ml.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-gdpr-anon",
+      "title": "Balance biased data",
+      "description": "Use generative AI-based models to anonymize sensitive data to meet or exceed GDPR standards",
+      "cardType": "Notebook",
+      "imageName": "gdpr-anonymization.png",
+      "detailsFileName": "gdpr-anonymization.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/gdpr-helpers/blob/main/examples/anonymize_files_colab.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gdpr-helpers/blob/main/examples/anonymize_files_colab.ipynb"
       }
     }
   ]
