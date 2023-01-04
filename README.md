@@ -16,6 +16,10 @@ The `docs/notebooks` directory contains Python Notebooks that utilize Gretel's P
 
 The `sample_data` directory contains a set of sample CSV files for use in different workflows.
 
+## Sample Data Previews
+
+The `sample_data_previews` directory contains the truncated versions of CSV files in `sample_data`.
+
 ## Use Cases
 
 The `use_cases` directory contains a json file defining our current use case workflows as well as a subdirectory of image thumbnails associated with those use case workflows for rendering in Gretel Console.
