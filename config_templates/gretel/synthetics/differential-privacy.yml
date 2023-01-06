@@ -25,6 +25,8 @@ models:
         dp_noise_multiplier: 0.001
         dp_l2_norm_clip: 5.0
         dp_microbatches: 1
+      generate:
+        num_records: 5000
       privacy_filters:
         similarity: auto
         outliers: auto

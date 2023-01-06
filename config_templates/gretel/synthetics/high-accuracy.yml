@@ -11,6 +11,8 @@ models:
         learning_rate: .001
         rnn_units: 256
         batch_size: 64
+      generate:
+        num_records: 5000
       privacy_filters:
         outliers: null
         similarity: null
