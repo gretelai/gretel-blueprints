@@ -15,17 +15,18 @@ models:
   - synthetics:
       data_source: __tmp__
       params:
-        epochs: 50
-        vocab_size: 0
-        learning_rate: .001
-        rnn_units: 256
-        batch_size: 4 
+        epochs: auto
+        vocab_size: auto
+        learning_rate: auto
+        rnn_units: auto
+        batch_size: auto
         predict_batch_size: 1
         dp: True
         dp_noise_multiplier: 0.001
         dp_l2_norm_clip: 5.0
         dp_microbatches: 1
+      generate:
+        num_records: 5000
       privacy_filters:
-        similarity: "high"
-        outliers: "high"
-        
+        similarity: auto
+        outliers: auto

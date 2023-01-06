@@ -1,16 +1,4 @@
-# For training synthetic datasets for maximum accuracy.
-# Useful for optimizing data for downstream ML tasks, at possible cost of higher compute.
-#
-# Before training, consider rounding all floating points
-# to the minimal precision necessary for your use case. This
-# will help prevent the model from trying to memorize
-# inconsequential data and learn separations in record better.
-#
-# Tip: Set vocab_size to 0 to help the model learn the numerical structures better,
-# Or, set vocab_size to 20000 for datasets with categorical or text data.
-#
-# Tip: Increasing rnn_units to 1024 and batch_size to 256 allows the network to learn 
-# more complex patterns, but at the expense of increased training and generation time.
+# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-lstm" configuration.
 
 schema_version: "1.0"
 name: "high-accuracy"
@@ -23,6 +11,8 @@ models:
         learning_rate: .001
         rnn_units: 256
         batch_size: 64
+      generate:
+        num_records: 5000
       privacy_filters:
         outliers: null
         similarity: null

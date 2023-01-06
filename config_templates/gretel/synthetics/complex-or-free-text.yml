@@ -1,8 +1,5 @@
-# Use when training on complex data such as free text or when achieving
-# maximum downstream accuracy for ML tasks is a goal.
-#
-# We use a higher RNN to better learn the structures with a tradeoff
-# in longer training and generation times.
+# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-lstm" configuration.
+
 
 schema_version: "1.0"
 name: "complex-or-free-text"
@@ -15,3 +12,9 @@ models:
         learning_rate: .001
         rnn_units: 1024
         batch_size: 256
+      generate:
+        num_records: 5000
+      privacy_filters:
+        outliers: auto
+        similarity: auto
+

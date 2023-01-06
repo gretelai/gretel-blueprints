@@ -1,7 +1,4 @@
-# Default configuration for Synthetic model creation.
-
-# The parameter settings below match the default settings 
-# in Gretel's source available synthetics package
+# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-lstm" configuration.
 
 schema_version: "1.0"
 name: "default-config"
