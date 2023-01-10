@@ -1,0 +1,21 @@
+CustomerID,Title,FirstName,MiddleName,LastName,Suffix,AddressLine1,AddressLine2,City,StateProvinceName,CountryRegionName,PostalCode,PhoneNumber,BirthDate,Education,Occupation,Gender,MaritalStatus,HomeOwnerFlag,NumberCarsOwned,NumberChildrenAtHome,TotalChildren,YearlyIncome
+user_26159,,Virginia,,Raman,,3242 Coralie Drive,,Sydney,New South Wales,Australia,1002,1 (11) 500 555-0191,1957-07-10,Partial College,Skilled Manual,F,S,1,1,0,1,78246
+user_11748,,Blake,,Hill,,1315 Norse Drive,,Victoria,British Columbia,Canada,V8V,171-555-0174,1958-07-18,Graduate Degree,Professional,M,M,1,1,4,5,92987
+user_25780,,Dana,M,Gill,,Roßstr 9928,,Leipzig,Nordrhein-Westfalen,Germany,4139,1 (11) 500 555-0147,1944-06-05,Partial College,Professional,F,S,0,2,0,5,87805
+user_16198,,Arthur,,Navarro,,6607 Panoramic Avenue,,Cheltenham,England,United Kingdom,GL50,1 (11) 500 555-0117,1972-10-13,High School,Manual,M,S,1,1,0,0,32050
+user_22931,,Logan,K,Johnson,,4945 Pennsylvania Blvd.,,Caloundra,Queensland,Australia,4551,1 (11) 500 555-0149,1928-03-02,Graduate Degree,Management,M,M,0,1,0,5,136024
+user_14724,,Dylan,L,Robinson,,380 Canyon Road,,Cliffside,British Columbia,Canada,V8Y 1L1,915-555-0155,1966-07-12,Graduate Degree,Skilled Manual,M,M,1,0,0,0,113094
+user_24231,,Makayla,,Cox,,30 Rolling Green Circle,,San Gabriel,California,United States,91776,392-555-0143,1979-10-18,Partial College,Skilled Manual,F,S,1,1,0,0,72260
+user_25348,,Angela,M,Wood,,273 Pleasant Hill Road,,San Carlos,California,United States,94070,299-555-0187,1956-07-18,High School,Skilled Manual,F,S,0,2,0,2,45840
+user_20397,,Isaiah,A,Gray,,9192 Dublin Court,,Grossmont,California,United States,91941,915-555-0139,1941-09-23,Bachelors ,Management,M,M,1,2,0,4,68795
+user_21125,,Bruce,E,Rana,,16, rue de l´Avenir,,Courbevoie,Hauts de Seine,France,92400,1 (11) 500 555-0156,1975-12-01,Partial College,Clerical,M,S,1,1,0,0,46489
+user_16996,,Destiny,M,Walker,,5878 East L Street,,Royal Oak,British Columbia,Canada,V8X,923-555-0167,1964-07-14,Bachelors ,Skilled Manual,F,S,1,3,5,5,79603
+user_21482,,Haley,M,Flores,,2473 San Rafael,,Lake Oswego,Oregon,United States,97034,620-555-0164,1949-10-08,Partial College,Professional,F,S,0,2,1,2,79604
+user_22694,,Molly,N,Kapoor,,Westheimer Straße 9,,Duesseldorf,Hessen,Germany,40434,1 (11) 500 555-0163,1978-01-06,Partial College,Clerical,F,S,1,2,3,3,42809
+user_11332,,Deanna,D,Ramos,,Roßstr 9938,,Berlin,Nordrhein-Westfalen,Germany,14197,1 (11) 500 555-0138,1962-10-04,Graduate Degree,Manual,F,S,1,0,0,1,39200
+user_19918,,Joy,A,Alonso,,1697 Charlotte Court,,York,England,United Kingdom,Y024 1GF,1 (11) 500 555-0129,1944-04-19,Bachelors ,Management,F,M,1,3,4,4,131121
+user_22392,,Bailey,A,Gray,,505, quai Paul Doumer,,Bobigny,Seine Saint Denis,France,93000,1 (11) 500 555-0130,1954-05-14,Partial College,Manual,F,M,1,1,0,2,25135
+user_12607,,Tamara,,Zhu,,570, avenue de Malakoff,,Verrieres Le Buisson,Essonne,France,91370,1 (11) 500 555-0188,1960-09-22,Graduate Degree,Clerical,F,M,1,0,0,3,63694
+user_14309,,Orlando,,Sanz,,1306 Kaski Ln,,Perth,South Australia,Australia,6006,1 (11) 500 555-0181,1966-05-09,Graduate Degree,Management,M,S,0,2,0,0,181530
+user_20599,,Kyle,,Wang,,5404 Panoramic Ave,,Kirkby,England,United Kingdom,KB9,1 (11) 500 555-0131,1947-06-12,High School,Management,M,M,0,4,5,5,146430
+user_23410,,Carrie,W,Alvarez,,1050 Greenhills Circle,,Lane Cove,New South Wales,Australia,1597,1 (11) 500 555-0122,1969-05-22,Graduate Degree,Management,F,M,1,0,0,1,114641

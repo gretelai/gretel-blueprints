@@ -22,7 +22,12 @@ async function main() {
   for await (const p of walk("sample_data")) {
     samples.push(p);
   }
-  console.log(JSON.stringify({ templates, samples }));
+  const sample_data_previews = [];
+  for await (const p of walk("sample_data_previews")) {
+    sample_data_previews.push(p);
+  }
+
+  console.log(JSON.stringify({ templates, samples, sample_data_previews }));
 }
 
 main();
