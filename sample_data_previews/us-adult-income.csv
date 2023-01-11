@@ -18,4 +18,3 @@ age,workclass,fnlwgt,education,education_num,marital_status,occupation,relations
 39,Private,226374,10th,6,Divorced,Other-service,Unmarried,Black,Female,0,0,40,United-States,<=50K
 47,Private,45857,HS-grad,9,Never-married,Adm-clerical,Unmarried,White,Female,0,0,40,United-States,<=50K
 19,Private,203319,11th,7,Never-married,Sales,Own-child,White,Male,0,0,30,United-States,<=50K
-59,Private,245196,10th,6,Married-civ-spouse,Transport-moving,Husband,Black,Male,0,0,40,United-States,>50K

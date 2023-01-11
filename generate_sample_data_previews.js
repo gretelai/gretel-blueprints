@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { parse } = require("csv-parse");
-
+const { stringify } = require("csv-stringify");
 /**
  *
  * For each file in the sample data folder,
@@ -10,26 +10,17 @@ const { parse } = require("csv-parse");
  *
  */
 
-const PREVIEW_SIZE = 21; // 20 data rows + header
+const PREVIEW_SIZE = 20;
 const READ_DIR = "sample_data";
 const PREVIEW_DIR = "sample_data_previews";
 
 function createPreviewForFile(fileName) {
   const readStream = fs.createReadStream(`${READ_DIR}/${fileName}`);
+  const parser = parse({ to: PREVIEW_SIZE });
+  const stringifier = stringify();
+  const writeStream = fs.createWriteStream(`${PREVIEW_DIR}/${fileName}`);
 
-  readStream.pipe(
-    parse({}, (err, records) => {
-      const previewRecords = records.slice(0, PREVIEW_SIZE);
-      fs.writeFile(
-        `${PREVIEW_DIR}/${fileName}`,
-        previewRecords.join("\n"),
-        "utf8",
-        () => {
-          console.log(`New preview file written: ${fileName}.`);
-        }
-      );
-    })
-  );
+  readStream.pipe(parser).pipe(stringifier).pipe(writeStream);
 }
 
 function generateSampleDataPreviews() {
