@@ -10,7 +10,7 @@ const { stringify } = require("csv-stringify");
  *
  */
 
-const PREVIEW_SIZE = 20;
+const PREVIEW_SIZE = 21; // 20 data rows + header
 const READ_DIR = "sample_data";
 const PREVIEW_DIR = "sample_data_previews";
 

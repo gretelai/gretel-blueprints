@@ -18,3 +18,4 @@ case_id,Hospital_code,Hospital_type_code,City_Code_Hospital,Hospital_region_code
 17,23,a,6,X,4,radiotherapy,Q,F,3.0,63418,8.0,Urgent,Extreme,4,71-80,2933.0,0-10
 18,29,a,4,X,4,anesthesia,S,F,3.0,63418,8.0,Emergency,Extreme,2,71-80,5342.0,11-20
 19,32,f,9,Y,4,radiotherapy,S,B,2.0,63418,8.0,Trauma,Extreme,2,71-80,7442.0,21-30
+20,12,a,9,Y,4,radiotherapy,Q,B,2.0,63418,8.0,Trauma,Extreme,2,71-80,5155.0,31-40
