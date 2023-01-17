@@ -96,7 +96,7 @@
       "title": "Synthesize highly dimensional data",
       "description": "Train a synthetic ACTGAN model designed to easily handle datasets with 50k+ records and 100+ columns.",
       "cardType": "Console",
-      "imageName": "synthetics.png",
+      "imageName": "high-dimensional.png",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
