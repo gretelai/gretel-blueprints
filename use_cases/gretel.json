@@ -126,19 +126,19 @@
       }
     },
     {
-      "gtmId": "use-case-benchmark",
-      "title": "Evaluate and analyze multiple synthetic models",
-      "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
+      "gtmId": "use-case-downstream-ml",
+      "title": "Evaluate downstream ML accuracy",
+      "description": "Validate the quality of synthetic data for downstream tasks.",
       "cardType": "Notebook",
-      "imageName": "benchmark.png",
-      "detailsFileName": "benchmark.md",
+      "imageName": "downstream-accuracy.png",
+      "detailsFileName": "evaluate-downstream-ml-accuracy.md",
       "button1": {
         "label": "Open in GitHub",
-        "link": "https://github.com/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/numerics_and_downstream_ml.ipynb"
       },
       "button2": {
         "label": "Run in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/numerics_and_downstream_ml.ipynb"
       }
     },
     {
@@ -155,6 +155,22 @@
       "button2": {
         "label": "Run in Google Colab",
         "link": "https://colab.research.google.com/github/gretelai/gdpr-helpers/blob/main/examples/anonymize_files_colab.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-benchmark",
+      "title": "Evaluate and analyze multiple synthetic models",
+      "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
+      "cardType": "Notebook",
+      "imageName": "benchmark.png",
+      "detailsFileName": "benchmark.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
       }
     }
   ]
