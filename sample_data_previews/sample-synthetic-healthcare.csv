@@ -1,0 +1,21 @@
+case_id,Hospital_code,Hospital_type_code,City_Code_Hospital,Hospital_region_code,Available Extra Rooms in Hospital,Department,Ward_Type,Ward_Facility_Code,Bed Grade,patientid,City_Code_Patient,Type of Admission,Severity of Illness,Visitors with Patient,Age,Admission_Deposit,Stay
+1,8,c,3,Z,3,radiotherapy,R,F,2.0,31397,7.0,Emergency,Extreme,2,51-60,4911.0,0-10
+2,2,c,5,Z,2,radiotherapy,S,F,2.0,31397,7.0,Trauma,Extreme,2,51-60,5954.0,41-50
+3,10,e,1,X,2,anesthesia,S,E,2.0,31397,7.0,Trauma,Extreme,2,51-60,4745.0,31-40
+4,26,b,2,Y,2,radiotherapy,R,D,2.0,31397,7.0,Trauma,Extreme,2,51-60,7272.0,41-50
+5,26,b,2,Y,2,radiotherapy,S,D,2.0,31397,7.0,Trauma,Extreme,2,51-60,5558.0,41-50
+6,23,a,6,X,2,anesthesia,S,F,2.0,31397,7.0,Trauma,Extreme,2,51-60,4449.0,11-20
+7,32,f,9,Y,1,radiotherapy,S,B,3.0,31397,7.0,Emergency,Extreme,2,51-60,6167.0,0-10
+8,23,a,6,X,4,radiotherapy,Q,F,3.0,31397,7.0,Trauma,Extreme,2,51-60,5571.0,41-50
+9,1,d,10,Y,2,gynecology,R,B,4.0,31397,7.0,Trauma,Extreme,2,51-60,7223.0,51-60
+10,10,e,1,X,2,gynecology,S,E,3.0,31397,7.0,Trauma,Extreme,2,51-60,6056.0,31-40
+11,22,g,9,Y,2,radiotherapy,S,B,2.0,31397,7.0,Urgent,Extreme,2,51-60,5797.0,21-30
+12,26,b,2,Y,4,radiotherapy,R,D,1.0,31397,7.0,Urgent,Extreme,2,51-60,5993.0,11-20
+13,16,c,3,Z,2,radiotherapy,R,A,3.0,31397,7.0,Emergency,Extreme,2,51-60,5141.0,0-10
+14,9,d,5,Z,3,radiotherapy,S,F,3.0,31397,7.0,Urgent,Extreme,2,51-60,8477.0,21-30
+15,6,a,6,X,4,gynecology,Q,F,3.0,63418,8.0,Emergency,Extreme,2,71-80,2685.0,0-10
+16,6,a,6,X,3,gynecology,Q,F,3.0,63418,8.0,Emergency,Extreme,2,71-80,9398.0,0-10
+17,23,a,6,X,4,radiotherapy,Q,F,3.0,63418,8.0,Urgent,Extreme,4,71-80,2933.0,0-10
+18,29,a,4,X,4,anesthesia,S,F,3.0,63418,8.0,Emergency,Extreme,2,71-80,5342.0,11-20
+19,32,f,9,Y,4,radiotherapy,S,B,2.0,63418,8.0,Trauma,Extreme,2,71-80,7442.0,21-30
+20,12,a,9,Y,4,radiotherapy,Q,B,2.0,63418,8.0,Trauma,Extreme,2,71-80,5155.0,31-40
