@@ -219,6 +219,22 @@
         "trainingTime": "15 mins",
         "bytes": 117475
       }
+    },
+    {
+      "gtmId": "use-case-benchmark",
+      "title": "Evaluate and analyze multiple synthetic models",
+      "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
+      "cardType": "Notebook",
+      "imageName": "benchmark.png",
+      "detailsFileName": "benchmark.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+      }
     }
   ]
 }
