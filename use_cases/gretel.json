@@ -144,7 +144,7 @@
     {
       "gtmId": "use-case-gdpr-anon",
       "title": "Automatic anonymization for GDPR ",
-      "description": "Use generative AI-based models to anonymize sensitive data to meet or exceed GDPR standards",
+      "description": "Use our Transform and Synthetics generative AI-based models to anonymize sensitive data to meet GDPR standards.",
       "cardType": "Notebook",
       "imageName": "gdpr-anonymization.png",
       "detailsFileName": "gdpr-anonymization.md",
