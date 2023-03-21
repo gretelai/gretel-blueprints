@@ -7,6 +7,6 @@ In the notebooks below, we've created two practical examples using a telecommuni
 
 In the first example, we'll synthesize all 5 tables in the database, while in the second, we will transform the data to remove PII (Personally Identifiable Information). You can also transform and then synthesize a dataset; stay tuned for a blog post and notebook on that soon.
 
-We' ll demonstrate how easy it is to connect to a database, run Gretel Relational, view quality metrics, and output the data back into a database. We will also test that referential integrity exists both before and after data is synthesized/transformed.
+We'll demonstrate how easy it is to connect to a database, run Gretel Relational, view quality metrics, and output the data back into a database. We will also test that referential integrity exists both before and after data is synthesized/transformed.
 
 [Read our blog](https://gretel.ai/blog/gretel-relational-preview) to learn more about Gretel Relational, check out [our docs](https://docs.gretel.ai/reference/gretel-relational), or use the colab notebooks below to see it in action. 
