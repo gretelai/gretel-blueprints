@@ -3,7 +3,7 @@ Gretel Relational takes you beyond synthesizing and transforming one table at a 
 ### Notebook Details
 
 In the notebooks below, we've created two practical examples using a telecommunications database and Gretel Relational. See the database schema below.
-![telecom db diagram](https://gretel-blueprints-pub.s3.us-west-2.amazonaws.com/rdb/telecom_db.png "Telecom Database Diagram")
+![telecom db diagram](/use_cases/images/telecom-db-small.png "Telecom Database Diagram")
 
 In the first example, we'll synthesize all 5 tables in the database, while in the second, we will transform the data to remove PII (Personally Identifiable Information). You can also transform and then synthesize a dataset; stay tuned for a blog post and notebook on that soon.
 
