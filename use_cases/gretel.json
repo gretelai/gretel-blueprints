@@ -19,6 +19,23 @@
       }
     },
     {
+      "gtmId": "use-case-relational-db",
+      "title": "[NEW] Connect to any normalized SQL database ",
+      "description": "Synthesize and transform data in a relational database with Gretel Relational.",
+      "cardType": "Notebook",
+      "tag": "Preview",
+      "imageName": "relational-db.png",
+      "detailsFileName": "relational-db.md",
+      "button1": {
+        "label": "Synthesize in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/synthesize_relational_database.ipynb"
+      },
+      "button2": {
+        "label": "Transform in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/transform_relational_database.ipynb"
+      }
+    },
+    {
       "gtmId": "use-case-redact-pii",
       "title": "Redact PII in sensitive data",
       "description": "Perform privacy preserving transformations on your sensitive data.",
@@ -63,7 +80,6 @@
       "modelType": "amplify",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
-      "tag": "New",
       "sampleDataset": {
         "fileName": "safe-driver-prediction.csv",
         "description": "Use this dataset to predict if a driver will file an insurance claim in the following year. Specify an output size in the config. By default, the model will create as many records as the input dataset.",
