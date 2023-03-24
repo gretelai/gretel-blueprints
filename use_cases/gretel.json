@@ -79,6 +79,7 @@
       "imageName": "downstream-accuracy.png",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
+      "tag": "New",
       "defaultConfig": "config_templates/gretel/synthetics/synthetic-evaluate.yml",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
@@ -161,7 +162,7 @@
     },
     {
       "gtmId": "use-case-downstream-accuracy-notebook",
-      "title": "Evaluate classification/regression performance",
+      "title": "[UPDATED] Evaluate classification/regression performance",
       "description": "Validate the quality of synthetic data for classification/regression tasks.",
       "cardType": "Notebook",
       "imageName": "downstream-accuracy.png",
