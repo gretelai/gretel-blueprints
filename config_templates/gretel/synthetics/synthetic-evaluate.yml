@@ -1,16 +1,13 @@
 # Template for generating synthetic data, then evaluating it on classification or regression models
 
-# In this template, we use the default config for Gretel Long Short Term Memory (LSTM) Model to generate synthetic data
-# You can substitute any synthetics model config (Gretel ACTGAN for high-dimensional data or DGAN for time-series data)
-
-# You can also change the params for evaluation by following instructions in the comments below
+# You can change the params for evaluation by following instructions in the comments below
 # IMPORTANT: make sure to add in the name of the "target" (label or prediction) column in the parameters below
 
 schema_version: "1.0"
 name: "synthetic-evaluate"
 models:
-  # The following is the default configuration for Gretel LSTM model to generate synthetic data. 
-  # You can use any synthetic model configuration. For example, to use Gretel ACTGAN model, copy over the default configuration from "tabular-actgan.yml"
+  # This configuration uses the Gretel Long Short Term Memory (LSTM) model to generate synthetic data. 
+  # You can use any synthetic model configuration. For example, to use Gretel ACTGAN model, copy over the configuration from "tabular-actgan.yml"
   - synthetics:
       data_source: __tmp__
       params:
