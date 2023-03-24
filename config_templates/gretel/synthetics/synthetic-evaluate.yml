@@ -3,14 +3,14 @@
 # In this example configuration, we use the default config for Gretel Long Short Term Memory (LSTM) Model to generate synthetic data
 # but you can substitute any synthetics model (like Gretel ACTGAN for high-dimensional data or DGAN for time-series data)
 
-# We also indicate parameters for evaluating classification, but you can also change the params to evaluate data on regression models by following the comments
-# Make sure to indicate what your target column is named 
+# You can also change the params to evaluate data on regression models by following instructions in the comments below
+# Make sure to indicate what the target (label or prediction) column in your data is called 
 
 schema_version: "1.0"
 name: "synthetic-evaluate"
 models:
   # The following is the default configuration for Gretel LSTM model to generate synthetic data. 
-  # You can use any synthetic model configuration. For example, to use GRETEL ACTGAN, copy over the default configuration from "tabular-actgan.yml"
+  # You can use any synthetic model configuration. For example, to use Gretel ACTGAN model, copy over the default configuration from "tabular-actgan.yml"
   - synthetics:
       data_source: __tmp__
       params:
@@ -24,10 +24,10 @@ models:
       privacy_filters:
         outliers: auto
         similarity: auto
-      # These parameters add evaluation for classification. To evaluate your data on regression models, change the configuration as instructed
+      ########## The following parameters add evaluation for classification. To evaluate your data on regression models, change the configuration as instructed ###########
       evaluate:
         task: classification # or "regression"  ###### To evaluate regression, change the task to "regression"
         target: "MY_TARGET_COLUMN"              ###### Change this string to reflect the header for the label/prediction column of your data
-        # holdout: 0.2                          
-        # metric: "acc"
-        # models: ["knn", ..., "xgboost"]
+        # holdout: 0.2                          ###### Default train-test split  
+        # metric: "acc"                         ###### Default metric for classification is accuracy, for regression is R-squared. See docs for all metrics available.
+        # models: ["knn", ..., "xgboost"]       ###### Default models used are all models available in the library. See docs to use a subset of models.
