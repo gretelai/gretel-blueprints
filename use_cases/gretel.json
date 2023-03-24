@@ -72,6 +72,25 @@
       }
     },
     {
+      "gtmId": "use-case-downstream-accuracy",
+      "title": "Synthesize data + evaluate ML performance",
+      "description": "Evaluate synthetic data performance on classification and regression models.",
+      "cardType": "Console",
+      "imageName": "downstream-accuracy.png",
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "tag": "New",
+      "defaultConfig": "config_templates/gretel/synthetics/synthetic-evaluate.yml",
+      "sampleDataset": {
+        "fileName": "bank_marketing_small.csv",
+        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
+        "records": 4521,
+        "fields": 17,
+        "trainingTime": "< 10 mins",
+        "bytes": 371020
+      }
+    },
+    {
       "gtmId": "use-case-amplify",
       "title": "Synthesize data at scale",
       "description": "Create large volumes of synthetic records for demos and scale testing.",
@@ -142,19 +161,19 @@
       }
     },
     {
-      "gtmId": "use-case-downstream-ml",
-      "title": "Evaluate downstream ML accuracy",
-      "description": "Validate the quality of synthetic data for downstream tasks.",
+      "gtmId": "use-case-downstream-accuracy-notebook",
+      "title": "[UPDATED] Evaluate classification/regression performance",
+      "description": "Validate the quality of synthetic data for classification/regression tasks.",
       "cardType": "Notebook",
       "imageName": "downstream-accuracy.png",
-      "detailsFileName": "evaluate-downstream-ml-accuracy.md",
+      "detailsFileName": "evaluate-downstream-accuracy-notebook.md",
       "button1": {
-        "label": "Open in GitHub",
-        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/numerics_and_downstream_ml.ipynb"
+        "label": "Evaluate Regression",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/downstream_machine_learning_regression_evaluation.ipynb"
       },
       "button2": {
-        "label": "Run in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/numerics_and_downstream_ml.ipynb"
+        "label": "Evaluate Classification",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/downstream_machine_learning_classification_evaluation.ipynb"
       }
     },
     {
