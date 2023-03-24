@@ -1,7 +1,5 @@
 # Template for generating synthetic data, then evaluating it on classification or regression models
-
-# You can change the params for evaluation by following instructions in the comments below
-# IMPORTANT: make sure to add in the name of the "target" (label or prediction) column in the parameters below
+#### IMPORTANT: make sure to add in the name of the "target" (label or prediction) column in the parameters below ####
 
 schema_version: "1.0"
 name: "synthetic-evaluate"
@@ -23,7 +21,7 @@ models:
         similarity: auto
       evaluate:
         task: classification # or "regression"
-        target: "MY_TARGET_COLUMN"              ########### IMPORTANT! RENAME TO THE LABEL/PREDICTION COLUMN NAME OF YOUR DATA ###########
-        # holdout: 0.2                          # Default train-test split  
-        # metric: "acc"                         # Default metric for classification is accuracy, for regression is R-squared. See docs for all metrics available.
-        # models: ["knn", ..., "xgboost"]       # Default models used are all models available in the library. See docs to use a subset of models.
+        target: "y"                             ########### IMPORTANT! RENAME TO THE LABEL/PREDICTION COLUMN NAME OF YOUR DATA ###########
+        # holdout: null                         # Default train-test split for model training
+        # metric: null                          # Default metric for AutoML model training. See docs to change metric: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
+        # models: null                          # Default models are all available. See docs to use a subset of models: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
