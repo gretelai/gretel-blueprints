@@ -1,0 +1,27 @@
+# Blueprint configuration for generating... for generating synthetic data, then evaluating it on classification or regression models
+#### IMPORTANT: make sure to add in the name of the "target" (label or prediction) column in the parameters below ####
+
+schema_version: "1.0"
+name: "synthetic-evaluate"
+models:
+  # This configuration uses the Gretel Long Short Term Memory (LSTM) model to generate synthetic data. 
+  # You can use any synthetic model configuration. For example, to use Gretel ACTGAN model, copy over the configuration from "tabular-actgan.yml"
+  - synthetics:
+      data_source: __tmp__
+      params:
+        epochs: auto
+        vocab_size: auto
+        learning_rate: auto
+        batch_size: auto
+        rnn_units: auto
+      generate:
+        num_records: 5000
+      privacy_filters:
+        outliers: auto
+        similarity: auto
+      evaluate:
+        task: classification # or "regression"
+        target: "y"                             ########### IMPORTANT! RENAME TO THE LABEL/PREDICTION COLUMN NAME OF YOUR DATA ###########
+        # holdout: null                         # Default train-test split for model training
+        # metric: null                          # Default metric for AutoML model training. See docs to change metric: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
+        # models: null                          # Default models are all available. See docs to use a subset of models: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
