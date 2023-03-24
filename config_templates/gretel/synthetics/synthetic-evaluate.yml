@@ -1,4 +1,4 @@
-# Template for generating synthetic data, then evaluating it on classification or regression models
+# Blueprint configuration for generating synthetic data, then evaluating it on classification or regression models
 #### IMPORTANT: make sure to add in the name of the "target" (label or prediction) column in the parameters below ####
 
 schema_version: "1.0"
