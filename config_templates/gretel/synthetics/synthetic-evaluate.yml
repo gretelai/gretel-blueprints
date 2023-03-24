@@ -1,10 +1,10 @@
-# Default configuration template for generating synthetic data, then evaluating it on classification/regression
+# Template for generating synthetic data, then evaluating it on classification or regression models
 
-# In this example configuration, we use the default config for Gretel Long Short Term Memory (LSTM) Model to generate synthetic data
-# but you can substitute any synthetics model (like Gretel ACTGAN for high-dimensional data or DGAN for time-series data)
+# In this template, we use the default config for Gretel Long Short Term Memory (LSTM) Model to generate synthetic data
+# You can substitute any synthetics model config (Gretel ACTGAN for high-dimensional data or DGAN for time-series data)
 
-# You can also change the params to evaluate data on regression models by following instructions in the comments below
-# Make sure to indicate what the target (label or prediction) column in your data is called 
+# You can also change the params for evaluation by following instructions in the comments below
+# IMPORTANT: make sure to add in the name of the "target" (label or prediction) column in the parameters below
 
 schema_version: "1.0"
 name: "synthetic-evaluate"
@@ -24,10 +24,9 @@ models:
       privacy_filters:
         outliers: auto
         similarity: auto
-      ########## The following parameters add evaluation for classification. To evaluate your data on regression models, change the configuration as instructed ###########
       evaluate:
-        task: classification # or "regression"  ###### To evaluate regression, change the task to "regression"
-        target: "MY_TARGET_COLUMN"              ###### Change this string to reflect the header for the label/prediction column of your data
-        # holdout: 0.2                          ###### Default train-test split  
-        # metric: "acc"                         ###### Default metric for classification is accuracy, for regression is R-squared. See docs for all metrics available.
-        # models: ["knn", ..., "xgboost"]       ###### Default models used are all models available in the library. See docs to use a subset of models.
+        task: classification # or "regression"
+        target: "MY_TARGET_COLUMN"              ########### IMPORTANT! RENAME TO THE LABEL/PREDICTION COLUMN NAME OF YOUR DATA ###########
+        # holdout: 0.2                          # Default train-test split  
+        # metric: "acc"                         # Default metric for classification is accuracy, for regression is R-squared. See docs for all metrics available.
+        # models: ["knn", ..., "xgboost"]       # Default models used are all models available in the library. See docs to use a subset of models.
