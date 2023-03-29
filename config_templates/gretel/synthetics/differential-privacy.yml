@@ -1,4 +1,8 @@
-# This is a default configuration for enabling differential privacy during
+# deprecated: This configuration will be deprecated soon. Please use the
+# "synthetics/tabular-lstm" configuration with dp: True to use experimental
+# differential privacy with Gretel LSTM
+
+# This is a configuration for enabling differential privacy during
 # model training via DP-SGD.
 #
 # Differential privacy helps prevent unintended memorization of secrets in 
