@@ -1,5 +1,5 @@
-# Default configuration for Gretel Tabular DP to generate synthetic data with
-# differential privacy guarantees
+# Default configuration for the Gretel Tabular DP model to generate synthetic
+# data with differential privacy guarantees.
 
 schema_version: "1.0"
 name: "tabular-differential-privacy"
