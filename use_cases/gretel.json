@@ -169,11 +169,11 @@
       "detailsFileName": "evaluate-downstream-accuracy-notebook.md",
       "button1": {
         "label": "Evaluate Regression",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/downstream_machine_learning_regression_evaluation.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/evaluate/evaluate_synthetic_data_regression_models.ipynb"
       },
       "button2": {
         "label": "Evaluate Classification",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/downstream_machine_learning_classification_evaluation.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/evaluate/evaluate_synthetic_data_classification_models.ipynb"
       }
     },
     {

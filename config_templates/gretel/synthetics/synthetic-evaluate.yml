@@ -1,10 +1,11 @@
-# Blueprint configuration for generating... for generating synthetic data, then evaluating it on classification or regression models
+# Blueprint configuration for generating synthetic data, then evaluating it on classification or regression models
+
 #### IMPORTANT: make sure to add in the name of the "target" (label or prediction) column in the parameters below ####
 
 schema_version: "1.0"
 name: "synthetic-evaluate"
 models:
-  # This configuration uses the Gretel Long Short Term Memory (LSTM) model to generate synthetic data. 
+  # This configuration uses the Gretel LSTM model to generate synthetic data. 
   # You can use any synthetic model configuration. For example, to use Gretel ACTGAN model, copy over the configuration from "tabular-actgan.yml"
   - synthetics:
       data_source: __tmp__
@@ -20,8 +21,8 @@ models:
         outliers: auto
         similarity: auto
       evaluate:
-        task: classification # or "regression"
-        target: "y"                             ########### IMPORTANT! RENAME TO THE LABEL/PREDICTION COLUMN NAME OF YOUR DATA ###########
-        # holdout: null                         # Default train-test split for model training
-        # metric: null                          # Default metric for AutoML model training. See docs to change metric: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
-        # models: null                          # Default models are all available. See docs to use a subset of models: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
+        task: classification # or change to: regression
+        target: "y"          ###### IMPORTANT: rename this to the label/target column of your data #######
+        # holdout: null      # Default train-test split for model training
+        # metric: null       # Default metric for AutoML model training. See docs to change metric: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
+        # models: null       # Default models are all available. See docs to use a subset of models: https://docs.gretel.ai/reference/evaluate/evaluate-tasks
