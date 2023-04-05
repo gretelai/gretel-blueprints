@@ -1,0 +1,41 @@
+# Blueprint configuration for evaluating synthetic data on classification and regression models
+
+### IMPORTANT: rename "target" to match the label/target header of your data ###
+
+# See https://docs.gretel.ai/reference/evaluate/evaluate-tasks/classification and
+# https://docs.gretel.ai/reference/evaluate/evaluate-tasks/regression  
+# for detailed info on all config options
+
+
+schema_version: "1.0"
+name: "tabular-lstm-evaluate"
+models:
+  
+  # This config uses the Gretel LSTM model to generate synthetic data. 
+  # You can substitute with any synthetic model. For example, to use Gretel ACTGAN model,
+  # copy the config from "tabular-actgan.yml"
+  - synthetics:
+      data_source: __tmp__
+      params:
+        epochs: auto
+        vocab_size: auto
+        learning_rate: auto
+        batch_size: auto
+        rnn_units: auto
+      generate:
+        num_records: 5000
+      privacy_filters:
+        outliers: auto
+        similarity: auto
+      evaluate:
+        
+        ### Indicate classification or regression 
+        task: classification  
+        
+        ### IMPORTANT: rename to match the label/target header of your data 
+        target: "y"           
+        
+        ### Optional metrics. See docs for all config options: https://docs.gretel.ai/reference/evaluate/evaluate-tasks/
+        # holdout: null       
+        # metric: null       
+        # models: null        
