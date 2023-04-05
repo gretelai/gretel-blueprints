@@ -17,4 +17,4 @@ Templates can be downloaded and modified for use with Gretel synthetics, or impo
  |`low-record-count`| For datasets that have fewer than 1000 rows and/or 4 columns, and a mix of categorical, numerical, and continuous values.  |
  |`time-series`| Specialized model for time-series datasets. Modify this config with values that fit your dataset.  |
  |`natural-language`| Useful for single-column natural language datasets such as reviews, tweets, and conversations. Dataset must be single-column. | 
- |`synthetic-evaluate`| Use this blueprint for generating and evaluating synthetic data performance on ML models (classification/regression). You can change the configuration to use the best synthetic model for your use case. | 
+ |`tabular-lstm-evaluate`| Use this blueprint for generating and evaluating synthetic data performance on ML models (classification/regression). You can change the configuration to use the best synthetic model for your use case. | 
