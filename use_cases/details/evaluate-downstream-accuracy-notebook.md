@@ -9,4 +9,4 @@ Select the Gretel Synthetic model you want to train and generate synthetic data 
 
 For more advanced examples, these notebooks use Gretel's synthetic model to generate synthetic data from publicly available datasets and then verifies its quality when training downstream models using Gretel’s Evaluate model, which consumes the open-source AutoML PyCaret library for both classification and regression.
 
-Try out the notebooks for yourself, either by [downloading them from Github](https://github.com/gretelai/gretel-blueprints/tree/main/docs/notebooks) or using one of the Google Colab links below.
+[Read our blog post](https://gretel.ai/blog/downstream-ml-evaluation-and-quality-scores) or try out the notebooks for yourself, either by [downloading them from Github](https://github.com/gretelai/gretel-blueprints/tree/main/docs/notebooks) or using one of the Google Colab links below.

@@ -162,7 +162,7 @@
     },
     {
       "gtmId": "use-case-downstream-accuracy-notebook",
-      "title": "[UPDATED] Evaluate classification/regression performance",
+      "title": "[UPDATED] Evaluate classification and regression",
       "description": "Validate the quality of synthetic data for classification/regression tasks.",
       "cardType": "Notebook",
       "imageName": "downstream-accuracy.png",
@@ -194,7 +194,7 @@
     },
     {
       "gtmId": "use-case-benchmark",
-      "title": "Evaluate and analyze multiple synthetic models",
+      "title": "Benchmark multiple synthetic models",
       "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
       "cardType": "Notebook",
       "imageName": "benchmark.png",
