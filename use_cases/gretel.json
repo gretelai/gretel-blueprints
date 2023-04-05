@@ -80,7 +80,7 @@
       "modelType": "synthetics",
       "modelCategory": "synthetics",
       "tag": "New",
-      "defaultConfig": "config_templates/gretel/synthetics/synthetic-evaluate.yml",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
         "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
