@@ -8,7 +8,7 @@
 
 
 schema_version: "1.0"
-name: "synthetic-evaluate"
+name: "tabular-lstm-evaluate"
 models:
   
   # This config uses the Gretel LSTM model to generate synthetic data. 
