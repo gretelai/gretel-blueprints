@@ -20,7 +20,7 @@
     },
     {
       "gtmId": "use-case-relational-db",
-      "title": "[NEW] Connect to any normalized SQL database ",
+      "title": "Connect to any normalized SQL database ",
       "description": "Synthesize and transform data in a relational database with Gretel Relational.",
       "cardType": "Notebook",
       "tag": "Preview",
@@ -33,6 +33,24 @@
       "button2": {
         "label": "Transform in Google Colab",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/transform_relational_database.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-tabular-dp",
+      "title": "Create provably private versions of sensitive data",
+      "description": "Use Gretel Tabular DP, our new differentially private graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
+      "cardType": "Console",
+      "imageName": "tabular-dp.png",
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
+      "sampleDataset": {
+        "fileName": "us-adult-income.csv",
+        "description": "This is the 1994 US Adult Census dataset from the UCI repository. It relates income to social factors such as age and education. ",
+        "records": 14000,
+        "fields": 30,
+        "trainingTime": "10 mins",
+        "bytes": 1440000
       }
     },
     {
