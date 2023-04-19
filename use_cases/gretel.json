@@ -20,7 +20,7 @@
     },
     {
       "gtmId": "use-case-relational-db",
-      "title": "[NEW] Connect to any normalized SQL database ",
+      "title": "Connect to any normalized SQL database ",
       "description": "Synthesize and transform data in a relational database with Gretel Relational.",
       "cardType": "Notebook",
       "tag": "Preview",
@@ -33,6 +33,25 @@
       "button2": {
         "label": "Transform in Google Colab",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/transform_relational_database.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-tabular-dp",
+      "title": "Create provably private versions of sensitive data",
+      "description": "Use Gretel Tabular DP, our new differentially private graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
+      "cardType": "Console",
+      "imageName": "tabular-dp.png",
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "tag": "New",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
+      "sampleDataset": {
+        "fileName": "bank_marketing_small.csv",
+        "description": "This dataset contains direct marketing campaign details (phone calls) from a Portuguese financial institution. It has sensitive information such as demographics and financials, which can benefit from privacy preserving techniques before sharing.  ",
+        "records": 4521,
+        "fields": 17,
+        "trainingTime": "< 4 mins",
+        "bytes": 371020
       }
     },
     {
@@ -79,7 +98,6 @@
       "imageName": "downstream-accuracy.png",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
-      "tag": "New",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
