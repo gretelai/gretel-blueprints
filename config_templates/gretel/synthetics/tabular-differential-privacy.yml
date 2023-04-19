@@ -8,5 +8,5 @@ models:
       data_source: __tmp__
       params:
         epsilon: 1
-        delta: 0.0001
+        delta: auto
         infer_domain: True
