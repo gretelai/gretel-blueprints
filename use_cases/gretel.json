@@ -38,7 +38,7 @@
     {
       "gtmId": "use-case-tabular-dp",
       "title": "Create provably private versions of sensitive data",
-      "description": "Use Gretel Tabular DP, our new differentially private graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
+      "description": "Use Gretel Tabular DP, our new graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
       "cardType": "Console",
       "imageName": "tabular-dp.png",
       "modelType": "synthetics",
