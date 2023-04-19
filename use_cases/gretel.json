@@ -47,7 +47,7 @@
       "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
-        "description": "This dataset contains direct marketing campaign details (phone calls) from a Portuguese financial institution. It has sensitive information such as demographics and financials, which need to be made private before the data can be shared.  ",
+        "description": "This dataset contains direct marketing campaign details (phone calls) from a Portuguese financial institution. It has sensitive information such as demographics and financials, which can benefit from privacy preserving techniques before sharing.  ",
         "records": 4521,
         "fields": 17,
         "trainingTime": "< 4 mins",
