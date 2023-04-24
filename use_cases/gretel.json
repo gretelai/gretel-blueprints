@@ -163,19 +163,19 @@
       }
     },
     {
-      "gtmId": "use-case-balance-biased-data",
-      "title": "Balance biased data",
-      "description": "Use conditional data generation to remove bias and balance datasets.",
+      "gtmId": "use-case-boost-minority-class",
+      "title": "Boost minority class data",
+      "description": "Train a model on a dataset with sparse instances of the minority class, and conditionally generate additional minority samples.",
       "cardType": "Notebook",
-      "imageName": "balance-bias.png",
-      "detailsFileName": "balance-biased-data.md",
+      "imageName": "minority-classes.png",
+      "detailsFileName": "boost-minority-class.md",
       "button1": {
         "label": "Open in GitHub",
-        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
+        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
       },
       "button2": {
         "label": "Run in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/balance_data_with_conditional_data_generation.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
       }
     },
     {
