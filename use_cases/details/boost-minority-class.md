@@ -1,3 +1,5 @@
+![boost minority class banner](https://blueprints.gretel.cloud/use_cases/images/boost-minority-class-hero.png "Boost Minority Class Banner")
+
 Real world datasets can often be sparse, meaning they contain limited instances from a particular target class. Training downstream ML models on such datasets is challenging since the model struggles to accurately learn the boundaries between majority and minority class samples.
 
 ### Notebook Details
