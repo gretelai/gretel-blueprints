@@ -25,7 +25,6 @@
       }
     },
     {
-      "title": "ACTGAN",
       "modelType": "actgan",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "sampleDataset": {
@@ -38,7 +37,6 @@
       }
     },
     {
-      "title": "Amplify",
       "modelType": "amplify",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
       "sampleDataset": {
