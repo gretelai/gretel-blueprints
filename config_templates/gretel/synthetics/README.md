@@ -11,7 +11,6 @@ Templates can be downloaded and modified for use with Gretel synthetics, or impo
  | ----------- |  ----------- |
  |`default`| Use the `gretel-synthetics` LSTM model. This model works for a variety of synthetic data tasks including time-series, tabular, and text data. Generally useful for a few thousand records and upward. Dataset generally has a mix of categorical, continuous, and numerical values.  |
  |`complex-or-free-text` | Best for highly complex datasets, or those containing plain text such as tweets and conversations.  |
- |`differential-privacy` | Differential privacy helps prevent unintended memorization of secrets in the training data, by limiting the amount that any training example, or small set of training examples, can affect the model. Works best on large datasets with 50,000 or more records. |
  |`high-dimensionality`| Use for datasets with more than 20 columns and/or 50,000 rows. Works well for largely numeric data. Avoid if dataset contains free text fields.  |
  |`high-dimensionality-high-record-count`| Use for datasets with more than 250,000 rows and 20 columns. Works well for largely numeric data. Avoid if dataset contains free text fields.  |
  |`high-accuracy`| Useful for optimizing data for downstream ML tasks, at possible cost of higher compute. |
