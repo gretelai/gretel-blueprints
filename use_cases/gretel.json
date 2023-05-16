@@ -39,8 +39,8 @@
       "gtmId": "use-case-image-synthetics",
       "title": "[EARLY ACCESS] Generate custom images",
       "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
-      "cardType": "Labs",
-      "tag": "Preview",
+      "cardType": "Notebook",
+      "tag": "Labs",
       "imageName": "image-synthetics.png",
       "detailsFileName": "image-synthetics-preview.md",
       "button1": {
