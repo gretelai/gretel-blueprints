@@ -14,7 +14,7 @@ card_schema = {
         "imageName": {"type": "string"},
         "tag": {
             "type": "string",
-            "enum": ["New", "Beta", "Preview", "Popular", "Deprecated"],
+            "enum": ["New", "Beta", "Preview", "Popular", "Deprecated","Labs"],
         },
         "modelType": {
             "type": "string",
