@@ -36,6 +36,19 @@
       }
     },
     {
+      "gtmId": "use-case-image-synthetics",
+      "title": "[EARLY ACCESS] Generate custom images",
+      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
+      "cardType": "Notebook",
+      "tag": "Labs",
+      "imageName": "image-synthetics.png",
+      "detailsFileName": "image-synthetics-preview.md",
+      "button1": {
+        "label": "Launch Gretel Labs",
+        "link": "https://image-synthetics-preview.gretel.cloud/"
+      }
+    },
+    {
       "gtmId": "use-case-tabular-dp",
       "title": "Create provably private versions of sensitive data",
       "description": "Use Gretel Tabular DP, our new graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
@@ -52,6 +65,24 @@
         "fields": 17,
         "trainingTime": "< 4 mins",
         "bytes": 371020
+      }
+    },
+    {
+      "gtmId": "use-case-natural-lang-gpt",
+      "title": "Generate natural language text using GPT",
+      "description": "Quickly create new labeled examples for natural language tasks.",
+      "cardType": "Console",
+      "imageName": "natural-lang-gpt.png",
+      "modelType": "gpt_x",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "sampleDataset": {
+        "fileName": "taylor-swift-lyrics.csv",
+        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
+        "records": 246,
+        "fields": 1,
+        "trainingTime": "< 5 mins",
+        "bytes": 405000
       }
     },
     {
@@ -73,21 +104,21 @@
       }
     },
     {
-      "gtmId": "use-case-natural-lang-gpt",
-      "title": "Generate natural language text using GPT",
-      "description": "Quickly create new labeled examples for natural language tasks.",
+      "gtmId": "use-case-timeseries-dgan",
+      "title": "Generate high-quality time series data",
+      "description": "Use DoppelGANger to create accurate and correlated time-series data.",
       "cardType": "Console",
-      "imageName": "natural-lang-gpt.png",
-      "modelType": "gpt_x",
+      "imageName": "timeseries.png",
+      "modelType": "timeseries_dgan",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
       "sampleDataset": {
-        "fileName": "taylor-swift-lyrics.csv",
-        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
-        "records": 246,
-        "fields": 1,
-        "trainingTime": "< 5 mins",
-        "bytes": 405000
+        "fileName": "daily-website-visitors.csv",
+        "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
+        "records": 2167,
+        "fields": 5,
+        "trainingTime": "3 mins",
+        "bytes": 63000
       }
     },
     {
@@ -127,21 +158,19 @@
       }
     },
     {
-      "gtmId": "use-case-timeseries-dgan",
-      "title": "Generate high-quality time series data",
-      "description": "Use DoppelGANger to create accurate and correlated time-series data.",
-      "cardType": "Console",
-      "imageName": "timeseries.png",
-      "modelType": "timeseries_dgan",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
-      "sampleDataset": {
-        "fileName": "daily-website-visitors.csv",
-        "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
-        "records": 2167,
-        "fields": 5,
-        "trainingTime": "3 mins",
-        "bytes": 63000
+      "gtmId": "use-case-boost-minority-class",
+      "title": "Boost minority class data",
+      "description": "Train a model on a dataset with sparse instances of the minority class, and conditionally generate additional minority samples.",
+      "cardType": "Notebook",
+      "imageName": "minority-classes.png",
+      "detailsFileName": "boost-minority-class.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
       }
     },
     {
@@ -163,24 +192,8 @@
       }
     },
     {
-      "gtmId": "use-case-boost-minority-class",
-      "title": "Boost minority class data",
-      "description": "Train a model on a dataset with sparse instances of the minority class, and conditionally generate additional minority samples.",
-      "cardType": "Notebook",
-      "imageName": "minority-classes.png",
-      "detailsFileName": "boost-minority-class.md",
-      "button1": {
-        "label": "Open in GitHub",
-        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
-      },
-      "button2": {
-        "label": "Run in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
-      }
-    },
-    {
       "gtmId": "use-case-downstream-accuracy-notebook",
-      "title": "[UPDATED] Evaluate classification and regression",
+      "title": "Evaluate classification and regression",
       "description": "Validate the quality of synthetic data for classification/regression tasks.",
       "cardType": "Notebook",
       "imageName": "downstream-accuracy.png",
