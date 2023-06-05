@@ -14,6 +14,7 @@
     },
     {
       "modelType": "gpt_x",
+      "modelCategory" : "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "sampleDataset": {
         "fileName": "taylor-swift-lyrics.csv",
@@ -26,6 +27,7 @@
     },
     {
       "modelType": "actgan",
+      "modelCategory" : "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "sampleDataset": {
         "fileName": "sample-synthetic-healthcare.csv",
@@ -38,6 +40,7 @@
     },
     {
       "modelType": "amplify",
+      "modelCategory" : "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
       "sampleDataset": {
         "fileName": "safe-driver-prediction.csv",
@@ -46,18 +49,6 @@
         "fields": 59,
         "trainingTime": "< 5 mins",
         "bytes": 100000000
-      }
-    },
-    {
-      "modelType": "evaluate",
-      "defaultConfig": "config_templates/gretel/evaluate/default.yml",
-      "sampleDataset": {
-        "fileName": "bank_marketing_small.csv",
-        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
-        "records": 4521,
-        "fields": 17,
-        "trainingTime": "< 10 mins",
-        "bytes": 371020
       }
     },
     {
