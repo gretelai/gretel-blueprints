@@ -2,6 +2,7 @@
   "modelTypes": [
     {
       "modelType": "synthetics",
+      "modelCategory" : "synthetics",
       "defaultConfig":  "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
@@ -53,6 +54,7 @@
     },
     {
       "modelType": "transform",
+      "modelCategory" : "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
       "sampleDataset": {
         "fileName": "sample-transform-emails.csv",
@@ -65,6 +67,7 @@
     },
     {
       "modelType": "classify",
+      "modelCategory" : "classify",
       "defaultConfig": "config_templates/gretel/classify/default.yml",
       "sampleDataset": {
         "fileName": "sample-classify-bike-sales.csv",
