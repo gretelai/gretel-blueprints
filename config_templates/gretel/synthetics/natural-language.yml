@@ -8,7 +8,7 @@ name: "natural-language-gpt"
 models:
   - gpt_x:
       data_source: "__temp__"
-      pretrained_model: "EleutherAI/gpt-neo-125m"
+      pretrained_model: "gretelai/mpt-7b"
       batch_size: 4
       epochs: 3
       weight_decay: 0.01
