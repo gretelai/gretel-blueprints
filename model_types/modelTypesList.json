@@ -2,8 +2,8 @@
   "modelTypes": [
     {
       "modelType": "synthetics",
-      "modelCategory" : "synthetics",
-      "defaultConfig":  "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
         "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
@@ -15,20 +15,20 @@
     },
     {
       "modelType": "gpt_x",
-      "modelCategory" : "synthetics",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "sampleDataset": {
-        "fileName": "taylor-swift-lyrics.csv",
+        "fileName": "taylor-swift-lyrics-up.csv",
         "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
-        "records": 246,
+        "records": 1225,
         "fields": 1,
-        "trainingTime": "< 5 mins",
-        "bytes": 405000
+        "trainingTime": "30 mins",
+        "bytes": 2076350
       }
     },
     {
       "modelType": "actgan",
-      "modelCategory" : "synthetics",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "sampleDataset": {
         "fileName": "sample-synthetic-healthcare.csv",
@@ -41,7 +41,7 @@
     },
     {
       "modelType": "amplify",
-      "modelCategory" : "synthetics",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
       "sampleDataset": {
         "fileName": "safe-driver-prediction.csv",
@@ -54,7 +54,7 @@
     },
     {
       "modelType": "transform",
-      "modelCategory" : "transform",
+      "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
       "sampleDataset": {
         "fileName": "sample-transform-emails.csv",
@@ -67,7 +67,7 @@
     },
     {
       "modelType": "classify",
-      "modelCategory" : "classify",
+      "modelCategory": "classify",
       "defaultConfig": "config_templates/gretel/classify/default.yml",
       "sampleDataset": {
         "fileName": "sample-classify-bike-sales.csv",
