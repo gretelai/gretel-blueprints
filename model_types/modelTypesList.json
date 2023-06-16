@@ -5,12 +5,12 @@
       "modelCategory" : "synthetics",
       "defaultConfig":  "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
       "sampleDataset": {
-        "fileName": "bank_marketing_small.csv",
-        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
-        "records": 4521,
-        "fields": 17,
-        "trainingTime": "< 10 mins",
-        "bytes": 371020
+        "fileName": "sample-synthetic-healthcare.csv",
+        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
+        "records": 9999,
+        "fields": 18,
+        "trainingTime": "6 mins",
+        "bytes": 830021
       }
     },
     {
@@ -31,12 +31,12 @@
       "modelCategory" : "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "sampleDataset": {
-        "fileName": "sample-synthetic-healthcare.csv",
-        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
-        "records": 9999,
-        "fields": 18,
-        "trainingTime": "6 mins",
-        "bytes": 830021
+        "fileName": "monthly-customer-payments.csv",
+        "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
+        "records": 7032,
+        "fields": 23,
+        "trainingTime": "3 mins",
+        "bytes": 1000000
       }
     },
     {
