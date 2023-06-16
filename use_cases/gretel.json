@@ -77,12 +77,12 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "sampleDataset": {
-        "fileName": "taylor-swift-lyrics.csv",
+        "fileName": "taylor-swift-lyrics-up.csv",
         "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
-        "records": 246,
+        "records": 1225,
         "fields": 1,
-        "trainingTime": "< 5 mins",
-        "bytes": 405000
+        "trainingTime": "30 mins",
+        "bytes": 2076530
       }
     },
     {
