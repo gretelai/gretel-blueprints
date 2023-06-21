@@ -2,31 +2,8 @@
   "modelTypes": [
     {
       "modelType": "synthetics",
-      "defaultConfig":  "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
-      "sampleDataset": {
-        "fileName": "bank_marketing_small.csv",
-        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
-        "records": 4521,
-        "fields": 17,
-        "trainingTime": "< 10 mins",
-        "bytes": 371020
-      }
-    },
-    {
-      "modelType": "gpt_x",
-      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
-      "sampleDataset": {
-        "fileName": "taylor-swift-lyrics.csv",
-        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
-        "records": 246,
-        "fields": 1,
-        "trainingTime": "< 5 mins",
-        "bytes": 405000
-      }
-    },
-    {
-      "modelType": "actgan",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
       "sampleDataset": {
         "fileName": "sample-synthetic-healthcare.csv",
         "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
@@ -37,7 +14,34 @@
       }
     },
     {
+      "modelType": "gpt_x",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "sampleDataset": {
+        "fileName": "taylor-swift-lyrics-up.csv",
+        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
+        "records": 1225,
+        "fields": 1,
+        "trainingTime": "30 mins",
+        "bytes": 2076350
+      }
+    },
+    {
+      "modelType": "actgan",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "sampleDataset": {
+        "fileName": "monthly-customer-payments.csv",
+        "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
+        "records": 7032,
+        "fields": 23,
+        "trainingTime": "3 mins",
+        "bytes": 1000000
+      }
+    },
+    {
       "modelType": "amplify",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
       "sampleDataset": {
         "fileName": "safe-driver-prediction.csv",
@@ -49,19 +53,8 @@
       }
     },
     {
-      "modelType": "evaluate",
-      "defaultConfig": "config_templates/gretel/evaluate/default.yml",
-      "sampleDataset": {
-        "fileName": "bank_marketing_small.csv",
-        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
-        "records": 4521,
-        "fields": 17,
-        "trainingTime": "< 10 mins",
-        "bytes": 371020
-      }
-    },
-    {
       "modelType": "transform",
+      "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
       "sampleDataset": {
         "fileName": "sample-transform-emails.csv",
@@ -74,6 +67,7 @@
     },
     {
       "modelType": "classify",
+      "modelCategory": "classify",
       "defaultConfig": "config_templates/gretel/classify/default.yml",
       "sampleDataset": {
         "fileName": "sample-classify-bike-sales.csv",
