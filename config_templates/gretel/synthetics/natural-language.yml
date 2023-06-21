@@ -17,5 +17,5 @@ models:
       learning_rate: 0.0002
       column_name: null
       generate:
-        num_records: 10
+        num_records: 80
         maximum_text_length: 100
