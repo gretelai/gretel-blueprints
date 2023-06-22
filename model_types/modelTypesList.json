@@ -19,7 +19,7 @@
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "sampleDataset": {
         "fileName": "banking-77-6class.csv",
-        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
+        "description": "Create realistic customer service chats and labels using this sample dataset.",
         "records": 1082,
         "fields": 1,
         "trainingTime": "15 mins",
