@@ -242,9 +242,9 @@
     {
       "gtmId": "use-case-natural-lang-gpt-alternate",
       "title": "Generate text including song lyrics using GPT",
-      "description": "Create natural language text data.",
+      "description": "Create natural language text data including song lyrics.",
       "cardType": "Console",
-      "imageName": "natural-lang-gpt.png",
+      "imageName": "natural-lang-gpt-2.png",
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
