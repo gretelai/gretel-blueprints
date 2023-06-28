@@ -77,12 +77,12 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "sampleDataset": {
-        "fileName": "taylor-swift-lyrics-up.csv",
-        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
-        "records": 1225,
+        "fileName": "sample-banking-questions-intents.csv",
+        "description": "Create realistic banking-related questions and intent labels using this sample dataset.",
+        "records": 1082,
         "fields": 1,
-        "trainingTime": "30 mins",
-        "bytes": 2076530
+        "trainingTime": "15 mins",
+        "bytes": 117475
       }
     },
     {
@@ -237,6 +237,24 @@
       "button2": {
         "label": "Run in Google Colab",
         "link": "https://colab.research.google.com/github/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-natural-lang-gpt-alternate",
+      "title": "Generate text including song lyrics using GPT",
+      "description": "Create natural language text data including song lyrics.",
+      "cardType": "Console",
+      "imageName": "natural-lang-gpt.png",
+      "modelType": "gpt_x",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "sampleDataset": {
+        "fileName": "taylor-swift-lyrics-up.csv",
+        "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
+        "records": 1225,
+        "fields": 1,
+        "trainingTime": "30 mins",
+        "bytes": 2076350
       }
     }
   ]
