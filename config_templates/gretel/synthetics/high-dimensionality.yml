@@ -15,5 +15,5 @@ models:
         generate:
             num_records: 5000
         privacy_filters:
-            outliers: auto
-            similarity: auto
+            outliers: null # Set to "auto" for additional protections
+            similarity: null # Set to "auto" for additional protections
