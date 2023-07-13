@@ -1,20 +1,18 @@
-# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-actgan" configuration.
+# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-lstm" configuration.
 
 schema_version: "1.0"
-name: "default-config"
+name: "tabular-lstm"
 models:
-  - actgan:
-        data_source: __tmp__
-        params:
-            epochs: auto
-            generator_dim: [1024, 1024]
-            discriminator_dim: [1024, 1024]
-            generator_lr: 0.0001
-            discriminator_lr: .00033
-            batch_size: auto
-            auto_transform_datetime: False
-        generate:
-            num_records: 5000
-        privacy_filters:
-            outliers: null # Set to "auto" for additional protections
-            similarity: null # Set to "auto" for additional protections
+  - synthetics:
+      data_source: __tmp__
+      params:
+        epochs: auto
+        vocab_size: auto
+        learning_rate: auto
+        batch_size: auto
+        rnn_units: auto
+      generate:
+        num_records: 5000
+      privacy_filters:
+        outliers: auto
+        similarity: auto
