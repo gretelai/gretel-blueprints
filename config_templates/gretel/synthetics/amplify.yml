@@ -16,3 +16,4 @@ models:
         params:
           num_records: null
           target_size_mb: null
+          auto_transform_datetimes: True

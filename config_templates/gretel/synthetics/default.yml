@@ -1,15 +1,16 @@
 # deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-lstm" configuration.
 
 schema_version: "1.0"
-name: "default-config"
+name: "tabular-lstm"
 models:
   - synthetics:
       data_source: __tmp__
       params:
-        epochs: 100
-        vocab_size: 20000
-        learning_rate: 0.01
-        validation_split: False
+        epochs: auto
+        vocab_size: auto
+        learning_rate: auto
+        batch_size: auto
+        rnn_units: auto
       generate:
         num_records: 5000
       privacy_filters:
