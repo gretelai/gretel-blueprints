@@ -1,16 +1,16 @@
 {
   "modelTypes": [
     {
-      "modelType": "synthetics",
+      "modelType": "actgan",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "sampleDataset": {
-        "fileName": "sample-synthetic-healthcare.csv",
-        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
-        "records": 9999,
-        "fields": 18,
-        "trainingTime": "6 mins",
-        "bytes": 830021
+        "fileName": "monthly-customer-payments.csv",
+        "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
+        "records": 7032,
+        "fields": 23,
+        "trainingTime": "3 mins",
+        "bytes": 1000000
       }
     },
     {
@@ -27,16 +27,42 @@
       }
     },
     {
-      "modelType": "actgan",
+      "modelType": "tabular_dp",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
       "sampleDataset": {
-        "fileName": "monthly-customer-payments.csv",
-        "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
-        "records": 7032,
-        "fields": 23,
+        "fileName": "bank_marketing_small.csv",
+        "description": "This dataset contains direct marketing campaign details (phone calls) from a Portuguese financial institution. It has sensitive information such as demographics and financials, which can benefit from privacy preserving techniques before sharing.  ",
+        "records": 4521,
+        "fields": 17,
+        "trainingTime": "< 4 mins",
+        "bytes": 371020
+      }
+    },
+    {
+      "modelType": "timeseries_dgan",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
+      "sampleDataset": {
+        "fileName": "daily-website-visitors.csv",
+        "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
+        "records": 2167,
+        "fields": 5,
         "trainingTime": "3 mins",
-        "bytes": 1000000
+        "bytes": 63000
+      }
+    },
+    {
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm.yml",
+      "sampleDataset": {
+        "fileName": "sample-synthetic-healthcare.csv",
+        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
+        "records": 9999,
+        "fields": 18,
+        "trainingTime": "6 mins",
+        "bytes": 830021
       }
     },
     {
@@ -65,6 +91,7 @@
         "bytes": 65300
       }
     },
+
     {
       "modelType": "classify",
       "modelCategory": "classify",
@@ -76,6 +103,19 @@
         "fields": 23,
         "trainingTime": "< 1 min",
         "bytes": 15996
+      }
+    },
+    {
+      "modelType": "evaluate",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
+      "sampleDataset": {
+        "fileName": "bank_marketing_small.csv",
+        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
+        "records": 4521,
+        "fields": 17,
+        "trainingTime": "< 10 mins",
+        "bytes": 371020
       }
     }
   ]
