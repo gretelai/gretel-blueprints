@@ -29,6 +29,7 @@ card_schema = {
                 "synthetics",
                 "timeseries_dgan",
                 "transform",
+                "tabular_dp",
             ],
         },
         "modelCategory": {
