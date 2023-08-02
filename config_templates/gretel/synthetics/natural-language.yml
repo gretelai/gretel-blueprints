@@ -10,7 +10,7 @@ models:
       data_source: "__temp__"
       pretrained_model: "gretelai/mpt-7b"
       batch_size: 4
-      steps: 900
+      steps: 750
       weight_decay: 0.01
       warmup_steps: 100
       lr_scheduler: "linear"
