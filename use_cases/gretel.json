@@ -54,7 +54,7 @@
       "description": "Use Gretel Tabular DP, our new graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
       "cardType": "Console",
       "imageName": "tabular-dp.png",
-      "modelType": "synthetics",
+      "modelType": "tabular_dp",
       "modelCategory": "synthetics",
       "tag": "New",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
@@ -127,7 +127,7 @@
       "description": "Evaluate synthetic data performance on classification and regression models.",
       "cardType": "Console",
       "imageName": "downstream-accuracy.png",
-      "modelType": "synthetics",
+      "modelType": "evaluate",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
       "sampleDataset": {
@@ -179,7 +179,7 @@
       "description": "Train a synthetic ACTGAN model designed to easily handle datasets with 50k+ records and 100+ columns.",
       "cardType": "Console",
       "imageName": "high-dimensional.png",
-      "modelType": "synthetics",
+      "modelType": "actgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "sampleDataset": {
