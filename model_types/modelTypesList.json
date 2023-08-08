@@ -1,34 +1,8 @@
 {
   "modelTypes": [
     {
-      "modelType": "synthetics",
-      "modelCategory" : "synthetics",
-      "defaultConfig":  "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
-      "sampleDataset": {
-        "fileName": "sample-synthetic-healthcare.csv",
-        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
-        "records": 9999,
-        "fields": 18,
-        "trainingTime": "6 mins",
-        "bytes": 830021
-      }
-    },
-    {
-      "modelType": "gpt_x",
-      "modelCategory" : "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
-      "sampleDataset": {
-        "fileName": "sample-banking-questions-intents.csv",
-        "description": "Create realistic banking-related questions and intent labels using this sample dataset.",
-        "records": 1082,
-        "fields": 1,
-        "trainingTime": "15 mins",
-        "bytes": 117475
-      }
-    },
-    {
       "modelType": "actgan",
-      "modelCategory" : "synthetics",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "sampleDataset": {
         "fileName": "monthly-customer-payments.csv",
@@ -40,8 +14,60 @@
       }
     },
     {
+      "modelType": "gpt_x",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "sampleDataset": {
+        "fileName": "sample-banking-questions-intents.csv",
+        "description": "Create realistic banking-related questions and intent labels using this sample dataset.",
+        "records": 1082,
+        "fields": 1,
+        "trainingTime": "15 mins",
+        "bytes": 117475
+      }
+    },
+    {
+      "modelType": "tabular_dp",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
+      "sampleDataset": {
+        "fileName": "bank_marketing_small.csv",
+        "description": "This dataset contains direct marketing campaign details (phone calls) from a Portuguese financial institution. It has sensitive information such as demographics and financials, which can benefit from privacy preserving techniques before sharing.  ",
+        "records": 4521,
+        "fields": 17,
+        "trainingTime": "< 4 mins",
+        "bytes": 371020
+      }
+    },
+    {
+      "modelType": "timeseries_dgan",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
+      "sampleDataset": {
+        "fileName": "daily-website-visitors.csv",
+        "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
+        "records": 2167,
+        "fields": 5,
+        "trainingTime": "3 mins",
+        "bytes": 63000
+      }
+    },
+    {
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm.yml",
+      "sampleDataset": {
+        "fileName": "sample-synthetic-healthcare.csv",
+        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
+        "records": 9999,
+        "fields": 18,
+        "trainingTime": "6 mins",
+        "bytes": 830021
+      }
+    },
+    {
       "modelType": "amplify",
-      "modelCategory" : "synthetics",
+      "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
       "sampleDataset": {
         "fileName": "safe-driver-prediction.csv",
@@ -54,7 +80,7 @@
     },
     {
       "modelType": "transform",
-      "modelCategory" : "transform",
+      "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
       "sampleDataset": {
         "fileName": "sample-transform-emails.csv",
@@ -67,7 +93,7 @@
     },
     {
       "modelType": "classify",
-      "modelCategory" : "classify",
+      "modelCategory": "classify",
       "defaultConfig": "config_templates/gretel/classify/default.yml",
       "sampleDataset": {
         "fileName": "sample-classify-bike-sales.csv",
@@ -76,6 +102,19 @@
         "fields": 23,
         "trainingTime": "< 1 min",
         "bytes": 15996
+      }
+    },
+    {
+      "modelType": "evaluate",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
+      "sampleDataset": {
+        "fileName": "bank_marketing_small.csv",
+        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
+        "records": 4521,
+        "fields": 17,
+        "trainingTime": "< 10 mins",
+        "bytes": 371020
       }
     }
   ]
