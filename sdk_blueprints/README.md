@@ -1,6 +1,6 @@
 # 📘 Gretel SDK Blueprints
 
-New to Gretel? This is the best place to start!
+New to the Gretel SDK? This is the best place to start!
 
  The **Gretel SDK Blueprints** are a series of notebooks that are designed to provide a foundational introduction to the Gretel SDK. For the best experience, we recommend running these notebooks in [Google Colab](https://colab.research.google.com/).
 
