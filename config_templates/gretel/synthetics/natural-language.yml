@@ -8,7 +8,7 @@ name: "natural-language-gpt"
 models:
   - gpt_x:
       data_source: "__temp__"
-      pretrained_model: "gretelai/mpt-7b"
+      pretrained_model: "meta-llama/Llama-2-7b-chat-hf"
       batch_size: 4
       steps: 750
       weight_decay: 0.01
