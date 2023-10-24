@@ -199,6 +199,10 @@
         "fields": 18,
         "trainingTime": "6 mins",
         "bytes": 830021
+      },
+      "button1": {
+        "label": "Try it out in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/synthesize_relational_database.ipynb"
       }
     },
     {
