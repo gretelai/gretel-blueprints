@@ -36,16 +36,21 @@
       }
     },
     {
-      "gtmId": "use-case-image-synthetics",
-      "title": "[EARLY ACCESS] Generate custom images",
-      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
-      "cardType": "Notebook",
-      "tag": "Labs",
-      "imageName": "image-synthetics.png",
-      "detailsFileName": "image-synthetics-preview.md",
-      "button1": {
-        "label": "Launch Gretel Labs",
-        "link": "https://image-synthetics-preview.gretel.cloud/"
+      "gtmId": "use-case-redact-pii",
+      "title": "Redact PII in sensitive data",
+      "description": "Safeguard sensitive information and uphold compliance standards by automatically removing private information from datasets.",
+      "cardType": "Console",
+      "imageName": "transform-v2.png",
+      "modelType": "transform_v2",
+      "modelCategory": "transform",
+      "defaultConfig": "config_templates/gretel/transform/v2.yml",
+      "sampleDataset": {
+        "fileName": "patients.csv",
+        "description": "TODOOO",
+        "records": 36,
+        "fields": 17,
+        "trainingTime": "TODOOOO",
+        "bytes": 5647
       }
     },
     {
@@ -86,21 +91,16 @@
       }
     },
     {
-      "gtmId": "use-case-redact-pii",
-      "title": "Redact PII in sensitive data",
-      "description": "Perform privacy preserving transformations on your sensitive data.",
-      "cardType": "Console",
-      "imageName": "image-transform-v1.png",
-      "modelType": "transform",
-      "modelCategory": "transform",
-      "defaultConfig": "config_templates/gretel/transform/default.yml",
-      "sampleDataset": {
-        "fileName": "sample-transform-emails.csv",
-        "description": "Unstructured text datasets are useful for training chatbots or other models that need large amounts of data. The emails in this public dataset need to be de-identified before they can be used to train ML models.",
-        "records": 100,
-        "fields": 2,
-        "trainingTime": "< 1 min",
-        "bytes": 65300
+      "gtmId": "use-case-image-synthetics",
+      "title": "[EARLY ACCESS] Generate custom images",
+      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
+      "cardType": "Notebook",
+      "tag": "Labs",
+      "imageName": "image-synthetics.png",
+      "detailsFileName": "image-synthetics-preview.md",
+      "button1": {
+        "label": "Launch Gretel Labs",
+        "link": "https://image-synthetics-preview.gretel.cloud/"
       }
     },
     {
@@ -255,6 +255,24 @@
         "fields": 1,
         "trainingTime": "30 mins",
         "bytes": 2076350
+      }
+    },
+    {
+      "gtmId": "use-case-remove-sensitive-data",
+      "title": "Remove sensitive data from unstructured text",
+      "description": "Use Named Entity Recognition (NER) to detect and redact personally identifiable data in free text fields.",
+      "cardType": "Console",
+      "imageName": "transform-v1.png",
+      "modelType": "transform",
+      "modelCategory": "transform",
+      "defaultConfig": "config_templates/gretel/transform/default.yml",
+      "sampleDataset": {
+        "fileName": "sample-transform-emails.csv",
+        "description": "Unstructured text datasets are useful for training chatbots or other models that need large amounts of data. The emails in this public dataset need to be de-identified before they can be used to train ML models.",
+        "records": 100,
+        "fields": 2,
+        "trainingTime": "< 1 min",
+        "bytes": 65300
       }
     }
   ]
