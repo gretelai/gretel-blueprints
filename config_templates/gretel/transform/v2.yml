@@ -4,15 +4,14 @@ models:
       globals:
 	    consistency: session
         locales: [it_IT]
-		entities: [first_name, middle_name, last_name, credit_card_number]
-		classification:
-			enable: true
-			num_values: 3
+    entities: [first_name, middle_name, last_name, credit_card_number]
+    classification:
+      enable: true
+      num_values: 3
       steps:
         - rows:
             update:
                 - entity: middle_name
                   value: fake.first_name()
-				- condition: column.entity not in ["middle_name", "other"]
-				  value: column.entity | fake
-          
+        - condition: column.entity not in ["middle_name", "other"]
+          value: column.entity | fake
