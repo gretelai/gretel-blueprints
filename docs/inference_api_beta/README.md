@@ -10,7 +10,7 @@ Gretel Tabular LLM utilizes lightweight streams to generate and retrieve tabular
 
 There are two main steps to utilize the Tabular LLM APIs:
 
-1) First, a request is made that contains the prompt and LLM parameters. This request will return immediately with a *inference stream ID*. This ID represents a lightweight stream that can be itereated next. Behind the scenes, this request will be processed and tabular records will be generated and written to the stream.
+1) First, a request is made that contains the prompt and LLM parameters. This request will return immediately with a *inference stream ID*. This ID represents a lightweight stream that can be itereated using a second endpoint. Behind the scenes, this request will be processed and tabular records will be generated and written to the stream.
 
 2) Second, API calls are made to iterate the *inference stream* to read tabular records (in JSON format) until generation is complete.
 
@@ -26,7 +26,7 @@ Stream creation (LLM requests) are rate limited to approximately 3 requests ever
 
 # API Usage
 
-These sections details the specifics of making API calls for Tabular LLM. All requests are made with `HTTP POST` requests.
+These sections detail the specifics of making API calls for Tabular LLM. All requests are made with `HTTP POST` requests.
 
 ## Make a LLM Request
 
