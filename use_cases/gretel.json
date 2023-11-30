@@ -90,7 +90,7 @@
       "title": "Redact PII in sensitive data",
       "description": "Perform privacy preserving transformations on your sensitive data.",
       "cardType": "Console",
-      "imageName": "redactpii.png",
+      "imageName": "image-transform-v1.png",
       "modelType": "transform",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
