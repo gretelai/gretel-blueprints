@@ -2,7 +2,7 @@ schema_version: "1.0"
 models:
   - transform_v2:
       globals:
-	    consistency: session
+      consistency: session
         locales: [it_IT]
     entities: [first_name, middle_name, last_name, credit_card_number]
     classification:
