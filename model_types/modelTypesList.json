@@ -79,6 +79,19 @@
       }
     },
     {
+      "modelType": "transform_v2",
+      "modelCategory": "transform",
+      "defaultConfig": "config_templates/gretel/transform/v2.yml",
+      "sampleDataset": {
+        "fileName": "patients.csv",
+        "description": "TODOOOOOOOOOOOOOO",
+        "records": 36,
+        "fields": 17,
+        "trainingTime": "< 1 min",
+        "bytes": 5647
+      }
+    },
+    {
       "modelType": "transform",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
