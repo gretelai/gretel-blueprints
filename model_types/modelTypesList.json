@@ -84,10 +84,10 @@
       "defaultConfig": "config_templates/gretel/transform/v2.yml",
       "sampleDataset": {
         "fileName": "patients.csv",
-        "description": "TODOOOOOOOOOOOOOO",
+        "description": "This patient dataset contains names, addresses and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
         "records": 36,
         "fields": 17,
-        "trainingTime": "TODO",
+        "trainingTime": "< 2 mins",
         "bytes": 5647
       }
     },
