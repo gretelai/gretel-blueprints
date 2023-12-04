@@ -1,0 +1,10 @@
+schema_version: "1.0"
+models:
+  - transform_v2:
+      globals:
+        classify_columns: true
+      steps:
+        - rows:
+            update:
+              - condition: column.entity != "other"
+                value: column.entity | fake
