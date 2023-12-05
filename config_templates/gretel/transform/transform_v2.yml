@@ -1,10 +1,18 @@
 schema_version: "1.0"
+name: "transform-v2-default"
 models:
   - transform_v2:
       globals:
-        classify_columns: true
+        classify:
+          # Classification is currently performed in the Gretel Cloud. If you are
+          # running in hybrid mode, you have the option to turn off classification
+          # by setting "enable" to false, or you can do classification based on
+          # column names only (at the cost of some accuracy loss) by setting
+          # "num_samples" to 0.
+          enable: true
+          num_samples: 3
       steps:
         - rows:
             update:
-              - condition: column.entity != "other"
+              - condition: column.entity is not none
                 value: column.entity | fake
