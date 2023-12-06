@@ -2,6 +2,7 @@ schema_version: "1.0"
 name: "transform-v2-default"
 models:
   - transform_v2:
+      data_source: "_"
       globals:
         classify:
           # Classification is currently performed in the Gretel Cloud. If you are
