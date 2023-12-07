@@ -93,6 +93,7 @@ card_schema = {
                 "synthetics",
                 "timeseries_dgan",
                 "transform",
+                "transform_v2",
                 "tabular_dp",
             ],
         },
