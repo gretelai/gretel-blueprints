@@ -12,6 +12,7 @@ card_schema = {
         "description": {"type": "string"},
         "cardType": {"type": "string", "enum": ["Console", "Notebook"]},
         "imageName": {"type": "string"},
+        "icon": {"type": "string"},
         "tag": {
             "type": "string",
             "enum": ["New", "Beta", "Preview", "Popular", "Deprecated","Labs"],
@@ -72,7 +73,7 @@ card_schema = {
             "properties": {"label": {"type": "string"}, "link": {"type": "string"}},
         },
     },
-    "required": ["gtmId", "title", "description", "cardType", "imageName"],
+    "required": ["gtmId", "title", "description", "cardType", "imageName", "icon"],
 }
 
 
@@ -91,6 +92,7 @@ def test_use_cases():
         gtm_ids.append(card.get("gtmId"))
         titles.append(card.get("title"))
         validate_images_exist(card.get("imageName"))
+        validate_icons_exist(card.get("icon"))
         validate_config_file_exists(card.get("defaultConfig"))
         validate_details_file_exists(card.get("detailsFileName"))
 
@@ -126,6 +128,17 @@ def validate_images_exist(image_name):
     three_x = split_name[0] + "@3x." + split_name[1]
 
     assert (Path(__file__).parent / dir_path / image_name).is_file()
+    assert (Path(__file__).parent / dir_path / two_x).is_file()
+    assert (Path(__file__).parent / dir_path / three_x).is_file()
+
+
+def validate_icons_exist(icon_name):
+    dir_path = "use_cases/icons"
+    split_name = icon_name.split(".")
+    two_x = split_name[0] + "@2x." + split_name[1]
+    three_x = split_name[0] + "@3x." + split_name[1]
+
+    assert (Path(__file__).parent / dir_path / icon_name).is_file()
     assert (Path(__file__).parent / dir_path / two_x).is_file()
     assert (Path(__file__).parent / dir_path / three_x).is_file()
 
