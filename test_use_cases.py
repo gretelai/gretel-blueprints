@@ -217,6 +217,17 @@ def validate_icons_exist(icon_name):
     assert (Path(__file__).parent / dir_path / three_x).is_file()
 
 
+def validate_icons_exist(icon_name):
+    dir_path = "use_cases/icons"
+    split_name = icon_name.split(".")
+    two_x = split_name[0] + "@2x." + split_name[1]
+    three_x = split_name[0] + "@3x." + split_name[1]
+
+    assert (Path(__file__).parent / dir_path / icon_name).is_file()
+    assert (Path(__file__).parent / dir_path / two_x).is_file()
+    assert (Path(__file__).parent / dir_path / three_x).is_file()
+
+
 def validate_config_file_exists(config_path):
     if config_path:
         assert (Path(__file__).parent / config_path).is_file()
