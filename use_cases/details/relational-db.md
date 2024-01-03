@@ -5,6 +5,8 @@ Wizard to create a connection to your remote database. And then follow the easy 
 
 Want to see how Gretel Relational works? Check out one of our notebooks below to go through the process step by step and compare the data before and after synthesis.
 
+To connect to your remote database, just 
+
 ### Notebook Details
 
 In the notebooks below, we've created two practical examples using a telecommunications database and Gretel Relational. See the database schema below.

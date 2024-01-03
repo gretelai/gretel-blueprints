@@ -7,6 +7,7 @@
       "cardType": "Console",
       "imageName": "synthetics.png",
       "icon": "synthetics.png",
+      "detailsFileName": "synthetic.md",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
@@ -17,6 +18,14 @@
         "fields": 18,
         "trainingTime": "6 mins",
         "bytes": 830021
+      },
+      "button1": {
+        "label": "Gretel 101 Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_101_Blueprint.ipynb"
+      },
+      "button2": {
+        "label": "Advanced Examples Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Advanced_Tabular_Blueprint.ipynb"
       }
     },
     {
@@ -24,7 +33,6 @@
       "title": "Synthesize any normalized SQL database ",
       "description": "Use Gretel Relational to synthesize or transform data in a relational database without losing foreign key relationships.",
       "cardType": "Notebook",
-      "tag": "Preview",
       "imageName": "relational-db.png",
       "icon": "relational-db.png",
       "detailsFileName": "relational-db.md",
@@ -42,6 +50,7 @@
       "title": "Redact PII in sensitive data",
       "description": "Safeguard sensitive information and uphold compliance standards by automatically removing private information from datasets.",
       "cardType": "Console",
+      "tag": "New",
       "imageName": "transform-v2.png",
       "icon": "transform.png",
       "modelType": "transform_v2",
@@ -65,7 +74,6 @@
       "icon": "tabular-dp.png",
       "modelType": "tabular_dp",
       "modelCategory": "synthetics",
-      "tag": "New",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
@@ -78,11 +86,12 @@
     },
     {
       "gtmId": "use-case-natural-lang-gpt",
-      "title": "Generate synthetic text data using GPT",
+      "title": "Generate natural language text using GPT",
       "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
       "cardType": "Console",
       "imageName": "natural-lang-gpt.png",
       "icon": "natural-lang-gpt.png",
+      "detailsFileName": "gpt-natural-language.md",
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
@@ -93,20 +102,31 @@
         "fields": 1,
         "trainingTime": "15 mins",
         "bytes": 117475
+      },
+      "button1": {
+        "label": "Text Generation Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Text_Generation_Blueprint.ipynb"
+      },
+      "button2": {
+        "label": "Zero-Shot Prompting Notebook",
+        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
       }
     },
     {
-      "gtmId": "use-case-image-synthetics",
-      "title": "[EARLY ACCESS] Generate custom images",
-      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
+      "gtmId": "use-case-gretel_tuner",
+      "title": "Auto-tune synthetic data parameters",
+      "description": "Automate hyperparameter sweeps to create the best synthetic data for your task.",
       "cardType": "Notebook",
-      "tag": "Labs",
-      "imageName": "image-synthetics.png",
-      "icon": "image-synthetics.png",
-      "detailsFileName": "image-synthetics-preview.md",
+      "imageName": "benchmark.png",
+      "icon": "benchmark.png",
+      "detailsFileName": "gretel-tuner.md",
       "button1": {
-        "label": "Launch Gretel Labs",
-        "link": "https://image-synthetics-preview.gretel.cloud/"
+        "label": "Introduction to Gretel Tuner",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-intro-tutorial.ipynb"
+      },
+      "button2": {
+        "label": "Gretel Tuner Advanced",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-advanced-tutorial.ipynb"
       }
     },
     {
@@ -289,6 +309,20 @@
         "fields": 2,
         "trainingTime": "< 1 min",
         "bytes": 65300
+      }
+    },
+    {
+      "gtmId": "use-case-image-synthetics",
+      "title": "[EARLY ACCESS] Generate custom images",
+      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
+      "cardType": "Notebook",
+      "tag": "Labs",
+      "imageName": "image-synthetics.png",
+      "icon": "image-synthetics.png",
+      "detailsFileName": "image-synthetics-preview.md",
+      "button1": {
+        "label": "Launch Gretel Labs",
+        "link": "https://image-synthetics-preview.gretel.cloud/"
       }
     }
   ]
