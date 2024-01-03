@@ -199,6 +199,14 @@
         "fields": 18,
         "trainingTime": "6 mins",
         "bytes": 830021
+      },
+      "button1": {
+        "label": "Gretel 101 Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_101_Blueprint.ipynb"
+      },
+      "button2": {
+        "label": "Advanced Examples Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Advanced_Tabular_Blueprint.ipynb"
       }
     },
     {
@@ -218,6 +226,14 @@
         "fields": 1,
         "trainingTime": "15 mins",
         "bytes": 117475
+      },
+      "button1": {
+        "label": "Text Generation Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Text_Generation_Blueprint.ipynb"
+      },
+      "button2": {
+        "label": "Zero-Shot Prompting Notebook",
+        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
       }
     },
     {
@@ -273,6 +289,20 @@
         "fields": 2,
         "trainingTime": "< 1 min",
         "bytes": 65300
+      }
+    },
+    {
+      "gtmId": "use-case-image-synthetics",
+      "title": "[EARLY ACCESS] Generate custom images",
+      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
+      "cardType": "Notebook",
+      "tag": "Labs",
+      "imageName": "image-synthetics.png",
+      "icon": "image-synthetics.png",
+      "detailsFileName": "image-synthetics-preview.md",
+      "button1": {
+        "label": "Launch Gretel Labs",
+        "link": "https://image-synthetics-preview.gretel.cloud/"
       }
     }
   ]
