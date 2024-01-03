@@ -6,6 +6,7 @@
       "description": "Create highly accurate synthetic training data for ML models.",
       "cardType": "Console",
       "imageName": "synthetics.png",
+      "icon": "synthetics.png",
       "detailsFileName": "synthetic.md",
       "modelType": "synthetics",
       "modelCategory": "synthetics",
