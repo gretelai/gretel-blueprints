@@ -1,5 +1,7 @@
 Gretel Relational takes you beyond synthesizing and transforming one table at a time, and enables generating entire databases, all while maintaining referential integrity. This early preview will give you a taste of what's coming in the Gretel Console and CLI/SDK. [We'd love to hear your feedback!](https://dqq4jigtkl1.typeform.com/to/Gibb8awJ)
 
+To connect to your remote database, just 
+
 ### Notebook Details
 
 In the notebooks below, we've created two practical examples using a telecommunications database and Gretel Relational. See the database schema below.
