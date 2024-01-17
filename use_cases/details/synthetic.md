@@ -1,3 +1,5 @@
+![Generate synthetic tabular data](https://blueprints.gretel.cloud/use_cases/images/synthetic-tabular-generation.png "Generate synthetic tabular data")
+
 If you’re new to Gretel, our synthetic data blueprint is a great place to start. This gentle introduction to synthetic data generation automatically selects our popular [ACTGAN model](https://gretel.ai/blog/scale-synthetic-data-to-millions-of-rows-with-actgan) and provides a sample healthcare dataset. Just answer a few questions, review the model configuration and hit **Run**. 
 
 Prefer coding? Check out the [Gretel 101 notebook](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_101_Blueprint.ipynb) example. Synthesize data in just 4 lines of code! 
