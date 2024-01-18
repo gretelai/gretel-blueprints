@@ -241,7 +241,6 @@
       "title": "Benchmark multiple synthetic models",
       "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
       "cardType": "Notebook",
-      "imageName": "benchmark.png",
       "icon": "benchmark.png",
       "detailsFileName": "benchmark.md",
       "button1": {
@@ -258,7 +257,6 @@
       "title": "Generate text including song lyrics using GPT",
       "description": "Create natural language text data including song lyrics.",
       "cardType": "Console",
-      "imageName": "natural-lang-gpt.png",
       "icon": "natural-lang-gpt.png",
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
@@ -277,7 +275,6 @@
       "title": "Remove sensitive data from unstructured text",
       "description": "Use Named Entity Recognition (NER) to detect and redact personally identifiable data in free text fields.",
       "cardType": "Console",
-      "imageName": "transform-v1.png",
       "icon": "transform.png",
       "modelType": "transform",
       "modelCategory": "transform",
@@ -297,7 +294,6 @@
       "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
       "cardType": "Notebook",
       "tag": "Labs",
-      "imageName": "image-synthetics.png",
       "icon": "image-synthetics.png",
       "detailsFileName": "image-synthetics-preview.md",
       "button1": {
