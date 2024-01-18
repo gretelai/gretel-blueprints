@@ -1,4 +1,9 @@
-Gretel Relational takes you beyond synthesizing and transforming one table at a time, and enables generating entire databases, all while maintaining referential integrity. This early preview will give you a taste of what's coming in the Gretel Console and CLI/SDK. [We'd love to hear your feedback!](https://dqq4jigtkl1.typeform.com/to/Gibb8awJ)
+Gretel Relational takes you beyond synthesizing and transforming one table at a time, and enables generating entire databases, all while maintaining referential integrity. We support connections to several relational databases such as MS SQL Server, Snowflake, BigQuery, Oracle, MySQL, PostgreSQL, with more connectors coming soon. 
+
+To get started in the Console, go to "Workflows" in the sidebar, and select the "New Workflow" button. Choose your project and the model you want to use (ACGTAN for synthesizing or Transform v2 for redacting PII). Next, use the Connetion Creation 
+Wizard to create a connection to your remote database. And then follow the easy steps to finish creating your workflow. 
+
+Want to see how Gretel Relational works? Check out one of our notebooks below to go through the process step by step and compare the data before and after synthesis.
 
 To connect to your remote database, just 
 

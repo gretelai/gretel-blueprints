@@ -2,8 +2,8 @@
   "cards": [
     {
       "gtmId": "use-case-synthetic",
-      "title": "Generate synthetic data",
-      "description": "Create highly accurate synthetic training data for ML models.",
+      "title": "Generate synthetic tabular data",
+      "description": "Create highly accurate synthetic tabular training data for ML models.",
       "cardType": "Console",
       "icon": "synthetics.png",
       "detailsFileName": "synthetic.md",
@@ -29,8 +29,8 @@
     },
     {
       "gtmId": "use-case-relational-db",
-      "title": "Connect to any normalized SQL database ",
-      "description": "Synthesize and transform data in a relational database with Gretel Relational.",
+      "title": "Synthesize any normalized SQL database ",
+      "description": "Use Gretel Relational to synthesize or transform data in a relational database without losing foreign key relationships.",
       "cardType": "Notebook",
       "icon": "relational-db.png",
       "detailsFileName": "relational-db.md",
@@ -65,7 +65,7 @@
     {
       "gtmId": "use-case-tabular-dp",
       "title": "Create provably private versions of sensitive data",
-      "description": "Use Gretel Tabular DP, our new graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
+      "description": "Use Gretel Tabular DP, our graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
       "cardType": "Console",
       "icon": "tabular-dp.png",
       "modelType": "tabular_dp",
@@ -82,7 +82,7 @@
     },
     {
       "gtmId": "use-case-natural-lang-gpt",
-      "title": "Generate natural language text using GPT",
+      "title": "Generate synthetic text data using GPT",
       "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
       "cardType": "Console",
       "icon": "natural-lang-gpt.png",
