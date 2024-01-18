@@ -73,7 +73,7 @@ card_schema = {
             "properties": {"label": {"type": "string"}, "link": {"type": "string"}},
         },
     },
-    "required": ["gtmId", "title", "description", "cardType", "imageName", "icon"],
+    "required": ["gtmId", "title", "description", "cardType", "icon"],
 }
 
 
@@ -91,7 +91,6 @@ def test_use_cases():
         assert card_is_valid
         gtm_ids.append(card.get("gtmId"))
         titles.append(card.get("title"))
-        validate_images_exist(card.get("imageName"))
         validate_icons_exist(card.get("icon"))
         validate_config_file_exists(card.get("defaultConfig"))
         validate_details_file_exists(card.get("detailsFileName"))
@@ -119,17 +118,6 @@ def validate_use_case_JSON(card):
 
 def validate_unique(field_values):
     assert len(field_values) == len(set(field_values))
-
-
-def validate_images_exist(image_name):
-    dir_path = "use_cases/images"
-    split_name = image_name.split(".")
-    two_x = split_name[0] + "@2x." + split_name[1]
-    three_x = split_name[0] + "@3x." + split_name[1]
-
-    assert (Path(__file__).parent / dir_path / image_name).is_file()
-    assert (Path(__file__).parent / dir_path / two_x).is_file()
-    assert (Path(__file__).parent / dir_path / three_x).is_file()
 
 
 def validate_icons_exist(icon_name):
