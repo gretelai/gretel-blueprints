@@ -317,8 +317,9 @@
       "modelType": "synthetics",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
-      "sampleDataset": {
-        "fileName": "sample-telecom",
+      "sampleConnection": {
+        "id": "sample_mysql_telecom",
+        "type": "mysql",
         "description": "Use this sample telecommunications database to synthesize an entirely new database of statistically equivalent records, while maintaining referential integrity.",
         "tables": 5,
         "records": 230988,
@@ -336,8 +337,9 @@
       "modelType": "transform",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
-      "sampleDataset": {
-        "fileName": "sample-telecom",
+      "sampleConnection": {
+        "id": "sample_mysql_telecom",
+        "type": "mysql",
         "description": "This telecommunications dataset contains names, addresses, social security numbers, and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
         "tables": 5,
         "records": 230988,
