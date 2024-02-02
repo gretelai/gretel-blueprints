@@ -334,9 +334,9 @@
       "description": "Safeguard sensitive information and uphold compliance standards by automatically removing private information from your database.",
       "cardType": "Console",
       "icon": "relational-db.png",
-      "modelType": "transform",
+      "modelType": "transform_v2",
       "modelCategory": "transform",
-      "defaultConfig": "config_templates/gretel/transform/default.yml",
+      "defaultConfig": "config_templates/gretel/transform/transform_v2.yml",
       "sampleConnection": {
         "id": "sample_mysql_telecom",
         "type": "mysql",
