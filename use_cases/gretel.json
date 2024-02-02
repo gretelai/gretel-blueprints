@@ -300,6 +300,46 @@
         "label": "Launch Gretel Labs",
         "link": "https://image-synthetics-preview.gretel.cloud/"
       }
+    },
+    {
+      "gtmId": "use-case-synthetic-database",
+      "title": "Synthesize a database",
+      "description": "Synthesize a database using Gretel Relational.",
+      "cardType": "Console",
+      "icon": "relational-db.png",
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "sampleConnection": {
+        "id": "sample_mysql_telecom",
+        "type": "mysql",
+        "description": "Use this sample telecommunications database to synthesize an entirely new database of statistically equivalent records, while maintaining referential integrity.",
+        "tables": 5,
+        "records": 230988,
+        "fields": 29,
+        "trainingTime": "20 mins",
+        "bytes": 9537000
+      }
+    },
+    {
+      "gtmId": "use-case-transform-database",
+      "title": "Redact PII in a database",
+      "description": "Safeguard sensitive information and uphold compliance standards by automatically removing private information from your database.",
+      "cardType": "Console",
+      "icon": "relational-db.png",
+      "modelType": "transform_v2",
+      "modelCategory": "transform",
+      "defaultConfig": "config_templates/gretel/transform/transform_v2.yml",
+      "sampleConnection": {
+        "id": "sample_mysql_telecom",
+        "type": "mysql",
+        "description": "This telecommunications dataset contains names, addresses, social security numbers, and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
+        "tables": 5,
+        "records": 230988,
+        "fields": 29,
+        "trainingTime": "5 mins",
+        "bytes": 9537000
+      }
     }
   ]
 }
