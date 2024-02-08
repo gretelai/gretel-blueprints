@@ -28,19 +28,23 @@
       }
     },
     {
-      "gtmId": "use-case-relational-db",
-      "title": "Synthesize any normalized SQL database ",
-      "description": "Use Gretel Relational to synthesize or transform data in a relational database without losing foreign key relationships.",
-      "cardType": "Notebook",
+      "gtmId": "use-case-synthetic-database",
+      "title": "Synthesize a database",
+      "description": "Synthesize a database using Gretel Relational.",
+      "cardType": "Console",
       "icon": "relational-db.png",
-      "detailsFileName": "relational-db.md",
-      "button1": {
-        "label": "Synthesize in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/synthesize_relational_database.ipynb"
-      },
-      "button2": {
-        "label": "Transform in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/transform_relational_database.ipynb"
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "sampleConnection": {
+        "id": "sample_mysql_telecom",
+        "type": "mysql",
+        "description": "Use this sample telecommunications database to synthesize an entirely new database of statistically equivalent records, while maintaining referential integrity.",
+        "tables": 5,
+        "records": 230988,
+        "fields": 29,
+        "trainingTime": "20 mins",
+        "bytes": 9537000
       }
     },
     {
@@ -306,26 +310,6 @@
       "button1": {
         "label": "Launch Gretel Labs",
         "link": "https://image-synthetics-preview.gretel.cloud/"
-      }
-    },
-    {
-      "gtmId": "use-case-synthetic-database",
-      "title": "Synthesize a database",
-      "description": "Synthesize a database using Gretel Relational.",
-      "cardType": "Console",
-      "icon": "relational-db.png",
-      "modelType": "synthetics",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
-      "sampleConnection": {
-        "id": "sample_mysql_telecom",
-        "type": "mysql",
-        "description": "Use this sample telecommunications database to synthesize an entirely new database of statistically equivalent records, while maintaining referential integrity.",
-        "tables": 5,
-        "records": 230988,
-        "fields": 29,
-        "trainingTime": "20 mins",
-        "bytes": 9537000
       }
     },
     {
