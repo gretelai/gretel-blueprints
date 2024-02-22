@@ -35,19 +35,38 @@
     {
       "id": "high-expense-healthcare-sql",
       "label": "Query a healthcare database to identify patients with high medical expenses",
-      "value": "SELECT Patient_ID, BirthDate, FirstName, LastName, MaritalStatus, Ethnicity, Sex, Address, State, Country, Zip, Healthcare_Expenses, Income\nFROM Patients_Financial_Data\nWHERE BirthDate > '1980-01-01'\nAND Healthcare_Expenses > 55000"
+      "value": [
+        "SELECT Patient_ID, BirthDate, FirstName, LastName, MaritalStatus, Ethnicity, Sex, Address, State, Country, Zip, Healthcare_Expenses, Income",
+        "FROM Patients_Financial_Data",
+        "WHERE BirthDate > '1980-01-01'",
+        "AND Healthcare_Expenses > 55000"
+      ]
     },
     {
       "id": "e-commerce-sql",
       "label": "Query an orders database for fulfillment data based on date range",
-      "value": "SELECT order_id, UPC, ISBN, order_quantity, price, date_ordered, date_shipped, brand, shipping_carrier, shipping_weight, address, ship_country\nFROM orders\nWHERE date_ordered BETWEEN '02-03-2023' and '07-30-2023'\nORDER BY date_ordered DESC"
+      "value": [
+        "SELECT order_id, UPC, ISBN, order_quantity, price, date_ordered, date_shipped, brand, shipping_carrier, shipping_weight, address, ship_country",
+        "FROM orders",
+        "WHERE date_ordered BETWEEN '02-03-2023' and '07-30-2023'",
+        "ORDER BY date_ordered DESC"
+      ]
     }
   ],
   "tabular": [
     {
       "id": "foo-users-fr",
       "label": "Create a mock dataset for users from Foo.io who live in France",
-      "value": "Generate a mock dataset for users from the Foo company based in France.\nEach user should have the following columns:\n* first_name: traditional French first names.\n* last_name: traditional French surnames. \n* email: formatted as the first letter of their first name followed by their last name @foo.io (e.g., jdupont@foo.io).\n* gender: Male/Female.\n* city: a city in France.\n* country: always 'France'."
+      "value": [
+        "Generate a mock dataset for users from the Foo company based in France.",
+        "Each user should have the following columns:",
+        "* first_name: traditional French first names.",
+        "* last_name: traditional French surnames. ",
+        "* email: formatted as the first letter of their first name followed by their last name @foo.io (e.g., jdupont@foo.io)",
+        "* gender: Male/Female",
+        "* city: a city in France",
+        "* country: always 'France'."
+      ]
     },
     {
       "id": "customer-support-banking",
@@ -62,12 +81,33 @@
     {
       "id": "texas-professionals",
       "label": "Generate a mock dataset for professionals based in Austin, Texas",
-      "value": "Generate a mock dataset for professionals based in Austin, Texas.\nEach entry should have the following columns:\nfirst_name: diverse first names from various cultural backgrounds.\nlast_name: diverse last names representing a range of ethnicities.\ncompany: name of their respective company.\njob_title: their designation or position in the company.\nemail: formatted as the first letter of their first name followed by their last name @company.com (e.g., angyuen@company.com).\naddress: use actual street names from Austin (e.g., 1500 Guadalupe Street). Do not include city, state, or zip code."
+      "value": [
+        "Generate a mock dataset for professionals based in Austin, Texas.",
+        "Each entry should have the following columns:",
+        "first_name: diverse first names from various cultural backgrounds.",
+        "last_name: diverse last names representing a range of ethnicities.",
+        "company: name of their respective company.",
+        "job_title: their designation or position in the company.",
+        "email: formatted as the first letter of their first name followed by their last name @company.com (e.g., angyuen@company.com).",
+        "address: use actual street names from Austin (e.g., 1500 Guadalupe Street). Do not include city, state, or zip code."
+      ]
     },
     {
       "id": "consumer-packaged-goods",
       "label": "Create a consumer packaged goods dataset",
-      "value": "Create a product dataset with the following columns:\n- ISBN: a realistic unique identifier\n- Title: the title of a product that is listed online, like: 'Red Travel Mug'\n- Description\n- Brand: the brand of the product, like 'Contigo'\n- Shipping Weight: numeric\n- Product Cost\n- Tag_1: a realistic tag for the product, like 'Household'\n- Color: the color of the product\n- City: city to be shipped\n- Country: country of city"
+      "value": [
+        "Create a product dataset with the following columns:",
+        "- ISBN: a realistic unique identifier",
+        "- Title: the title of a product that is listed online, like: 'Red Travel Mug'",
+        "- Description",
+        "- Brand: the brand of the product, like 'Contigo'",
+        "- Shipping Weight: numeric",
+        "- Product Cost",
+        "- Tag_1: a realistic tag for the product, like 'Household'",
+        "- Color: the color of the product",
+        "- City: city to be shipped",
+        "- Country: country of city"
+      ]
     }
   ]
 }
