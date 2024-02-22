@@ -1,0 +1,46 @@
+{
+  "natural_language": [
+    {
+      "id": "what-why-synthetic",
+      "key": "Question answering",
+      "value": "What is synthetic data and why is it useful?"
+    },
+    {
+      "id": "consumer-packaged-goods-nat-lang",
+      "key": "Prompt creation",
+      "value": "Create a prompt that I can use to generate a realistic consumer packaged goods dataset"
+    },
+    {
+      "id": "customer-support-banking-nat-lang",
+      "key": "Text generation",
+      "value": "Write 5 unusual customer support questions for an online banking system."
+    },
+    {
+      "id": "90s-pop-song",
+      "key": "Creative writing",
+      "value": "Make up a verse of a romantic pop song from the 1990s"
+    },
+    {
+      "id": "email-subject-celebrate",
+      "key": "Idea generation",
+      "value": "Generate 5 email subject lines celebrating a company milestone. Provide different milestone types that would resonate with employees and provide cause for celebration."
+    },
+    {
+      "id": "business-writing",
+      "key": "Business writing",
+      "value": "Create a template for a product requirements document."
+    }
+  ],
+  "sql": [
+    {
+      "id": "high-expense-healthcare-sql",
+      "key": "Query a healthcare database to identify patients with high medical expenses",
+      "value": "SELECT Patient_ID, BirthDate, FirstName, LastName, MaritalStatus, Ethnicity, Sex, Address, State, Country, Zip, Healthcare_Expenses, Income\nFROM Patients_Financial_Data\nWHERE BirthDate > '1980-01-01'\nAND Healthcare_Expenses > 55000"
+    },
+    {
+      "id": "e-commerce-sql",
+      "key": "Query an orders database for fulfillment data based on date range",
+      "value": "SELECT order_id, UPC, ISBN, order_quantity, price, date_ordered, date_shipped, brand, shipping_carrier, shipping_weight, address, ship_country\nFROM orders\nWHERE date_ordered BETWEEN '02-03-2023' and '07-30-2023'\nORDER BY date_ordered DESC"
+    }
+  ]
+}
