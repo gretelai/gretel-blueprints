@@ -80,10 +80,11 @@ def plot_event_type_distribution(
     # Apply event_mapping if provided
     if event_mapping:
         df = df.copy()
-        df[event_column] = df[event_column].map(event_mapping)
+        df.loc[:, event_column] = df[event_column].map(event_mapping)
         if df_ref is not None:
             df_ref = df_ref.copy()
-            df_ref[event_column] = df_ref[event_column].map(event_mapping)
+            # df_ref[event_column] = df_ref[event_column].map(event_mapping)
+            df_ref.loc[:, event_column] = df_ref[event_column].map(event_mapping)
 
     # Filter out rows with event_column as '[END]'
     df_filtered = df[df[event_column] != "[END]"]
@@ -229,8 +230,7 @@ def plot_event_sequences(
         sorted_events = sorted(df[event_column].unique())
         event_to_int = {event: i for i, event in enumerate(sorted_events)}
 
-        df[event_column + "_INT"] = df[event_column].map(event_to_int)
-
+        df.loc[:, event_column + "_INT"] = df[event_column].map(event_to_int)
         for label in random_ids:
             dfi = df[df[example_id_column] == label].reset_index()
             ax.plot(
@@ -410,7 +410,8 @@ def compute_transition_matrix(df, event_column, example_id_column):
     - event_column: The name of the column containing event types.
     - example_id_column: The name of the column containing example IDs.
     """
-    df["Next_" + event_column] = df.groupby(example_id_column)[
+    df = df.copy()
+    df.loc[:, "Next_" + event_column] = df.groupby(example_id_column)[
         event_column
     ].shift(-1)
     transition_counts = (
