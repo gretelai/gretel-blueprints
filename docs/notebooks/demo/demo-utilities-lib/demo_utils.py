@@ -83,7 +83,6 @@ def plot_event_type_distribution(
         df.loc[:, event_column] = df[event_column].map(event_mapping)
         if df_ref is not None:
             df_ref = df_ref.copy()
-            # df_ref[event_column] = df_ref[event_column].map(event_mapping)
             df_ref.loc[:, event_column] = df_ref[event_column].map(event_mapping)
 
     # Filter out rows with event_column as '[END]'
@@ -230,6 +229,7 @@ def plot_event_sequences(
         sorted_events = sorted(df[event_column].unique())
         event_to_int = {event: i for i, event in enumerate(sorted_events)}
 
+        df = df.copy()
         df.loc[:, event_column + "_INT"] = df[event_column].map(event_to_int)
         for label in random_ids:
             dfi = df[df[example_id_column] == label].reset_index()
