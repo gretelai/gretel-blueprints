@@ -125,12 +125,26 @@
       ]
     }, 
     {
-      "id": "healthcare-dataset",
+      "id": "medical-diagnosis-prescription-dataset",
       "label": "Create a medical patient dataset", 
       "value": [
         "Generate 15 rows of medical patient data.", 
         "Include these columns: patient_id in the format ##########, patient_name, street_address, city column with US city, state column with corresponding US state, zip_code column with corresponding US zip code, DOB, phone_number in the format ###-##-####, email, diagnosis and correlating prescription."
       ] 
+    }, 
+    {
+      "id": "customer-bank-transaction-dataset",
+      "label": "Create a customer bank transaction dataset", 
+      "value": [
+        "Generate 50 rows of customer bank transaction data. Include the following columns:",
+        "- customer name",
+        "- customer_id",
+        "- transaction_date",
+        "- transaction_amount",   
+        "- transaction_type",     
+        "- transaction_category",
+        "- account_balance"
+      ]
     }
   ]
 }
