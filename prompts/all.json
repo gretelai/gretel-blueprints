@@ -58,7 +58,7 @@
       "id": "foo-users-fr",
       "label": "Users from Foo.io who live in France",
       "value": [
-        "Generate a mock dataset for users from the Foo company based in France.",
+        "Generate 25 rows of a mock dataset for users from the Foo company based in France.",
         "Each user should have the following columns:",
         "* first_name: traditional French first names.",
         "* last_name: traditional French surnames. ",
@@ -96,7 +96,7 @@
       "id": "texas-professionals",
       "label": "Professionals based in Austin, Texas",
       "value": [
-        "Generate a mock dataset for professionals based in Austin, Texas.",
+        "Generate 50 rows of a mock dataset for professionals based in Austin, Texas.",
         "Each entry should have the following columns:",
         "first_name: diverse first names from various cultural backgrounds.",
         "last_name: diverse last names representing a range of ethnicities.",
@@ -110,7 +110,7 @@
       "id": "consumer-packaged-goods",
       "label": "Consumer packaged goods (CPG)",
       "value": [
-        "Create a product dataset with the following columns:",
+        "Create 50 rows of a product dataset with the following columns:",
         "- ISBN: a realistic unique identifier",
         "- Title: the title of a product that is listed online, like: 'Red Travel Mug'",
         "- Description",
