@@ -8,40 +8,50 @@ from gretel_client.tuner import BaseTunerMetric, MetricDirection
 # Function to pad sequences with '[END]'
 def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[END]"):
     """
-    Pads sequences within a DataFrame group to a specified maximum length, ensuring all other columns
-    are padded with their latest value in the sequence.
+    Pads sequences within a DataFrame group to a specified maximum length, using the mean value
+    for padding numeric columns and a specific pad value for categorical columns.
 
     Parameters:
     - group: DataFrame group (subset of a DataFrame usually obtained through groupby operation).
     - max_len: The desired maximum length for the sequences.
     - example_id_column: Name of the column containing example IDs.
     - event_column: Name of the column containing events.
-    - pad_value: The value used for padding. Defaults to "[END]".
+    - pad_value: The value used for padding categorical columns. Defaults to "[END]".
 
     Returns:
     - A DataFrame with sequences padded to the specified maximum length.
     """
     pad_size = max_len - len(group)
-    if pad_size > 0:
-        # Initialize the padding dictionary with the ID and event columns
-        padding_dict = {
-            example_id_column: [group[example_id_column].iloc[0]] * pad_size,
-            event_column: [pad_value] * pad_size,
-        }
-        
-        # Add other columns to the padding dictionary, using their last value for padding
-        for col in group.columns:
-            if col not in [example_id_column, event_column]:
-                padding_dict[col] = [group[col].iloc[-1]] * pad_size
-        
-        # Create a DataFrame from the padding dictionary
-        padding = pd.DataFrame(padding_dict, index=[0] * pad_size)
-        
-        # Concatenate the original group with the padding DataFrame
-        return pd.concat([group, padding], ignore_index=True)
-    else:
-        # If no padding is needed, return the original group
-        return group
+    
+    # Initialize padding dictionary with example_id_column and event_column
+    padding_dict = {
+        example_id_column: [group[example_id_column].iloc[0]] * pad_size,
+        event_column: [pad_value] * pad_size,
+    }
+    
+    # Automatically determine other columns to pad
+    other_columns = group.columns.difference([example_id_column, event_column])
+    
+    # Separate numeric and categorical columns
+    numeric_cols = group[other_columns].select_dtypes(include=['number']).columns
+    categorical_cols = group[other_columns].select_dtypes(exclude=['number']).columns
+    
+    # Pad numeric columns with their mean value
+    for col in numeric_cols:
+        mean_value = group[col].mean()
+        padding_dict[col] = [mean_value] * pad_size
+    
+    # Pad categorical columns with the pad_value
+    for col in categorical_cols:
+        padding_dict[col] = [pad_value] * pad_size
+    
+    # Create padding DataFrame
+    padding = pd.DataFrame(padding_dict, index=[0] * pad_size)
+    
+    # Concatenate group with padding
+    padded_group = pd.concat([group, padding], ignore_index=True)
+    
+    return padded_group
 
 
 def undo_padding(group, event_column, pad_value="[END]"):
