@@ -131,7 +131,7 @@ def plot_event_type_distribution(
         index,
         ref_hist.values,
         bar_width,
-        label="Reference",
+        label="Synthetic" if df_ref is not None else "Data",
         alpha=0.7,
         color="blue",
     )
@@ -147,14 +147,17 @@ def plot_event_type_distribution(
             index + bar_width,
             gen_hist.values,
             bar_width,
-            label="Generated",
+            label="Reference",
             alpha=0.7,
             color="orange",
         )
 
     plt.xlabel(event_column)
     plt.ylabel("Normalized Frequency")
-    plt.title(f"{event_column} Distribution: Reference vs Generated Data")
+    if df_ref is not None:
+        plt.title(f"{event_column} Distribution: Reference vs Synthetic Data")
+    else:
+        plt.title(f"{event_column} Distribution")
     plt.xticks(index + bar_width / 2, labels=all_event_types, rotation=45)
     plt.legend()
     plt.grid()
@@ -200,14 +203,17 @@ def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, e
 
     # Plot the reference transition matrix
     sns.heatmap(transition_matrix_ref, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[0])
-    axs[0].set_title('Reference Transition Probability Matrix')
+    if df_ref is not None:
+        axs[0].set_title('Reference Transition Probability Matrix')
+    else:
+        axs[0].set_title('Transition Probability Matrix')
     axs[0].set_xlabel('Next Event')
     axs[0].set_ylabel('Current Event')
 
     if df_ref is not None:
         # Plot the generated transition matrix
         sns.heatmap(transition_matrix_gen, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[1])
-        axs[1].set_title('Generated Transition Probability Matrix')
+        axs[1].set_title('Reference Transition Probability Matrix')
         axs[1].set_xlabel('Next Event')
 
     plt.tight_layout()
@@ -259,7 +265,7 @@ def plot_event_sequences(
                 dfi[event_column + "_INT"],
                 marker="o",
                 linestyle="-",
-                label=f"{example_id_column}: {label}",
+                label=f"{example_id_column}: {label[:10] + '...' if len(label) > 10 else label}",
             )
 
         ax.set_xlabel("Event Sequence Steps")
@@ -275,7 +281,7 @@ def plot_event_sequences(
     ncols = 2 if df_ref is not None else 1
     fig, axs = plt.subplots(1, ncols, figsize=(10 * ncols, 6))
     if ncols == 1:
-        axs = [axs]  # Make it a list to use axs[0] without error
+        axs = [axs]
 
     random_ids = np.random.choice(
         df_filtered[example_id_column].unique(), num_sequences, replace=False
@@ -284,7 +290,7 @@ def plot_event_sequences(
         axs[0],
         df_filtered[df_filtered[example_id_column].isin(random_ids)],
         random_ids,
-        "Reference Data Sequences",
+        "Synthetic Sequences" if df_ref is not None else "Data Sequences",
     )
 
     if df_ref is not None:
@@ -300,7 +306,7 @@ def plot_event_sequences(
                 df_ref_filtered[example_id_column].isin(random_ids_ref)
             ],
             random_ids_ref,
-            "Generated Data Sequences",
+            "Reference Data Sequences",
         )
 
     plt.tight_layout()
@@ -350,6 +356,7 @@ def check_series_order(series, valid_sequence):
             return False  # Invalid event sequence
     return True
 
+
 def remove_invalid_sequences(df, series_validity, example_id_column):
     """
     Filters out sequences based on their validity.
@@ -363,6 +370,56 @@ def remove_invalid_sequences(df, series_validity, example_id_column):
     valid_series_ids = series_validity[series_validity].index.tolist()
     valid_df = df[df[example_id_column].isin(valid_series_ids)]
     return valid_df
+
+
+def is_strictly_subsequent(sequence):
+    """
+    Checks if a given sequence is strictly subsequent, allowing repeats but no gaps.
+
+    This function assumes input as a pandas Series to leverage vectorized operations for efficiency.
+    It checks if the difference between consecutive numbers is either 0 (repeat) or 1 (subsequent),
+    which meets the criteria for being strictly subsequent.
+
+    Parameters:
+    - sequence (pandas.Series): A pandas Series of numeric values representing the sequence.
+
+    Returns:
+    - bool: True if the sequence is strictly subsequent; False otherwise.
+    """
+    diffs = sequence.diff().fillna(1)  # Handle the first element as valid
+    return ((diffs == 1) | (diffs == 0)).all()
+
+
+def get_strictly_subsequent_sequences(df, example_id_column, event_column, pad_value="[END]"):
+    """
+    Filters sequences in a DataFrame for strict subsequency in events, calculating their prevalence.
+
+    This function first removes padding from the DataFrame. It then evaluates each sequence identified
+    by a unique identifier in the example_id_column for strict subsequency in the event_column. Sequences
+    that are strictly subsequent (allow for consecutive or repeated events without gaps) are retained.
+    The function returns these sequences and the percentage of total sequences that are strictly subsequent.
+
+    Parameters:
+    - df (pandas.DataFrame): The input DataFrame with sequences to filter.
+    - example_id_column (str): The column name identifying unique sequences.
+    - event_column (str): The column name with numeric events to check for strict subsequency.
+    - pad_value (str, optional): The padding value to be ignored. Defaults to "[END]".
+
+    Returns:
+    - (pandas.DataFrame, float): A tuple containing a filtered DataFrame of valid sequences and the percentage
+      of sequences that are strictly subsequent.
+    """
+    df = undo_padding(df, event_column, pad_value=pad_value)
+    
+    valid_ids = []
+    for identifier, group in df.groupby(example_id_column):
+        if is_strictly_subsequent(group[event_column].reset_index(drop=True)):
+            valid_ids.append(identifier)
+
+    percentage_valid = (len(valid_ids) / df[example_id_column].nunique()) * 100
+    df_valid = df[df[example_id_column].isin(valid_ids)]
+    
+    return df_valid, percentage_valid
 
 
 def calculate_percentage_of_valid_sequences(series_validity):
