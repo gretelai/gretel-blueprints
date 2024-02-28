@@ -6,10 +6,11 @@ from gretel_client.tuner import BaseTunerMetric, MetricDirection
 
 
 # Function to pad sequences with '[END]'
-def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[END]"):
+def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[END]", attribute_columns=None):
     """
     Pads sequences within a DataFrame group to a specified maximum length, using the mean value
-    for padding numeric columns and a specific pad value for categorical columns.
+    for padding numeric columns, a specific pad value for categorical columns, and the existing value
+    for specified attribute columns.
 
     Parameters:
     - group: DataFrame group (subset of a DataFrame usually obtained through groupby operation).
@@ -17,6 +18,7 @@ def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[EN
     - example_id_column: Name of the column containing example IDs.
     - event_column: Name of the column containing events.
     - pad_value: The value used for padding categorical columns. Defaults to "[END]".
+    - attribute_columns: List of columns that should be padded with their existing value in the sequence.
 
     Returns:
     - A DataFrame with sequences padded to the specified maximum length.
@@ -29,8 +31,11 @@ def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[EN
         event_column: [pad_value] * pad_size,
     }
     
-    # Automatically determine other columns to pad
-    other_columns = group.columns.difference([example_id_column, event_column])
+    # Automatically determine other columns to pad if attribute_columns is not specified
+    if attribute_columns is None:
+        attribute_columns = []
+
+    other_columns = group.columns.difference([example_id_column, event_column] + attribute_columns)
     
     # Separate numeric and categorical columns
     numeric_cols = group[other_columns].select_dtypes(include=['number']).columns
@@ -44,6 +49,11 @@ def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[EN
     # Pad categorical columns with the pad_value
     for col in categorical_cols:
         padding_dict[col] = [pad_value] * pad_size
+
+    # Pad attribute columns with their existing value in the sequence
+    for col in attribute_columns:
+        attribute_value = group[col].iloc[0]  # Assuming the column has a fixed value for each sequence
+        padding_dict[col] = [attribute_value] * pad_size
     
     # Create padding DataFrame
     padding = pd.DataFrame(padding_dict, index=[0] * pad_size)
