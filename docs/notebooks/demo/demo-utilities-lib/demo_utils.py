@@ -86,7 +86,7 @@ def undo_padding(group, event_column, pad_value="[END]"):
 
 
 def plot_event_type_distribution(
-    df, event_column, df_ref=None, event_mapping=None
+    df, event_column, df_ref=None, event_mapping=None, pad_value="[END]"
 ):
     """
     Plots the distribution of event types for reference and optionally generated data.
@@ -106,12 +106,12 @@ def plot_event_type_distribution(
             df_ref.loc[:, event_column] = df_ref[event_column].map(event_mapping)
 
     # Filter out rows with event_column as '[END]'
-    df_filtered = df[df[event_column] != "[END]"]
+    df_filtered = df[df[event_column] != pad_value]
 
     # Get the union of event types present in reference and optionally in generated data
     all_event_types = df_filtered[event_column].unique()
     if df_ref is not None:
-        df_ref_filtered = df_ref[df_ref[event_column] != "[END]"]
+        df_ref_filtered = df_ref[df_ref[event_column] != pad_value]
         all_event_types = np.union1d(
             all_event_types, df_ref_filtered[event_column].unique()
         )
@@ -162,7 +162,7 @@ def plot_event_type_distribution(
     plt.show()
 
 
-def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, event_mapping=None):
+def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, event_mapping=None, pad_value="[END]"):
     """
     Plots transition probability matrices for reference and optionally generated data, with generic column handling.
 
@@ -184,9 +184,9 @@ def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, e
             df_ref_copy[event_column] = df_ref_copy[event_column].map(event_mapping)
     
     # Filter out rows with event_column as '[END]'
-    df_filtered = df_copy[df_copy[event_column] != "[END]"]
+    df_filtered = df_copy[df_copy[event_column] != pad_value]
     if df_ref is not None:
-        df_ref_filtered = df_ref_copy[df_ref_copy[event_column] != "[END]"]
+        df_ref_filtered = df_ref_copy[df_ref_copy[event_column] != pad_value]
 
     # Compute transition matrices using the filtered copies
     transition_matrix_ref = compute_transition_matrix(df_filtered, event_column, example_id_column)
@@ -221,6 +221,7 @@ def plot_event_sequences(
     df_ref=None,
     num_sequences=5,
     event_mapping=None,
+    pad_value="[END]"
 ):
     """
     Plots event sequences for a specified number of randomly selected sequences from one or two DataFrames,
@@ -237,7 +238,7 @@ def plot_event_sequences(
 
     def prepare_df(df):
         """Preprocess DataFrame and map event_column."""
-        df_filtered = df[df[event_column] != "[END]"].copy()
+        df_filtered = df[df[event_column] != pad_value].copy()
         if event_mapping:
             df_filtered[event_column] = df_filtered[event_column].map(
                 event_mapping
@@ -421,7 +422,7 @@ def transition_matrix_distance(tm1, tm2):
     return distance
 
 
-def compute_transition_matrix(df, event_column, example_id_column):
+def compute_transition_matrix(df, event_column, example_id_column, pad_value="[END]"):
     """
     Calculates the transition matrix for event sequences within each example ID.
 
@@ -443,7 +444,7 @@ def compute_transition_matrix(df, event_column, example_id_column):
         transition_counts.sum(axis=1), axis=0
     ).fillna(0)
     transition_matrix = transition_matrix.drop(
-        index="[END]", columns="[END]", errors="ignore"
+        index=pad_value, columns=pad_value, errors="ignore"
     )
     return transition_matrix
 
@@ -457,6 +458,7 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
         num_samples=100,
         hist_weight=0.5,
         trans_weight=0.5,
+        pad_value="[END]"
     ):
         """
         Initializes the metric calculation class with reference data and parameters.
@@ -475,6 +477,7 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
         self.num_samples = num_samples
         self.hist_weight = hist_weight
         self.trans_weight = trans_weight
+        self.pad_value = pad_value
         self.direction = MetricDirection.MINIMIZE
 
     def __call__(self, model):
@@ -497,10 +500,10 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
 
         # Compute normalized transition matrices
         ref_tm = compute_transition_matrix(
-            self.reference_df, self.event_column, self.example_id_column
+            self.reference_df, self.event_column, self.example_id_column, pad_value=self.pad_value
         )
         gen_tm = compute_transition_matrix(
-            generated_data, self.event_column, self.example_id_column
+            generated_data, self.event_column, self.example_id_column, pad_value=self.pad_value
         )
         tm_distance = transition_matrix_distance(ref_tm, gen_tm)
 
