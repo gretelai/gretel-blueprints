@@ -14,9 +14,9 @@ async function* walk(dir, ext) {
 
 // Then, use it with a simple async for loop
 async function main() {
-  const templates = [];
+  const configs = [];
   for await (const p of walk("config_templates", /\.ya?ml$/)) {
-    templates.push(p);
+    configs.push(p);
   }
   const samples = [];
   for await (const p of walk("sample_data")) {
@@ -26,6 +26,13 @@ async function main() {
   for await (const p of walk("sample_data_previews")) {
     sample_data_previews.push(p);
   }
+  /* 
+  Files whose first comment is `# deprecated: This configuration will be deprecated soon. <additional message>` are deprecated and filtered from the manifest
+  */
+  const templates = configs.filter((template) => {
+    const str = fs.readFileSync(template, "utf8");
+    return !str.startsWith("# deprecated");
+  });
 
   console.log(JSON.stringify({ templates, samples, sample_data_previews }));
 }
