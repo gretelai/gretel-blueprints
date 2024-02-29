@@ -374,18 +374,22 @@ def remove_invalid_sequences(df, series_validity, example_id_column):
 
 def is_strictly_subsequent(sequence):
     """
-    Checks if a given sequence is strictly subsequent, allowing repeats but no gaps.
+    Checks if a given sequence is strictly subsequent, starting with 1, allowing repeats but no gaps.
 
     This function assumes input as a pandas Series to leverage vectorized operations for efficiency.
-    It checks if the difference between consecutive numbers is either 0 (repeat) or 1 (subsequent),
+    It checks if the sequence starts with 1 and if the difference between consecutive numbers is either 0 (repeat) or 1 (subsequent),
     which meets the criteria for being strictly subsequent.
 
     Parameters:
     - sequence (pandas.Series): A pandas Series of numeric values representing the sequence.
 
     Returns:
-    - bool: True if the sequence is strictly subsequent; False otherwise.
+    - bool: True if the sequence starts with 1 and is strictly subsequent; False otherwise.
     """
+    # Check if the sequence starts with 1
+    if sequence.iloc[0] != 1:
+        return False
+
     diffs = sequence.diff().fillna(1)  # Handle the first element as valid
     return ((diffs == 1) | (diffs == 0)).all()
 
