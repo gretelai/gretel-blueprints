@@ -204,7 +204,7 @@ def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, e
     # Plot the reference transition matrix
     sns.heatmap(transition_matrix_ref, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[0])
     if df_ref is not None:
-        axs[0].set_title('Reference Transition Probability Matrix')
+        axs[0].set_title('Synthetic Transition Probability Matrix')
     else:
         axs[0].set_title('Transition Probability Matrix')
     axs[0].set_xlabel('Next Event')
