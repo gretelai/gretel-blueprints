@@ -192,27 +192,27 @@ def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, e
         df_ref_filtered = df_ref_copy[df_ref_copy[event_column] != pad_value]
 
     # Compute transition matrices using the filtered copies
-    transition_matrix_ref = compute_transition_matrix(df_filtered, event_column, example_id_column)
+    transition_matrix = compute_transition_matrix(df_filtered, event_column, example_id_column)
     if df_ref is not None:
-        transition_matrix_gen = compute_transition_matrix(df_ref_filtered, event_column, example_id_column)
+        transition_matrix_ref = compute_transition_matrix(df_ref_filtered, event_column, example_id_column)
 
     # Plot setup
     fig, axs = plt.subplots(nrows=1, ncols=2 if df_ref is not None else 1, figsize=(24 if df_ref is not None else 12, 10), sharey=True)
     if not isinstance(axs, np.ndarray):  # Adjust for a single subplot
         axs = [axs]
 
-    # Plot the reference transition matrix
-    sns.heatmap(transition_matrix_ref, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[0])
+    # Plot the transition matrix
+    sns.heatmap(transition_matrix, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[0])
     if df_ref is not None:
-        axs[0].set_title('Reference Transition Probability Matrix')
+        axs[0].set_title('Synthetic Transition Probability Matrix')
     else:
         axs[0].set_title('Transition Probability Matrix')
     axs[0].set_xlabel('Next Event')
     axs[0].set_ylabel('Current Event')
 
     if df_ref is not None:
-        # Plot the generated transition matrix
-        sns.heatmap(transition_matrix_gen, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[1])
+        # Plot the reference transition matrix
+        sns.heatmap(transition_matrix_ref, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[1])
         axs[1].set_title('Reference Transition Probability Matrix')
         axs[1].set_xlabel('Next Event')
 
