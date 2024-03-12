@@ -5,13 +5,63 @@ import seaborn as sns
 from gretel_client.tuner import BaseTunerMetric, MetricDirection
 
 
-# Function to pad sequences with '[END]'
+def calculate_sample_length(desired_max_len=0):
+  """Calculates the sample length and adjusted maximum sequence length
+  based on the desired ratio.
+
+  Args:
+    target_ratio: An optional integer representing the desired ratio of 
+                  max_sequence_len to sample_len. Defaults to 15, but can be
+                  overridden.
+    desired_max_len: An optional integer representing the desired maximum sequence length. 
+                      If 0, only the target_ratio is used to calculate sample_length. 
+                      If provided, it is adjusted to be divisible by target_ratio 
+                      and then used to calculate sample_length.
+
+  Returns:
+    A tuple containing two integers:
+      - The calculated sample length.
+      - The adjusted maximum sequence length divisible by the target ratio 
+        and closest to the desired_max_len, or 0 if desired_max_len is not provided.
+  """
+
+  if desired_max_len > 0 and (not isinstance(desired_max_len, int) or desired_max_len <= 0):
+    raise ValueError("desired_max_len must be a positive integer if provided")
+
+  # Adjust desired_max_len based on adjusted_target_ratio
+  if desired_max_len < 25:
+    return 1, desired_max_len, desired_max_len
+  
+  # Consider potential target_ratios within the desired range (10-20)
+  potential_ratios = range(10, 21)
+
+  # Calculate adjusted_max_len and distance for each potential_ratio
+  adjusted_max_lens = [math.ceil(desired_max_len / ratio) * ratio for ratio in potential_ratios]
+  distances = [abs(adjusted_max_len - desired_max_len) for adjusted_max_len in adjusted_max_lens]
+
+  # Find the index of the target_ratio with the smallest distance
+  closest_ratio_index = distances.index(min(distances))
+
+  # Extract the closest target_ratio and adjusted_max_len
+  closest_target_ratio = potential_ratios[closest_ratio_index]
+  adjusted_max_len = adjusted_max_lens[closest_ratio_index]
+
+  # Calculate sample_length based on the closest target_ratio
+  sample_length = adjusted_max_len // closest_target_ratio
+
+  # Handle division by zero
+  if sample_length == 0:
+    sample_length = 1
+
+  return sample_length, adjusted_max_len, closest_target_ratio
+
+
 def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[END]", attribute_columns=None):
     """
     Pads sequences within a DataFrame group to a specified maximum length, using the mean value
     for padding numeric columns, a specific pad value for categorical columns, and the existing value
     for specified attribute columns.
-
+    
     Parameters:
     - group: DataFrame group (subset of a DataFrame usually obtained through groupby operation).
     - max_len: The desired maximum length for the sequences.
@@ -19,7 +69,7 @@ def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[EN
     - event_column: Name of the column containing events.
     - pad_value: The value used for padding categorical columns. Defaults to "[END]".
     - attribute_columns: List of columns that should be padded with their existing value in the sequence.
-
+    
     Returns:
     - A DataFrame with sequences padded to the specified maximum length.
     """
@@ -34,7 +84,7 @@ def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[EN
     # Automatically determine other columns to pad if attribute_columns is not specified
     if attribute_columns is None:
         attribute_columns = []
-
+    
     other_columns = group.columns.difference([example_id_column, event_column] + attribute_columns)
     
     # Separate numeric and categorical columns
@@ -49,7 +99,7 @@ def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[EN
     # Pad categorical columns with the pad_value
     for col in categorical_cols:
         padding_dict[col] = [pad_value] * pad_size
-
+    
     # Pad attribute columns with their existing value in the sequence
     for col in attribute_columns:
         attribute_value = group[col].iloc[0]  # Assuming the column has a fixed value for each sequence
@@ -510,6 +560,48 @@ def compute_transition_matrix(df, event_column, example_id_column, pad_value="[E
     return transition_matrix
 
 
+def calculate_histograms(df, sequence_id, feature_columns, bin_configs=[25, 50, 100, 150]):
+    """
+    Calculate histograms for mean, min-max difference, median, and standard deviation for each numerical feature in the dataframe,
+    across multiple bin configurations.
+    """
+    histograms = {}
+    for feature in feature_columns:
+        histograms[feature] = {config: {} for config in bin_configs}
+        feature_data = df.groupby(sequence_id)[feature].agg(['mean', lambda x: x.max() - x.min(), 'median', 'std'])
+        feature_data.rename(columns={'<lambda_0>': 'min_max_diff', 'median': 'medians', 'std': 'stdevs'}, inplace=True)
+
+        for bins in bin_configs:
+            histograms[feature][bins] = {
+                'means': np.histogram(feature_data['mean'], bins=bins, density=True),
+                'min_max_diff': np.histogram(feature_data['min_max_diff'], bins=bins, density=True),
+                'medians': np.histogram(feature_data['medians'], bins=bins, density=True),
+                'stdevs': np.histogram(feature_data['stdevs'], bins=bins, density=True)
+            }
+    return histograms
+
+def calculate_weighted_histogram_distance(histogramsA, histogramsB, bin_configs=[25, 50, 100, 150], weights={'means': 0.25, 'min_max_diff': 0.25, 'medians': 0.25, 'stdevs': 0.25}):
+    """
+    Calculate the average weighted sum of Wasserstein distances between corresponding histograms for mean, 
+    min-max difference, medians, and standard deviations across multiple bin configurations.
+    """
+    total_distances = []
+    for bins in bin_configs:
+        bin_distance = 0
+        for feature in histogramsA:
+            feature_distance = sum(
+                weights[hist_type] * wasserstein_distance(histogramsA[feature][bins][hist_type][0], histogramsB[feature][bins][hist_type][0])
+                for hist_type in ['means', 'min_max_diff', 'medians', 'stdevs']
+                if hist_type in weights
+            )
+            bin_distance += feature_distance
+        total_distances.append(bin_distance)
+    
+    # Average the distances across bin configurations
+    avg_distance = np.mean(total_distances) if total_distances else 0
+    return avg_distance
+
+
 class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
     def __init__(
         self,
@@ -572,4 +664,46 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
         final_score = (self.hist_weight * hist_distance) + (
             self.trans_weight * tm_distance
         )
+        return final_score
+
+
+class TimeSeriesDistance(BaseTunerMetric):
+    def __init__(self, reference_df, example_id_column, feature_columns, num_samples=100):
+        """
+        Initialize the metric calculation class with reference data and parameters.
+        
+        Parameters:
+        - reference_df (DataFrame): DataFrame containing the reference data.
+        - example_id_column (str): The name of the column containing example IDs.
+        - feature_columns (list): List of feature column names to be considered for distance calculation.
+        - num_samples (int): Number of samples to generate for comparison.
+        """
+        self.reference_df = reference_df
+        self.example_id_column = example_id_column
+        self.feature_columns = feature_columns
+        self.num_samples = num_samples
+        self.direction = MetricDirection.MINIMIZE  # Specify the direction for metric optimization.
+
+    def calculate_final_score(self, generated_df):
+        """
+        Calculates a weighted score based on histogram and autocorrelation distances between
+        the reference and generated data.
+        """
+        # Compute histogram distances
+        ref_hist = calculate_histograms(self.reference_df, self.example_id_column, self.feature_columns)
+        gen_hist = calculate_histograms(generated_df, self.example_id_column, self.feature_columns)
+        hist_distance = calculate_weighted_histogram_distance(ref_hist, gen_hist)
+        
+        return hist_distance
+
+    def __call__(self, model):
+        """
+        Generates synthetic data using the provided model, compares it to the reference data,
+        and calculates a weighted score based on histogram and autocorrelation distances.
+        """
+        generated_data = self.submit_generate_for_trial(
+            model, num_records=self.num_samples
+        )
+
+        final_score = self.calculate_final_score(generated_data)
         return final_score
