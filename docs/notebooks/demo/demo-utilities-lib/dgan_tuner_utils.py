@@ -19,10 +19,12 @@ def calculate_sample_length(desired_max_len=0):
                       and then used to calculate sample_length.
 
   Returns:
-    A tuple containing two integers:
-      - The calculated sample length.
-      - The adjusted maximum sequence length divisible by the target ratio 
-        and closest to the desired_max_len, or 0 if desired_max_len is not provided.
+    tuple: A tuple containing three values:
+      - The calculated sample length, which is the adjusted maximum sequence length divided by the optimal ratio.
+      - The adjusted maximum sequence length, which is the original desired maximum length adjusted
+        to be divisible by the optimal ratio.
+      - The optimal ratio used to calculate the sample length and adjusted maximum sequence length.
+  
   """
 
   if desired_max_len > 0 and (not isinstance(desired_max_len, int) or desired_max_len <= 0):
