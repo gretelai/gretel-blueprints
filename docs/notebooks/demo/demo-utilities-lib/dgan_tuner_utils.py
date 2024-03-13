@@ -136,7 +136,7 @@ def undo_padding(group, event_column, pad_value="[END]"):
 
 
 def plot_event_type_distribution(
-    df, event_column, df_ref=None, event_mapping=None, pad_value="[END]"
+    df, event_column, df_ref=None, event_mapping=None, pad_value="[END]", output_file=None
 ):
     """
     Plots the distribution of event types for reference and optionally generated data.
@@ -146,6 +146,7 @@ def plot_event_type_distribution(
     - event_column: The name of the column containing event types.
     - df_ref: (Optional) DataFrame containing the generated data.
     - event_mapping: (Optional) Dictionary to map event column values to a new naming convention.
+    - output_file: (Optional) Path to save the plot instead of displaying it.
     """
     # Apply event_mapping if provided
     if event_mapping:
@@ -212,10 +213,16 @@ def plot_event_type_distribution(
     plt.legend()
     plt.grid()
     plt.tight_layout()
-    plt.show()
+
+    # Save to file if output_file is provided, else display
+    if output_file:
+        plt.savefig(output_file)
+        plt.close()  # Close the figure to prevent display in notebook environments
+    else:
+        plt.show()
 
 
-def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, event_mapping=None, pad_value="[END]"):
+def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, event_mapping=None, pad_value="[END]", output_file=None):
     """
     Plots transition probability matrices for reference and optionally generated data, with generic column handling.
 
@@ -267,7 +274,13 @@ def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, e
         axs[1].set_xlabel('Next Event')
 
     plt.tight_layout()
-    plt.show()
+
+    # Save to file if output_file is provided, else display
+    if output_file:
+        plt.savefig(output_file)
+        plt.close()  # Close the figure to prevent display in notebook environments
+    else:
+        plt.show()
 
 
 def plot_event_sequences(
@@ -277,7 +290,8 @@ def plot_event_sequences(
     df_ref=None,
     num_sequences=5,
     event_mapping=None,
-    pad_value="[END]"
+    pad_value="[END]",
+    output_file=None
 ):
     """
     Plots event sequences for a specified number of randomly selected sequences from one or two DataFrames,
@@ -360,7 +374,13 @@ def plot_event_sequences(
         )
 
     plt.tight_layout()
-    plt.show()
+
+    # Save to file if output_file is provided, else display
+    if output_file:
+        plt.savefig(output_file)
+        plt.close()  # Close the figure to prevent display in notebook environments
+    else:
+        plt.show()
 
 
 def check_series_order(series, valid_sequence):
