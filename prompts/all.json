@@ -8,7 +8,7 @@
     {
       "id": "consumer-packaged-goods-nat-lang",
       "label": "Prompt creation",
-      "value": "Create a prompt that I can use to generate a realistic consumer packaged goods dataset"
+      "value": "Write a prompt for a large language model that I can use to generate a realistic consumer packaged goods dataset."
     },
     {
       "id": "customer-support-banking-nat-lang",
