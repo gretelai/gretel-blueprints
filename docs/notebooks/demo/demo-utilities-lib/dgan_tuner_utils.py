@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from gretel_client.tuner import BaseTunerMetric, MetricDirection
-
+import math
 
 def calculate_sample_length(desired_max_len=0):
   """Calculates the sample length and adjusted maximum sequence length
@@ -135,6 +135,83 @@ def undo_padding(group, event_column, pad_value="[END]"):
     unpadded_group = group[is_not_padded]
     
     return unpadded_group
+
+
+def compute_actions_from_events(df, example_id_column, event_column):
+    """
+    Computes the event for each row in the DataFrame based on the changes
+    in the event_column values for each unique identifier in example_id_column. The action
+    is determined as 'start', 'increment', or 'unchanged'.
+    
+    Args:
+    - df (pd.DataFrame): The input DataFrame to process.
+    - example_id_column (str): The column name acting as the unique session identifier.
+    - event_column (str): The column name representing the event count.
+    
+    Returns:
+    - pd.DataFrame: The DataFrame with an updated 'event_column' column.
+    """
+    # Sort df by example_id_column and event_column to ensure the sequence is correct
+    df_sorted = df.sort_values(by=[example_id_column, event_column]).reset_index(drop=True)
+
+    df_sorted['tmp'] = None
+
+    previous_id = None
+    previous_count = None
+
+    for index, row in df_sorted.iterrows():
+        if row[example_id_column] != previous_id:  # New session
+            df_sorted.at[index, 'tmp'] = 'start'
+        else:  # Same session as previous row
+            if row[event_column] == previous_count:  # No change in event count
+                df_sorted.at[index, 'tmp'] = 'unchanged'
+            elif row[event_column] > previous_count:  # Event count has increased
+                df_sorted.at[index, 'tmp'] = 'increment'
+            # Assuming event_column only increases or stays the same,
+            # so no else case for decrement
+
+        # Update previous values for the next iteration
+        previous_id = row[example_id_column]
+        previous_count = row[event_column]
+    
+    df_sorted[event_column] =  df_sorted['tmp']
+    df_sorted.drop('tmp', axis=1, inplace=True)
+    
+    return df_sorted.reset_index(drop=True)
+
+
+def compute_events_from_actions(df, event_column, pad_value="[END]"):
+    """
+    Processes the given DataFrame by removing rows with a specified action in event_column set to 'pad_value',
+    initializing a new 'new_funnel_count' column, and updating it based on event_column values.
+    
+    Args:
+    - df (pd.DataFrame): The input DataFrame to process.
+    - event_column (str): The name of the column containing event actions.
+    
+    Returns:
+    - pd.DataFrame: The processed DataFrame with updated event_column column.
+    """
+        
+    df_new = df[df[event_column] != pad_value].reset_index(drop=True).copy()
+
+    # Initialize the new_funnel_count column
+    df_new['tmp'] = 0
+
+    # Apply actions to calculate new_funnel_count
+    for i, row in df_new.iterrows():
+        if row[event_column] == 'start':
+            df_new.at[i, 'tmp'] = 1
+        elif row[event_column] == 'increment' and i > 0:
+            df_new.at[i, 'tmp'] = df_new.at[i-1, 'tmp'] + 1
+        elif row[event_column] == 'unchanged' and i > 0:
+            df_new.at[i, 'tmp'] = df_new.at[i-1, 'tmp']
+        
+    df_new[event_column] = df_new['tmp']
+    
+    df_new.drop('tmp', axis=1, inplace=True)
+
+    return df_new
 
 
 def plot_event_type_distribution(
@@ -665,10 +742,12 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
         )
 
         # Compute and normalize histograms for the event column
-        ref_hist = self.reference_df[self.event_column].value_counts(
+        ref_df_no_padding =  self.reference_df[self.reference_df[self.event_column] != self.pad_value]
+        generated_data_no_padding =  generated_data[generated_data[self.event_column] != self.pad_value]
+        ref_hist = ref_df_no_padding[self.event_column].value_counts(
             normalize=True
         )
-        gen_hist = generated_data[self.event_column].value_counts(
+        gen_hist = generated_data_no_padding[self.event_column].value_counts(
             normalize=True
         )
         hist_distance = histogram_distance(ref_hist, gen_hist)
