@@ -1,4 +1,5 @@
 import math
+import uuid
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -213,6 +214,22 @@ def compute_events_from_actions(df, event_column, pad_value="[END]"):
     df_new.drop('tmp', axis=1, inplace=True)
 
     return df_new
+
+
+def generate_deterministic_uuid(value, column_name):
+    """
+    Generates a deterministic UUID for a given value and column name.
+
+    Parameters:
+    - value (str/int/float): The value to encode into the UUID.
+    - column_name (str): The name of the column as the UUID namespace.
+
+    Returns:
+    - str: A UUID string that is deterministic based on the value and column name.
+    """
+    NAMESPACE = uuid.uuid5(uuid.NAMESPACE_DNS, column_name)
+    value_str = str(value)
+    return str(uuid.uuid5(NAMESPACE, value_str))
 
 
 def plot_event_type_distribution(
@@ -563,7 +580,7 @@ def get_strictly_subsequent_sequences(df, example_id_column, event_column, pad_v
     - (pandas.DataFrame, float): A tuple containing a filtered DataFrame of valid sequences and the percentage
       of sequences that are strictly subsequent.
     """
-    df = undo_padding(df, event_column, pad_value=pad_value)
+    df = df[~df.isin([pad_value]).any(axis=1)]
     
     valid_ids = []
     for identifier, group in df.groupby(example_id_column):
