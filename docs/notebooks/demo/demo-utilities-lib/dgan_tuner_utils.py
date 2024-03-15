@@ -1,9 +1,10 @@
+import math
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from gretel_client.tuner import BaseTunerMetric, MetricDirection
-import math
+from scipy.stats import wasserstein_distance
 
 def calculate_sample_length(desired_max_len=0):
   """Calculates the sample length and adjusted maximum sequence length
