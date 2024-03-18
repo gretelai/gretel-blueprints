@@ -55,6 +55,17 @@
   ],
   "tabular": [
     {
+      "id": "input-output-pairs",
+      "label": "Create a question-and-answer dataset based on a source text",
+      "value": [
+        "From the source text below, create a dataset with the following columns:",
+        "* `question`: Ask a set of unique questions related to the topic that a customer might ask. Questions should be relatively complex and specific enough to be addressed in a short answer.",
+        "* `context`: Copy the exact sentence(s) from the source text and surrounding details from where the answer can be derived.",
+        "* `truth`: Respond to the question with a clear, textbook quality answer that provides relevant details to fully address the question.",
+        "[COPY / PASTE CONTENT HERE] To add content, simply select everything from a webpage or document that you would like to extract content from (use Ctrl+A or Cmd+A), copy it (Ctrl+C or Cmd+C), and paste here (Ctrl+V or Cmd+V). Try it out!"
+      ]
+    },
+    {
       "id": "foo-users-fr",
       "label": "Users from Foo.io who live in France",
       "value": [
