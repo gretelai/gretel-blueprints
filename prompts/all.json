@@ -8,7 +8,7 @@
     {
       "id": "consumer-packaged-goods-nat-lang",
       "label": "Prompt creation",
-      "value": "Create a prompt that I can use to generate a realistic consumer packaged goods dataset"
+      "value": "Write a prompt for a large language model that I can use to generate a realistic consumer packaged goods dataset."
     },
     {
       "id": "customer-support-banking-nat-lang",
@@ -54,6 +54,17 @@
     }
   ],
   "tabular": [
+    {
+      "id": "input-output-pairs",
+      "label": "Create a question-and-answer dataset based on a source text",
+      "value": [
+        "From the source text below, create a dataset with the following columns:",
+        "* `question`: Ask a set of unique questions related to the topic that a customer might ask. Questions should be relatively complex and specific enough to be addressed in a short answer.",
+        "* `context`: Copy the exact sentence(s) from the source text and surrounding details from where the answer can be derived.",
+        "* `truth`: Respond to the question with a clear, textbook quality answer that provides relevant details to fully address the question.",
+        "[COPY / PASTE CONTENT HERE] To add content, simply select everything from a webpage or document that you would like to extract content from (use Ctrl+A or Cmd+A), copy it (Ctrl+C or Cmd+C), and paste here (Ctrl+V or Cmd+V). Try it out!"
+      ]
+    },
     {
       "id": "foo-users-fr",
       "label": "Create a mock dataset for users from Foo.io who live in France",
@@ -108,27 +119,12 @@
         "- City: city to be shipped",
         "- Country: country of city"
       ]
-    }, 
-    {
-      "id": "input-output-pairs",
-      "label": "Create question and answer data based on a source text",
-      "value": [
-        "From the source text below, create a dataset of 30 rows with the following columns:",
-        " - question: Unique questions about the source text. The question should have a short answer contained within the source text",
-        " - context: Copy the exact sentence(s) from the source text and surrounding details from where the answer can be derived",
-        " - truth: Respond to the question with a clear, textbook quality answer that provides relevant details to fully address the question",
-        " Source text:", 
-        "The Roman Empire was the post-Republican state of ancient Rome and is generally understood to mean the period and territory ruled by the Romans following Octavian's assumption of sole rule under the Principate in 27 BC. It included territory in Europe, North Africa, and Western Asia, and was ruled by emperors. The fall of the Western Roman Empire in 476 conventionally marks the end of classical antiquity and the beginning of the Middle Ages.",
-        "Rome had expanded its rule to most of the Mediterranean and beyond, but became severely destabilized in civil wars and political conflicts which culminated in the victory of Octavian over Mark Antony and Cleopatra at the Battle of Actium in 31 BC and the subsequent conquest of the Ptolemaic Kingdom in Egypt. In 27 BC the Roman Senate granted Octavian overarching power (imperium) and the new title of Augustus, marking his accession as the first Roman emperor of a monarchy with Rome as its sole capital. The vast Roman territories were organized in senatorial and imperial provinces.",
-        "The first two centuries of the Empire saw a period of unprecedented stability and prosperity known as the Pax Romana ('Roman Peace'). Rome reached its greatest territorial expanse under Trajan (AD 98–117); a period of increasing trouble and decline began under Commodus (180–192). In the 3rd century, the Empire underwent a crisis that threatened its existence, as the Gallic and Palmyrene Empires broke away from the Roman state, and a series of short-lived emperors led the Empire. It was reunified under Aurelian (r. 270–275). Diocletian set up two different imperial courts in the Greek East and Latin West in 286; Christians rose to power in the 4th century following the Edict of Milan. The imperial seat moved from Rome to Byzantium in 330, renamed Constantinople after Constantine the Great. The Migration Period, involving large invasions by Germanic peoples and by the Huns of Attila, led to the decline of the Western Roman Empire. With the fall of Ravenna to the Germanic Herulians and the deposition of Romulus Augustus in 476 by Odoacer, the Western Roman Empire finally collapsed. The Eastern Roman Empire survived for another millennium with Constantinople as its sole capital, until the city's fall in 1453.", 
-        "Due to the Empire's extent and endurance, its institutions and culture had a lasting influence on the development of language, religion, art, architecture, literature, philosophy, law, and forms of government in its territories. Latin evolved into the Romance languages, while Medieval Greek became the language of the East. The Empire's adoption of Christianity led to the formation of medieval Christendom. Roman and Greek art had a profound impact on the Italian Renaissance. Rome's architectural tradition served as the basis for Romanesque, Renaissance and Neoclassical architecture, and influenced Islamic architecture. The rediscovery of classical science and technology (which formed the basis for Islamic science) in medieval Europe led to the Scientific Renaissance and Scientific Revolution. Many modern legal systems, such as the Napoleonic Code, descend from Roman law, while Rome's republican institutions have influenced the Italian city-state republics of the medieval period, the early United States, and modern democratic republics."
-      ]
-    }, 
+    },
     {
       "id": "medical-diagnosis-prescription-dataset",
-      "label": "Create a medical patient dataset", 
+      "label": "Create a medical patient dataset",
       "value": [
-        "Generate 45 rows of medical patient data.", 
+        "Generate 45 rows of medical patient data.",
         "Include these columns:",
         "patient_id in the format ##########",
         "patient_name",
@@ -140,18 +136,18 @@
         "email",
         "ssn",
         "diagnosis column with corresponding prescription column"
-      ] 
-    }, 
+      ]
+    },
     {
       "id": "customer-bank-transaction-dataset",
-      "label": "Create a customer bank transaction dataset", 
+      "label": "Create a customer bank transaction dataset",
       "value": [
         "Generate 50 rows of customer bank transaction data. Include the following columns:",
         "- customer name",
         "- customer_id",
         "- transaction_date",
-        "- transaction_amount",   
-        "- transaction_type",     
+        "- transaction_amount",
+        "- transaction_type",
         "- transaction_category",
         "- account_balance"
       ]
