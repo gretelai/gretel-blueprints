@@ -199,6 +199,7 @@ def compute_actions_from_events(df, example_id_column, event_column):
                 row[event_column] > previous_count
             ):  # Event count has increased
                 df_sorted.at[index, "tmp"] = "increment"
+
             # Assuming event_column only increases or stays the same,
             # so no else case for decrement
 
