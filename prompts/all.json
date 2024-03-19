@@ -91,7 +91,7 @@
     },
     {
       "id": "texas-professionals",
-      "label": "Dataset of professionals based in Austin, Texas",
+      "label": "Professionals based in Austin, Texas",
       "value": [
         "Generate 40 rows of a mock dataset for professionals based in Austin, Texas.",
         "Each entry should have the following columns:",
