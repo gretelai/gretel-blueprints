@@ -4,7 +4,7 @@
 # using the column_name parameter
 
 schema_version: "1.0"
-name: "natural-language"
+name: "natural-language-gpt"
 models:
   - gpt_x:
       data_source: "__temp__"
