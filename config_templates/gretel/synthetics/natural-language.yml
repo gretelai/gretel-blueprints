@@ -4,11 +4,11 @@
 # using the column_name parameter
 
 schema_version: "1.0"
-name: "natural-language-gpt"
+name: "natural-language"
 models:
   - gpt_x:
       data_source: "__temp__"
-      pretrained_model: "meta-llama/Llama-2-7b-chat-hf"
+      pretrained_model: "mistralai/Mistral-7B-Instruct-v0.2"
       column_name: null
       params:
         batch_size: 4
@@ -16,7 +16,7 @@ models:
         weight_decay: 0.01
         warmup_steps: 100
         lr_scheduler: "linear"
-        learning_rate: 0.0002
+        learning_rate: 0.0001
       generate:
         num_records: 80
         maximum_text_length: 100
