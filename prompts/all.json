@@ -56,7 +56,7 @@
   "tabular": [
     {
       "id": "input-output-pairs",
-      "label": "Create a question-and-answer dataset based on a source text",
+      "label": "Question-and-truth pairs based on a source text",
       "value": [
         "From the source text below, create a dataset with the following columns:",
         "* `question`: Ask a set of unique questions related to the topic that a customer might ask. Questions should be relatively complex and specific enough to be addressed in a short answer.",
@@ -67,7 +67,7 @@
     },
     {
       "id": "foo-users-fr",
-      "label": "Create a mock dataset for users from Foo.io who live in France",
+      "label": "Users from Foo.io who live in France",
       "value": [
         "Generate 45 rows of a mock dataset for users from the Foo company based in France.",
         "Each user should have the following columns:",
@@ -81,17 +81,17 @@
     },
     {
       "id": "customer-support-banking",
-      "label": "Generate realistic customer support questions for an online banking system",
+      "label": "Customer support questions for a bank",
       "value": "Create a mock dataset: Columns: id, customer_support_question. Generate realistic customer support questions for an online banking system. Generate 30 rows of data."
     },
     {
       "id": "product-reviews",
-      "label": "Generate positive and negative reviews for a given list of products",
+      "label": "Positive and negative product reviews",
       "value": "Generate positive and negative reviews for common household products purchased online. Create 25 rows of data. Columns are: the product name, number of stars (1-5), review and customer id"
     },
     {
       "id": "texas-professionals",
-      "label": "Generate a mock dataset for professionals based in Austin, Texas",
+      "label": "Professionals based in Austin, Texas",
       "value": [
         "Generate 40 rows of a mock dataset for professionals based in Austin, Texas.",
         "Each entry should have the following columns:",
@@ -105,7 +105,7 @@
     },
     {
       "id": "consumer-packaged-goods",
-      "label": "Create a consumer packaged goods dataset",
+      "label": "Consumer packaged goods (CPG)",
       "value": [
         "Create 30 rows of a product dataset with the following columns:",
         "- ISBN: a realistic unique identifier",
@@ -122,7 +122,7 @@
     },
     {
       "id": "medical-diagnosis-prescription-dataset",
-      "label": "Create a medical patient dataset",
+      "label": "Electronic health records (EHR)",
       "value": [
         "Generate 45 rows of medical patient data.",
         "Include these columns:",
@@ -140,7 +140,7 @@
     },
     {
       "id": "customer-bank-transaction-dataset",
-      "label": "Create a customer bank transaction dataset",
+      "label": "Financial transactions",
       "value": [
         "Generate 50 rows of customer bank transaction data. Include the following columns:",
         "- customer name",
