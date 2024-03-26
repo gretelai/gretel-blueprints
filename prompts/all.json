@@ -152,5 +152,17 @@
         "- account_balance"
       ]
     }
+  ],
+  "augment-dataset": [
+    {
+      "id": "add-column",
+      "label": "New column",
+      "value": "Add a new column called [NAME] that follows these rules: [RULES]."
+    },
+    {
+      "id": "fill-missing-data",
+      "label": "Fill missing data",
+      "value": "Please fill any empty or missing values based on the csv data provided."
+    }
   ]
 }
