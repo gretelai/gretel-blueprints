@@ -5,7 +5,6 @@
       "title": "Generate synthetic tabular data",
       "description": "Create highly accurate synthetic tabular training data for ML models.",
       "cardType": "Console",
-      "imageName": "synthetics.png",
       "icon": "synthetics.png",
       "detailsFileName": "synthetic.md",
       "modelType": "synthetics",
@@ -29,20 +28,23 @@
       }
     },
     {
-      "gtmId": "use-case-relational-db",
-      "title": "Synthesize any normalized SQL database ",
-      "description": "Use Gretel Relational to synthesize or transform data in a relational database without losing foreign key relationships.",
-      "cardType": "Notebook",
-      "imageName": "relational-db.png",
+      "gtmId": "use-case-synthetic-database",
+      "title": "Synthesize a database",
+      "description": "Synthesize a database using Gretel Relational.",
+      "cardType": "Console",
       "icon": "relational-db.png",
-      "detailsFileName": "relational-db.md",
-      "button1": {
-        "label": "Synthesize in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/synthesize_relational_database.ipynb"
-      },
-      "button2": {
-        "label": "Transform in Google Colab",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/transform_relational_database.ipynb"
+      "modelType": "synthetics",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "sampleConnection": {
+        "id": "sample_mysql_telecom",
+        "type": "mysql",
+        "description": "Use this sample telecommunications database to synthesize an entirely new database of statistically equivalent records, while maintaining referential integrity.",
+        "tables": 5,
+        "records": 230988,
+        "fields": 29,
+        "trainingTime": "20 mins",
+        "bytes": 9537000
       }
     },
     {
@@ -51,7 +53,6 @@
       "description": "Safeguard sensitive information and uphold compliance standards by automatically removing private information from datasets.",
       "cardType": "Console",
       "tag": "New",
-      "imageName": "transform-v2.png",
       "icon": "transform.png",
       "modelType": "transform_v2",
       "modelCategory": "transform",
@@ -70,7 +71,6 @@
       "title": "Create provably private versions of sensitive data",
       "description": "Use Gretel Tabular DP, our graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
       "cardType": "Console",
-      "imageName": "tabular-dp.png",
       "icon": "tabular-dp.png",
       "modelType": "tabular_dp",
       "modelCategory": "synthetics",
@@ -89,7 +89,6 @@
       "title": "Generate natural language text using GPT",
       "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
       "cardType": "Console",
-      "imageName": "natural-lang-gpt.png",
       "icon": "natural-lang-gpt.png",
       "detailsFileName": "gpt-natural-language.md",
       "modelType": "gpt_x",
@@ -117,7 +116,6 @@
       "title": "Auto-tune synthetic data parameters",
       "description": "Automate hyperparameter sweeps to create the best synthetic data for your task.",
       "cardType": "Notebook",
-      "imageName": "benchmark.png",
       "icon": "benchmark.png",
       "detailsFileName": "gretel-tuner.md",
       "button1": {
@@ -134,7 +132,6 @@
       "title": "Generate high-quality time series data",
       "description": "Use DoppelGANger to create accurate and correlated time-series data.",
       "cardType": "Console",
-      "imageName": "timeseries.png",
       "icon": "timeseries.png",
       "modelType": "timeseries_dgan",
       "modelCategory": "synthetics",
@@ -149,11 +146,30 @@
       }
     },
     {
+      "gtmId": "use-case-transform-database",
+      "title": "Redact PII in a database",
+      "description": "Safeguard sensitive information and uphold compliance standards by automatically removing private information from your database.",
+      "cardType": "Console",
+      "icon": "relational-db.png",
+      "modelType": "transform_v2",
+      "modelCategory": "transform",
+      "defaultConfig": "config_templates/gretel/transform/transform_v2.yml",
+      "sampleConnection": {
+        "id": "sample_mysql_telecom",
+        "type": "mysql",
+        "description": "This telecommunications dataset contains names, addresses, social security numbers, and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
+        "tables": 5,
+        "records": 230988,
+        "fields": 29,
+        "trainingTime": "5 mins",
+        "bytes": 9537000
+      }
+    },
+    {
       "gtmId": "use-case-downstream-accuracy",
       "title": "Synthesize data + evaluate ML performance",
       "description": "Evaluate synthetic data performance on classification and regression models.",
       "cardType": "Console",
-      "imageName": "downstream-accuracy.png",
       "icon": "downstream-accuracy.png",
       "modelType": "evaluate",
       "modelCategory": "synthetics",
@@ -172,7 +188,6 @@
       "title": "Synthesize data at scale",
       "description": "Create large volumes of synthetic records for demos and scale testing.",
       "cardType": "Console",
-      "imageName": "amplify.png",
       "icon": "amplify.png",
       "modelType": "amplify",
       "modelCategory": "synthetics",
@@ -191,7 +206,6 @@
       "title": "Boost minority class data",
       "description": "Train a model on a dataset with sparse instances of the minority class, and conditionally generate additional minority samples.",
       "cardType": "Notebook",
-      "imageName": "minority-classes.png",
       "icon": "minority-classes.png",
       "detailsFileName": "boost-minority-class.md",
       "button1": {
@@ -208,7 +222,6 @@
       "title": "Synthesize highly dimensional data",
       "description": "Train a synthetic ACTGAN model designed to easily handle datasets with 50k+ records and 100+ columns.",
       "cardType": "Console",
-      "imageName": "high-dimensional.png",
       "icon": "high-dimensional.png",
       "modelType": "actgan",
       "modelCategory": "synthetics",
@@ -227,7 +240,6 @@
       "title": "Evaluate classification and regression",
       "description": "Validate the quality of synthetic data for classification/regression tasks.",
       "cardType": "Notebook",
-      "imageName": "downstream-accuracy.png",
       "icon": "downstream-accuracy.png",
       "detailsFileName": "evaluate-downstream-accuracy-notebook.md",
       "button1": {
@@ -244,7 +256,6 @@
       "title": "Automatic anonymization for GDPR ",
       "description": "Use our Transform and Synthetics generative AI-based models to anonymize sensitive data to meet GDPR standards.",
       "cardType": "Notebook",
-      "imageName": "gdpr-anonymization.png",
       "icon": "gdpr-anonymization.png",
       "detailsFileName": "gdpr-anonymization.md",
       "button1": {
@@ -261,7 +272,6 @@
       "title": "Benchmark multiple synthetic models",
       "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
       "cardType": "Notebook",
-      "imageName": "benchmark.png",
       "icon": "benchmark.png",
       "detailsFileName": "benchmark.md",
       "button1": {
@@ -278,7 +288,6 @@
       "title": "Generate text including song lyrics using GPT",
       "description": "Create natural language text data including song lyrics.",
       "cardType": "Console",
-      "imageName": "natural-lang-gpt.png",
       "icon": "natural-lang-gpt.png",
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
@@ -297,7 +306,6 @@
       "title": "Remove sensitive data from unstructured text",
       "description": "Use Named Entity Recognition (NER) to detect and redact personally identifiable data in free text fields.",
       "cardType": "Console",
-      "imageName": "transform-v1.png",
       "icon": "transform.png",
       "modelType": "transform",
       "modelCategory": "transform",
@@ -317,7 +325,6 @@
       "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
       "cardType": "Notebook",
       "tag": "Labs",
-      "imageName": "image-synthetics.png",
       "icon": "image-synthetics.png",
       "detailsFileName": "image-synthetics-preview.md",
       "button1": {
