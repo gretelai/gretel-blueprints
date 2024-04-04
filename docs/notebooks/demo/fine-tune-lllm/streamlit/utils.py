@@ -67,6 +67,7 @@ def initialize_gretel_client():
             # Display the essential calls in an expandable code block
             code_snippet = """
 # Code to initialize Gretel client
+# $ pip install gretel_client
 # Retrieve the API key from https://console.gretel.ai/users/me/key
 
 from gretel_client import Gretel
@@ -123,13 +124,23 @@ def create_doc_prompt(selected_document_types):
     document_types_examples = ", ".join(selected_document_types)
 
     DOCUMENT_TYPE_PROMPT = f"""
-    You are a data expert across the financial services, insurance, and banking verticals. Generate a diverse dataset of domains and detailed descriptions for various document types, including specific formats and schemas, as they relate to the customer journey within a Finance, Insurance, Fintech, or Banking company.
+    You are a data expert across the financial services, 
+    insurance, and banking verticals. Generate a diverse dataset of domains and
+    detailed descriptions for various document types, including specific formats and 
+    schemas, as they relate to the customer journey within a Finance, 
+    Insurance, Fintech, or Banking company.
 
     Columns:
     * document_type: choose from the following list ({document_types_examples}).
-    * document_description: A one-sentence detailed description of the kind of documents found in this domain, including specifics about format, common fields, and content type where applicable. Describe the schema, structure, and length of the data format that could be used as instructions to create a document from scratch.
+    * document_description: A one-sentence detailed description of the kind of 
+      documents found in this domain, including specifics about format, 
+      common fields, and content type where applicable. Describe the schema, 
+      structure, and length of the data format that could be used as instructions
+      to create a document from scratch.
 
-    Remember to customize fields and formats based on the specific requirements of each domain to accurately reflect the variety and complexity of documents in a SaaS company environment.
+    Remember to customize fields and formats based on the specific requirements
+    of each domain to accurately reflect the variety and complexity of documents 
+    in a SaaS company environment.
     """
 
     return DOCUMENT_TYPE_PROMPT.strip()
@@ -317,7 +328,7 @@ def generate_contextual_tags(
     # Descriptive text explaining the process and objective
     st.write(
         """
-    This is the final stage of data preparation before using Gretel to generate data at scale. In this step, we compile all of the following tags to create a "recipe" that can guide the LLM to generate highly diverse synthetic data at scale.
+    This is the final stage of data preparation before using Gretel to generate data at scale. In this step, we compile all of the following tags to create a "recipe" that can guide Gretel Navigator to generate highly diverse synthetic data at scale.
 
     For this dataset, we will guide each LLM generation with the following properties:
     - **Document type**
@@ -455,7 +466,8 @@ def generate_text2pii_data(tabllm, row, num_docs_per_context, min_text_length):
     failed_count = 0
 
     create_prompt = f"""
-Create a unique, comprehensive dataset entry as described below. Each entry should differ substantially in content, style, and perspective.
+Create a unique, comprehensive dataset entry as described below. 
+Each entry should differ substantially in content, style, and perspective.
 
 Dataset format: Two columns - 'document_type' and 'document_text'
 
@@ -607,10 +619,7 @@ create_prompt = """{create_prompt.strip()}"""
 # Generate initial documents
 results = navigator.generate(prompt=create_prompt, num_records={num_docs_per_context})
 
-# Example: Applying markup and filtering
-# This is a simplified example. Adjust according to your actual implementation.
 results['text_markup'] = results['document_text'].apply(lambda text: add_markup_to_text(text, pii_types_dict))
-filtered_results = results[results['document_text'].str.len() >= {min_text_length}]
     '''
 
     # Display the code snippet in Streamlit
