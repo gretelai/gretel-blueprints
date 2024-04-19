@@ -1,0 +1,30 @@
+base_config: tabular-actgan
+
+metric: synthetic_data_quality_score
+
+params:
+
+    generator_lr:
+        log_range: [0.00001, 0.001]
+
+    discriminator_lr:
+        log_range: [0.00001, 0.001]
+
+    embedding_dim:
+        choices: [64, 128, 256]
+
+    generator_dim:
+        choices:
+            - [512, 512, 512, 512]
+            - [1024, 1024]
+            - [1024, 1024, 1024]
+            - [2048, 2048]
+            - [2048, 2048, 2048]
+
+    discriminator_dim:
+        choices:
+            - [512, 512, 512, 512]
+            - [1024, 1024]
+            - [1024, 1024, 1024]
+            - [2048, 2048]
+            - [2048, 2048, 2048]
