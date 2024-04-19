@@ -17,4 +17,3 @@ params:
 
     reset_states:
         choices: [true, false]
-  
