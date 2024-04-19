@@ -1,69 +1,89 @@
+import math
+import uuid
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from gretel_client.tuner import BaseTunerMetric, MetricDirection
+from scipy.stats import wasserstein_distance
 
 
 def calculate_sample_length(desired_max_len=0):
-  """Calculates the sample length and adjusted maximum sequence length
-  based on the desired ratio.
+    """Calculates the sample length and adjusted maximum sequence length
+    based on the desired ratio.
 
-  Args:
-    target_ratio: An optional integer representing the desired ratio of 
-                  max_sequence_len to sample_len. Defaults to 15, but can be
-                  overridden.
-    desired_max_len: An optional integer representing the desired maximum sequence length. 
-                      If 0, only the target_ratio is used to calculate sample_length. 
-                      If provided, it is adjusted to be divisible by target_ratio 
-                      and then used to calculate sample_length.
+    Args:
+      target_ratio: An optional integer representing the desired ratio of
+                    max_sequence_len to sample_len. Defaults to 15, but can be
+                    overridden.
+      desired_max_len: An optional integer representing the desired maximum sequence length.
+                        If 0, only the target_ratio is used to calculate sample_length.
+                        If provided, it is adjusted to be divisible by target_ratio
+                        and then used to calculate sample_length.
 
-  Returns:
-    tuple: A tuple containing three values:
-      - The calculated sample length, which is the adjusted maximum sequence length divided by the optimal ratio.
-      - The adjusted maximum sequence length, which is the original desired maximum length adjusted
-        to be divisible by the optimal ratio.
-      - The optimal ratio used to calculate the sample length and adjusted maximum sequence length.
-  
-  """
+    Returns:
+      tuple: A tuple containing three values:
+        - The calculated sample length, which is the adjusted maximum sequence length divided by the optimal ratio.
+        - The adjusted maximum sequence length, which is the original desired maximum length adjusted
+          to be divisible by the optimal ratio.
+        - The optimal ratio used to calculate the sample length and adjusted maximum sequence length.
 
-  if desired_max_len > 0 and (not isinstance(desired_max_len, int) or desired_max_len <= 0):
-    raise ValueError("desired_max_len must be a positive integer if provided")
+    """
 
-  # Adjust desired_max_len based on adjusted_target_ratio
-  if desired_max_len < 25:
-    return 1, desired_max_len, desired_max_len
-  
-  # Consider potential target_ratios within the desired range (10-20)
-  potential_ratios = range(10, 21)
+    if desired_max_len > 0 and (
+        not isinstance(desired_max_len, int) or desired_max_len <= 0
+    ):
+        raise ValueError(
+            "desired_max_len must be a positive integer if provided"
+        )
 
-  # Calculate adjusted_max_len and distance for each potential_ratio
-  adjusted_max_lens = [math.ceil(desired_max_len / ratio) * ratio for ratio in potential_ratios]
-  distances = [abs(adjusted_max_len - desired_max_len) for adjusted_max_len in adjusted_max_lens]
+    # Adjust desired_max_len based on adjusted_target_ratio
+    if desired_max_len < 25:
+        return 1, desired_max_len, desired_max_len
 
-  # Find the index of the target_ratio with the smallest distance
-  closest_ratio_index = distances.index(min(distances))
+    # Consider potential target_ratios within the desired range (10-20)
+    potential_ratios = range(10, 21)
 
-  # Extract the closest target_ratio and adjusted_max_len
-  closest_target_ratio = potential_ratios[closest_ratio_index]
-  adjusted_max_len = adjusted_max_lens[closest_ratio_index]
+    # Calculate adjusted_max_len and distance for each potential_ratio
+    adjusted_max_lens = [
+        math.ceil(desired_max_len / ratio) * ratio
+        for ratio in potential_ratios
+    ]
+    distances = [
+        abs(adjusted_max_len - desired_max_len)
+        for adjusted_max_len in adjusted_max_lens
+    ]
 
-  # Calculate sample_length based on the closest target_ratio
-  sample_length = adjusted_max_len // closest_target_ratio
+    # Find the index of the target_ratio with the smallest distance
+    closest_ratio_index = distances.index(min(distances))
 
-  # Handle division by zero
-  if sample_length == 0:
-    sample_length = 1
+    # Extract the closest target_ratio and adjusted_max_len
+    closest_target_ratio = potential_ratios[closest_ratio_index]
+    adjusted_max_len = adjusted_max_lens[closest_ratio_index]
 
-  return sample_length, adjusted_max_len, closest_target_ratio
+    # Calculate sample_length based on the closest target_ratio
+    sample_length = adjusted_max_len // closest_target_ratio
+
+    # Handle division by zero
+    if sample_length == 0:
+        sample_length = 1
+
+    return sample_length, adjusted_max_len, closest_target_ratio
 
 
-def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[END]", attribute_columns=None):
+def pad_sequence(
+    group,
+    max_len,
+    example_id_column,
+    event_column,
+    pad_value="[END]",
+    attribute_columns=None,
+):
     """
     Pads sequences within a DataFrame group to a specified maximum length, using the mean value
     for padding numeric columns, a specific pad value for categorical columns, and the existing value
     for specified attribute columns.
-    
+
     Parameters:
     - group: DataFrame group (subset of a DataFrame usually obtained through groupby operation).
     - max_len: The desired maximum length for the sequences.
@@ -71,48 +91,56 @@ def pad_sequence(group, max_len, example_id_column, event_column, pad_value="[EN
     - event_column: Name of the column containing events.
     - pad_value: The value used for padding categorical columns. Defaults to "[END]".
     - attribute_columns: List of columns that should be padded with their existing value in the sequence.
-    
+
     Returns:
     - A DataFrame with sequences padded to the specified maximum length.
     """
     pad_size = max_len - len(group)
-    
+
     # Initialize padding dictionary with example_id_column and event_column
     padding_dict = {
         example_id_column: [group[example_id_column].iloc[0]] * pad_size,
         event_column: [pad_value] * pad_size,
     }
-    
+
     # Automatically determine other columns to pad if attribute_columns is not specified
     if attribute_columns is None:
         attribute_columns = []
-    
-    other_columns = group.columns.difference([example_id_column, event_column] + attribute_columns)
-    
+
+    other_columns = group.columns.difference(
+        [example_id_column, event_column] + attribute_columns
+    )
+
     # Separate numeric and categorical columns
-    numeric_cols = group[other_columns].select_dtypes(include=['number']).columns
-    categorical_cols = group[other_columns].select_dtypes(exclude=['number']).columns
-    
+    numeric_cols = (
+        group[other_columns].select_dtypes(include=["number"]).columns
+    )
+    categorical_cols = (
+        group[other_columns].select_dtypes(exclude=["number"]).columns
+    )
+
     # Pad numeric columns with their mean value
     for col in numeric_cols:
         mean_value = group[col].mean()
         padding_dict[col] = [mean_value] * pad_size
-    
+
     # Pad categorical columns with the pad_value
     for col in categorical_cols:
         padding_dict[col] = [pad_value] * pad_size
-    
+
     # Pad attribute columns with their existing value in the sequence
     for col in attribute_columns:
-        attribute_value = group[col].iloc[0]  # Assuming the column has a fixed value for each sequence
+        attribute_value = group[col].iloc[
+            0
+        ]  # Assuming the column has a fixed value for each sequence
         padding_dict[col] = [attribute_value] * pad_size
-    
+
     # Create padding DataFrame
     padding = pd.DataFrame(padding_dict, index=[0] * pad_size)
-    
+
     # Concatenate group with padding
     padded_group = pd.concat([group, padding], ignore_index=True)
-    
+
     return padded_group
 
 
@@ -130,15 +158,118 @@ def undo_padding(group, event_column, pad_value="[END]"):
     """
     # Identify rows that do not contain the padding value in the event_column
     is_not_padded = group[event_column] != pad_value
-    
+
     # Filter out the padded rows
     unpadded_group = group[is_not_padded]
-    
+
     return unpadded_group
 
 
+def compute_actions_from_events(df, example_id_column, event_column):
+    """
+    Computes the event for each row in the DataFrame based on the changes
+    in the event_column values for each unique identifier in example_id_column. The action
+    is determined as 'start', 'increment', or 'unchanged'.
+
+    Args:
+    - df (pd.DataFrame): The input DataFrame to process.
+    - example_id_column (str): The column name acting as the unique session identifier.
+    - event_column (str): The column name representing the event count.
+
+    Returns:
+    - pd.DataFrame: The DataFrame with an updated 'event_column' column.
+    """
+    # Sort df by example_id_column and event_column to ensure the sequence is correct
+    df_sorted = df.sort_values(
+        by=[example_id_column, event_column]
+    ).reset_index(drop=True)
+
+    df_sorted["tmp"] = None
+
+    previous_id = None
+    previous_count = None
+
+    for index, row in df_sorted.iterrows():
+        if row[example_id_column] != previous_id:  # New session
+            df_sorted.at[index, "tmp"] = "start"
+        else:  # Same session as previous row
+            if row[event_column] == previous_count:  # No change in event count
+                df_sorted.at[index, "tmp"] = "unchanged"
+            elif (
+                row[event_column] > previous_count
+            ):  # Event count has increased
+                df_sorted.at[index, "tmp"] = "increment"
+
+            # Assuming event_column only increases or stays the same,
+            # so no else case for decrement
+
+        # Update previous values for the next iteration
+        previous_id = row[example_id_column]
+        previous_count = row[event_column]
+
+    df_sorted[event_column] = df_sorted["tmp"]
+    df_sorted.drop("tmp", axis=1, inplace=True)
+
+    return df_sorted.reset_index(drop=True)
+
+
+def compute_events_from_actions(df, event_column, pad_value="[END]"):
+    """
+    Processes the given DataFrame by removing rows with a specified action in event_column set to 'pad_value',
+    initializing a new 'new_funnel_count' column, and updating it based on event_column values.
+
+    Args:
+    - df (pd.DataFrame): The input DataFrame to process.
+    - event_column (str): The name of the column containing event actions.
+
+    Returns:
+    - pd.DataFrame: The processed DataFrame with updated event_column column.
+    """
+
+    df_new = df[df[event_column] != pad_value].reset_index(drop=True).copy()
+
+    # Initialize the new_funnel_count column
+    df_new["tmp"] = 0
+
+    # Apply actions to calculate new_funnel_count
+    for i, row in df_new.iterrows():
+        if row[event_column] == "start":
+            df_new.at[i, "tmp"] = 1
+        elif row[event_column] == "increment" and i > 0:
+            df_new.at[i, "tmp"] = df_new.at[i - 1, "tmp"] + 1
+        elif row[event_column] == "unchanged" and i > 0:
+            df_new.at[i, "tmp"] = df_new.at[i - 1, "tmp"]
+
+    df_new[event_column] = df_new["tmp"]
+
+    df_new.drop("tmp", axis=1, inplace=True)
+
+    return df_new
+
+
+def generate_deterministic_uuid(value, column_name):
+    """
+    Generates a deterministic UUID for a given value and column name.
+
+    Parameters:
+    - value (str/int/float): The value to encode into the UUID.
+    - column_name (str): The name of the column as the UUID namespace.
+
+    Returns:
+    - str: A UUID string that is deterministic based on the value and column name.
+    """
+    NAMESPACE = uuid.uuid5(uuid.NAMESPACE_DNS, column_name)
+    value_str = str(value)
+    return str(uuid.uuid5(NAMESPACE, value_str))
+
+
 def plot_event_type_distribution(
-    df, event_column, df_ref=None, event_mapping=None, pad_value="[END]", output_file=None
+    df,
+    event_column,
+    df_ref=None,
+    event_mapping=None,
+    pad_value="[END]",
+    output_file=None,
 ):
     """
     Plots the distribution of event types for reference and optionally generated data.
@@ -156,7 +287,9 @@ def plot_event_type_distribution(
         df.loc[:, event_column] = df[event_column].map(event_mapping)
         if df_ref is not None:
             df_ref = df_ref.copy()
-            df_ref.loc[:, event_column] = df_ref[event_column].map(event_mapping)
+            df_ref.loc[:, event_column] = df_ref[event_column].map(
+                event_mapping
+            )
 
     # Filter out rows with event_column as '[END]'
     df_filtered = df[df[event_column] != pad_value]
@@ -224,7 +357,15 @@ def plot_event_type_distribution(
         plt.show()
 
 
-def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, event_mapping=None, pad_value="[END]", output_file=None):
+def plot_transition_matrices(
+    df,
+    event_column,
+    example_id_column,
+    df_ref=None,
+    event_mapping=None,
+    pad_value="[END]",
+    output_file=None,
+):
     """
     Plots transition probability matrices for reference and optionally generated data, with generic column handling.
 
@@ -243,37 +384,64 @@ def plot_transition_matrices(df, event_column, example_id_column, df_ref=None, e
     if event_mapping:
         df_copy[event_column] = df_copy[event_column].map(event_mapping)
         if df_ref_copy is not None:
-            df_ref_copy[event_column] = df_ref_copy[event_column].map(event_mapping)
-    
+            df_ref_copy[event_column] = df_ref_copy[event_column].map(
+                event_mapping
+            )
+
     # Filter out rows with event_column as '[END]'
     df_filtered = df_copy[df_copy[event_column] != pad_value]
     if df_ref is not None:
         df_ref_filtered = df_ref_copy[df_ref_copy[event_column] != pad_value]
 
     # Compute transition matrices using the filtered copies
-    transition_matrix = compute_transition_matrix(df_filtered, event_column, example_id_column)
+    transition_matrix = compute_transition_matrix(
+        df_filtered, event_column, example_id_column
+    )
     if df_ref is not None:
-        transition_matrix_ref = compute_transition_matrix(df_ref_filtered, event_column, example_id_column)
+        transition_matrix_ref = compute_transition_matrix(
+            df_ref_filtered, event_column, example_id_column
+        )
 
     # Plot setup
-    fig, axs = plt.subplots(nrows=1, ncols=2 if df_ref is not None else 1, figsize=(24 if df_ref is not None else 12, 10), sharey=True)
+    fig, axs = plt.subplots(
+        nrows=1,
+        ncols=2 if df_ref is not None else 1,
+        figsize=(24 if df_ref is not None else 12, 10),
+        sharey=True,
+    )
     if not isinstance(axs, np.ndarray):  # Adjust for a single subplot
         axs = [axs]
 
     # Plot the transition matrix
-    sns.heatmap(transition_matrix, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[0])
+    sns.heatmap(
+        transition_matrix,
+        annot=True,
+        fmt=".2f",
+        cmap="YlGnBu",
+        cbar=True,
+        linewidths=0.5,
+        ax=axs[0],
+    )
     if df_ref is not None:
-        axs[0].set_title('Synthetic Transition Probability Matrix')
+        axs[0].set_title("Synthetic Transition Probability Matrix")
     else:
-        axs[0].set_title('Transition Probability Matrix')
-    axs[0].set_xlabel('Next Event')
-    axs[0].set_ylabel('Current Event')
+        axs[0].set_title("Transition Probability Matrix")
+    axs[0].set_xlabel("Next Event")
+    axs[0].set_ylabel("Current Event")
 
     if df_ref is not None:
         # Plot the reference transition matrix
-        sns.heatmap(transition_matrix_ref, annot=True, fmt=".2f", cmap="YlGnBu", cbar=True, linewidths=.5, ax=axs[1])
-        axs[1].set_title('Reference Transition Probability Matrix')
-        axs[1].set_xlabel('Next Event')
+        sns.heatmap(
+            transition_matrix_ref,
+            annot=True,
+            fmt=".2f",
+            cmap="YlGnBu",
+            cbar=True,
+            linewidths=0.5,
+            ax=axs[1],
+        )
+        axs[1].set_title("Reference Transition Probability Matrix")
+        axs[1].set_xlabel("Next Event")
 
     plt.tight_layout()
 
@@ -293,7 +461,7 @@ def plot_event_sequences(
     num_sequences=5,
     event_mapping=None,
     pad_value="[END]",
-    output_file=None
+    output_file=None,
 ):
     """
     Plots event sequences for a specified number of randomly selected sequences from one or two DataFrames,
@@ -466,7 +634,9 @@ def is_strictly_subsequent(sequence):
     return ((diffs == 1) | (diffs == 0)).all()
 
 
-def get_strictly_subsequent_sequences(df, example_id_column, event_column, pad_value="[END]"):
+def get_strictly_subsequent_sequences(
+    df, example_id_column, event_column, pad_value="[END]"
+):
     """
     Filters sequences in a DataFrame for strict subsequency in events, calculating their prevalence.
 
@@ -485,8 +655,8 @@ def get_strictly_subsequent_sequences(df, example_id_column, event_column, pad_v
     - (pandas.DataFrame, float): A tuple containing a filtered DataFrame of valid sequences and the percentage
       of sequences that are strictly subsequent.
     """
-    df = undo_padding(df, event_column, pad_value=pad_value)
-    
+    df = df[~df.isin([pad_value]).any(axis=1)]
+
     valid_ids = []
     for identifier, group in df.groupby(example_id_column):
         if is_strictly_subsequent(group[event_column].reset_index(drop=True)):
@@ -494,7 +664,7 @@ def get_strictly_subsequent_sequences(df, example_id_column, event_column, pad_v
 
     percentage_valid = (len(valid_ids) / df[example_id_column].nunique()) * 100
     df_valid = df[df[example_id_column].isin(valid_ids)]
-    
+
     return df_valid, percentage_valid
 
 
@@ -555,7 +725,9 @@ def transition_matrix_distance(tm1, tm2):
     return distance
 
 
-def compute_transition_matrix(df, event_column, example_id_column, pad_value="[END]"):
+def compute_transition_matrix(
+    df, event_column, example_id_column, pad_value="[END]"
+):
     """
     Calculates the transition matrix for event sequences within each example ID.
 
@@ -582,7 +754,9 @@ def compute_transition_matrix(df, event_column, example_id_column, pad_value="[E
     return transition_matrix
 
 
-def calculate_histograms(df, sequence_id, feature_columns, bin_configs=[25, 50, 100, 150]):
+def calculate_histograms(
+    df, sequence_id, feature_columns, bin_configs=[25, 50, 100, 150]
+):
     """
     Calculate histograms for mean, min-max difference, median, and standard deviation for each numerical feature in the dataframe,
     across multiple bin configurations.
@@ -590,21 +764,49 @@ def calculate_histograms(df, sequence_id, feature_columns, bin_configs=[25, 50, 
     histograms = {}
     for feature in feature_columns:
         histograms[feature] = {config: {} for config in bin_configs}
-        feature_data = df.groupby(sequence_id)[feature].agg(['mean', lambda x: x.max() - x.min(), 'median', 'std'])
-        feature_data.rename(columns={'<lambda_0>': 'min_max_diff', 'median': 'medians', 'std': 'stdevs'}, inplace=True)
+        feature_data = df.groupby(sequence_id)[feature].agg(
+            ["mean", lambda x: x.max() - x.min(), "median", "std"]
+        )
+        feature_data.rename(
+            columns={
+                "<lambda_0>": "min_max_diff",
+                "median": "medians",
+                "std": "stdevs",
+            },
+            inplace=True,
+        )
 
         for bins in bin_configs:
             histograms[feature][bins] = {
-                'means': np.histogram(feature_data['mean'], bins=bins, density=True),
-                'min_max_diff': np.histogram(feature_data['min_max_diff'], bins=bins, density=True),
-                'medians': np.histogram(feature_data['medians'], bins=bins, density=True),
-                'stdevs': np.histogram(feature_data['stdevs'], bins=bins, density=True)
+                "means": np.histogram(
+                    feature_data["mean"], bins=bins, density=True
+                ),
+                "min_max_diff": np.histogram(
+                    feature_data["min_max_diff"], bins=bins, density=True
+                ),
+                "medians": np.histogram(
+                    feature_data["medians"], bins=bins, density=True
+                ),
+                "stdevs": np.histogram(
+                    feature_data["stdevs"], bins=bins, density=True
+                ),
             }
     return histograms
 
-def calculate_weighted_histogram_distance(histogramsA, histogramsB, bin_configs=[25, 50, 100, 150], weights={'means': 0.25, 'min_max_diff': 0.25, 'medians': 0.25, 'stdevs': 0.25}):
+
+def calculate_weighted_histogram_distance(
+    histogramsA,
+    histogramsB,
+    bin_configs=[25, 50, 100, 150],
+    weights={
+        "means": 0.25,
+        "min_max_diff": 0.25,
+        "medians": 0.25,
+        "stdevs": 0.25,
+    },
+):
     """
-    Calculate the average weighted sum of Wasserstein distances between corresponding histograms for mean, 
+    Calculate the average weighted sum of Wasserstein distances between corresponding histograms for mean,
     min-max difference, medians, and standard deviations across multiple bin configurations.
     """
     total_distances = []
@@ -612,13 +814,17 @@ def calculate_weighted_histogram_distance(histogramsA, histogramsB, bin_configs=
         bin_distance = 0
         for feature in histogramsA:
             feature_distance = sum(
-                weights[hist_type] * wasserstein_distance(histogramsA[feature][bins][hist_type][0], histogramsB[feature][bins][hist_type][0])
-                for hist_type in ['means', 'min_max_diff', 'medians', 'stdevs']
+                weights[hist_type]
+                * wasserstein_distance(
+                    histogramsA[feature][bins][hist_type][0],
+                    histogramsB[feature][bins][hist_type][0],
+                )
+                for hist_type in ["means", "min_max_diff", "medians", "stdevs"]
                 if hist_type in weights
             )
             bin_distance += feature_distance
         total_distances.append(bin_distance)
-    
+
     # Average the distances across bin configurations
     avg_distance = np.mean(total_distances) if total_distances else 0
     return avg_distance
@@ -633,7 +839,7 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
         num_samples=100,
         hist_weight=0.5,
         trans_weight=0.5,
-        pad_value="[END]"
+        pad_value="[END]",
     ):
         """
         Initializes the metric calculation class with reference data and parameters.
@@ -665,20 +871,32 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
         )
 
         # Compute and normalize histograms for the event column
-        ref_hist = self.reference_df[self.event_column].value_counts(
+        ref_df_no_padding = self.reference_df[
+            self.reference_df[self.event_column] != self.pad_value
+        ]
+        generated_data_no_padding = generated_data[
+            generated_data[self.event_column] != self.pad_value
+        ]
+        ref_hist = ref_df_no_padding[self.event_column].value_counts(
             normalize=True
         )
-        gen_hist = generated_data[self.event_column].value_counts(
+        gen_hist = generated_data_no_padding[self.event_column].value_counts(
             normalize=True
         )
         hist_distance = histogram_distance(ref_hist, gen_hist)
 
         # Compute normalized transition matrices
         ref_tm = compute_transition_matrix(
-            self.reference_df, self.event_column, self.example_id_column, pad_value=self.pad_value
+            self.reference_df,
+            self.event_column,
+            self.example_id_column,
+            pad_value=self.pad_value,
         )
         gen_tm = compute_transition_matrix(
-            generated_data, self.event_column, self.example_id_column, pad_value=self.pad_value
+            generated_data,
+            self.event_column,
+            self.example_id_column,
+            pad_value=self.pad_value,
         )
         tm_distance = transition_matrix_distance(ref_tm, gen_tm)
 
@@ -690,10 +908,22 @@ class EventTypeHistogramAndTransitionDistance(BaseTunerMetric):
 
 
 class TimeSeriesDistance(BaseTunerMetric):
-    def __init__(self, reference_df, example_id_column, feature_columns, num_samples=100):
+    def __init__(
+        self,
+        reference_df,
+        example_id_column,
+        feature_columns,
+        weights={
+            "means": 0.25,
+            "min_max_diff": 0.25,
+            "medians": 0.25,
+            "stdevs": 0.25,
+        },
+        num_samples=100,
+    ):
         """
         Initialize the metric calculation class with reference data and parameters.
-        
+
         Parameters:
         - reference_df (DataFrame): DataFrame containing the reference data.
         - example_id_column (str): The name of the column containing example IDs.
@@ -704,7 +934,10 @@ class TimeSeriesDistance(BaseTunerMetric):
         self.example_id_column = example_id_column
         self.feature_columns = feature_columns
         self.num_samples = num_samples
-        self.direction = MetricDirection.MINIMIZE  # Specify the direction for metric optimization.
+        self.weights = weights
+        self.direction = (
+            MetricDirection.MINIMIZE
+        )  # Specify the direction for metric optimization.
 
     def calculate_final_score(self, generated_df):
         """
@@ -712,10 +945,16 @@ class TimeSeriesDistance(BaseTunerMetric):
         the reference and generated data.
         """
         # Compute histogram distances
-        ref_hist = calculate_histograms(self.reference_df, self.example_id_column, self.feature_columns)
-        gen_hist = calculate_histograms(generated_df, self.example_id_column, self.feature_columns)
-        hist_distance = calculate_weighted_histogram_distance(ref_hist, gen_hist)
-        
+        ref_hist = calculate_histograms(
+            self.reference_df, self.example_id_column, self.feature_columns
+        )
+        gen_hist = calculate_histograms(
+            generated_df, self.example_id_column, self.feature_columns
+        )
+        hist_distance = calculate_weighted_histogram_distance(
+            ref_hist, gen_hist, weights=self.weights
+        )
+
         return hist_distance
 
     def __call__(self, model):

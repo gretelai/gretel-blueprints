@@ -8,7 +8,7 @@
     {
       "id": "consumer-packaged-goods-nat-lang",
       "label": "Prompt creation",
-      "value": "Create a prompt that I can use to generate a realistic consumer packaged goods dataset"
+      "value": "Write a prompt for a large language model that I can use to generate a realistic consumer packaged goods dataset."
     },
     {
       "id": "customer-support-banking-nat-lang",
@@ -55,10 +55,21 @@
   ],
   "tabular": [
     {
-      "id": "foo-users-fr",
-      "label": "Create a mock dataset for users from Foo.io who live in France",
+      "id": "input-output-pairs",
+      "label": "Question-and-truth pairs based on a source text",
       "value": [
-        "Generate a mock dataset for users from the Foo company based in France.",
+        "From the source text below, create a dataset with the following columns:",
+        "* `question`: Ask a set of unique questions related to the topic that a customer might ask. Questions should be relatively complex and specific enough to be addressed in a short answer.",
+        "* `context`: Copy the exact sentence(s) from the source text and surrounding details from where the answer can be derived.",
+        "* `truth`: Respond to the question with a clear, textbook quality answer that provides relevant details to fully address the question.",
+        "[COPY / PASTE CONTENT HERE] To add content, simply select everything from a webpage or document that you would like to extract content from (use Ctrl+A or Cmd+A), copy it (Ctrl+C or Cmd+C), and paste here (Ctrl+V or Cmd+V). Try it out!"
+      ]
+    },
+    {
+      "id": "foo-users-fr",
+      "label": "Users from Foo.io who live in France",
+      "value": [
+        "Generate 45 rows of a mock dataset for users from the Foo company based in France.",
         "Each user should have the following columns:",
         "* first_name: traditional French first names.",
         "* last_name: traditional French surnames. ",
@@ -70,19 +81,19 @@
     },
     {
       "id": "customer-support-banking",
-      "label": "Generate realistic customer support questions for an online banking system",
-      "value": "Create a mock dataset: Columns: id, customer_support_question. Generate realistic customer support questions for an online banking system."
+      "label": "Customer support questions for a bank",
+      "value": "Create a mock dataset: Columns: id, customer_support_question. Generate realistic customer support questions for an online banking system. Generate 30 rows of data."
     },
     {
       "id": "product-reviews",
-      "label": "Generate positive and negative reviews for a given list of products",
-      "value": "Generate positive and negative reviews for the following products: red travel mug, leather mary jane heels, unicorn LED night light. Columns include the product name, number of stars (1-5), review and customer id"
+      "label": "Positive and negative product reviews",
+      "value": "Generate positive and negative reviews for common household products purchased online. Create 25 rows of data. Columns are: the product name, number of stars (1-5), review and customer id"
     },
     {
       "id": "texas-professionals",
-      "label": "Generate a mock dataset for professionals based in Austin, Texas",
+      "label": "Professionals based in Austin, Texas",
       "value": [
-        "Generate a mock dataset for professionals based in Austin, Texas.",
+        "Generate 40 rows of a mock dataset for professionals based in Austin, Texas.",
         "Each entry should have the following columns:",
         "first_name: diverse first names from various cultural backgrounds.",
         "last_name: diverse last names representing a range of ethnicities.",
@@ -94,9 +105,9 @@
     },
     {
       "id": "consumer-packaged-goods",
-      "label": "Create a consumer packaged goods dataset",
+      "label": "Consumer packaged goods (CPG)",
       "value": [
-        "Create a product dataset with the following columns:",
+        "Create 30 rows of a product dataset with the following columns:",
         "- ISBN: a realistic unique identifier",
         "- Title: the title of a product that is listed online, like: 'Red Travel Mug'",
         "- Description",
@@ -108,6 +119,50 @@
         "- City: city to be shipped",
         "- Country: country of city"
       ]
+    },
+    {
+      "id": "medical-diagnosis-prescription-dataset",
+      "label": "Electronic health records (EHR)",
+      "value": [
+        "Generate 45 rows of medical patient data.",
+        "Include these columns:",
+        "patient_id in the format ##########",
+        "patient_name",
+        "street_address",
+        "city with US cities",
+        "state which corresponds to city",
+        "DOB",
+        "phone_number in the format ###-##-####",
+        "email",
+        "ssn",
+        "diagnosis column with corresponding prescription column"
+      ]
+    },
+    {
+      "id": "customer-bank-transaction-dataset",
+      "label": "Financial transactions",
+      "value": [
+        "Generate 50 rows of customer bank transaction data. Include the following columns:",
+        "- customer name",
+        "- customer_id",
+        "- transaction_date",
+        "- transaction_amount",
+        "- transaction_type",
+        "- transaction_category",
+        "- account_balance"
+      ]
+    }
+  ],
+  "augment-dataset": [
+    {
+      "id": "add-column",
+      "label": "New column",
+      "value": "Add a new column called [NAME] that follows these rules: [RULES]."
+    },
+    {
+      "id": "fill-missing-data",
+      "label": "Fill missing data",
+      "value": "Please fill any empty or missing values based on the csv data provided."
     }
   ]
 }
