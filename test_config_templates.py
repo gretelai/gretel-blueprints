@@ -5,7 +5,6 @@ import pytest
 import requests
 import yaml
 from gretel_client import ClientConfig, configure_session
-from gretel_client.gretel.config_setup import extract_model_config_section
 from gretel_client.projects import Project, tmp_project
 from gretel_client.projects.models import read_model_config
 
@@ -63,7 +62,9 @@ def test_tuner_configs(_config_file, project: Project):
     tuner_config_dict.pop("metric")
     base_config = tuner_config_dict.pop("base_config")
     config = read_model_config(f"synthetics/{base_config}")
-    model_type, model_config = extract_model_config_section(base_config)
+    model_type, model_config = next(
+        iter(read_model_config(f"synthetics/{base_config}")["models"][0].items())
+    )
 
     # update the model config with the tuner params
     for section, section_params in tuner_config_dict.items():
