@@ -1,3 +1,3 @@
-gretel-client>0.8.0
+gretel-client>=0.17.9
 pytest
 jsonschema
