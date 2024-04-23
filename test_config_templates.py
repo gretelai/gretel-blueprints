@@ -62,9 +62,7 @@ def test_tuner_configs(_config_file, project: Project):
     tuner_config_dict.pop("metric")
     base_config = tuner_config_dict.pop("base_config")
     config = read_model_config(f"synthetics/{base_config}")
-    model_type, model_config = next(
-        iter(read_model_config(f"synthetics/{base_config}")["models"][0].items())
-    )
+    model_config = next(iter(config["models"][0].values()))
 
     # update the model config with the tuner params
     for section, section_params in tuner_config_dict.items():
@@ -76,7 +74,6 @@ def test_tuner_configs(_config_file, project: Project):
                 model_config[section][name] = value
             else:
                 model_config[section].setdefault(name, value)
-    config["models"][0][model_type] = model_config
 
     # execute dry run via the API
     resp = requests.post(
