@@ -1,4 +1,4 @@
-base_config: tabular-lstm
+base_config: synthetics/tabular-lstm
 
 metric: synthetic_data_quality_score
 
@@ -6,13 +6,13 @@ params:
     rnn_units:
         int_range: [64, 1024, 64]
 
-    dropout_rate: 
+    dropout_rate:
         float_range: [0.1, 0.75]
-    
-    gen_temp: 
+
+    gen_temp:
         float_range: [0.8, 1.2]
 
-    learning_rate: 
+    learning_rate:
         log_range: [0.0005, 0.01]
 
     reset_states:
