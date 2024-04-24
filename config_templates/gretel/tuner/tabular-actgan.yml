@@ -1,4 +1,4 @@
-base_config: tabular-actgan
+base_config: synthetics/tabular-actgan
 
 metric: synthetic_data_quality_score
 
