@@ -61,7 +61,7 @@ def test_tuner_configs(_config_file, project: Project):
     tuner_config_dict = yaml.safe_load(open(_config_file).read())
     tuner_config_dict.pop("metric")
     base_config = tuner_config_dict.pop("base_config")
-    config = read_model_config(f"synthetics/{base_config}")
+    config = read_model_config(base_config)
     model_config = next(iter(config["models"][0].values()))
 
     # update the model config with the tuner params
