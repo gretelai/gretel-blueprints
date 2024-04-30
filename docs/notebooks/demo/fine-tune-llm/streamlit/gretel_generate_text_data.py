@@ -20,10 +20,10 @@ def main():
     )
 
     # Initialize Gretel client
-    gretel, tabllm = initialize_gretel_client()
+    gretel, navigator = initialize_gretel_client()
 
-    if gretel is not None and tabllm is not None:
-        create_document_types_section(gretel, tabllm)
+    if gretel is not None and navigator is not None:
+        create_document_types_section(gretel, navigator)
 
         if "document_types" in st.session_state:
             st.success("Document types section completed successfully.")
@@ -37,7 +37,7 @@ def main():
 
             if "contextual_tags" in st.session_state:
                 create_synthetic_dataset(
-                    tabllm, st.session_state.contextual_tags
+                    navigator, st.session_state.contextual_tags
                 )
 
 

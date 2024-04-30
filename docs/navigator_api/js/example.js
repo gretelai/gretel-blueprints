@@ -20,7 +20,7 @@ GRETEL_API_KEY={your key} node example.js --prompt="generate a users table" --nu
 GRETEL_API_KEY={your key} node example.js --getModels
 */
 
-import { getModels, createStructuredData } from "./streaming_tabllm.js";
+import { getModels, createStructuredData } from "./streaming_navigator.js";
 
 const main = async () => {
   // Check for API key

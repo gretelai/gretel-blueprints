@@ -228,18 +228,18 @@ def construct_prompt(topics, user_profiles, language):
     return PROMPT
 
 # Define a function to initialize the Gretel client
-def initialize_tabllm(gretel):
+def initialize_navigator(gretel):
     try:
-        tabllm = gretel.factories.initialize_inference_api("tabllm", backend_model="gretelai/tabular-v0c")
-        return tabllm
+        navigator = gretel.factories.initialize_inference_api("navigator", backend_model="gretelai/tabular-v0c")
+        return navigator
     except Exception as e:
         st.error(f"Error initializing Gretel client: {e}")
         return None
 
 def generate_synthetic_data(gretel, selected_topics, selected_user_profiles, selected_language, chunked_texts):
 
-    tabllm = initialize_tabllm(gretel)
-    print(tabllm)
+    navigator = initialize_navigator(gretel)
+    print(navigator)
 
     # Define the number of samples per document and generation parameters
     SAMPLES_PER_DOC = 4
@@ -257,7 +257,7 @@ def generate_synthetic_data(gretel, selected_topics, selected_user_profiles, sel
 
         for chunk in all_chunks:
             PROMPT = construct_prompt(selected_topics, selected_user_profiles, selected_language)
-            df_doc = tabllm.generate(f"{PROMPT}\n\n{chunk}", **GENERATE_PARAMS)
+            df_doc = navigator.generate(f"{PROMPT}\n\n{chunk}", **GENERATE_PARAMS)
             df = pd.concat([df, df_doc], ignore_index=True)
             
         # st.session_state['generated_data'] = df  # Save generated data in session state
