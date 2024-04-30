@@ -42,7 +42,7 @@ def initialize_gretel_client():
     Initialize the Gretel client with a user-provided API key.
 
     Returns:
-        tuple: (gretel, tabllm) if successful, otherwise (None, None).
+        tuple: (gretel, navigator) if successful, otherwise (None, None).
     """
     st.subheader("1. Initialization")
     st.write(
@@ -59,7 +59,7 @@ def initialize_gretel_client():
         try:
             # Assuming Gretel and its dependencies are imported and available
             gretel = Gretel(api_key=api_key)
-            tabllm = gretel.factories.initialize_inference_api(
+            navigator = gretel.factories.initialize_inference_api(
                 backend_model="gretelai/tabular-v0"
             )
             st.success("Gretel client initialized successfully.")
@@ -77,7 +77,7 @@ navigator = gretel.factories.initialize_inference_api(backend_model="gretelai/ta
             with st.expander("Show Initialization Code"):
                 st.code(code_snippet, language="python")
 
-            return gretel, tabllm
+            return gretel, navigator
         except Exception as e:
             st.error(f"Failed to initialize Gretel client: {e}")
     else:
@@ -146,12 +146,12 @@ def create_doc_prompt(selected_document_types):
     return DOCUMENT_TYPE_PROMPT.strip()
 
 
-def generate_document_descriptions(tabllm, prompt, num_document_types):
+def generate_document_descriptions(navigator, prompt, num_document_types):
     """
-    Generate descriptions for document types using Gretel's tabllm.generate based on a provided prompt.
+    Generate descriptions for document types using Gretel's navigator.generate based on a provided prompt.
 
     Args:
-        tabllm: Initialized Gretel tabllm client.
+        navigator: Initialized Gretel navigator client.
         prompt (str): The constructed prompt to guide the LLM generation process.
         num_document_types (int): The number of document descriptions to generate.
 
@@ -159,7 +159,7 @@ def generate_document_descriptions(tabllm, prompt, num_document_types):
         pd.DataFrame: DataFrame containing the generated document types and their descriptions.
     """
     # Generate document descriptions based on the provided prompt
-    df = tabllm.generate(prompt=prompt, num_records=num_document_types)
+    df = navigator.generate(prompt=prompt, num_records=num_document_types)
 
     return df
 
@@ -175,7 +175,7 @@ descriptions_df = navigator.generate(prompt=DOCUMENT_TYPE_PROMPT, num_records={n
     st.code(code_snippet, language="python")
 
 
-def create_document_types_section(gretel, tabllm):
+def create_document_types_section(gretel, navigator):
     st.subheader("2. Create Document Types")
     st.write(
         """
@@ -219,7 +219,7 @@ def create_document_types_section(gretel, tabllm):
         if st.button("Generate Document Type Descriptions"):
             with st.spinner("Generating document type descriptions..."):
                 doc_df = generate_document_descriptions(
-                    tabllm, doc_prompt, num_document_types
+                    navigator, doc_prompt, num_document_types
                 )
 
                 # Display the generated descriptions
@@ -446,7 +446,7 @@ def add_markup_to_text(text, pii_types_dict):
     return text
 
 
-def generate_text2pii_data(tabllm, row, num_docs_per_context, min_text_length):
+def generate_text2pii_data(navigator, row, num_docs_per_context, min_text_length):
     document_type = row["document_type"]
     document_description = row["document_description"]
     pii_types_dict = {}
@@ -489,7 +489,7 @@ Aim to create a rich, detailed, and engaging {document_type} that showcases crea
 
     while len(generated_records) < num_docs_per_context:
         # Generate initial documents
-        results = tabllm.generate(
+        results = navigator.generate(
             prompt=create_prompt, num_records=num_docs_per_context
         )
 
@@ -523,7 +523,7 @@ def display_generated_data(dataframe):
     st.write(dataframe)
 
 
-def create_synthetic_dataset(tabllm, contextual_tags_df):
+def create_synthetic_dataset(navigator, contextual_tags_df):
     st.subheader("4. Creating Synthetic Text-to-PII Dataset")
     st.write(
         """
@@ -551,7 +551,7 @@ def create_synthetic_dataset(tabllm, contextual_tags_df):
         with st.spinner("Generating text-to-pii data..."):
             for index, row in contextual_tags_df.iterrows():
                 result_df = generate_text2pii_data(
-                    tabllm, row, num_docs_per_context, min_text_length
+                    navigator, row, num_docs_per_context, min_text_length
                 )
                 results.append(result_df)
 
