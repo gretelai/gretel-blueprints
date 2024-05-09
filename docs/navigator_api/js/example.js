@@ -15,7 +15,9 @@ GRETEL_API_KEY={your key} node example.js --prompt="generate a users table"
 GRETEL_API_KEY={your key} node example.js --prompt="generate a users table" --num_rows=40 \
 --model_id=gretelai/tabular-v0c --temperature=0.9 --top_k=20 --top_p=0.6
 
-3. Get list of available inference models:
+3. Get output as JSON with --json=true. Defaults to a human-friendly output.
+
+4. Get list of available inference models:
 
 GRETEL_API_KEY={your key} node example.js --getModels
 */
@@ -42,37 +44,46 @@ const main = async () => {
     }
   }
 
+  // Make call to models list endpoint. Don't create an inference stream
   if (args.getModels) {
-    const models = getModels().then((models) => {
-      console.log(models);
+    getModels().then((results) => {
+      console.log(results);
     });
-  } else {
-    // Check for prompt
-    if (!args.prompt) {
-      console.log("Prompt must be specified with --prompt=");
-      return;
+    return;
+  }
+
+  // Check for prompt
+  if (!args.prompt) {
+    console.log("Prompt must be specified with --prompt=");
+    return;
+  }
+
+  const params = {
+    temperature: args.temperature,
+    top_k: args.top_k,
+    top_p: args.top_p,
+  };
+
+  let result = [];
+  const rowCallback = (row) => {
+    result = result.concat(row.table_data);
+  };
+
+  createStructuredData(
+    args.prompt,
+    rowCallback,
+    args.num_rows,
+    args.model_id,
+    params
+  ).then(() => {
+    if (args.json) {
+      console.log(JSON.stringify(result));
+    } else {
+      console.table(result);
     }
 
-    let params = {
-      temperature: args.temperature,
-      top_k: args.top_k,
-      top_p: args.top_p,
-    };
-
-    let result = [];
-    const rowCallback = (row) => {
-      result = result.concat(row.table_data);
-      console.table(result);
-    };
-
-    createStructuredData(
-      args.prompt,
-      rowCallback,
-      args.num_rows,
-      args.model_id,
-      params
-    );
-  }
+    console.log("---- Generation complete. ----");
+  });
 };
 
 main();
