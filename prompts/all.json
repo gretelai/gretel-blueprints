@@ -55,6 +55,20 @@
   ],
   "tabular": [
     {
+      "id": "foo-users-fr",
+      "label": "Users from Foo.io who live in France",
+      "value": [
+        "Generate a mock dataset for users from the Foo company based in France.",
+        "Each user should have the following columns:",
+        "* first_name: traditional French first names.",
+        "* last_name: traditional French surnames. ",
+        "* email: formatted as the first letter of their first name followed by their last name @foo.io (e.g., jdupont@foo.io)",
+        "* gender: Male/Female",
+        "* city: a city in France",
+        "* country: always 'France'."
+      ]
+    },
+    {
       "id": "input-output-pairs",
       "label": "Question-and-truth pairs based on a source text",
       "value": [
@@ -66,34 +80,20 @@
       ]
     },
     {
-      "id": "foo-users-fr",
-      "label": "Users from Foo.io who live in France",
-      "value": [
-        "Generate 45 rows of a mock dataset for users from the Foo company based in France.",
-        "Each user should have the following columns:",
-        "* first_name: traditional French first names.",
-        "* last_name: traditional French surnames. ",
-        "* email: formatted as the first letter of their first name followed by their last name @foo.io (e.g., jdupont@foo.io)",
-        "* gender: Male/Female",
-        "* city: a city in France",
-        "* country: always 'France'."
-      ]
-    },
-    {
       "id": "customer-support-banking",
       "label": "Customer support questions for a bank",
-      "value": "Create a mock dataset: Columns: id, customer_support_question. Generate realistic customer support questions for an online banking system. Generate 30 rows of data."
+      "value": "Create a mock dataset: Columns: id, customer_support_question. Generate realistic customer support questions for an online banking system."
     },
     {
       "id": "product-reviews",
       "label": "Positive and negative product reviews",
-      "value": "Generate positive and negative reviews for common household products purchased online. Create 25 rows of data. Columns are: the product name, number of stars (1-5), review and customer id"
+      "value": "Generate positive and negative reviews for common household products purchased online. Columns are: the product name, number of stars (1-5), review and customer id"
     },
     {
       "id": "texas-professionals",
       "label": "Professionals based in Austin, Texas",
       "value": [
-        "Generate 40 rows of a mock dataset for professionals based in Austin, Texas.",
+        "Generate a mock dataset for professionals based in Austin, Texas.",
         "Each entry should have the following columns:",
         "first_name: diverse first names from various cultural backgrounds.",
         "last_name: diverse last names representing a range of ethnicities.",
@@ -107,7 +107,7 @@
       "id": "consumer-packaged-goods",
       "label": "Consumer packaged goods (CPG)",
       "value": [
-        "Create 30 rows of a product dataset with the following columns:",
+        "Create a product dataset with the following columns:",
         "- ISBN: a realistic unique identifier",
         "- Title: the title of a product that is listed online, like: 'Red Travel Mug'",
         "- Description",
@@ -124,7 +124,7 @@
       "id": "medical-diagnosis-prescription-dataset",
       "label": "Electronic health records (EHR)",
       "value": [
-        "Generate 45 rows of medical patient data.",
+        "Generate a medical patient data.",
         "Include these columns:",
         "patient_id in the format ##########",
         "patient_name",
@@ -142,7 +142,7 @@
       "id": "customer-bank-transaction-dataset",
       "label": "Financial transactions",
       "value": [
-        "Generate 50 rows of customer bank transaction data. Include the following columns:",
+        "Generate customer bank transaction data. Include the following columns:",
         "- customer name",
         "- customer_id",
         "- transaction_date",
@@ -162,7 +162,7 @@
     {
       "id": "fill-missing-data",
       "label": "Fill missing data",
-      "value": "Please fill any empty or missing values based on the csv data provided."
+      "value": "Fill in empty, incomplete, or missing data for these columns [COLUMNS] that follow these rules: [RULES]."
     }
   ]
 }
