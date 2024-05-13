@@ -1,5 +1,3 @@
-# Default configuration for NAVFT.
-
 schema_version: "1.0"
 name: "navft-time-series" 
 models:
