@@ -67,6 +67,12 @@ const main = async () => {
   let result = [];
   const rowCallback = (row) => {
     result = result.concat(row.table_data);
+    console.log("\n--- logging intermediate results ---");
+    if (args.json) {
+      console.log(JSON.stringify(result));
+    } else {
+      console.table(result);
+    }
   };
 
   createStructuredData(
@@ -76,13 +82,14 @@ const main = async () => {
     args.model_id,
     params
   ).then(() => {
+    console.log("---- Generation complete, final data: ----");
     if (args.json) {
       console.log(JSON.stringify(result));
     } else {
       console.table(result);
     }
 
-    console.log("---- Generation complete. ----");
+    console.log("---- END. ----");
   });
 };
 
