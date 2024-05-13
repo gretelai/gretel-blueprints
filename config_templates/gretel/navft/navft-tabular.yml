@@ -1,0 +1,13 @@
+# Default configuration for NAVFT.
+
+schema_version: "1.0"
+name: "navft-tabular" 
+models:
+  - navft:
+      group_training_examples_by: null
+      order_training_examples_by: null
+      train_set_size: 1.0
+      generate:
+        num_records: 5000
+      params:
+        epochs: 1
