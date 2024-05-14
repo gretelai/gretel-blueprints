@@ -16,7 +16,9 @@ GRETEL_API_KEY={your key} node example.js --prompt="generate a users table"
 GRETEL_API_KEY={your key} node example.js --prompt="generate a users table" --num_rows=40 \
 --model_id=gretelai/tabular-v0c --temperature=0.9 --top_k=20 --top_p=0.6
 
-3. Get output as JSON with `--json=true`. Defaults to a human-readable output.
+3. Other options:
+* Get output as JSON with `--json=true`. Defaults to a human-readable output.
+* Show intermediate logging with --showIntermediateLogging=true
 
 4. Get list of available inference models:
 
@@ -68,12 +70,15 @@ const main = async () => {
 
   let result = [];
   const rowCallback = (row) => {
-    result = result.concat(row.table_data);
-    console.log("\n--- logging intermediate results ---");
-    if (args.json) {
-      console.log(JSON.stringify(result));
-    } else {
-      console.table(result);
+    result.push(row.table_data);
+
+    if (args.showIntermediateLogging) {
+      console.log("\n--- logging intermediate results ---");
+      if (args.json) {
+        console.log(JSON.stringify(result));
+      } else {
+        console.table(result);
+      }
     }
   };
 
@@ -85,6 +90,7 @@ const main = async () => {
     params
   ).then(() => {
     console.log("---- Generation complete, final data: ----");
+
     if (args.json) {
       console.log(JSON.stringify(result));
     } else {

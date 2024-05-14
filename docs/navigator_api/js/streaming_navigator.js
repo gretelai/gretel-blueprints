@@ -28,12 +28,23 @@ export const createStructuredData = async (
   model_id = "gretelai/tabular-v0",
   params
 ) => {
-  const createStream = async ({ model_id, num_rows, prompt, params }) => {
+  const createStream = async ({
+    model_id,
+    num_rows,
+    prompt,
+    table_data,
+    table_headers,
+    params,
+  }) => {
+    const ref_data = table_headers.length
+      ? { sample_data: { table_headers, table_data } }
+      : undefined;
     // Create stream
     const streamResponse = await _callAPI("v1/inference/tabular/stream", {
       model_id,
       num_rows,
       prompt,
+      ref_data,
       params: { ...DEFAULT_HYPERPARAMS, ...params },
     });
 
@@ -159,16 +170,11 @@ export const createStructuredData = async (
       rowHandler: newRowHandler,
     }).then(() => {
       if (numRowsLeft > 0 && results.length) {
-        const table_headers = results[0].table_headers;
-        const tableHeadersString = table_headers.join(", ");
-        const table_data = results.map((row) => row.table_data).flat();
-
         try {
           return recursiveStreaming({
             numRows: numRowsLeft,
-            prompt: `Generate more data like the following table with the columns: ${tableHeadersString}`,
-            table_headers,
-            table_data,
+            table_headers: results[0].table_headers,
+            table_data: results.map((row) => row.table_data).flat(),
           });
         } catch (err) {
           console.log("Error in recursive streaming", err);
