@@ -1,0 +1,11 @@
+# Default configuration for NAVFT.
+
+schema_version: "1.0"
+name: "navft-tabular" 
+models:
+  - atlas:
+      data_source: __tmp__
+      generate:
+        num_records: 5000
+      params:
+        epochs: 1

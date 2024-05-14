@@ -1,0 +1,12 @@
+schema_version: "1.0"
+name: "navft-time-series" 
+models:
+  - atlas:
+      data_source: __tmp__
+      group_training_examples_by: null
+      order_training_examples_by: null
+      num_records_per_example: auto
+      generate:
+        num_records: 5000
+      params:
+        epochs: 1
