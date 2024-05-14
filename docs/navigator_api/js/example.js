@@ -1,8 +1,9 @@
 /*
+
 REQUIREMENTS
 1. Requires Node v18 or later
 2. Must set GRETEL_API_KEY env variable before running. Get your key from https://console.gretel.ai/users/me/key
-3. Maximum of 50 rows. Use the standard /models batch API for more.
+3. Want to generate a LOT of data? Use the standard /models batch API..
 
 EXAMPLES
 
@@ -15,11 +16,12 @@ GRETEL_API_KEY={your key} node example.js --prompt="generate a users table"
 GRETEL_API_KEY={your key} node example.js --prompt="generate a users table" --num_rows=40 \
 --model_id=gretelai/tabular-v0c --temperature=0.9 --top_k=20 --top_p=0.6
 
-3. Get output as JSON with --json=true. Defaults to a human-friendly output.
+3. Get output as JSON with `--json=true`. Defaults to a human-readable output.
 
 4. Get list of available inference models:
 
 GRETEL_API_KEY={your key} node example.js --getModels
+
 */
 
 import { getModels, createStructuredData } from "./streaming_navigator.js";
