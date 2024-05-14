@@ -31,12 +31,12 @@ export const createStructuredData = async (
   const createStream = async ({
     model_id,
     num_rows,
-    prompt,
+    prompt = "",
     table_data,
     table_headers,
     params,
   }) => {
-    const ref_data = table_headers.length
+    const ref_data = table_headers?.length
       ? { sample_data: { table_headers, table_data } }
       : undefined;
     // Create stream

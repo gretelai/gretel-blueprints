@@ -70,7 +70,7 @@ const main = async () => {
 
   let result = [];
   const rowCallback = (row) => {
-    result.push(row.table_data);
+    result = result.concat(row.table_data);
 
     if (args.showIntermediateLogging) {
       console.log("\n--- logging intermediate results ---");
