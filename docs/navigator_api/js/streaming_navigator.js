@@ -1,5 +1,5 @@
+// -- constants and defaults --
 const MAX_ROWS_PER_STREAM = 50;
-const REQUEST_TIMEOUT_SEC = 60;
 const POLLING_DELAY = 500; // ms
 // Use reasonable default params if not set
 const DEFAULT_HYPERPARAMS = {
@@ -59,9 +59,8 @@ export const createStructuredData = async (
     );
 
     const iterateResult = await iterateResponse.json();
-
     if (iterateResponse.status !== 200) {
-      throw new Error(JSON.stringify(iterateResult));
+      throw new Error(iterateResult);
     } else {
       return iterateResult;
     }
@@ -76,7 +75,7 @@ export const createStructuredData = async (
       try {
         iterateResult = await readFromStream({ stream_id, num_rows, iterator });
       } catch (err) {
-        console.log(`Error iterating on stream: ${err}`);
+        console.log(`Error iterating on stream: ${JSON.stringify(err)}`);
         break;
       }
 
@@ -106,6 +105,8 @@ export const createStructuredData = async (
     model_id,
     num_rows,
     prompt,
+    table_headers,
+    table_data,
     params,
     rowHandler,
   }) => {
@@ -113,10 +114,12 @@ export const createStructuredData = async (
       model_id,
       num_rows,
       prompt,
+      table_headers,
+      table_data,
       params,
     });
 
-    await getDataFromStream({ stream_id, num_rows, rowHandler });
+    return await getDataFromStream({ stream_id, num_rows, rowHandler });
   };
 
   /**
@@ -160,14 +163,15 @@ export const createStructuredData = async (
     }).then(() => {
       if (numRowsLeft > 0 && results.length) {
         const table_headers = results[0].table_headers;
+        const tableHeadersString = table_headers.join(", ");
         const table_data = results.map((row) => row.table_data).flat();
-
+        const lastRows = table_data.slice(Math.max(table_data.length - 3, 0));
         try {
           return recursiveStreaming({
             numRows: numRowsLeft,
-            prompt: "Generate more data like the following table:",
+            prompt: `Generate more data like the following table with the columns: ${tableHeadersString}`,
             table_headers,
-            table_data: table_data.slice(Math.max(table_data.length - 3, 0)), // send just last 3 records
+            table_data: lastRows,
           });
         } catch (err) {
           console.log("Error in recursive streaming", err);
@@ -176,7 +180,7 @@ export const createStructuredData = async (
     });
   };
 
-  await recursiveStreaming({ numRows: num_rows, prompt });
+  return await recursiveStreaming({ numRows: num_rows, prompt });
 };
 
 /////////////////////////////////////////////
