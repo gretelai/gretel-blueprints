@@ -1,7 +1,7 @@
 schema_version: "1.0"
 name: "navft-time-series" 
 models:
-  - navft:
+  - atlas:
       data_source: __tmp__
       group_training_examples_by: null
       order_training_examples_by: null
