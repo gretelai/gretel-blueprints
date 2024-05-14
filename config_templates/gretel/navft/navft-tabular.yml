@@ -4,9 +4,7 @@ schema_version: "1.0"
 name: "navft-tabular" 
 models:
   - navft:
-      group_training_examples_by: null
-      order_training_examples_by: null
-      train_set_size: 1.0
+      data_source: __tmp__
       generate:
         num_records: 5000
       params:

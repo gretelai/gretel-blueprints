@@ -2,11 +2,10 @@ schema_version: "1.0"
 name: "navft-time-series" 
 models:
   - navft:
+      data_source: __tmp__
       group_training_examples_by: null
       order_training_examples_by: null
-      train_set_size: 1.0
-      time_series:
-        num_records_per_example: auto
+      num_records_per_example: auto
       generate:
         num_records: 5000
       params:
