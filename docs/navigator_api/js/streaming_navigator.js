@@ -31,7 +31,7 @@ export const createStructuredData = async (
   const createStream = async ({
     model_id,
     num_rows,
-    prompt = "",
+    prompt,
     table_data,
     table_headers,
     params,
@@ -173,6 +173,7 @@ export const createStructuredData = async (
         try {
           return recursiveStreaming({
             numRows: numRowsLeft,
+            prompt,
             table_headers: results[0].table_headers,
             table_data: results.map((row) => row.table_data).flat(),
           });
