@@ -122,10 +122,8 @@ export const createStructuredData = async (
   };
 
   /**
-   *
    * Since each individual stream allows a MAX of 50 rows, create multiple streams as needed,
-   * passing partial results of the previous stream into the next stream.
-   *
+   * passing results of the previous stream into the next stream.
    */
   const recursiveStreaming = async ({
     numRows,
@@ -164,14 +162,13 @@ export const createStructuredData = async (
         const table_headers = results[0].table_headers;
         const tableHeadersString = table_headers.join(", ");
         const table_data = results.map((row) => row.table_data).flat();
-        const lastRows = table_data.slice(Math.max(table_data.length - 3, 0));
 
         try {
           return recursiveStreaming({
             numRows: numRowsLeft,
             prompt: `Generate more data like the following table with the columns: ${tableHeadersString}`,
             table_headers,
-            table_data: lastRows,
+            table_data,
           });
         } catch (err) {
           console.log("Error in recursive streaming", err);
