@@ -8,8 +8,7 @@ const DEFAULT_HYPERPARAMS = {
   top_p: 0.9,
 };
 
-const BASE_URL = "https://api-dev.gretel.cloud/";
-// const BASE_URL = "https://api.gretel.cloud/";
+const BASE_URL = "https://api.gretel.cloud/";
 
 ///////////////////////////////////////////////
 // Generates structured data given a prompt //
