@@ -318,19 +318,6 @@
         "trainingTime": "< 1 min",
         "bytes": 65300
       }
-    },
-    {
-      "gtmId": "use-case-image-synthetics",
-      "title": "[EARLY ACCESS] Generate custom images",
-      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
-      "cardType": "Notebook",
-      "tag": "Labs",
-      "icon": "image-synthetics.png",
-      "detailsFileName": "image-synthetics-preview.md",
-      "button1": {
-        "label": "Launch Gretel Labs",
-        "link": "https://image-synthetics-preview.gretel.cloud/"
-      }
     }
   ]
 }
