@@ -1,8 +1,9 @@
 /*
+
 REQUIREMENTS
 1. Requires Node v18 or later
 2. Must set GRETEL_API_KEY env variable before running. Get your key from https://console.gretel.ai/users/me/key
-3. Maximum of 50 rows. Use the standard /models batch API for more.
+3. Want to generate a LOT of data? Use the standard /models batch API..
 
 EXAMPLES
 
@@ -15,9 +16,14 @@ GRETEL_API_KEY={your key} node example.js --prompt="generate a users table"
 GRETEL_API_KEY={your key} node example.js --prompt="generate a users table" --num_rows=40 \
 --model_id=gretelai/tabular-v0c --temperature=0.9 --top_k=20 --top_p=0.6
 
-3. Get list of available inference models:
+3. Other options:
+* Get output as JSON with `--json=true`. Defaults to a human-readable output.
+* Show intermediate logging with --showIntermediateLogging=true
+
+4. Get list of available inference models:
 
 GRETEL_API_KEY={your key} node example.js --getModels
+
 */
 
 import { getModels, createStructuredData } from "./streaming_navigator.js";
@@ -42,37 +48,57 @@ const main = async () => {
     }
   }
 
+  // Make call to models list endpoint. Don't create an inference stream
   if (args.getModels) {
-    const models = getModels().then((models) => {
-      console.log(models);
+    getModels().then((results) => {
+      console.log(results);
     });
-  } else {
-    // Check for prompt
-    if (!args.prompt) {
-      console.log("Prompt must be specified with --prompt=");
-      return;
+    return;
+  }
+
+  // Check for prompt
+  if (!args.prompt) {
+    console.log("Prompt must be specified with --prompt=");
+    return;
+  }
+
+  const params = {
+    temperature: args.temperature,
+    top_k: args.top_k,
+    top_p: args.top_p,
+  };
+
+  let result = [];
+  const rowCallback = (row) => {
+    result = result.concat(row.table_data);
+
+    if (args.showIntermediateLogging) {
+      console.log("\n--- logging intermediate results ---");
+      if (args.json) {
+        console.log(JSON.stringify(result));
+      } else {
+        console.table(result);
+      }
+    }
+  };
+
+  createStructuredData(
+    args.prompt,
+    rowCallback,
+    args.num_rows,
+    args.model_id,
+    params
+  ).then(() => {
+    console.log("---- Generation complete, final data: ----");
+
+    if (args.json) {
+      console.log(JSON.stringify(result));
+    } else {
+      console.table(result);
     }
 
-    let params = {
-      temperature: args.temperature,
-      top_k: args.top_k,
-      top_p: args.top_p,
-    };
-
-    let result = [];
-    const rowCallback = (row) => {
-      result = result.concat(row.table_data);
-      console.table(result);
-    };
-
-    createStructuredData(
-      args.prompt,
-      rowCallback,
-      args.num_rows,
-      args.model_id,
-      params
-    );
-  }
+    console.log("---- END. ----");
+  });
 };
 
 main();
