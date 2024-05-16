@@ -230,7 +230,7 @@ def construct_prompt(topics, user_profiles, language):
 # Define a function to initialize the Gretel client
 def initialize_navigator(gretel):
     try:
-        navigator = gretel.factories.initialize_inference_api("navigator", backend_model="gretelai/tabular-v0c")
+        navigator = gretel.factories.initialize_inference_api("navigator", backend_model="gretelai-google/gemini-pro")
         return navigator
     except Exception as e:
         st.error(f"Error initializing Gretel client: {e}")
