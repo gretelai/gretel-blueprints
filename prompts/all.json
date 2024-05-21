@@ -158,11 +158,6 @@
       "id": "add-column",
       "label": "New column",
       "value": "Add a new column called [NAME] that follows these rules: [RULES]."
-    },
-    {
-      "id": "fill-missing-data",
-      "label": "Fill missing data",
-      "value": "Fill in empty, incomplete, or missing data for these columns [COLUMNS] that follow these rules: [RULES]."
     }
   ]
 }
