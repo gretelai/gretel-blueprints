@@ -14,7 +14,7 @@ GRETEL_API_KEY={your key} node example.js --prompt="generate a users table"
 2. Using advanced settings:
 
 GRETEL_API_KEY={your key} node example.js --prompt="generate a users table" --num_rows=40 \
---model_id=gretelai/tabular-v0c --temperature=0.9 --top_k=20 --top_p=0.6
+--model_id=gretelai-google/gemini-pro --temperature=0.9 --top_k=20 --top_p=0.6
 
 3. Other options:
 * Get output as JSON with `--json=true`. Defaults to a human-readable output.

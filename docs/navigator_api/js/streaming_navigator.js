@@ -25,7 +25,7 @@ export const createStructuredData = async (
   prompt,
   rowCallback,
   num_rows = 10,
-  model_id = "gretelai/tabular-v0",
+  model_id = "gretelai/auto",
   params
 ) => {
   const createStream = async ({

@@ -38,7 +38,7 @@ To submit a prompt to Navigator, make the following call. This example uses one 
 POST https://api.gretel.cloud/v1/inference/tabular/stream
 
 {
-  "model_id": "gretelai/tabular-v0",
+  "model_id": "gretelai/auto",
   "prompt": "Generate a mock dataset for users from the Foo company based in France.\n  Each user should have the following columns: \n  * first_name: traditional French first names. \n  * last_name: traditional French surnames. \n  * email: formatted as the first letter of their first name followed by their last name @foo.io (e.g., jdupont@foo.io).\n  * gender: Male/Female. \n  * city: a city in France. \n  * country: always 'France'.",
   "params": {
     "temperature": 0.7,

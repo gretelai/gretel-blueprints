@@ -60,7 +60,7 @@ def initialize_gretel_client():
             # Assuming Gretel and its dependencies are imported and available
             gretel = Gretel(api_key=api_key)
             navigator = gretel.factories.initialize_inference_api(
-                backend_model="gretelai/tabular-v0"
+                backend_model="gretelai/auto"
             )
             st.success("Gretel client initialized successfully.")
 
@@ -72,7 +72,7 @@ def initialize_gretel_client():
 
 from gretel_client import Gretel
 gretel = Gretel(api_key="prompt")
-navigator = gretel.factories.initialize_inference_api(backend_model="gretelai/tabular-v0")
+navigator = gretel.factories.initialize_inference_api(backend_model="gretelai/auto")
             """
             with st.expander("Show Initialization Code"):
                 st.code(code_snippet, language="python")
