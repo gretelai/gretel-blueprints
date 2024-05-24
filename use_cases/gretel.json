@@ -7,25 +7,13 @@
       "cardType": "Notebook",
       "icon": "natural-lang-gpt.png",
       "detailsFileName": "navigator.md",
-      "button1": {
-        "label": "Go to Playground",
+      "button1": {  
+        "label": "Go to Navigator Playground",
         "link": "https://console.gretel.ai/playground"
       },
       "button2": {
-        "label": "Integrate the Navigator streaming SDK",
+        "label": "Integrate the Navigator SDK",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/navigator-real-time-inference.ipynb"
-      },
-      "button3": {
-        "label": "Generate data at scale using the batch jobs SDK", 
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/navigator_basic_sdk_examples.ipynb"
-      }, 
-      "button4": {
-        "label": "Augment LLM training with synthetic data", 
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/navigator_augmenting_llm_training_data.ipynb"
-      },
-      "button5": {
-        "label": "Create diverse training data for RAG applications",
-        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/rag/gretel-webinar-navigator-rag.ipynb"
       }
     },
     {
