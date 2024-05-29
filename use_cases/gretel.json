@@ -9,7 +9,7 @@
       "detailsFileName": "navigator.md",
       "button1": {  
         "label": "Go to Navigator Playground",
-        "link": "https://console.gretel.ai/playground"
+        "link": "/playground"
       },
       "button2": {
         "label": "Integrate the Navigator SDK",
