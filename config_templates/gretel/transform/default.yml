@@ -23,5 +23,6 @@ models:
             update:
               - condition: column.entity is in globals.classify.entities
                 value: column.entity | fake
+                fallback_value: '"<" ~ column.entity ~ ">"'
               - type: text
                 value: this | fake_entities
