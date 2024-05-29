@@ -2,18 +2,18 @@
   "cards": [
     {
       "gtmId": "use-case-navigator",
-      "title": "Navigator",
-      "description": "Edit, augment, and create data from scratch using a prompt.",
+      "title": "Generate data from a prompt",
+      "description": "Use Navigator to edit, augment, and create data from scratch.",
       "cardType": "Notebook",
       "icon": "navigator.png",
       "detailsFileName": "navigator.md",
       "button1": {  
         "label": "Go to Navigator Playground",
-        "link": "/playground"
+        "link": "/navigator"
       },
       "button2": {
         "label": "Integrate the Navigator SDK",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/navigator-real-time-inference.ipynb"
+        "link": "https://docs.gretel.ai/create-synthetic-data/models/navigator/examples"
       }
     },
     {

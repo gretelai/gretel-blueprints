@@ -1,4 +1,4 @@
-![Edit, augment, or create data from a prompt](https://blueprints.gretel.cloud/use_cases/images/natural-language-gpt.png "Generate data from scratch")
+![Use Navigator to edit, augment, and create data from scratch.](https://blueprints.gretel.cloud/use_cases/images/natural-language-gpt.png "Generate data from scratch")
 
 Want to expertly navigate your data? With Navigator, you can create new datasets or augment your existing datasets based on a text prompt. 
 
