@@ -5,7 +5,7 @@
       "title": "Navigator",
       "description": "Edit, augment, and create data from scratch using a prompt.",
       "cardType": "Notebook",
-      "icon": "natural-lang-gpt.png",
+      "icon": "navigator.png",
       "detailsFileName": "navigator.md",
       "button1": {  
         "label": "Go to Navigator Playground",
