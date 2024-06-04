@@ -5,6 +5,7 @@
       "title": "Generate data from a prompt",
       "description": "Use Navigator to edit, augment, and create data from scratch.",
       "cardType": "Notebook",
+      "icon": "navigator.png",
       "detailsFileName": "navigator.md",
       "button1": {  
         "label": "Go to Navigator Playground",
