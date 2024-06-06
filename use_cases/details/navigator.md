@@ -1,4 +1,4 @@
-![Use Navigator to edit, augment, and create data from scratch.](https://blueprints.gretel.cloud/use_cases/images/natural-language-gpt.png "Generate data from scratch")
+![Use Navigator to edit, augment, and create data from scratch.](https://blueprints.gretel.cloud/use_cases/images/navigator.png "Generate data from scratch")
 
 Gretel Navigator is an advanced compound AI system designed to help you create and enhance high-quality tabular datasets effortlessly. With just a text prompt, you can generate new datasets or augment existing ones, making complex data generation faster and more efficient.
 
