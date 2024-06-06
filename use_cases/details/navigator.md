@@ -1,10 +1,8 @@
 ![Use Navigator to edit, augment, and create data from scratch.](https://blueprints.gretel.cloud/use_cases/images/natural-language-gpt.png "Generate data from scratch")
 
-Want to expertly navigate your data? With Navigator, you can create new datasets or augment your existing datasets based on a text prompt. 
+Gretel Navigator is an advanced compound AI system designed to help you create and enhance high-quality tabular datasets effortlessly. With just a text prompt, you can generate new datasets or augment existing ones, making complex data generation faster and more efficient.
 
-Navigator is Gretel's first compound AI system that leverages multiple LLMs and agentic tools in order to deliver high quality, highly realistc tabular data at enterprise scale, all from just a prompt or sample data. 
+Navigator combines multiple large language models (LLMs) and agentic tools to produce realistic and diverse tabular data at enterprise scale. Popular use cases include: generating data for RAG (retrieval augmented generation) evaluation, adding summary or predictive columns to existing datasets, and generating demo data. 
 
-Popular use cases include: generating data for RAG (retrieval augmented generation) evaluation, adding summary or predictive columns to existing datasets, and generating demo data.  
-
-Try Navigator in the console, or check out one of our advanced notebook examples.
+Try Navigator in the Console, or check out one of our advanced notebook examples.
 
