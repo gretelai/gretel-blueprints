@@ -1,7 +1,8 @@
-import streamlit as st
-import pandas as pd
-import random
 import itertools
+import random
+
+import pandas as pd
+import streamlit as st
 from faker import Faker
 from gretel_client import Gretel
 
@@ -24,9 +25,7 @@ def display_header(logo_path: str) -> None:
     banner_line_html = (
         '<div class="banner-line"></div>'  # Using the CSS class for styling
     )
-    scaled_svg = (
-        f"""<div class="logo-div">{svg_logo}</div>{banner_line_html}"""
-    )
+    scaled_svg = f"""<div class="logo-div">{svg_logo}</div>{banner_line_html}"""
     st.markdown(scaled_svg, unsafe_allow_html=True)
 
 
@@ -59,9 +58,7 @@ def initialize_gretel_client():
         try:
             # Assuming Gretel and its dependencies are imported and available
             gretel = Gretel(api_key=api_key)
-            navigator = gretel.factories.initialize_inference_api(
-                backend_model="gretelai/auto"
-            )
+            navigator = gretel.factories.initialize_navigator_api()
             st.success("Gretel client initialized successfully.")
 
             # Display the essential calls in an expandable code block
@@ -72,7 +69,7 @@ def initialize_gretel_client():
 
 from gretel_client import Gretel
 gretel = Gretel(api_key="prompt")
-navigator = gretel.factories.initialize_inference_api(backend_model="gretelai/auto")
+navigator = gretel.factories.initialize_navigator_api(backend_model="gretelai/auto")
             """
             with st.expander("Show Initialization Code"):
                 st.code(code_snippet, language="python")
@@ -187,12 +184,8 @@ def create_document_types_section(gretel, navigator):
     )
 
     # Document Type Selection and Customization
-    document_types = (
-        get_document_types()
-    )  # Assuming this function is defined elsewhere
-    selected_document_types = st.multiselect(
-        "Select document types", document_types
-    )
+    document_types = get_document_types()  # Assuming this function is defined elsewhere
+    selected_document_types = st.multiselect("Select document types", document_types)
 
     # Optionally, allow adding a custom tag
     custom_tag = st.text_input("Add a custom document type (optional)")
@@ -227,9 +220,7 @@ def create_document_types_section(gretel, navigator):
 
                 # Update the session state with generated document types and descriptions
                 st.session_state.document_types = dict(
-                    zip(
-                        doc_df["document_type"], doc_df["document_description"]
-                    )
+                    zip(doc_df["document_type"], doc_df["document_description"])
                 )
         else:
             st.warning("Please select at least one document type.")
@@ -319,9 +310,7 @@ def configure_pii_generator():
     return pii_generator
 
 
-def generate_contextual_tags(
-    selected_pii_types, document_type_dict, pii_generator
-):
+def generate_contextual_tags(selected_pii_types, document_type_dict, pii_generator):
     # Header for the section
     st.subheader("3. Generate Contextual Tags")
 
@@ -379,9 +368,7 @@ def generate_contextual_tags(
         list(language_options.keys()),
         default=["english_us"],
     )
-    language_dict = {
-        lang: language_options[lang] for lang in selected_languages
-    }
+    language_dict = {lang: language_options[lang] for lang in selected_languages}
 
     # Logic to generate sampled contextual tag data
     if st.button("Generate Contextual Tags"):
@@ -392,9 +379,7 @@ def generate_contextual_tags(
             # Select a random number of PII types between 1 and 3
             num_pii_types = random.randint(1, max_pii_types)
             print(pii_values_count)
-            pii_types = random.sample(
-                list(selected_pii_types.keys()), num_pii_types
-            )
+            pii_types = random.sample(list(selected_pii_types.keys()), num_pii_types)
 
             # Initialize lists to hold the selected PII types and their corresponding values
             selected_pii_types_list = []
@@ -432,9 +417,7 @@ def generate_contextual_tags(
         st.session_state.contextual_tags = contextual_tags_df
 
         # Display the number of contextual tag permutations created and a preview of the DataFrame
-        st.write(
-            f"Created {len(contextual_tags_df)} contextual tag permutations"
-        )
+        st.write(f"Created {len(contextual_tags_df)} contextual tag permutations")
         st.dataframe(contextual_tags_df.head(10))
 
 
@@ -566,9 +549,7 @@ def create_synthetic_dataset(navigator, contextual_tags_df):
         st.write(final_results_styled.to_html(), unsafe_allow_html=True)
 
 
-def show_synthetic_data_generation_code(
-    row, num_docs_per_context, min_text_length
-):
+def show_synthetic_data_generation_code(row, num_docs_per_context, min_text_length):
     """
     Display the code used for generating document text based on PII data in Streamlit.
 
@@ -579,8 +560,7 @@ def show_synthetic_data_generation_code(
     """
     # Reconstructing the pii_types_dict and pii_values_markdown from the row
     pii_types_dict = {
-        pii_type: row["pii_values"][k]
-        for k, pii_type in enumerate(row["pii_type"])
+        pii_type: row["pii_values"][k] for k, pii_type in enumerate(row["pii_type"])
     }
     pii_values_markdown = ", or ".join(
         [
