@@ -1,6 +1,22 @@
 {
   "cards": [
     {
+      "gtmId": "use-case-navigator",
+      "title": "Generate data from a prompt",
+      "description": "Use Navigator to edit, augment, and create data from scratch.",
+      "cardType": "Notebook",
+      "icon": "navigator.png",
+      "detailsFileName": "navigator.md",
+      "button1": {  
+        "label": "Go to Navigator Playground",
+        "link": "/navigator"
+      },
+      "button2": {
+        "label": "Integrate the Navigator SDK",
+        "link": "https://docs.gretel.ai/create-synthetic-data/models/navigator/examples"
+      }
+    },
+    {
       "gtmId": "use-case-synthetic",
       "title": "Generate synthetic tabular data",
       "description": "Create highly accurate synthetic tabular training data for ML models.",
@@ -108,7 +124,7 @@
       },
       "button2": {
         "label": "Zero-Shot Prompting Notebook",
-        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Prompting_Llama_2_at_Scale.ipynb"
       }
     },
     {
@@ -317,19 +333,6 @@
         "fields": 2,
         "trainingTime": "< 1 min",
         "bytes": 65300
-      }
-    },
-    {
-      "gtmId": "use-case-image-synthetics",
-      "title": "[EARLY ACCESS] Generate custom images",
-      "description": "Fine-tune Gretel Image Synthetics on your domain specific images",
-      "cardType": "Notebook",
-      "tag": "Labs",
-      "icon": "image-synthetics.png",
-      "detailsFileName": "image-synthetics-preview.md",
-      "button1": {
-        "label": "Launch Gretel Labs",
-        "link": "https://image-synthetics-preview.gretel.cloud/"
       }
     }
   ]
