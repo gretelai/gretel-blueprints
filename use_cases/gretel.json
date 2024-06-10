@@ -1,6 +1,22 @@
 {
   "cards": [
     {
+      "gtmId": "use-case-navigator",
+      "title": "Generate data from a prompt",
+      "description": "Use Navigator to edit, augment, and create data from scratch.",
+      "cardType": "Notebook",
+      "icon": "navigator.png",
+      "detailsFileName": "navigator.md",
+      "button1": {  
+        "label": "Go to Navigator Playground",
+        "link": "/navigator"
+      },
+      "button2": {
+        "label": "Integrate the Navigator SDK",
+        "link": "https://docs.gretel.ai/create-synthetic-data/models/navigator/examples"
+      }
+    },
+    {
       "gtmId": "use-case-synthetic",
       "title": "Generate synthetic tabular data",
       "description": "Create highly accurate synthetic tabular training data for ML models.",
