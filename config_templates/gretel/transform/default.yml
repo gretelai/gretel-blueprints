@@ -9,6 +9,9 @@ models:
       data_source: "_"
       globals:
         classify:
+          # Classification currently uses the Gretel Cloud. If you are running in a hybrid
+          # environment and prefer not to use the Cloud, please set "enable: false" below.
+          enable: true
           entities:
             - name
             - email
