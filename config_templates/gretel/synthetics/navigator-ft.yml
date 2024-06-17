@@ -1,0 +1,19 @@
+schema_version: "1.0"
+name: "navigator_ft"
+models:
+  - navigator_ft:
+      data_source: __tmp__
+      # The default settings below assume that records in your dataset are
+      # independent. If you need to maintain correlations across multiple
+      # records (for example, where each record represents a transaction,
+      # and transactions within a single account are correlated), set
+      # `group_training_examples_by` to the name of the column (account_id)
+      # within which to maintain correlations across records, and optionally
+      # `order_training_examples_by` to the name of the column representing
+      # the order of events (transaction_date).
+      group_training_examples_by: null # Set to column name of your choice
+      order_training_examples_by: null # Set to column name of your choice
+      generate:
+        num_records: 5000
+      params:
+        num_input_records_to_sample: 25000
