@@ -8,4 +8,4 @@ models:
       generate:
         num_records: 5000
       params:
-        num_records_to_train_on: 25000
+        num_input_records_to_sample: 25000
