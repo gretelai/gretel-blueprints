@@ -1,5 +1,5 @@
 schema_version: "1.0"
-name: "navigator-ft-time-series" 
+name: "time-series"
 models:
   - navigator_ft:
       data_source: __tmp__
@@ -8,4 +8,4 @@ models:
       generate:
         num_records: 5000
       params:
-        num_training_records: 25000
+        num_records_to_train_on: 25000
