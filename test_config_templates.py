@@ -6,6 +6,7 @@ import requests
 import yaml
 from gretel_client import ClientConfig, configure_session
 from gretel_client.projects import Project, tmp_project
+from gretel_client.projects.models import read_model_config
 
 _api_key = os.getenv("GRETEL_API_KEY")
 if not _api_key:
@@ -24,17 +25,60 @@ def project() -> Project:
         yield project
 
 
-_configs = (Path(__file__).parent / "config_templates").glob("**/*.yml")
+_configs = list((Path(__file__).parent / "config_templates").glob("**/*.yml"))
 
 
 @pytest.mark.parametrize(
-    "_config_file", ["/".join(str(_config).split("/")[-4:]) for _config in _configs]
+    "_config_file",
+    [
+        "/".join(str(_config).split("/")[-4:])
+        for _config in _configs
+        if _config.parent.name != "tuner"
+    ],
 )
 def test_configs(_config_file, project: Project):
     _config_dict = yaml.safe_load(open(_config_file).read())
     resp = requests.post(
         f"{_cloud_url}/projects/{project.name}/models",
         json=_config_dict,
+        params={"dry_run": "yes"},
+        headers={"Authorization": _api_key},
+    )
+    if resp.status_code != 200:
+        print(f"Error for {_cloud_url}, got response: {resp.text}")
+    assert resp.status_code == 200
+
+
+@pytest.mark.parametrize(
+    "_config_file",
+    [
+        "/".join(str(_config).split("/")[-4:])
+        for _config in _configs
+        if _config.parent.name == "tuner"
+    ],
+)
+def test_tuner_configs(_config_file, project: Project):
+    tuner_config_dict = yaml.safe_load(open(_config_file).read())
+    tuner_config_dict.pop("metric")
+    base_config = tuner_config_dict.pop("base_config")
+    config = read_model_config(base_config)
+    model_config = next(iter(config["models"][0].values()))
+
+    # update the model config with the tuner params
+    for section, section_params in tuner_config_dict.items():
+        assert section in model_config
+        for name, options in section_params.items():
+            # tuner param options are always list-like
+            value = next(iter(options.values()))[0]
+            if name in model_config[section]:
+                model_config[section][name] = value
+            else:
+                model_config[section].setdefault(name, value)
+
+    # execute dry run via the API
+    resp = requests.post(
+        f"{_cloud_url}/projects/{project.name}/models",
+        json=config,
         params={"dry_run": "yes"},
         headers={"Authorization": _api_key},
     )
