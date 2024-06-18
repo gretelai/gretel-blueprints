@@ -16,6 +16,21 @@
       }
     },
     {
+      "modelType": "navigator_ft",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "description": "Our newest language model capable of generating multi-modal tabular data including mixed categorical, numeric, time-series, and free text fields.",
+      "label": "Navigator Fine Tuning",
+      "sampleDataset": {
+        "fileName": "sample-patient-events.csv",
+        "description": "This medical dataset contains sequences of annotated events (such as hospital admission, diagnosis, treatment, etc.) for 1,712 synthetic patients.",
+        "records": 7348,
+        "fields": 17,
+        "trainingTime": "25 mins",
+        "bytes": 2365136
+      }
+    },
+    {
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
