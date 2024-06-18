@@ -3,17 +3,27 @@ name: "navigator_ft"
 models:
   - navigator_ft:
       data_source: __tmp__
-      # The default settings below assume that records in your dataset are
-      # independent. If you need to maintain correlations across multiple
-      # records (for example, where each record represents a transaction,
-      # and transactions within a single account are correlated), set
-      # `group_training_examples_by` to the name of the column (account_id)
-      # within which to maintain correlations across records, and optionally
-      # `order_training_examples_by` to the name of the column representing
-      # the order of events (transaction_date).
-      group_training_examples_by: null # Set to column name of your choice
-      order_training_examples_by: null # Set to column name of your choice
+
+      # Optionally group records by the column(s) set below.
+      # This is useful if you need to maintain correlations
+      # across multiple records. Otherwise, the training
+      # assumes records are independent.
+      group_training_examples_by: null
+
+      # Optionally order records by the column set below.
+      # This is useful if your records are sequential.
+      # Note that this parameter can only be used when
+      # your records are grouped using the above parameter.
+      order_training_examples_by: null
+
       generate:
         num_records: 5000
+
       params:
+        # The parameter below is a proxy for training
+        # time. It sets the number of records from the
+        # input dataset that the model will see during
+        # training. It can be smaller (we downsample),
+        # larger (we resample), or the same size as
+        # your input dataset.
         num_input_records_to_sample: 25000
