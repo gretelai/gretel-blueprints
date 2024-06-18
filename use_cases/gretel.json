@@ -7,7 +7,7 @@
       "cardType": "Notebook",
       "icon": "navigator.png",
       "detailsFileName": "navigator.md",
-      "button1": {  
+      "button1": {
         "label": "Go to Navigator Playground",
         "link": "/navigator"
       },
@@ -18,8 +18,8 @@
     },
     {
       "gtmId": "use-case-synthetic",
-      "title": "Generate synthetic tabular data",
-      "description": "Create highly accurate synthetic tabular training data for ML models.",
+      "title": "Generate synthetic data from complex tabular datasets",
+      "description": "Handle high-dimensional data with thousands of columns and millions of rows.",
       "cardType": "Console",
       "icon": "synthetics.png",
       "detailsFileName": "synthetic.md",
@@ -44,35 +44,39 @@
       }
     },
     {
-      "gtmId": "use-case-synthetic-database",
-      "title": "Synthesize a database",
-      "description": "Synthesize a database using Gretel Relational.",
+      "gtmId": "use-case-navigator-ft",
+      "title": "[Public Preview] Generate synthetic tabular, text and time series data with Navigator Fine Tuning ",
+      "description": "Try out our latest synthetic model supporting tabular, text, JSON and time series data in a single dataset.",
       "cardType": "Console",
-      "icon": "relational-db.png",
-      "modelType": "synthetics",
+      "tag": "Preview",
+      "icon": "navigator-ft.png",
+      "detailsFileName": "navigator-ft.md",
+      "modelType": "navigator_ft",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
-      "sampleConnection": {
-        "id": "sample_mysql_telecom",
-        "type": "mysql",
-        "description": "Use this sample telecommunications database to synthesize an entirely new database of statistically equivalent records, while maintaining referential integrity.",
-        "tables": 5,
-        "records": 230988,
-        "fields": 29,
-        "trainingTime": "20 mins",
-        "bytes": 9537000
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "sampleDataset": {
+        "fileName": "sample-patient-events.csv",
+        "description": "This medical dataset contains sequences of annotated events (such as hospital admission, diagnosis, treatment, etc.) for 1,712 synthetic patients.",
+        "records": 7348,
+        "fields": 17,
+        "trainingTime": "25 mins",
+        "bytes": 2365136
+      },
+      "button1": {
+        "label": "SDK Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
       }
     },
     {
       "gtmId": "use-case-redact-pii",
-      "title": "Redact PII in sensitive data",
-      "description": "Safeguard sensitive information and uphold compliance standards by automatically removing private information from datasets.",
+      "title": "Transform unstructured data into AI-ready formats",
+      "description": "De-identify, transform, or label text and tabular data for AI.",
       "cardType": "Console",
       "tag": "New",
       "icon": "transform.png",
       "modelType": "transform_v2",
       "modelCategory": "transform",
-      "defaultConfig": "config_templates/gretel/transform/transform_v2.yml",
+      "defaultConfig": "config_templates/gretel/transform/default.yml",
       "sampleDataset": {
         "fileName": "patients.csv",
         "description": "This patient dataset contains names, addresses and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
@@ -80,6 +84,22 @@
         "fields": 17,
         "trainingTime": "< 2 mins",
         "bytes": 5647
+      }
+    },
+    {
+      "gtmId": "use-case-gretel_tuner",
+      "title": "Optimize your synthetic data",
+      "description": "Automate hyperparameter tuning to create the best synthetic data for your task.",
+      "cardType": "Notebook",
+      "icon": "benchmark.png",
+      "detailsFileName": "gretel-tuner.md",
+      "button1": {
+        "label": "Introduction to Gretel Tuner",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-intro-tutorial.ipynb"
+      },
+      "button2": {
+        "label": "Gretel Tuner Advanced",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-advanced-tutorial.ipynb"
       }
     },
     {
@@ -125,22 +145,6 @@
       "button2": {
         "label": "Zero-Shot Prompting Notebook",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Prompting_Llama_2_at_Scale.ipynb"
-      }
-    },
-    {
-      "gtmId": "use-case-gretel_tuner",
-      "title": "Auto-tune synthetic data parameters",
-      "description": "Automate hyperparameter sweeps to create the best synthetic data for your task.",
-      "cardType": "Notebook",
-      "icon": "benchmark.png",
-      "detailsFileName": "gretel-tuner.md",
-      "button1": {
-        "label": "Introduction to Gretel Tuner",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-intro-tutorial.ipynb"
-      },
-      "button2": {
-        "label": "Gretel Tuner Advanced",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-advanced-tutorial.ipynb"
       }
     },
     {
