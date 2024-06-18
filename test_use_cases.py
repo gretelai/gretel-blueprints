@@ -21,7 +21,7 @@ card_schema = {
             "type": "string",
             "enum": [
                 "actgan",
-                "navigator_ft"
+                "navigator_ft",
                 "amplify",
                 "classify",
                 "ctgan",
