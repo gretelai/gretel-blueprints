@@ -123,7 +123,7 @@
     {
       "modelType": "transform",
       "modelCategory": "transform",
-      "defaultConfig": "config_templates/gretel/transform/default.yml",
+      "defaultConfig": "config_templates/gretel/transform/transform-v1-default.yml",
       "description": "Detect and transform PII entities in datasets, including named entity recognition within free text fields.",
       "label": "Transform",
       "sampleDataset": {
