@@ -276,7 +276,7 @@
       "description": "Use Named Entity Recognition (NER) to detect and redact personally identifiable data in free text fields.",
       "cardType": "Console",
       "icon": "transform.png",
-      "modelType": "transform",
+      "modelType": "transform_v2",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
       "sampleDataset": {
