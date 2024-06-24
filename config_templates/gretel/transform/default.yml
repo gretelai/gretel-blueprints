@@ -1,29 +1,31 @@
 # Policy to search for and redact "sensitive PII" as defined by `ask-experian` as well as
-# a custom defined regular expression for user IDs. 
+# a custom defined regular expression for user IDs.
 # https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
 
-# NLP is turned on using "use_nlp: true" to provide better person name and 
-# location detection. Set to false if you're experiencing performance issues
-# https://docs.gretel.ai/classify/classify-model-configuration#classifying-data-using-nlp
-
 schema_version: "1.0"
-name: "redact-pii-nlp-on"
+name: "redact-pii-nlp"
 models:
-  - transforms:
+  - transform_v2:
       data_source: "_"
-      use_nlp: true
-      policies:
-        - name: remove_pii
-          rules:
-            - name: fake_or_redact_pii
-              conditions:
-                value_label:
-                  - person_name
-                  - credit_card_number
-                  - phone_number
-                  - email_address
-                  - us_social_security_number
-                  - location
-              transforms:
-                - type: fake
-                - type: hash
+      globals:
+        classify:
+          # Classification currently uses the Gretel Cloud. If you are running in a hybrid
+          # environment and prefer not to use the Cloud, please set "enable: false" below.
+          enable: true
+          entities:
+            - name
+            - email
+            - phone_number
+            - address
+            - credit_card_number
+            - ssn
+          ner_threshold: 0.2
+        locales: [en_US, en_CA]
+      steps:
+        - rows:
+            update:
+              - condition: column.entity is in globals.classify.entities
+                value: column.entity | fake
+                fallback_value: '"<" ~ column.entity ~ ">"'
+              - type: text
+                value: this | fake_entities
