@@ -108,7 +108,7 @@
     {
       "modelType": "transform_v2",
       "modelCategory": "transform",
-      "defaultConfig": "config_templates/gretel/transform/transform_v2.yml",
+      "defaultConfig": "config_templates/gretel/transform/default.yml",
       "description": "Flexible data pre and post processing toolkit including support for detecting arbitrary PII entities, configurable data generation templates, and faster speed.",
       "label": "Transform V2",
       "sampleDataset": {
