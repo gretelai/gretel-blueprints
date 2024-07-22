@@ -7,6 +7,9 @@
 # Key Points:
 # 1. Data Requirements: For optimal accuracy and utility, it's recommended to use 
 #    10,000 or more examples when performing DP fine-tuning.
+# 2. Gradient Accumulation: This technique allows for larger effective batch sizes
+#    by accumulating gradients over multiple forward/backward passes. In this config,
+#    the effective batch size is 128 (batch_size * gradient_accumulation_steps).
 
 schema_version: "1.0"
 name: "natural-language-dp"
@@ -17,11 +20,12 @@ models:
       column_name: null  # Specify column name for data if using multiple columns
       params:
         batch_size: 16  # Number of samples processed before the model is updated
+        gradient_accumulation_steps: 8  # Number of steps to accumulate gradients before updating
         steps: 3000  # Total number of training steps
         weight_decay: 0.01
         warmup_steps: 100
         lr_scheduler: "linear"
-        learning_rate: 0.0001 # Initial learning rate for training
+        learning_rate: 0.001 # Initial learning rate for training
         max_tokens: 128  # Increase to allow for longer sequences
       peft_params:
         lora_r: 8
