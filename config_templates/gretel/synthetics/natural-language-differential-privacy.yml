@@ -1,0 +1,35 @@
+# Natural Language Differentially Private Fine-Tuning Configuration
+# 
+# Purpose: This configuration is designed for fine-tuning language models on 
+# natural language data (e.g., reviews, tweets, conversations) using 
+# differential privacy (DP) techniques in Gretel.
+#
+# Key Points:
+# 1. Data Requirements: For optimal accuracy and utility, it's recommended to use 
+#    10,000 or more examples when performing DP fine-tuning.
+
+schema_version: "1.0"
+name: "natural-language-dp"
+models:
+  - gpt_x:
+      data_source: "__temp__" 
+      pretrained_model: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+      column_name: null  # Specify column name for data if using multiple columns
+      params:
+        batch_size: 16  # Number of samples processed before the model is updated
+        steps: 3000  # Total number of training steps
+        weight_decay: 0.01
+        warmup_steps: 100
+        lr_scheduler: "linear"
+        learning_rate: 0.0001 # Initial learning rate for training
+        max_tokens: 128  # Increase to allow for longer sequences
+      peft_params:
+        lora_r: 8
+        lora_alpha_over_r: 1
+      privacy_params:
+        dp: true  # Enable differentially private fine-tuning via DP-SGD
+        epsilon: 5  # Privacy budget (lower values = stronger privacy)
+        delta: auto  # Probability of privacy loss (auto-calculated)
+      generate:
+        num_records: 80  # Number of records to generate
+        maximum_text_length: 128  # Maximum length of generated texts in tokens
