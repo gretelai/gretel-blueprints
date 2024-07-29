@@ -161,6 +161,14 @@
       "id": "add-column",
       "label": "New column",
       "value": "Add a new column called [NAME] that follows these rules: [RULES]."
-    }
+    },
+    {
+      "id": "fill-in-data",
+      "label": "Fill missing or empty data",
+      "value": [
+        "Fill in the empty fields of the dataset, for each column following the instructions:",
+        "[COLUMN] : [INSTRUCTIONS]"
+      ]
+    } 
   ]
 }
