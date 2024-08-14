@@ -18,8 +18,8 @@
     },
     {
       "gtmId": "use-case-navigator-ft-simple",
-      "title": "Generate multi-modal synthetic data with Navigator Fine Tuning",
-      "description": "Try out our latest synthetic model to combine numeric data, categorical data, free text data, and more in a single dataset.",
+      "title": "Generate multi-modal synthetic data",
+      "description": "Use Navigator Fine-Tuning to combine numeric, categorical, and free text data in a single dataset.",
       "cardType": "Console",
       "tag": "New",
       "icon": "navigator-ft-simple.png",
@@ -48,7 +48,7 @@
     },
     {
       "gtmId": "use-case-gpt-dp",
-      "title": "Create free text data with privacy guarantees",
+      "title": "Produce free text data with privacy guarantees",
       "description": "Leverage differentially private fine-tuning with GPT to generate a provably-private version of your free text data.",
       "cardType": "Console",
       "tag": "New",
