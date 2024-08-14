@@ -1,21 +1,6 @@
 {
   "modelTypes": [
     {
-      "modelType": "actgan",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
-      "description": "Our speediest and most efficient GAN model for generating highly dimensional numeric and categorical tabular data.",
-      "label": "Synthetic ACTGAN",
-      "sampleDataset": {
-        "fileName": "monthly-customer-payments.csv",
-        "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
-        "records": 7032,
-        "fields": 23,
-        "trainingTime": "3 mins",
-        "bytes": 1000000
-      }
-    },
-    {
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
@@ -28,6 +13,21 @@
         "fields": 17,
         "trainingTime": "25 mins",
         "bytes": 2386363
+      }
+    },
+    {
+      "modelType": "actgan",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "description": "Our speediest and most efficient GAN model for generating highly dimensional numeric and categorical tabular data.",
+      "label": "Synthetic ACTGAN",
+      "sampleDataset": {
+        "fileName": "monthly-customer-payments.csv",
+        "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
+        "records": 7032,
+        "fields": 23,
+        "trainingTime": "3 mins",
+        "bytes": 1000000
       }
     },
     {
