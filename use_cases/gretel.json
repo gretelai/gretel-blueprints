@@ -18,8 +18,8 @@
     },
     {
       "gtmId": "use-case-navigator-ft-simple",
-      "title": "Generate multi-modal synthetic data",
-      "description": "Use Navigator Fine-Tuning to combine numeric, categorical, and free text data in a single dataset.",
+      "title": "Synthesize tabular data with Navigator Fine Tuning",
+      "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
       "tag": "New",
       "icon": "navigator-ft-simple.png",
