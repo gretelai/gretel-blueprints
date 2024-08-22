@@ -17,16 +17,20 @@
       }
     },
     {
-      "gtmId": "use-case-navigator-ft-simple",
+      "gtmId": "use-case-navigator-ft",
       "title": "Synthesize tabular data with Navigator Fine Tuning",
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
       "tag": "New",
-      "icon": "navigator-ft-simple.png",
-      "detailsFileName": "navigator-ft-simple.md",
+      "icon": "navigator-ft.png",
+      "detailsFileName": "navigator-ft.md",
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml"
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "button1": {
+        "label": "SDK Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
+      }
     },
     {
       "gtmId": "use-case-redact-pii",
@@ -166,29 +170,6 @@
         "fields": 5,
         "trainingTime": "3 mins",
         "bytes": 63000
-      }
-    },
-    {
-      "gtmId": "use-case-navigator-ft",
-      "title": "Generate synthetic tabular, text and time series data with Navigator Fine Tuning ",
-      "description": "Try out our latest synthetic model supporting tabular, text, JSON and time series data in a single dataset.",
-      "cardType": "Console",
-      "icon": "navigator-ft.png",
-      "detailsFileName": "navigator-ft.md",
-      "modelType": "navigator_ft",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
-      "sampleDataset": {
-        "fileName": "sample-patient-events.csv",
-        "description": "This medical dataset contains sequences of annotated events (such as hospital admission, diagnosis, treatment, etc.) for 1,712 synthetic patients.",
-        "records": 7348,
-        "fields": 17,
-        "trainingTime": "25 mins",
-        "bytes": 2386363
-      },
-      "button1": {
-        "label": "SDK Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
       }
     },
     {
