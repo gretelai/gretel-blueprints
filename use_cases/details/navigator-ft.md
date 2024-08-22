@@ -1,14 +1,7 @@
-![Generate synthetic tabular, text and time series data](https://blueprints.gretel.cloud/use_cases/images/navigator-ft-hero.png "Generate synthetic tabular, text and time series data")
+![Synthesize tabular data with Navigator Fine Tuning](https://blueprints.gretel.cloud/use_cases/images/navigator-ft-hero.png "Synthesize tabular data with Navigator Fine Tuning")
 
-**Navigator Fine Tuning** is the latest advancement in our suite of synthetic data solutions. It builds upon the recent general availability of [Gretel Navigator](https://console.gretel.ai/navigator), enabling you to generate data not only from a prompt, but also from fine-tuning the underlying model on your domain-specific real-world datasets to generate the highest quality synthetic data.
+If you’re new to Gretel, our Navigator Fine-Tuning blueprint is a great place to start. This blueprint automatically selects our comprehensive multi-modal model, a great one-stop shop for most synthetic data generation needs. Just answer a few questions, review the model configuration and hit **Run**. 
 
-One of the standout features of Navigator Fine Tuning is its support for multiple tabular data modalities within a single model. This means you can now generate datasets that maintain correlations across:
-- Numeric Data: Continuous or discrete numbers
-- Categorical Data: Categories or labels
-- Free Text: Unstructured text entries and long-form natural language such as email messages or notes in medical treatment summaries
-- Time Series: Sequential time-stamped data
-- JSON Data: Complex nested structures
+Navigator Fine-Tuning supports mutliple tabular modalities of data within a single model, such as numeric, categorical, and free text data.
 
-All these data types can coexist within a single dataset, maintaining correlations not just within individual rows, but also across events spanning multiple rows, making Navigator  an exceptionally powerful tool for time series data generation.
-
-Try it in the Console, or if you prefer code, give the [SDK notebook](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb) a spin. 
+Prefer coding? Check out the [SDK notebook](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb) example.
