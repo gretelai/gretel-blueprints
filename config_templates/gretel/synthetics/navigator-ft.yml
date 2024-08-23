@@ -20,10 +20,12 @@ models:
         num_records: 5000
 
       params:
-        # The parameter below is a proxy for training
-        # time. It sets the number of records from the
-        # input dataset that the model will see during
-        # training. It can be smaller (we downsample),
-        # larger (we resample), or the same size as
-        # your input dataset.
-        num_input_records_to_sample: 25000
+        # The parameter below is a proxy for training time.
+        # If set to 'auto', we will automatically choose an
+        # appropriate value. An integer value will set the
+        # number of records from the input dataset that the
+        # model will see during training. It can be smaller
+        # (we downsample), larger (we resample), or the same
+        # size as your input dataset. A starting value to
+        # experiment with is 25,000.
+        num_input_records_to_sample: auto
