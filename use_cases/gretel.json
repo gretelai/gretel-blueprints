@@ -30,6 +30,14 @@
       "button1": {
         "label": "SDK Notebook",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
+      },
+      "sampleDataset": {
+        "fileName": "financial_transactions.csv",
+        "description": "This financial dataset contains transaction ID, date, payment, currency, type, and description for banking transactions. It includes numeric, categorical, and free text tabular data.",
+        "records": 9344,
+        "fields": 6,
+        "trainingTime": "10 mins",
+        "bytes": 683576
       }
     },
     {
@@ -64,6 +72,14 @@
       "button1": {
         "label": "SDK Notebook",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/generate_differentially_private_synthetic_text.ipynb"
+      },
+      "sampleDataset": {
+        "fileName": "clinical_notes.csv",
+        "description": "This clinical notes dataset contains medical observations written by healthcare providers during patient care. It includes personally identifiable information which needs to be redacted before the dataset can be shared or used to train ML models.",
+        "records": 30000,
+        "fields": 1,
+        "trainingTime": "2 hours",
+        "bytes": 103447682
       }
     },
     {

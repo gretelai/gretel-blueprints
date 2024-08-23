@@ -9,10 +9,10 @@
       "sampleDataset": {
         "fileName": "financial_transactions.csv",
         "description": "This financial dataset contains transaction ID, date, payment, currency, type, and description for banking transactions. It includes numeric, categorical, and free text tabular data.",
-        "records": 9345,
+        "records": 9344,
         "fields": 6,
-        "trainingTime": "8 mins",
-        "bytes": 677591
+        "trainingTime": "10 mins",
+        "bytes": 683576
       }
     },
     {
