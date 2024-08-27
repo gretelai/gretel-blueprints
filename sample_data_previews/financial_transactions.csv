@@ -1,0 +1,21 @@
+transaction_id,date,amount,currency,transaction_type,description
+86492337,2021-08-01,250.5,USD,debit,Paid monthly rent for apartment in New York City.
+82782780,2022-02-14,50.0,EUR,debit,Bought a souvenir for a friend during a trip to Paris.
+81861773,2023-01-05,1000.0,GBP,transfer,Sent money to a family member in the UK for holiday expenses.
+46881945,2021-11-20,120.0,USD,credit,Bought groceries for the week from a local supermarket.
+22031755,2022-06-15,75.0,CAD,debit,Withdrew cash for a weekend camping trip in Canada.
+23494374,2023-09-22,300.0,JPY,transfer,Sent money to a friend in Japan for a birthday gift.
+32513708,2021-02-18,150.0,USD,debit,Paid utility bills for a house in Texas.
+65492428,2022-07-03,100.0,USD,debit,Bought a new pair of running shoes.
+70958305,2023-12-28,200.0,USD,transfer,Sent money to a friend for holiday gifts.
+99557011,2021-06-10,80.0,USD,debit,Paid for a haircut and styling session.
+94473946,2022-11-27,150.0,USD,debit,Bought tickets for a football game in Seattle.
+43949381,2023-04-15,120.0,USD,transfer,Sent money to a friend in New York for a birthday gift.
+14818853,2022-04-15,125.78,USD,credit,Received salary payment from employer.
+80157141,2023-03-01,1000.0,EUR,transfer,Sent monthly rent payment to landlord.
+49840331,2021-12-28,50.25,GBP,debit,Purchased Christmas gifts for family.
+83297667,2022-01-03,200.0,JPY,credit,Received transfer from family in Japan.
+87362864,2021-06-15,35.99,USD,debit,Bought lunch for colleagues.
+44491138,2023-02-27,750.0,USD,transfer,Sent money to friend for group trip expenses.
+75439054,2022-05-01,150.0,USD,credit,Deposited tax refund into account.
+77764312,2023-04-10,2000.0,EUR,transfer,Sent money to parents for home repairs.

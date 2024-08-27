@@ -1,6 +1,21 @@
 {
   "modelTypes": [
     {
+      "modelType": "navigator_ft",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "description": "Our newest language model capable of generating multi-modal tabular data including mixed categorical, numeric, time-series, and free text fields.",
+      "label": "Navigator Fine Tuning",
+      "sampleDataset": {
+        "fileName": "financial_transactions.csv",
+        "description": "This financial dataset contains transaction ID, date, payment, currency, type, and description for banking transactions. It includes numeric, categorical, and free text tabular data.",
+        "records": 9344,
+        "fields": 6,
+        "trainingTime": "10 mins",
+        "bytes": 683576
+      }
+    },
+    {
       "modelType": "actgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
@@ -13,21 +28,6 @@
         "fields": 23,
         "trainingTime": "3 mins",
         "bytes": 1000000
-      }
-    },
-    {
-      "modelType": "navigator_ft",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
-      "description": "Our newest language model capable of generating multi-modal tabular data including mixed categorical, numeric, time-series, and free text fields.",
-      "label": "Navigator Fine Tuning",
-      "sampleDataset": {
-        "fileName": "sample-patient-events.csv",
-        "description": "This medical dataset contains sequences of annotated events (such as hospital admission, diagnosis, treatment, etc.) for 1,712 synthetic patients.",
-        "records": 7348,
-        "fields": 17,
-        "trainingTime": "25 mins",
-        "bytes": 2386363
       }
     },
     {
