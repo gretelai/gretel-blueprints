@@ -1,0 +1,31 @@
+schema_version: "1.0"
+name: "navigator_ft"
+models:
+  - navigator_ft:
+      data_source: __tmp__
+
+      # Optionally group records by the column(s) set below.
+      # This is useful if you need to maintain correlations
+      # across multiple records. Otherwise, the training
+      # assumes records are independent.
+      group_training_examples_by: null
+
+      # Optionally order records by the column set below.
+      # This is useful if your records are sequential.
+      # Note that this parameter can only be used when
+      # your records are grouped using the above parameter.
+      order_training_examples_by: null
+
+      generate:
+        num_records: 5000
+
+      params:
+        # The parameter below is a proxy for training time.
+        # If set to 'auto', we will automatically choose an
+        # appropriate value. An integer value will set the
+        # number of records from the input dataset that the
+        # model will see during training. It can be smaller
+        # (we downsample), larger (we resample), or the same
+        # size as your input dataset. A starting value to
+        # experiment with is 25,000.
+        num_input_records_to_sample: auto

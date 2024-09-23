@@ -1,5 +1,5 @@
 # Policy to search for and redact "sensitive PII" as defined by `ask-experian` as well as
-# a custom defined regular expression for user IDs. 
+# a custom defined regular expression for user IDs.
 # https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
 
 schema_version: "1.0"
