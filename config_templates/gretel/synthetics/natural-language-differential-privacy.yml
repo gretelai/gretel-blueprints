@@ -17,7 +17,7 @@ name: "natural-language-dp"
 models:
   - gpt_x:
       data_source: "__temp__" 
-      pretrained_model: "gretelai/gpt-auto"
+      pretrained_model: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
       column_name: null  # Specify column name for data if using multiple columns
       params:
         batch_size: 16  # Number of samples used to compute gradient
