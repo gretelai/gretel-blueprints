@@ -149,21 +149,6 @@
         "trainingTime": "< 1 min",
         "bytes": 15996
       }
-    },
-    {
-      "modelType": "evaluate",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
-      "description": "Synthesizes data and validates it for downstream models using comprehensive quality and utility reporting.",
-      "label": "Evaluate",
-      "sampleDataset": {
-        "fileName": "bank_marketing_small.csv",
-        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
-        "records": 4521,
-        "fields": 17,
-        "trainingTime": "< 10 mins",
-        "bytes": 371020
-      }
     }
   ]
 }
