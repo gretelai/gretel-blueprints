@@ -1,0 +1,113 @@
+model_suite: Apache-2.0
+
+special_system_instructions: >-
+  You are an expert at writing SQL queries and technical documentation. You are obsessed with writing
+  clean, efficient, and maintainable SQL code. You are tasked with generating SQL queries and natural
+  language text that will be used to train a language model that will be used to generate SQL queries.
+
+seed_categories:
+  - name: domain
+    description: Major industry domain or sector that relies on robust data solutions
+    values: [Healthcare, Finance, Retail, Manufacturing, Education, Public Health, Science and Technology, Environmental Science, Government, Media and Entertainment, 
+            Transportation, Energy, Agriculture, Manufacturing, Food and Beverage, Wellness, Construction, Automotive, Telecommunications, Public Services, Financial Services, 
+            Medicine, Social Services, Education and Training, Information and Communications, Environment, Textiles, Startups, Legal and Law, Entertainment, Pharmaceuticals, 
+            Food Service, Advertising, Financial Planning, Travel and Tourism, Waste Management, E-commerce, Hospitality, Philanthropy, Public Health, Sports, Social Media, 
+            Venture Capital, Arts and Culture, Economics, Artificial Intelligence, Biotechnology, Renewable Energy and Sustainability, Business and Entrepreneurship, 
+            Defense and Aerospace, Logistics, Oil and Gas, Fashion and Apparel, Human Resources, Music, Nonprofit, Gaming, Insurance, Space Exploration, Banking, Smart Cities, 
+            Recreation, Maritime, Electricity, Gas & Water Services, Wholesale Trade, Hotel and Resorts, Rental Services, Fitness, Agricultural Technology, Consulting, Analytics, 
+            Chemicals, Urban Planning, Internet of Things, Global Trade, Automation Technology, Journalism, Engineering, Psychology, Scientific Research, Publishing, Cybersecurity, 
+            Credit Cards & Loans, Robotics & Computing, Digital Health, Consumer Electronics, Business Intelligence, Market Research, Sales Forecasting, Data Governance, Digital Marketing]
+    subcategories:
+      - name: topic
+        description: Key topics that professional SQL developers care about in the given domain
+        num_values_to_generate: 25
+
+  - name: sql_complexity
+    description: Complexity of the SQL query, ranging from basic operations to advanced data processing techniques
+    values:
+      - "Basic SQL"
+      - "Aggregation"
+      - "Single Join"
+      - "Subquery"
+      - "Multiple Join"
+      - "Window Functions"
+
+  - name: sql_task_type
+    description: Type of SQL task that the query represents
+    num_values_to_generate: 25
+    values:
+      - "Data Retrieval"
+      - "Data Definition"
+      - "Data Manipulation"
+      - "Analytics and Reporting"
+      - "Database Administration"
+      - "Data Cleaning and Transformation"
+
+  - name: natural_language_type
+    description: Type of natural language that will be paired with an SQL query
+    num_values_to_generate: 25
+    values:
+      - "a natural language prompt for an SQL query"
+      - "a question about how to extract information from a database using SQL"
+      - "an explanation of what an SQL query is doing"
+      - "an instruction that tells a user to write an SQL query for a specific task"
+
+  - name: data_generation_mode
+    description: Mode of data generation for different contexts
+    values:
+      - "Creation"
+      - "Editing"
+      - "Augmentation"
+      - "Sequential"
+      - "Time Series"
+
+data_columns:
+  - name: domain_description
+    description: Detailed description of the {domain}
+    specific_instructions: "Provide a detailed description of the {domain} that includes one key areas of focus for a subdomain for writing SQL."
+
+  - name: sql_complexity_description
+    description: Description of the complexity level of the SQL query
+    specific_instructions: "Provide a description for the {sql_complexity} level, highlighting the types of SQL operations involved."
+    relevant_columns: [sql_complexity]
+
+  - name: sql_task_type_description
+    description: Description of the type of SQL task
+    specific_instructions: "Provide a description for the {sql_task_type}, including its typical use cases in the {domain} industry."
+    relevant_columns: [sql_task_type, domain]
+
+  - name: sql_prompt
+    description: Natural language prompt that will be paired with an SQL query
+    specific_instructions: "You are an expert engineer, well versed in prompt tuning for LLMs.
+    Create a natural language prompt to generate SQL in the field of {domain}, specifically about the domain of {topic}. 
+    Feel free to ask for data that focus on a smaller subject within the scope of {natural_language_type}.
+
+    Make sure to use the following guidelines:
+        * Just return the generated text without any additional preface or content
+        * The generated text must include diverse words / sentences and must always specify all required column names
+    "
+    relevant_columns: [domain, topic, natural_language_type]
+
+  - name: sql_context
+    description: SQL context that provides additional information, such as table or view creation statements
+    specific_instructions: "Generate SQL statement as context that is relevant to the {domain} industry and aligns with the {topic} and {sql_prompt}"
+    relevant_columns: [domain, topic, sql_prompt]
+    output_type: code
+    llm_type: code
+
+  - name: sql
+    description: SQL query that will be paired with natural language text
+    specific_instructions: "Write an SQL query to accomplish the task described by {sql_prompt}. Use the provided {sql_context} if applicable."
+    relevant_columns: [domain, topic, sql_complexity, sql_task_type, sql_context, sql_prompt]
+    output_type: code
+    llm_type: code
+
+  - name: sql_explanation
+    description: Natural language explanation of what the SQL query is doing
+    specific_instructions: "Provide a detailed explanation of the SQL query, including the purpose of each clause and how it contributes to achieving the task described by {sql_prompt}."
+    relevant_columns: [sql_prompt, sql, sql_context]
+
+data_validators:
+  - validator: code
+    code_lang: ansi
+    code_columns: [sql]
