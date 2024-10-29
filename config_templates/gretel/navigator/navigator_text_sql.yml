@@ -81,10 +81,6 @@ data_columns:
     specific_instructions: "You are an expert engineer, well versed in prompt tuning for LLMs.
     Create a natural language prompt to generate SQL in the field of {domain}, specifically about the domain of {topic}. 
     Feel free to ask for data that focus on a smaller subject within the scope of {natural_language_type}.
-
-    Make sure to use the following guidelines:
-        * Just return the generated text without any additional preface or content
-        * The generated text must include diverse words / sentences and must always specify all required column names
     "
     relevant_columns: [domain, topic, natural_language_type]
 
