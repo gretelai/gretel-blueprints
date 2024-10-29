@@ -110,4 +110,4 @@ data_columns:
 data_validators:
   - validator: code
     code_lang: ansi
-    code_columns: [sql]
+    code_columns: [sql, sql_context]
