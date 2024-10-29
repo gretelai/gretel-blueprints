@@ -22,7 +22,7 @@ card_schema = {
             "items": {
                 "type": "object", 
                 "properties": {
-                    "category": {
+                    "modelCategory": {
                         "type": "string",
                         "enum": [
                             "synthetics",
