@@ -27,6 +27,13 @@
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "modelActions": [
+        {
+          "modelType": "navigator_ft",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml"
+        }
+      ],
       "button1": {
         "label": "SDK Notebook",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
@@ -49,6 +56,13 @@
       "modelType": "transform_v2",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
+      "modelActions": [
+        {
+          "modelType": "transform_v2",
+          "modelCategory": "transform",
+          "defaultConfig": "config_templates/gretel/transform/default.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "patients.csv",
         "description": "This patient dataset contains names, addresses and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
@@ -69,6 +83,13 @@
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml",
+      "modelActions": [
+        {
+          "modelType": "gpt_x",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml"
+        }
+      ],
       "button1": {
         "label": "SDK Notebook",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/generate_differentially_private_synthetic_text.ipynb"
@@ -108,6 +129,13 @@
       "modelType": "synthetics",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "modelActions": [
+        {
+          "modelType": "synthetics",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "sample-synthetic-healthcare.csv",
         "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
@@ -134,6 +162,13 @@
       "modelType": "tabular_dp",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
+      "modelActions": [
+        {
+          "modelType": "tabular_dp",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
         "description": "This dataset contains direct marketing campaign details (phone calls) from a Portuguese financial institution. It has sensitive information such as demographics and financials, which can benefit from privacy preserving techniques before sharing.  ",
@@ -153,6 +188,13 @@
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "modelActions": [
+        {
+          "modelType": "gpt_x",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "sample-banking-questions-intents.csv",
         "description": "Create realistic banking-related questions and intent labels using this sample dataset.",
@@ -179,6 +221,13 @@
       "modelType": "timeseries_dgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
+      "modelActions": [
+        {
+          "modelType": "timeseries_dgan",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/time-series.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "daily-website-visitors.csv",
         "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
@@ -197,6 +246,13 @@
       "modelType": "transform_v2",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/transform_v2.yml",
+      "modelActions": [
+        {
+          "modelType": "transform_v2",
+          "modelCategory": "transform",
+          "defaultConfig": "config_templates/gretel/transform/transform_v2.yml"
+        }
+      ],
       "sampleConnection": {
         "id": "sample_mysql_telecom",
         "type": "mysql",
@@ -217,6 +273,13 @@
       "modelType": "evaluate",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
+      "modelActions": [
+        {
+          "modelType": "evaluate",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
         "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
@@ -235,6 +298,13 @@
       "modelType": "amplify",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/amplify.yml",
+      "modelActions": [
+        {
+          "modelType": "amplify",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/amplify.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "safe-driver-prediction.csv",
         "description": "Use this dataset to predict if a driver will file an insurance claim in the following year. Specify an output size in the config. By default, the model will create as many records as the input dataset.",
@@ -269,6 +339,13 @@
       "modelType": "actgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "modelActions": [
+        {
+          "modelType": "actgan",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "monthly-customer-payments.csv",
         "description": "This dataset of monthly customer charges contains sensitive information and more than 20 columns.",
@@ -335,6 +412,13 @@
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "modelActions": [
+        {
+          "modelType": "gpt_x",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "taylor-swift-lyrics-up.csv",
         "description": "Create believable song lyrics using this dataset of Taylor Swift hits.",
@@ -353,6 +437,13 @@
       "modelType": "transform_v2",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
+      "modelActions": [
+        {
+          "modelType": "transform_v2",
+          "modelCategory": "transform",
+          "defaultConfig": "config_templates/gretel/transform/default.yml"
+        }
+      ],
       "sampleDataset": {
         "fileName": "sample-transform-emails.csv",
         "description": "Unstructured text datasets are useful for training chatbots or other models that need large amounts of data. The emails in this public dataset need to be de-identified before they can be used to train ML models.",
