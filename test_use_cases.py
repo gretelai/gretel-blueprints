@@ -17,6 +17,42 @@ card_schema = {
             "type": "string",
             "enum": ["New", "Beta", "Preview", "Popular", "Deprecated","Labs"],
         },
+        "modelActions": {
+            "type": "array", 
+            "items": {
+                "type": "object", 
+                "properties": {
+                    "modelCategory": {
+                        "type": "string",
+                        "enum": [
+                            "synthetics",
+                            "transform",
+                            "classify",
+                            "evaluate",
+                        ],
+                    },
+                    "modelType": {
+                        "type": "string",
+                        "enum": [
+                            "actgan",
+                            "navigator_ft",
+                            "amplify",
+                            "classify",
+                            "ctgan",
+                            "evaluate",
+                            "gpt_x",
+                            "lstm",
+                            "synthetics",
+                            "timeseries_dgan",
+                            "transform",
+                            "transform_v2",
+                            "tabular_dp",
+                        ],
+                    },
+                    "defaultConfig": {"type": "string"},
+                }
+            }
+        },
         "modelType": {
             "type": "string",
             "enum": [
