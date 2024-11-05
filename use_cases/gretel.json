@@ -61,6 +61,11 @@
           "modelType": "transform_v2",
           "modelCategory": "transform",
           "defaultConfig": "config_templates/gretel/transform/default.yml"
+        },
+        {
+          "modelType": "gpt_x",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml"
         }
       ],
       "sampleDataset": {
