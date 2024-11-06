@@ -1,19 +1,31 @@
+# Policy to search for and redact "sensitive PII" as defined by `ask-experian` as well as
+# a custom defined regular expression for user IDs.
+# https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
+
 schema_version: "1.0"
-name: "transform-v2-default"
+name: "redact-pii-nlp"
 models:
   - transform_v2:
       data_source: "_"
       globals:
         classify:
-          # Classification is currently performed in the Gretel Cloud. If you are
-          # running in hybrid mode, you have the option to turn off classification
-          # by setting "enable" to false, or you can do classification based on
-          # column names only (at the cost of some accuracy loss) by setting
-          # "num_samples" to 0.
+          # Classification currently uses the Gretel Cloud. If you are running in a hybrid
+          # environment and prefer not to use the Cloud, please set "enable: false" below.
           enable: true
-          num_samples: 3
+          entities:
+            - name
+            - email
+            - phone_number
+            - address
+            - credit_card_number
+            - ssn
+          ner_threshold: 0.2
+        locales: [en_US, en_CA]
       steps:
         - rows:
             update:
-              - condition: column.entity is not none
+              - condition: column.entity is in globals.classify.entities
                 value: column.entity | fake
+                fallback_value: '"<" ~ column.entity ~ ">"'
+              - type: text
+                value: this | fake_entities
