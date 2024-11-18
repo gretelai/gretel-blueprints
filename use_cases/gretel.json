@@ -126,12 +126,12 @@
       "cardType": "Console",
       "icon": "synthetics.png",
       "detailsFileName": "synthetic.md",
-      "modelType": "synthetics",
+      "modelType": "actgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "modelActions": [
         {
-          "modelType": "synthetics",
+          "modelType": "actgan",
           "modelCategory": "synthetics",
           "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml"
         }
