@@ -17,12 +17,10 @@ models:
     order_training_examples_by: null
 
     generate:
-        num_records: 1000
+        num_records: 5000
 
-        # When DP is enabled, the model will sometimes have a hard
-        # time learning the tabular format; enabling structured
-        # generation might help with increasing the percentage of
-        # valid records.
+        # With DP, enabling structured generation can help with
+        # increasing the percentage of valid records.
         use_structured_generation: true
 
     params:
