@@ -34,6 +34,7 @@
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "differentialPrivacyConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml",
       "description": "GPT3-like pre-trained transformer model for generating natural language text from an input file.",
       "label": "GPT",
       "sampleDataset": {
