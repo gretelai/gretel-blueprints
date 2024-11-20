@@ -64,12 +64,12 @@
         }
       ],
       "sampleDataset": {
-        "fileName": "patients.csv",
+        "fileName": "patients_notes.csv",
         "description": "This patient dataset contains names, addresses and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
-        "records": 36,
-        "fields": 17,
+        "records": 35,
+        "fields": 19,
         "trainingTime": "< 2 mins",
-        "bytes": 5647
+        "bytes": 20646
       }
     },
     {
@@ -180,7 +180,7 @@
     },
     {
       "gtmId": "use-case-natural-lang-gpt",
-      "title": "Generate natural language text using GPT",
+      "title": "Generate synthetic text data using GPT",
       "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
       "cardType": "Console",
       "icon": "natural-lang-gpt.png",
@@ -209,7 +209,7 @@
       },
       "button2": {
         "label": "Zero-Shot Prompting Notebook",
-        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Prompting_Llama_2_at_Scale.ipynb"
       }
     },
     {

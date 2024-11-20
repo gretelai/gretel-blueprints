@@ -112,12 +112,12 @@
       "description": "Flexible data pre and post processing toolkit including support for detecting arbitrary PII entities, configurable data generation templates, and faster speed.",
       "label": "Transform V2",
       "sampleDataset": {
-        "fileName": "patients.csv",
+        "fileName": "patients_notes.csv",
         "description": "This patient dataset contains names, addresses and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
-        "records": 36,
-        "fields": 17,
+        "records": 35,
+        "fields": 19,
         "trainingTime": "< 2 mins",
-        "bytes": 5647
+        "bytes": 20646
       }
     },
     {
@@ -148,21 +148,6 @@
         "fields": 23,
         "trainingTime": "< 1 min",
         "bytes": 15996
-      }
-    },
-    {
-      "modelType": "evaluate",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular-lstm-evaluate.yml",
-      "description": "Synthesizes data and validates it for downstream models using comprehensive quality and utility reporting.",
-      "label": "Evaluate",
-      "sampleDataset": {
-        "fileName": "bank_marketing_small.csv",
-        "description": "Create synthetic data based on the publicly available dataset predicting opting in or out of bank marketing.",
-        "records": 4521,
-        "fields": 17,
-        "trainingTime": "< 10 mins",
-        "bytes": 371020
       }
     }
   ]
