@@ -1,0 +1,289 @@
+{
+  "cards": [
+    {
+      "gtmId": "use-case-navigator",
+      "title": "Generate data from a prompt",
+      "description": "Use Navigator to edit, augment, and create data from scratch.",
+      "cardType": "Notebook",
+      "icon": "navigator.png",
+      "detailsFileName": "navigator.md",
+      "button1": {
+        "label": "Go to Navigator Playground",
+        "link": "/navigator"
+      },
+      "button2": {
+        "label": "Integrate the Navigator SDK",
+        "link": "https://docs.gretel.ai/create-synthetic-data/models/navigator/examples"
+      }
+    },
+    {
+      "gtmId": "use-case-navigator-ft",
+      "title": "Synthesize tabular data with Navigator Fine Tuning",
+      "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
+      "cardType": "Console",
+      "tag": "New",
+      "icon": "navigator-ft.png",
+      "detailsFileName": "navigator-ft.md",
+      "modelType": "navigator_ft",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "modelActions": [
+        {
+          "modelType": "navigator_ft",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml"
+        }
+      ],
+      "button1": {
+        "label": "SDK Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
+      },
+      "sampleDataset": {
+        "fileName": "financial_transactions.csv",
+        "description": "This financial dataset contains transaction ID, date, payment, currency, type, and description for banking transactions. It includes numeric, categorical, and free text tabular data.",
+        "records": 9344,
+        "fields": 6,
+        "trainingTime": "10 mins",
+        "bytes": 683576
+      }
+    },
+    {
+      "gtmId": "use-case-redact-pii",
+      "title": "Transform unstructured data into AI-ready formats",
+      "description": "De-identify, transform, or label text and tabular data for AI.",
+      "cardType": "Console",
+      "icon": "transform.png",
+      "modelType": "transform_v2",
+      "modelCategory": "transform",
+      "defaultConfig": "config_templates/gretel/transform/default.yml",
+      "modelActions": [
+        {
+          "modelType": "transform_v2",
+          "modelCategory": "transform",
+          "defaultConfig": "config_templates/gretel/transform/default.yml"
+        }
+      ],
+      "sampleDataset": {
+        "fileName": "patients.csv",
+        "description": "This patient dataset contains names, addresses and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
+        "records": 36,
+        "fields": 17,
+        "trainingTime": "< 2 mins",
+        "bytes": 5647
+      }
+    },
+    {
+      "gtmId": "use-case-gpt-dp",
+      "title": "Produce free text data with privacy guarantees",
+      "description": "Leverage differentially private fine-tuning with GPT to generate a provably-private version of your free text data.",
+      "cardType": "Console",
+      "tag": "New",
+      "icon": "GPTwithDP.png",
+      "detailsFileName": "gpt-dp.md",
+      "modelType": "gpt_x",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml",
+      "modelActions": [
+        {
+          "modelType": "gpt_x",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml"
+        }
+      ],
+      "button1": {
+        "label": "SDK Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/generate_differentially_private_synthetic_text.ipynb"
+      },
+      "sampleDataset": {
+        "fileName": "clinical_notes.csv",
+        "description": "This clinical notes dataset contains medical observations written by healthcare providers during patient care. It includes personally identifiable information which needs to be redacted before the dataset can be shared or used to train ML models.",
+        "records": 30000,
+        "fields": 1,
+        "trainingTime": "2 hours",
+        "bytes": 103447682
+      }
+    },
+    {
+      "gtmId": "use-case-gretel_tuner",
+      "title": "Optimize your synthetic data",
+      "description": "Automate hyperparameter tuning to create the best synthetic data for your task.",
+      "cardType": "Notebook",
+      "icon": "benchmark.png",
+      "detailsFileName": "gretel-tuner.md",
+      "button1": {
+        "label": "Introduction to Gretel Tuner",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-intro-tutorial.ipynb"
+      },
+      "button2": {
+        "label": "Gretel Tuner Advanced",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/gretel-tuner-advanced-tutorial.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-synthetic",
+      "title": "Generate synthetic data from complex tabular datasets",
+      "description": "Handle high-dimensional data with thousands of columns and millions of rows.",
+      "cardType": "Console",
+      "icon": "synthetics.png",
+      "detailsFileName": "synthetic.md",
+      "modelType": "actgan",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "modelActions": [
+        {
+          "modelType": "actgan",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml"
+        }
+      ],
+      "sampleDataset": {
+        "fileName": "sample-synthetic-healthcare.csv",
+        "description": "Use this sample electronic health records (EHR) dataset to synthesize an entirely new set of statistically equivalent records.",
+        "records": 9999,
+        "fields": 18,
+        "trainingTime": "6 mins",
+        "bytes": 830021
+      },
+      "button1": {
+        "label": "Gretel 101 Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_101_Blueprint.ipynb"
+      },
+      "button2": {
+        "label": "Advanced Examples Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Advanced_Tabular_Blueprint.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-tabular-dp",
+      "title": "Create provably private versions of sensitive data",
+      "description": "Use Gretel Tabular DP, our graph-based generative model, to generate synthetic data with strong differential privacy guarantees.",
+      "cardType": "Console",
+      "icon": "tabular-dp.png",
+      "modelType": "tabular_dp",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
+      "modelActions": [
+        {
+          "modelType": "tabular_dp",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml"
+        }
+      ],
+      "sampleDataset": {
+        "fileName": "bank_marketing_small.csv",
+        "description": "This dataset contains direct marketing campaign details (phone calls) from a Portuguese financial institution. It has sensitive information such as demographics and financials, which can benefit from privacy preserving techniques before sharing.  ",
+        "records": 4521,
+        "fields": 17,
+        "trainingTime": "< 4 mins",
+        "bytes": 371020
+      }
+    },
+    {
+      "gtmId": "use-case-natural-lang-gpt",
+      "title": "Generate natural language text using GPT",
+      "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
+      "cardType": "Console",
+      "icon": "natural-lang-gpt.png",
+      "detailsFileName": "gpt-natural-language.md",
+      "modelType": "gpt_x",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "modelActions": [
+        {
+          "modelType": "gpt_x",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml"
+        }
+      ],
+      "sampleDataset": {
+        "fileName": "sample-banking-questions-intents.csv",
+        "description": "Create realistic banking-related questions and intent labels using this sample dataset.",
+        "records": 1082,
+        "fields": 1,
+        "trainingTime": "15 mins",
+        "bytes": 117475
+      },
+      "button1": {
+        "label": "Text Generation Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Text_Generation_Blueprint.ipynb"
+      },
+      "button2": {
+        "label": "Zero-Shot Prompting Notebook",
+        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
+      }
+    },
+    {
+      "gtmId": "use-case-timeseries-dgan",
+      "title": "Generate high-quality time series data",
+      "description": "Use DoppelGANger to create accurate and correlated time-series data.",
+      "cardType": "Console",
+      "icon": "timeseries.png",
+      "modelType": "timeseries_dgan",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
+      "modelActions": [
+        {
+          "modelType": "timeseries_dgan",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/time-series.yml"
+        }
+      ],
+      "sampleDataset": {
+        "fileName": "daily-website-visitors.csv",
+        "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
+        "records": 2167,
+        "fields": 5,
+        "trainingTime": "3 mins",
+        "bytes": 63000
+      }
+    },
+    {
+      "gtmId": "use-case-boost-minority-class",
+      "title": "Boost minority class data",
+      "description": "Train a model on a dataset with sparse instances of the minority class, and conditionally generate additional minority samples.",
+      "cardType": "Notebook",
+      "icon": "minority-classes.png",
+      "detailsFileName": "boost-minority-class.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/boost_minority_class.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-downstream-accuracy-notebook",
+      "title": "Evaluate classification and regression",
+      "description": "Validate the quality of synthetic data for classification/regression tasks.",
+      "cardType": "Notebook",
+      "icon": "downstream-accuracy.png",
+      "detailsFileName": "evaluate-downstream-accuracy-notebook.md",
+      "button1": {
+        "label": "Evaluate Regression",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/evaluate/evaluate_synthetic_data_regression_models.ipynb"
+      },
+      "button2": {
+        "label": "Evaluate Classification",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/evaluate/evaluate_synthetic_data_classification_models.ipynb"
+      }
+    },
+    {
+      "gtmId": "use-case-benchmark",
+      "title": "Benchmark multiple synthetic models",
+      "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
+      "cardType": "Notebook",
+      "icon": "benchmark.png",
+      "detailsFileName": "benchmark.md",
+      "button1": {
+        "label": "Open in GitHub",
+        "link": "https://github.com/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+      },
+      "button2": {
+        "label": "Run in Google Colab",
+        "link": "https://colab.research.google.com/github/gretelai/trainer/blob/main/notebooks/benchmark.ipynb"
+      }
+    }
+  ]
+}
