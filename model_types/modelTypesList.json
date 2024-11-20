@@ -112,12 +112,12 @@
       "description": "Flexible data pre and post processing toolkit including support for detecting arbitrary PII entities, configurable data generation templates, and faster speed.",
       "label": "Transform V2",
       "sampleDataset": {
-        "fileName": "patients.csv",
+        "fileName": "patients_notes.csv",
         "description": "This patient dataset contains names, addresses and other personally identifiable information, which needs to be redacted before the dataset can be shared or used to train ML models.",
-        "records": 36,
-        "fields": 17,
+        "records": 35,
+        "fields": 19,
         "trainingTime": "< 2 mins",
-        "bytes": 5647
+        "bytes": 20646
       }
     },
     {
