@@ -1,31 +1,47 @@
-# Policy to search for and redact "sensitive PII" as defined by `ask-experian` as well as
-# a custom defined regular expression for user IDs.
-# https://www.experian.com/blogs/ask-experian/what-is-personally-identifiable-information/
-
 schema_version: "1.0"
-name: "redact-pii-nlp"
+name: "redact-pii-ner"
 models:
   - transform_v2:
       data_source: "_"
       globals:
         classify:
-          # Classification currently uses the Gretel Cloud. If you are running in a hybrid
-          # environment and prefer not to use the Cloud, please set "enable: false" below.
           enable: true
           entities:
+            - first_name
+            - last_name
             - name
+            - gender
             - email
             - phone_number
+            - street_address
+            - city
+            - administrative_unit
+            - country
             - address
+            - postcode
             - credit_card_number
             - ssn
-          ner_threshold: 0.2
-        locales: [en_US, en_CA]
+        ner:
+          ner_threshold: 0.7
+        locales: [en_US]
       steps:
-        - rows:
+        - vars:
+            row_seed: random.random()
+          rows:
             update:
-              - condition: column.entity is in globals.classify.entities
+              - condition: column.entity is in globals.classify.entities and column.entity != "country" and column.entity != "email" and column.entity != "phone_number" and column.entity != "first_name" and column.entity != "last_name" and column.entity != "gender"
                 value: column.entity | fake
                 fallback_value: '"<" ~ column.entity ~ ">"'
-              - type: text
+              - condition: column.entity == "phone_number"
+                value: (random.randint(100, 999) | string) + "-" + (random.randint(100, 999) |
+                  string) + "-" + (random.randint(1000, 9999) | string)
+              - condition: column.entity == "first_name"
+                value: fake.persona(row_index=vars.row_seed + index).first_name
+              - condition: column.entity == "last_name"
+                value: fake.persona(row_index=vars.row_seed + index).last_name
+              - condition: column.entity == "gender"
+                value: fake.persona(row_index=vars.row_seed + index).gender
+              - condition: column.entity == "email"
+                value: fake.persona(row_index=vars.row_seed + index).email
+              - condition: column.entity is none and column.type == "text"
                 value: this | fake_entities
