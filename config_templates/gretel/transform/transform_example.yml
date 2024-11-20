@@ -1,0 +1,173 @@
+schema_version: "1.0"
+name: "redact-pii-nlp"
+models:
+  - transform_v2:
+      data_source: "_"
+      globals:
+        classify:
+          enable: true
+          entities:
+            # The model has been fine-tuned on the entities
+            # listed below, but you can include any arbitrary
+            # value and the model will attempt to find it.
+            # See here for definitions of each entity:
+            # https://docs.gretel.ai/create-synthetic-data/models/transform/v2/supported-entities
+
+            # If you want to fake an entity,
+            # it must be included in Faker:
+            # https://faker.readthedocs.io/en/master/providers.html
+
+            # You generally want to keep the entity list
+            # to a minimum, only including entities that you
+            # need to transform, in order to avoid the model getting
+            # confused about which entity type a column may be.
+            # Comment entities in or out based on what exists
+            # in your dataset.
+
+            # If the names are combined into a single column
+            # for full name in your dataset, use the name entity
+            # instead of first_name and last_name.
+            - first_name
+            - last_name
+            # - name
+
+            # If the address is in a single column rather than
+            # separated out into street address, city, state, etc.,
+            # use only address as the entity instead,
+            # and comment the others out.
+            - street_address
+            - city
+            - administrative_unit  # Faker's term for state or province
+            - country
+            - postcode
+            # - address
+
+            # Other common entities
+            - gender
+            - email
+            - phone_number
+            - credit_card_number
+            - ssn
+
+            # Entities that the model has been fine-tuned on,
+            # but are less common. Hence they have been commented
+            # out by default.
+            # - account_number
+            # - api_key
+            # - bank_routing_number
+            # - biometric_identifier
+            # - certificate_license_number
+            # - company_name
+            # - coordinate
+            # - customer_id
+            # - cvv
+            # - date
+            # - date_of_birth
+            # - date_time
+            # - device_identifier
+            # - employee_id
+            # - health_plan_beneficiary_number
+            # - ipv4
+            # - ipv6
+            # - license_plate
+            # - medical_record_number
+            # - national_id
+            # - password
+            # - pin
+            # - state
+            # - swift_bic
+            # - unique_identifier
+            # - tax_id
+            # - time
+            # - url
+            # - user_name
+            # - vehicle_identifier
+
+        ner:
+          # You can think of the NER threshold as the level of
+          # confidence required in the model's detection before
+          # labeling an entity. Increasing the NER threshold
+          # decreases the number of detected entities, while
+          # decreasing the NER threshold increases the number
+          # of detected entities.
+          ner_threshold: 0.7
+
+        # You can add additional locales to the list by separating
+        # via commas, such as locales: [en_US, en_CA]
+        locales: [en_US]
+      steps:
+        - rows:
+            update:
+              # For each column in the dataset you want to fake,
+              # follow this format:
+              # - name: <column_name>
+              #   value: fake.<entity_type>()
+              - name: address
+                value: fake.street_address()
+              - name: city
+                value: fake.city()
+              - name: state
+                value: fake.administrative_unit()
+              - name: postcode
+                value: fake.postcode()
+
+              # Names can be faked the same way:
+              - name: fname
+                value: fake.first_name()
+              - name: lname
+                value: fake.last_name()
+              # - name: fullname
+              #   value: fake.name()
+ 
+              # You may want names to be based on a gender column instead.
+              # Update the name of the gender column (e.g., "gender").
+              # Update the values in the gender column (e.g., "male", "female").
+              # - name: fname
+              #   value: fake.first_name_male() if row["gender"] == 'male' else fake.first_name_female() if row["gender"] == 'female' else fake.first_name()
+              # - name: lname
+              #   value: fake.last_name_male() if row["gender"] == 'male' else fake.last_name_female() if row["gender"] == 'female' else fake.last_name()
+              # Or, for full name:
+              # - name: name
+              #   value: fake.name_male() if row["gender"] == 'male' else fake.name_female() if row["gender"] == 'female' else fake.name()
+
+              # You may have values based on others values in the
+              # dataset, such as email.
+              # Ensure steps for dependent values (e.g. email)
+              # are performed after steps that fake dependent values
+              # (e.g. first_name and last_name).
+              # For example, if I want email to be based on first
+              # and last name, I need to have faked those already.
+
+              # The below syntax generates an email of the form
+              # <lowercase_first_letter_of_first_name><lowercase_last_name><number between 0 and 9>@<freedomain>
+              # As an example, it could be "kjohnson7@gmail.com" for someone with a faked name of Kara Johnson
+              # Be sure to update the column names with your column names,
+              # rather than "fname" and "lname"
+              - name: email
+                value: row["fname"][0].lower() + row["lname"].lower() + (random.randint(0, 9) | string) + "@" + fake.free_email_domain()
+
+              # This section of the Faker documentation has a list
+              # of various options for domains or full emails:
+              # https://faker.readthedocs.io/en/master/providers/faker.providers.internet.html
+              # Here are some examples:
+              # value: fake.email() # Note that this will not be based on first or last name columns, it is random.
+              # value: fake.company_email() # Note that this will not be based on first or last name columns, it is random.
+              # value: row["fname"] + "." + row["lname"] + "@" + fake.domainname()
+              # value: row["fname"] + "." + row["lname"] + "@" + fake.domainword() + ".com"
+              # The next example generates a fake company name, removes punctuation,
+              # and converts to lowercase for the names and domain.
+              # value: row["fname"].lower() + "." + row["lname"].lower() + "@" + fake.company().replace(" ", "").replace(",","").replace("-","").lower() + ".org"
+
+              # By default, Faker does not standardize telephone formats.
+              # This example generates a format like "123-456-7890".
+              - condition: column.entity == "phone_number"
+                value: (random.randint(100, 999) | string) + "-" + (random.randint(100, 999) | string) + "-" + (random.randint(1000, 9999) | string)
+              # The next example generates a format like "(123)456-7890"
+              # - condition: column.entity == "phone_number"
+              #   value: "(" + (random.randint(100, 999) | string) + ")" + (random.randint(100, 999) | string) + "-" + (random.randint(1000, 9999) | string)
+
+              # The next section text columns not classified as a single entity and runs NER.
+              # It fakes any entities from the list on globals.classify.entities.
+              # Comment this out if you don't want to fake entities in free-text columns.
+              - condition: column.entity is none and column.type == "text"
+                value: this | fake_entities
