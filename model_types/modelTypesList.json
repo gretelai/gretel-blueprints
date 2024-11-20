@@ -4,6 +4,7 @@
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "differentialPrivacyConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
       "description": "Our newest language model capable of generating multi-modal tabular data including mixed categorical, numeric, time-series, and free text fields.",
       "label": "Navigator Fine Tuning",
       "sampleDataset": {
