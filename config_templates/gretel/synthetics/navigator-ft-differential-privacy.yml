@@ -1,4 +1,4 @@
-schema_version: 1.0
+schema_version: "1.0"
 name: "navigator_ft-dp"
 models:
 - navigator_ft:
