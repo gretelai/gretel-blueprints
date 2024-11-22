@@ -21,7 +21,6 @@
       "title": "Synthesize tabular data with Navigator Fine Tuning",
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
-      "tag": "New",
       "icon": "navigator-ft.png",
       "detailsFileName": "navigator-ft.md",
       "modelType": "navigator_ft",
@@ -73,11 +72,41 @@
       }
     },
     {
+      "gtmId": "use-case-navigator-ft-dp",
+      "title": "Generate differentially-private synthetic numeric, categorical, and text data",
+      "description": "Use Navigator Fine Tuning with Differential Privacy to synthesize tabular data with mathematical guarantees of privacy.",
+      "cardType": "Console",
+      "tag": "New",
+      "icon": "navigator-ft-dp.png",
+      "detailsFileName": "navigator-ft-dp.md",
+      "modelType": "navigator_ft",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
+      "modelActions": [
+        {
+          "modelType": "navigator_ft",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml"
+        }
+      ],
+      "button1": {
+        "label": "SDK Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navft-dp/navft-dp-sample.ipynb"
+      },
+      "sampleDataset": {
+        "fileName": "womens_clothing_reviews.csv",
+        "description": "This dataset contains reviews, ratings, and categories for women's clothing.",
+        "records": 20641,
+        "fields": 8,
+        "trainingTime": "25 mins",
+        "bytes": 7137167
+      }
+    },
+    {
       "gtmId": "use-case-gpt-dp",
       "title": "Produce free text data with privacy guarantees",
       "description": "Leverage differentially private fine-tuning with GPT to generate a provably-private version of your free text data.",
       "cardType": "Console",
-      "tag": "New",
       "icon": "GPTwithDP.png",
       "detailsFileName": "gpt-dp.md",
       "modelType": "gpt_x",
