@@ -2,7 +2,17 @@
 # a Synthetic Quality Score report for any two datasets
 
 schema_version: "1.0"
+name: "evaluate-model"
 
 models:
   - evaluate:
-      data_source: "__tmp__"
+      data_source: "__tmp__"    
+      ref_data: "__tmp__"
+      privacy_metrics:
+        quasi_identifier_count: 3
+        skip: false
+        skip_mia: false
+        skip_aia: false
+      pii_replay:
+        skip: false
+        entities: null
