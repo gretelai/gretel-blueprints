@@ -5,10 +5,10 @@ schema_version: "1.0"
 name: "evaluate-model"
 models:
   - evaluate:
-      data_source: "__tmp__" # Synthetic data source
+      data_source: "__tmp__" # Output data source
       ref_data:
-        "0": "__tmp__" # Training data source
-        "1": "__tmp__" # Optional test data source for MIA 
+        "0": "__tmp__" # Original data source
+        "1": "__tmp__" # Optional test (holdout) data source for MIA
       privacy_metrics:
         quasi_identifier_count: 3
         skip: false
