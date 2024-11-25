@@ -7,9 +7,8 @@
 # If they are both null, the model will generate the same number of records as the training data. 
 # If they are both non-null values, the config will be invalid.
 
-schema_version: '1.0'
+schema_version: "1.0"
 name: "data-amplification-model"
-
 models:
     - amplify:
         data_source: __tmp__
