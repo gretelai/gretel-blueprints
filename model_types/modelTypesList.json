@@ -20,6 +20,7 @@
       "modelType": "actgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "differentialPrivacyConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
       "description": "Our speediest and most efficient GAN model for generating highly dimensional numeric and categorical tabular data.",
       "label": "Synthetic ACTGAN",
       "sampleDataset": {
