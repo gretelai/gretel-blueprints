@@ -4,6 +4,7 @@
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
+      "differentialPrivacyConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
       "description": "Our newest language model capable of generating multi-modal tabular data including mixed categorical, numeric, time-series, and free text fields.",
       "label": "Navigator Fine Tuning",
       "sampleDataset": {
@@ -19,6 +20,7 @@
       "modelType": "actgan",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
+      "differentialPrivacyConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
       "description": "Our speediest and most efficient GAN model for generating highly dimensional numeric and categorical tabular data.",
       "label": "Synthetic ACTGAN",
       "sampleDataset": {
@@ -34,6 +36,7 @@
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
+      "differentialPrivacyConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml",
       "description": "GPT3-like pre-trained transformer model for generating natural language text from an input file.",
       "label": "GPT",
       "sampleDataset": {
