@@ -27,7 +27,7 @@ models:
         num_input_records_to_sample: auto
 
         # You can try increasing this until you run out-of-memory.
-        batch_size: 8
+        batch_size: 4
 
     privacy_params:
         dp: true
