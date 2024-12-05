@@ -98,7 +98,7 @@
         "description": "This dataset contains reviews, ratings, and categories for women's clothing.",
         "records": 20641,
         "fields": 8,
-        "trainingTime": "39 mins",
+        "trainingTime": "46 mins",
         "bytes": 3260007
       }
     },
