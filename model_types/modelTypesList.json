@@ -5,7 +5,7 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
       "differentialPrivacyConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
-      "description": "Our newest language model capable of generating multi-modal tabular data including mixed categorical, numeric, time-series, and free text fields.",
+      "description": "Use our flagship model to generate privacy-preserving synthetic data across categorical, numeric, time-sequence, and text fields in tabular data.",
       "label": "Tabular Fine-Tuning",
       "sampleDataset": {
         "fileName": "financial_transactions.csv",
@@ -21,7 +21,7 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "differentialPrivacyConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml",
-      "description": "GPT3-like pre-trained transformer model for generating natural language text from an input file.",
+      "description": "Fine-tune large language models with differential privacy, evaluate model quality, and generate synthetic text while protecting sensitive training data.",
       "label": "Text Fine-Tuning",
       "sampleDataset": {
         "fileName": "sample-banking-questions-intents.csv",
@@ -36,7 +36,7 @@
       "modelType": "transform_v2",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/transform_v2.yml",
-      "description": "Flexible data pre and post processing toolkit including support for detecting arbitrary PII entities, configurable data generation templates, and faster speed.",
+      "description": "Detect and transform sensitive data with configurable templates, validate data quality, and automate PII discovery across your structured data.",
       "label": "Transform",
       "sampleDataset": {
         "fileName": "patients_notes.csv",
@@ -52,7 +52,7 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "differentialPrivacyConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
-      "description": "Our speediest and most efficient GAN model for generating highly dimensional numeric and categorical tabular data.",
+      "description": "Quickly generate synthetic tabular data for high-dimensional datasets while preserving relationships between numeric and categorical columns.",
       "label": "Tabular GAN",
       "sampleDataset": {
         "fileName": "monthly-customer-payments.csv",
@@ -67,7 +67,7 @@
       "modelType": "tabular_dp",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
-      "description": "Fast, graph-based synthetic data model with strong differential privacy guarantees",
+      "description": "Create privacy-protected synthetic data categorical and numeric data with mathematical guarantees using fast graph-based modeling optimized for tabular structures.",
       "label": "Tabular DP",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
