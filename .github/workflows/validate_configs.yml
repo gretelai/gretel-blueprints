@@ -4,48 +4,47 @@ on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
     branches:
-      - '**'  
+      - "**"
 
 jobs:
   validate-configs:
     runs-on: ubuntu-latest
     steps:
+      # Setup and install deps
+      - uses: actions/checkout@v1
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
 
-    # Setup and install deps
-    - uses: actions/checkout@v1
-    - name: Setup Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-    - name: Install deps
-      run: | 
-        pip install -r requirements.txt
+      # Run tests in DEV
+      - name: Unit tests
+        run: |
+          pytest -s -vv test_config_templates.py
+        if: ${{ github.base_ref != 'main' }}
+        env:
+          GRETEL_API_KEY: ${{ secrets.GRETEL_DEV_API_KEY }}
+          GRETEL_CLOUD_URL: "https://api-dev.gretel.cloud"
 
-    # Run tests in DEV
-    - name: Unit tests
-      run: |
-        pytest -s -vv test_config_templates.py
-      if: ${{ github.base_ref != 'main' }}
-      env:
-        GRETEL_API_KEY: ${{ secrets.GRETEL_DEV_API_KEY }}
-        GRETEL_CLOUD_URL: "https://api-dev.gretel.cloud"
+      # Run tests in PROD
+      - name: Unit tests
+        run: |
+          pytest -s -vv test_config_templates.py
+        if: ${{ github.base_ref == 'main' }}
+        env:
+          GRETEL_API_KEY: ${{ secrets.GRETEL_PROD_API_KEY }}
+          GRETEL_CLOUD_URL: "https://api.gretel.cloud"
 
-    # Run tests in PROD
-    - name: Unit tests
-      run: |
-        pytest -s -vv test_config_templates.py
-      if: ${{ github.base_ref == 'main' }}
-      env:
-        GRETEL_API_KEY: ${{ secrets.GRETEL_PROD_API_KEY }}
-        GRETEL_CLOUD_URL: "https://api.gretel.cloud"
-
-    # job notif
-    - uses: 8398a7/action-slack@v2
-      with:
-        status: ${{ job.status }}
-        author_name: Validate Configs
-        only_mention_fail: here
-      env:
-        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: always()
+      # job notif
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          author_name: Validate Configs
+          only_mention_fail: here
+        env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
