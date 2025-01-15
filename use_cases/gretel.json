@@ -209,7 +209,7 @@
     },
     {
       "gtmId": "use-case-natural-lang-gpt",
-      "title": "Generate synthetic text data using GPT",
+      "title": "Generate natural language text using GPT",
       "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
       "cardType": "Console",
       "icon": "natural-lang-gpt.png",
@@ -238,7 +238,7 @@
       },
       "button2": {
         "label": "Zero-Shot Prompting Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Prompting_Llama_2_at_Scale.ipynb"
+        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
       }
     },
     {
