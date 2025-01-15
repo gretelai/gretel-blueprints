@@ -5,7 +5,7 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
       "differentialPrivacyConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
-      "description": "Use our flagship model to generate privacy-preserving synthetic data across categorical, numeric, time-sequence, and text fields in tabular data.",
+      "description": "Use our flagship model to generate privacy-preserving synthetic data across categorical, numeric, time-sequence, and text fields.",
       "label": "Tabular Fine-Tuning",
       "sampleDataset": {
         "fileName": "financial_transactions.csv",
