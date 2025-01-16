@@ -18,7 +18,7 @@
     },
     {
       "gtmId": "use-case-navigator-ft",
-      "title": "Synthesize tabular data with Navigator Fine Tuning",
+      "title": "Synthesize tabular data with Tabular Fine-Tuning",
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
       "icon": "navigator-ft.png",
@@ -74,7 +74,7 @@
     {
       "gtmId": "use-case-navigator-ft-dp",
       "title": "Generate differentially-private synthetic numeric, categorical, and text data",
-      "description": "Use Navigator Fine Tuning with Differential Privacy to synthesize tabular data with mathematical guarantees of privacy.",
+      "description": "Use Tabular Fine-Tuning with Differential Privacy to synthesize tabular data with mathematical guarantees of privacy.",
       "cardType": "Console",
       "tag": "New",
       "icon": "navigator-ft-dp.png",
@@ -105,7 +105,7 @@
     {
       "gtmId": "use-case-gpt-dp",
       "title": "Produce free text data with privacy guarantees",
-      "description": "Leverage differentially private fine-tuning with GPT to generate a provably-private version of your free text data.",
+      "description": "Leverage differentially private fine-tuning with Text Fine-Tuning to generate a provably-private version of your free text data.",
       "cardType": "Console",
       "icon": "GPTwithDP.png",
       "detailsFileName": "gpt-dp.md",
@@ -209,7 +209,7 @@
     },
     {
       "gtmId": "use-case-natural-lang-gpt",
-      "title": "Generate synthetic text data using GPT",
+      "title": "Generate synthetic text data using Text Fine-Tuning",
       "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
       "cardType": "Console",
       "icon": "natural-lang-gpt.png",
@@ -238,7 +238,7 @@
       },
       "button2": {
         "label": "Zero-Shot Prompting Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Prompting_Llama_2_at_Scale.ipynb"
+        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
       }
     },
     {
