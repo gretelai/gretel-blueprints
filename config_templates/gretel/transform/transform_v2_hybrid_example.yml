@@ -1,0 +1,28 @@
+schema_version: "1.0"
+models:
+  - transform_v2:
+      # This matches the columns we're trying to fake
+      data_source: https://raw.githubusercontent.com/gretelai/gretel-blueprints/refs/heads/main/sample_data/patients.csv
+      globals:
+        locales:
+          - en_US
+        classify:
+          enable: false
+      steps:
+        - vars:
+            # See the list of supported entities here
+            # https://docs.gretel.ai/create-synthetic-data/models/transform/v2/supported-entities
+            entity_mapping:
+              fname: first_name
+              lname: last_name
+              telephone: phone_number
+              address: street_address
+              city: city
+              country: country
+              postcode: postcode
+          rows:
+            update:
+              - condition: column.name in vars.entity_mapping
+                value: vars.entity_mapping[column.name] | fake
+              - name: email
+                value: row.fname.lower() + "." + row.lname.lower() + "@example.com"
