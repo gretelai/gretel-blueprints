@@ -1,4 +1,4 @@
-![Create free text data with privacy guarantees](https://blueprints.gretel.cloud/use_cases/images/gpt-dp.png "Create free text data with privacy guarantees")
+![Create free text data with privacy guarantees](https://blueprints.gretel.cloud/use_cases/images/text-ft-dp.png "Create free text data with privacy guarantees")
 
 Unlock the potential of your text data while ensuring privacy by applying [differentially private fine-tuning using Text Fine-Tuning](https://gretel.ai/blog/generate-differentially-private-synthetic-text-with-gretel-gpt). This method allows you to create a version of your free text data that maintains the integrity of sensitive information while still providing high-quality outputs.
 
