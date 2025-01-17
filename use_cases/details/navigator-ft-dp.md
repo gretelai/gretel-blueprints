@@ -1,4 +1,4 @@
-![Generate differentially-private synthetic numeric, categorical, and text data](https://blueprints.gretel.cloud/use_cases/images/navigator-ft-dp-hero.png "Generate differentially-private synthetic numeric, categorical, and text data")
+![Generate differentially-private synthetic numeric, categorical, and text data](https://blueprints.gretel.cloud/use_cases/images/tabular-ft-dp.png "Generate differentially-private synthetic numeric, categorical, and text data")
 
 With Differential Privacy for Tabular Fine-Tuning, you can now get mathematical guarantees related to privacy without having to separate your dataset out by data type. Tabular Fine-Tuning supports datasets containing numerical, categorical, free text, and event-driven fields.
 

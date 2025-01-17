@@ -1,4 +1,4 @@
-![Generate synthetic text data](https://blueprints.gretel.cloud/use_cases/images/natural-language-gpt.png "Generate synthetic text data")
+![Generate synthetic text data](https://blueprints.gretel.cloud/use_cases/images/text-ft.png "Generate synthetic text data")
 
 Streamline your natural language processing projects with our Text Fine-Tuning blueprint. It supports the creation of labeled examples for various language tasks. From sentiment analysis to text summarization, Gretel Text Fine-Tuning makes it simple to prompt or fine-tune LLMs to enhance the quality of your datasets with precision and efficiency.
 
