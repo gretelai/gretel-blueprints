@@ -1,0 +1,165 @@
+:root {
+    /* Define color variables for easy theme management */
+    --blurple: #5534A5;
+    --blurple-hover: #8574FF;
+    --light-blurple: #EDE7F6;
+    --black: #000; /* Ensure black is defined if used */
+}
+
+/* General font adjustments */
+html, body, [class*="css"] {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333; /* Improved readability with a darker font color */
+}
+
+/* Style for the div containing the SVG logo */
+.logo-div {
+    margin-bottom: -20px;
+    transform: scale(0.7);
+    transform-origin: top left;
+}
+
+/* Adjustments for the main title */
+h1 {
+    font-size: 36px;
+    color: var(--blurple);
+    font-weight: 600;
+    margin-top: -20px; /* Reduced top margin to decrease space */
+}
+
+/* Adjustments for secondary titles */
+h2 {
+    font-size: 20px !important;
+    color: var(--black) !important;
+    font-weight: 600 !important;
+}
+
+/* Styles for other headers with blurple color */
+h3, h4, h5, h6 {
+    color: var(--blurple);
+    font-weight: 600;
+}
+
+/* Button customization */
+.stButton>button {
+    border-radius: 5px; /* Less rounded corners for a modern look */
+    background-color: #dddde7; /* Light background color */
+    color: #4537D4; /* Text color */
+    border: 2px solid #dddde7; /* Border color for a seamless look */
+    padding: 10px 24px; /* Ample padding for button text */
+    font-size: 16px; /* Appropriate font size for readability */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Override focus state to prevent red contour */
+.stButton>button:focus {
+    outline: none !important; /* Removes the outline */
+    border-color: #dddde7 !important; /* Keeps the border color consistent, adjust as needed */
+}
+
+/* General adjustments for focus states to remove red outline */
+button:focus, .stButton>button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Customization for button active and focus states */
+.stButton>button:active, .stButton>button:focus {
+    color: #4537D4 !important; /* Custom text color - replace as needed */
+    outline: none !important; /* Removes the default focus outline */
+}
+
+/* Maintaining hover effect for consistency */
+.stButton>button:hover {
+    background-color: #dddde7; /* Slightly darker shade on hover */
+    color: #4537D4; /* Maintaining text color on hover */
+    border-color: #FFFFFF; /* Hover border color set to match the button text color */
+}
+
+/* Input fields styling */
+.stTextInput>div>div>input, .stSelectbox>div>div>select {
+    border-radius: 20px;
+    border: 2px solid var(--blurple);
+}
+
+/* File uploader styling */
+.stFileUploader>div>div>div {
+    border-radius: 20px;
+    border: 2px dashed var(--blurple);
+    background-color: var(--light-blurple);
+}
+
+/* Widget labels */
+.stLabel>label {
+    font-weight: bold;
+    color: var(--blurple);
+}
+
+/* Markdown link colors */
+.stMarkdown a {
+    color: var(--blurple);
+}
+
+/* General button customization to attempt influencing st.file_uploader */
+button, .stFileUploader button {
+    border-radius: 5px !important; /* Less rounded corners */
+    background-color: #F6F6FD !important; /* Light background color */
+    color: #4537D4 !important; /* Text color */
+    border: 2px solid #F6F6FD !important; /* Border color for a seamless look */
+    padding: 10px 24px !important; /* Ample padding for button text */
+    font-size: 16px !important; /* Appropriate font size for readability */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s !important; /* Smooth transition */
+}
+
+button:hover, .stFileUploader button:hover {
+    background-color: #E4E4F6 !important; /* Darker shade on hover */
+    color: #4537D4 !important; /* Maintaining text color on hover */
+    border-color: #F6F6FD !important; /* Hover border color */
+}
+
+/* Focus state to prevent red outline and maintain custom styles */
+button:focus, .stFileUploader button:focus {
+    outline: none !important; /* Removes the outline */
+    border-color: #F6F6FD !important; /* Keeps the border color consistent */
+}
+
+/* Active state for additional visual feedback */
+button:active, .stFileUploader button:active {
+    background-color: #D7D7F4 !important; /* Slightly darker for active state */
+    color: #4537D4 !important;
+    border-color: #FFFFFF !important; /* Optional: change if active state border color needed */
+}
+
+/* General adjustments for focus states to remove red outline universally */
+button:focus, .stButton>button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+/* Responsive design adjustments for smaller screens */
+@media (max-width: 768px) {
+    .logo-div, h1, .stButton>button, h2, h3, h4, h5, h6 {
+        transform: scale(0.6); /* Adjust scale for smaller screens */
+        font-size: 14px; /* Smaller font sizes for better mobile readability */
+    }
+    .stButton>button {
+        padding: 8px 20px; /* Adjust padding for smaller buttons */
+    }
+}
+
+/* Navigation Link Styles */
+.nav-link, .nav-link-active {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 4px 0;
+    background-color: var(--button-background, #F6F6FD);
+    color: var(--button-text-color, #4537D4);
+    text-align: left;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%; /* Ensure link utilizes full sidebar width for easier clicking */
+    box-sizing: border-box; /* Ensures padding does not increase the box size */
+}
