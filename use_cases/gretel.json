@@ -22,7 +22,7 @@
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
       "icon": "tabular-ft.png",
-      "detailsFileName": "navigator-ft.md",
+      "detailsFileName": "tabular-ft.md",
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
@@ -239,31 +239,6 @@
       "button2": {
         "label": "Zero-Shot Prompting Notebook",
         "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
-      }
-    },
-    {
-      "gtmId": "use-case-timeseries-dgan",
-      "title": "Generate high-quality time series data",
-      "description": "Use DoppelGANger to create accurate and correlated time-series data.",
-      "cardType": "Console",
-      "icon": "timeseries.png",
-      "modelType": "timeseries_dgan",
-      "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/time-series.yml",
-      "modelActions": [
-        {
-          "modelType": "timeseries_dgan",
-          "modelCategory": "synthetics",
-          "defaultConfig": "config_templates/gretel/synthetics/time-series.yml"
-        }
-      ],
-      "sampleDataset": {
-        "fileName": "daily-website-visitors.csv",
-        "description": "Safely synthesize a dataset of daily website visitors while maintaining correlations and data patterns.",
-        "records": 2167,
-        "fields": 5,
-        "trainingTime": "3 mins",
-        "bytes": 63000
       }
     },
     {
