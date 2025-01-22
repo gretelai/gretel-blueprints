@@ -283,22 +283,6 @@
       }
     },
     {
-      "gtmId": "use-case-downstream-accuracy-notebook",
-      "title": "Evaluate classification and regression",
-      "description": "Validate the quality of synthetic data for classification/regression tasks.",
-      "cardType": "Notebook",
-      "icon": "downstream-accuracy.png",
-      "detailsFileName": "evaluate-downstream-accuracy-notebook.md",
-      "button1": {
-        "label": "Evaluate Regression",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/evaluate/evaluate_synthetic_data_regression_models.ipynb"
-      },
-      "button2": {
-        "label": "Evaluate Classification",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/evaluate/evaluate_synthetic_data_classification_models.ipynb"
-      }
-    },
-    {
       "gtmId": "use-case-benchmark",
       "title": "Benchmark multiple synthetic models",
       "description": "Evaluate multiple synthetic data models on a standardized benchmark with a single function.",
