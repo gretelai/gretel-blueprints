@@ -76,7 +76,6 @@
       "title": "Generate differentially-private synthetic numeric, categorical, and text data",
       "description": "Use Tabular Fine-Tuning with Differential Privacy to synthesize data with mathematical guarantees of privacy.",
       "cardType": "Console",
-      "tag": "New",
       "icon": "tabular-ft-dp.png",
       "detailsFileName": "tabular-ft-dp.md",
       "modelType": "navigator_ft",
