@@ -1,4 +1,4 @@
-![Generate synthetic tabular data](https://blueprints.gretel.cloud/use_cases/images/synthetic-tabular-generation.png "Generate synthetic tabular data")
+![Generate synthetic tabular data](https://blueprints.gretel.cloud/use_cases/images/tabular-gan.png "Generate synthetic tabular data")
 
 The synthetic data blueprint is a great introduction to synthetic data generation using our [Tabular GAN model](https://gretel.ai/blog/scale-synthetic-data-to-millions-of-rows-with-actgan) for numeric and categorical data using a sample healthcare dataset. Just answer a few questions, review the model configuration and hit **Run**.
 
