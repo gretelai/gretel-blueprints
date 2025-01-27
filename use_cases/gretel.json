@@ -18,7 +18,7 @@
     },
     {
       "gtmId": "use-case-navigator-ft",
-      "title": "Synthesize tabular data with Tabular Fine-Tuning",
+      "title": "Synthesize data with Tabular Fine-Tuning",
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
       "icon": "tabular-ft.png",
@@ -74,7 +74,7 @@
     {
       "gtmId": "use-case-navigator-ft-dp",
       "title": "Generate differentially-private synthetic numeric, categorical, and text data",
-      "description": "Use Tabular Fine-Tuning with Differential Privacy to synthesize tabular data with mathematical guarantees of privacy.",
+      "description": "Use Tabular Fine-Tuning with Differential Privacy to synthesize data with mathematical guarantees of privacy.",
       "cardType": "Console",
       "tag": "New",
       "icon": "tabular-ft-dp.png",
