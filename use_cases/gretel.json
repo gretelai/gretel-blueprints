@@ -17,7 +17,7 @@
       }
     },
     {
-      "gtmId": "use-case-navigator-ft",
+      "gtmId": "use-case-tabular-ft",
       "title": "Synthesize data with Tabular Fine-Tuning",
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
@@ -47,7 +47,7 @@
       }
     },
     {
-      "gtmId": "use-case-redact-pii",
+      "gtmId": "use-case-transform",
       "title": "Transform unstructured data into AI-ready formats",
       "description": "De-identify, transform, or label text and tabular data for AI.",
       "cardType": "Console",
@@ -72,7 +72,7 @@
       }
     },
     {
-      "gtmId": "use-case-navigator-ft-dp",
+      "gtmId": "use-case-tabular-ft-dp",
       "title": "Generate differentially-private synthetic numeric, categorical, and text data",
       "description": "Use Tabular Fine-Tuning with Differential Privacy to synthesize data with mathematical guarantees of privacy.",
       "cardType": "Console",
@@ -102,7 +102,7 @@
       }
     },
     {
-      "gtmId": "use-case-gpt-dp",
+      "gtmId": "use-case-text-ft-dp",
       "title": "Produce free text data with privacy guarantees",
       "description": "Leverage differentially private fine-tuning with Text Fine-Tuning to generate a provably-private version of your free text data.",
       "cardType": "Console",
@@ -148,7 +148,7 @@
       }
     },
     {
-      "gtmId": "use-case-synthetic",
+      "gtmId": "use-case-tabular-gan",
       "title": "Generate synthetic data from complex tabular datasets",
       "description": "Handle high-dimensional data with thousands of columns and millions of rows.",
       "cardType": "Console",
@@ -207,7 +207,7 @@
       }
     },
     {
-      "gtmId": "use-case-natural-lang-gpt",
+      "gtmId": "use-case-text-ft",
       "title": "Generate synthetic text data using Text Fine-Tuning",
       "description": "Quickly generate diverse text examples for natural language tasks, simplifying the generation of labeled datasets.",
       "cardType": "Console",
