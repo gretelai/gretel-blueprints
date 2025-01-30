@@ -67,7 +67,7 @@
       "modelType": "tabular_dp",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/synthetics/tabular-differential-privacy.yml",
-      "description": "Create privacy-protected synthetic data categorical and numeric data with mathematical guarantees using fast graph-based modeling optimized for tabular structures.",
+      "description": "Create privacy-protected synthetic data with mathematical guarantees using fast graph-based modeling optimized for tabular structures.",
       "label": "Tabular DP",
       "sampleDataset": {
         "fileName": "bank_marketing_small.csv",
