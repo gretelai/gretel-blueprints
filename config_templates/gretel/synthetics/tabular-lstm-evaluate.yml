@@ -1,0 +1,29 @@
+# Blueprint configuration for evaluating synthetic data on classification and regression models
+# You can substitute with any synthetic model. For example, to use Gretel ACTGAN or TabularDP models,
+# edit the default config and add the "evaluate" parameters below.
+
+schema_version: "1.0"
+name: "tabular-lstm-evaluate"
+models:
+  - synthetics:
+      data_source: __tmp__
+      params:
+        epochs: auto
+        vocab_size: auto
+        learning_rate: auto
+        batch_size: auto
+        rnn_units: auto
+      generate:
+        num_records: 5000
+      privacy_filters:
+        outliers: auto
+        similarity: auto
+      evaluate:
+        ### Indicate classification or regression 
+        task: classification # Indicate classification or regression
+        target: "y" # The column in your dataset containing the desired label
+        
+        ### Optional metrics
+        # holdout: null       
+        # metric: null       
+        # models: null        
