@@ -1,0 +1,20 @@
+# deprecated: This configuration will be deprecated soon. Please use the "synthetics/tabular-lstm" configuration.
+
+
+schema_version: "1.0"
+name: "complex-or-free-text"
+models:
+  - synthetics:
+      data_source: "__tmp__"
+      params:
+        epochs: 100
+        vocab_size: 20000
+        learning_rate: .001
+        rnn_units: 1024
+        batch_size: 256
+      generate:
+        num_records: 5000
+      privacy_filters:
+        outliers: auto
+        similarity: auto
+

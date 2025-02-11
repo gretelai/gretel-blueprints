@@ -1,0 +1,18 @@
+# Gretel Configuration for Amplification model creation
+#
+# Once this model is created, you may run the model to generate high
+# volumes of synthetic data
+#
+# NOTE: Set either `num_records` or `target_size_mb` to a non-null integer. 
+# If they are both null, the model will generate the same number of records as the training data. 
+# If they are both non-null values, the config will be invalid.
+
+schema_version: "1.0"
+name: "data-amplification-model"
+models:
+    - amplify:
+        data_source: __tmp__
+        params:
+          num_records: null
+          target_size_mb: null
+          auto_transform_datetimes: True
