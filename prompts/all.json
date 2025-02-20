@@ -156,11 +156,5 @@
       ]
     }
   ],
-  "augment-dataset": [
-    {
-      "id": "add-column",
-      "label": "New column",
-      "value": "Add a new column called [NAME] that follows these rules: [RULES]."
-    }
-  ]
+  "augment-dataset": []
 }
