@@ -1,0 +1,16 @@
+schema_version: "1.0"
+name: default
+task:
+  name: tabular_gan
+  config:
+    train:
+      params:
+        epochs: auto
+        generator_dim: [1024, 1024]
+        discriminator_dim: [1024, 1024]
+        generator_lr: 0.0001
+        discriminator_lr: .00033
+        batch_size: auto
+        auto_transform_datetimes: False
+    generate:
+      num_records: 5000
