@@ -1,0 +1,47 @@
+schema_version: "1.0"
+name: default
+task:
+  name: transform
+  config:
+      globals:
+        classify:
+          enable: true
+          entities:
+            - first_name
+            - last_name
+            - name
+            - gender
+            - email
+            - phone_number
+            - street_address
+            - city
+            - administrative_unit
+            - country
+            - address
+            - postcode
+            - credit_card_number
+            - ssn
+        ner:
+          ner_threshold: 0.7
+        locales: [en_US]
+      steps:
+        - vars:
+            row_seed: random.random()
+          rows:
+            update:
+              - condition: column.entity is in globals.classify.entities and column.entity != "country" and column.entity != "email" and column.entity != "phone_number" and column.entity != "first_name" and column.entity != "last_name" and column.entity != "gender"
+                value: column.entity | fake
+                fallback_value: '"<" ~ column.entity ~ ">"'
+              - condition: column.entity == "phone_number"
+                value: (random.randint(100, 999) | string) + "-" + (random.randint(100, 999) |
+                  string) + "-" + (random.randint(1000, 9999) | string)
+              - condition: column.entity == "first_name"
+                value: fake.persona(row_index=vars.row_seed + index).first_name
+              - condition: column.entity == "last_name"
+                value: fake.persona(row_index=vars.row_seed + index).last_name
+              - condition: column.entity == "gender"
+                value: fake.persona(row_index=vars.row_seed + index).gender
+              - condition: column.entity == "email"
+                value: fake.persona(row_index=vars.row_seed + index).email
+              - condition: column.entity is none and column.type == "text"
+                value: this | fake_entities
