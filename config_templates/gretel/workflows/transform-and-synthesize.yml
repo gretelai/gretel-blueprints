@@ -5,14 +5,14 @@ globals:
   num_records: 100
 inputs: {}
 steps:
-- config: {}
-  name: holdout
+- name: holdout
   task: holdout
+  config: {}
   inputs:
   - data-source
-- config:
-    name: transform
-    task: transform
+- name: transform
+  task: transform
+  config:
     globals:
       classify:
         enable: true
@@ -61,9 +61,9 @@ steps:
         row_seed: random.random()
   inputs:
   - holdout
-- config:
-    name: tabular-ft
-    task: tabular_ft
+- name: tabular-ft
+  task: tabular_ft
+  config:
     generate:
       num_records: 5000
     train:
