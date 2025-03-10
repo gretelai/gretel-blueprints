@@ -9,7 +9,7 @@ steps:
   task: holdout
   config: {}
   inputs:
-  - data-source
+  - uploaded-data-read
 - name: transform
   task: transform
   config:
