@@ -33,7 +33,7 @@ _configs = list((Path(__file__).parent / "config_templates").glob("**/*.yml"))
     [
         "/".join(str(_config).split("/")[-4:])
         for _config in _configs
-        if _config.parent.name != "tuner"
+        if _config.parent.name != "tuner" and _config.parent.name != "workflows"
     ],
 )
 def test_configs(_config_file, project: Project):

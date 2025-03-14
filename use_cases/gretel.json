@@ -1,6 +1,22 @@
 {
   "cards": [
     {
+      "gtmId": "transform-and-synthesize",
+      "title": "Transform + synthesize for HIPAA compliance",
+      "description": "Transform then synthesize your data for HIPAA compliance.",
+      "cardType": "Console",
+      "icon": "transform.png",
+      "defaultConfig": "config_templates/gretel/workflows/transform-and-synthesize.yml"
+    },
+    {
+      "gtmId": "text-to-python",
+      "title": "Data Designer: Generate text-to-python",
+      "description": "Use our advanced Data Designer to generate text-to-python pairs for LLM fine-tuning",
+      "cardType": "Console",
+      "icon": "navigator.png",
+      "defaultConfig": "config_templates/gretel/workflows/text-to-python.yml"
+    },
+    {
       "gtmId": "use-case-tabular-ft",
       "title": "Synthesize data with Tabular Fine-Tuning",
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",

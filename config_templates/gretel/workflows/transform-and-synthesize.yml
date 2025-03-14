@@ -1,0 +1,77 @@
+name: 'Transform-and-Synthesize'
+version: "2"
+globals:
+  model_suite: apache-2.0
+  num_records: 100
+inputs: {}
+steps:
+- name: holdout
+  task: holdout
+  config: {}
+  inputs:
+  - uploaded-data-read
+- name: transform
+  task: transform
+  config:
+    globals:
+      classify:
+        enable: true
+        entities:
+        - first_name
+        - last_name
+        - name
+        - gender
+        - email
+        - phone_number
+        - street_address
+        - city
+        - administrative_unit
+        - country
+        - address
+        - postcode
+        - credit_card_number
+        - ssn
+      locales:
+      - en_US
+      ner:
+        ner_threshold: 0.7
+    steps:
+    - rows:
+        update:
+        - condition: column.entity is in globals.classify.entities and column.entity
+            != "country" and column.entity != "email" and column.entity != "phone_number"
+            and column.entity != "first_name" and column.entity != "last_name" and
+            column.entity != "gender"
+          fallback_value: '"<" ~ column.entity ~ ">"'
+          value: column.entity | fake
+        - condition: column.entity == "phone_number"
+          value: (random.randint(100, 999) | string) + "-" + (random.randint(100,
+            999) | string) + "-" + (random.randint(1000, 9999) | string)
+        - condition: column.entity == "first_name"
+          value: fake.persona(row_index=vars.row_seed + index).first_name
+        - condition: column.entity == "last_name"
+          value: fake.persona(row_index=vars.row_seed + index).last_name
+        - condition: column.entity == "gender"
+          value: fake.persona(row_index=vars.row_seed + index).gender
+        - condition: column.entity == "email"
+          value: fake.persona(row_index=vars.row_seed + index).email
+        - condition: column.entity is none and column.type == "text"
+          value: this | fake_entities
+      vars:
+        row_seed: random.random()
+  inputs:
+  - holdout
+- name: tabular-ft
+  task: tabular_ft
+  config:
+    generate:
+      num_records: 5000
+    train:
+      group_training_examples_by: null
+      order_training_examples_by: null
+      params:
+        num_input_records_to_sample: auto
+      privacy_params: {}
+  inputs:
+  - transform
+  
