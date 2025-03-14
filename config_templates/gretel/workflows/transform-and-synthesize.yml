@@ -1,4 +1,4 @@
-name: 'Transform and Synthesize'
+name: 'Transform-and-Synthesize'
 version: "2"
 globals:
   model_suite: apache-2.0
