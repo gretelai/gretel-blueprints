@@ -8,8 +8,6 @@ steps:
 - name: holdout
   task: holdout
   config: {}
-  inputs:
-  - uploaded-data-read
 - name: transform
   task: transform
   config:
@@ -59,8 +57,6 @@ steps:
           value: this | fake_entities
       vars:
         row_seed: random.random()
-  inputs:
-  - holdout
 - name: tabular-ft
   task: tabular_ft
   config:
@@ -72,6 +68,4 @@ steps:
       params:
         num_input_records_to_sample: auto
       privacy_params: {}
-  inputs:
-  - transform
   
