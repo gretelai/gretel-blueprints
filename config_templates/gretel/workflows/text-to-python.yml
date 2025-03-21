@@ -75,7 +75,7 @@ post_processors:
         code_lang: python
         code_columns: [code]
 
-    - evaluator: text_to_python
+    - evaluator: general
       settings:
         text_column: text
         code_column: code
