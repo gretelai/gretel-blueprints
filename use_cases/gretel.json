@@ -1,38 +1,14 @@
 {
   "cards": [
     {
-      "gtmId": "transform-and-synthesize",
-      "title": "[v2/dev-only] Transform + synthesize for HIPAA compliance",
-      "description": "Transform then synthesize your data for HIPAA compliance.",
-      "cardType": "Console",
-      "icon": "transform.png",
-      "defaultConfig": "config_templates/gretel/workflows/transform-and-synthesize.yml"
-    },
-    {
-      "gtmId": "text-to-python",
-      "title": "[v2/dev-only] Data Designer: Generate text-to-python",
-      "description": "Use our advanced Data Designer to generate text-to-python pairs for LLM fine-tuning",
-      "cardType": "Console",
-      "icon": "navigator.png",
-      "defaultConfig": "config_templates/gretel/workflows/text-to-python.yml"
-    },
-    {
-      "gtmId": "use-case-tabular-ft",
+      "gtmId": "blueprint-transform-tabular-ft",
       "title": "Synthesize data with Tabular Fine-Tuning",
       "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
       "cardType": "Console",
       "icon": "tabular-ft.png",
       "detailsFileName": "tabular-ft.md",
-      "modelType": "navigator_ft",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
-      "modelActions": [
-        {
-          "modelType": "navigator_ft",
-          "modelCategory": "synthetics",
-          "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml"
-        }
-      ],
+      "defaultConfig": "config_templates/gretel/workflows/transform-synthesize-hipaa.yml",
       "button1": {
         "label": "SDK Notebook",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
@@ -42,9 +18,19 @@
         "description": "This financial dataset contains transaction ID, date, payment, currency, type, and description for banking transactions. It includes numeric, categorical, and free text tabular data.",
         "records": 9344,
         "fields": 6,
-        "trainingTime": "10 mins",
+        "trainingTime": "20 mins",
         "bytes": 683576
       }
+    },
+    {
+      "gtmId": "blueprint-text-to-python",
+      "title": "Data Designer: Generate text-to-python",
+      "description": "Use Navigator Data Designer to generate text-to-python pairs for LLM fine-tuning",
+      "cardType": "Console",
+      "icon": "navigator.png",
+      "label": "New",
+      "detailsFileName": "dd-text-to-python.md",
+      "defaultConfig": "config_templates/gretel/workflows/text-to-python.yml"
     },
     {
       "gtmId": "use-case-transform",
