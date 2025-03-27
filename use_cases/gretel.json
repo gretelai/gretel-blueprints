@@ -1,36 +1,34 @@
 {
   "cards": [
     {
-      "gtmId": "blueprint-transform-tabular-ft",
-      "title": "Synthesize data with Tabular Fine-Tuning",
-      "description": "Use Gretel's flagship model to create high-quality, domain-specific tabular datasets, supporting data types such as numeric, categorical, and free text.",
+      "gtmId": "blueprint-hipaa-controls",
+      "title": "Synthesize HIPAA-protected healthcare data",
+      "description": "Apply safeguards to healthcare datasets designed for HIPAA requirements while maintaining data utility for analysis and model training.",
       "cardType": "Console",
       "icon": "tabular-ft.png",
       "detailsFileName": "tabular-ft.md",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/workflows/transform-synthesize-hipaa.yml",
-      "button1": {
-        "label": "SDK Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
-      },
       "sampleDataset": {
-        "fileName": "financial_transactions.csv",
-        "description": "This financial dataset contains transaction ID, date, payment, currency, type, and description for banking transactions. It includes numeric, categorical, and free text tabular data.",
-        "records": 9344,
-        "fields": 6,
+        "fileName": "hipaa_patients.csv",
+        "description": "This healthcare dataset contains patient identifiers, demographics, medical events, and clinical notes spanning multiple healthcare facilities, with both structured fields and free-text observations.",
+        "records": 1725,
+        "fields": 15,
         "trainingTime": "20 mins",
-        "bytes": 683576
+        "bytes": 521216
       }
     },
     {
-      "gtmId": "blueprint-text-to-python",
-      "title": "Data Designer: Generate text-to-python",
-      "description": "Use Navigator Data Designer to generate text-to-python pairs for LLM fine-tuning",
-      "cardType": "Console",
+      "gtmId": "blueprint-notebook-multi-turn",
+      "title": "New: Generate multi-turn conversations from scratch",
+      "description": "Use Navigator Data Designer to quickly generate diverse conversational data to train AI agents.",
+      "cardType": "Notebook",
       "icon": "navigator.png",
-      "label": "New",
-      "detailsFileName": "dd-text-to-python.md",
-      "defaultConfig": "config_templates/gretel/workflows/text-to-python.yml"
+      "detailsFileName": "dd-multi-turn-conversations.md",
+      "button1": {
+        "label": "Launch Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/navigator-data-designer-sdk-multi-turn-conversation.ipynb"
+      }
     },
     {
       "gtmId": "use-case-transform",
@@ -55,6 +53,22 @@
         "fields": 19,
         "trainingTime": "< 2 mins",
         "bytes": 20646
+      }
+    },
+    {
+      "gtmId": "blueprint-notebook-text-to-code",
+      "title": "New: Generate Text-to-Code training data for coding assistants",
+      "description": "Create diverse instruction-code pairs in Python or SQL across multiple domains to fine-tune coding assistants that transform natural language into accurate, executable code.",
+      "cardType": "Notebook",
+      "icon": "navigator.png",
+      "detailsFileName": "dd-text-to-code.md",
+      "button1": {
+        "label": "Text to Python",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/text-to-code/navigator-data-designer-sdk-text-to-python.ipynb"
+      },
+      "button2": {
+        "label": "Text to SQL",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/text-to-code/navigator-data-designer-sdk-text-to-sql.ipynb"
       }
     },
     {
@@ -85,6 +99,36 @@
         "fields": 8,
         "trainingTime": "46 mins",
         "bytes": 3260007
+      }
+    },
+    {
+      "gtmId": "blueprint-notebook-rag-eval",
+      "title": "New: Create custom RAG evaluation datasets",
+      "description": "Generate domain-specific reference documents, queries, and ground truth answers to measure your RAG system's performance across real-world scenarios and edge cases.",
+      "cardType": "Notebook",
+      "icon": "navigator.png",
+      "detailsFileName": "dd-rag-evals.md",
+      "button1": {
+        "label": "Launch Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/rag-evals/data_designer_sdk_rag_evals.ipynb"
+      }
+    },
+    {
+      "gtmId": "blueprint-gdpr-controls",
+      "title": "Create GDPR-ready synthetic customer data",
+      "description": "Generate privacy-protected synthetic versions of customer datasets containing personal identifiers. Transform sensitive fields and generate realistic synthetic data that maintains analytical utility while implementing GDPR privacy principles.",
+      "cardType": "Console",
+      "icon": "tabular-ft.png",
+      "detailsFileName": "tabular-ft.md",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/workflows/transform-synthesize-gdpr.yml",
+      "sampleDataset": {
+        "fileName": "ecommerce_customers.csv",
+        "description": "This e-commerce dataset contains 500 customer records with personal identifiers (email, address), digital footprints, browsing behavior metrics, membership duration, and annual spending amounts.",
+        "records": 500,
+        "fields": 8,
+        "trainingTime": "20 mins",
+        "bytes": 89088
       }
     },
     {
