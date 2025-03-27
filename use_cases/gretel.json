@@ -120,9 +120,13 @@
       "description": "Generate privacy-protected synthetic versions of customer datasets containing personal identifiers. Transform sensitive fields and generate realistic synthetic data that maintains analytical utility while implementing GDPR privacy principles.",
       "cardType": "Console",
       "icon": "tabular-ft.png",
-      "detailsFileName": "tabular-ft.md",
+      "detailsFileName": "synthesize-gdpr.md",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/workflows/transform-synthesize-gdpr.yml",
+      "button1": {
+        "label": "Try the Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/synthetics/gdpr-transform-synthesize.ipynb"
+      },
       "sampleDataset": {
         "fileName": "ecommerce_customers.csv",
         "description": "This e-commerce dataset contains 500 customer records with personal identifiers (email, address), digital footprints, browsing behavior metrics, membership duration, and annual spending amounts.",
