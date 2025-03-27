@@ -6,4 +6,4 @@ The process is straightforward: upload your customer data, adjust parameters as 
 
 After running the workflow, you'll receive a detailed quality and privacy report that helps you evaluate how well the synthetic data preserves patterns from the original while protecting personal information. The transformation blueprint addresses key GDPR concerns including pseudonymization of personal data, handling of special categories, and data minimization principles.
 
-Looking to synthesize HIPAA-protected data? Here's our blueprint for [adding HIPAA safeguards](use_cases/cards/blueprint-hipaa-controls) to data containing PII. 
+Looking to synthesize HIPAA-protected data? Here's our blueprint for [adding HIPAA safeguards](blueprint-hipaa-controls) to data containing PII. 

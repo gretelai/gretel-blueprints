@@ -6,4 +6,4 @@ The process is simple: upload your healthcare data, modify a few parameters or u
 
 Prefer coding? Check out the [SDK notebook](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/synthetics/hipaa-transform-synthesize.ipynb) example.
 
-If you're interested in GDPR standards, here's our blueprint for [adding GDPR safeguards](use_cases/cards/blueprint-gdpr-controls) to private data.
+If you're interested in GDPR standards, here's our blueprint for [adding GDPR safeguards](blueprint-gdpr-controls) to private data.
