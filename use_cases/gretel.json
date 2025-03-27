@@ -6,7 +6,7 @@
       "description": "Apply safeguards to healthcare datasets designed for HIPAA requirements while maintaining data utility for analysis and model training.",
       "cardType": "Console",
       "icon": "tabular-ft.png",
-      "detailsFileName": "tabular-ft.md",
+      "detailsFileName": "synthesize-hipaa.md",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/workflows/transform-synthesize-hipaa.yml",
       "sampleDataset": {
@@ -36,6 +36,7 @@
       "description": "De-identify, transform, or label text and tabular data for AI.",
       "cardType": "Console",
       "icon": "transform.png",
+      "detailsFileName": "transform.md",
       "modelType": "transform_v2",
       "modelCategory": "transform",
       "defaultConfig": "config_templates/gretel/transform/default.yml",
