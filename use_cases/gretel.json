@@ -20,7 +20,7 @@
     },
     {
       "gtmId": "blueprint-notebook-multi-turn",
-      "title": "New: Generate multi-turn conversations from scratch",
+      "title": "[New] Generate multi-turn conversations from scratch",
       "description": "Use Navigator Data Designer to quickly generate diverse conversational data to train AI agents.",
       "cardType": "Notebook",
       "icon": "navigator.png",
@@ -58,7 +58,7 @@
     },
     {
       "gtmId": "blueprint-notebook-text-to-code",
-      "title": "New: Generate Text-to-Code training data for coding assistants",
+      "title": "Generate Text-to-Code training data for coding assistants",
       "description": "Create diverse instruction-code pairs in Python or SQL across multiple domains to fine-tune coding assistants that transform natural language into accurate, executable code.",
       "cardType": "Notebook",
       "icon": "navigator.png",
@@ -104,7 +104,7 @@
     },
     {
       "gtmId": "blueprint-notebook-rag-eval",
-      "title": "New: Create custom RAG evaluation datasets",
+      "title": "Create custom RAG evaluation datasets",
       "description": "Generate domain-specific reference documents, queries, and ground truth answers to measure your RAG system's performance across real-world scenarios and edge cases.",
       "cardType": "Notebook",
       "icon": "navigator.png",
