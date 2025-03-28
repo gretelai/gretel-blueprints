@@ -74,8 +74,8 @@
     },
     {
       "gtmId": "use-case-tabular-ft-dp",
-      "title": "Generate differentially-private synthetic numeric, categorical, and text data",
-      "description": "Use Tabular Fine-Tuning with Differential Privacy to synthesize data with mathematical guarantees of privacy.",
+      "title": "Create synthetic data with provable privacy guarantees",
+      "description": "Build realistic synthetic datasets with differential privacy protection - perfect for regulatory compliance or when mathematical privacy guarantees are required. Adjust privacy settings to balance utility and protection.",
       "cardType": "Console",
       "icon": "tabular-ft-dp.png",
       "detailsFileName": "tabular-ft-dp.md",
@@ -104,8 +104,8 @@
     },
     {
       "gtmId": "blueprint-notebook-rag-eval",
-      "title": "Create custom RAG evaluation datasets",
-      "description": "Generate domain-specific reference documents, queries, and ground truth answers to measure your RAG system's performance across real-world scenarios and edge cases.",
+      "title": "Produce custom RAG evaluation datasets",
+      "description": "Craft domain-specific reference documents, queries, and ground truth answers to measure your RAG system's performance across real-world scenarios and edge cases.",
       "cardType": "Notebook",
       "icon": "navigator.png",
       "detailsFileName": "dd-rag-evals.md",
@@ -117,7 +117,7 @@
     {
       "gtmId": "blueprint-gdpr-controls",
       "title": "Create GDPR-ready synthetic customer data",
-      "description": "Generate privacy-protected synthetic versions of customer datasets containing personal identifiers. Transform sensitive fields and generate realistic synthetic data that maintains analytical utility while implementing GDPR privacy principles.",
+      "description": "Develop privacy-protected synthetic versions of customer datasets containing personal identifiers. Transform sensitive fields and generate realistic synthetic data that maintains analytical utility while implementing GDPR privacy principles.",
       "cardType": "Console",
       "icon": "tabular-ft.png",
       "detailsFileName": "synthesize-gdpr.md",

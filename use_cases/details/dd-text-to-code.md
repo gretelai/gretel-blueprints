@@ -6,7 +6,9 @@ This blueprint showcases how to create synthetic datasets for code generation in
 
 Whether you're building a general-purpose coding assistant or domain-specific tools for healthcare, finance, or technology sectors, these blueprints provide a flexible framework for generating the high-quality training data needed to improve your models' ability to translate natural language into working code.
 
+[Check out our blog post here](https://gretel.ai/blog/build-high-quality-datasets-for-ai-using-gretel-navigator) or [read the documentation](https://docs.gretel.ai/create-synthetic-data/gretel-data-designer-beta) to learn more.
+
 Interested in other use cases? Here are a few more notebooks:
-* [RAG evaluation](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/rag-evals/data_designer_sdk_rag_evals.ipynb)
-* [Start from seed data](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/navigator-data-designer-sdk-sample-to-dataset.ipynb)
-* [Multi-turn conversation datasets](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/multi-turn-chat/navigator-data-designer-sdk-multi-turn-conversation.ipynb)
+- [RAG evaluation](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/rag-evals/data_designer_sdk_rag_evals.ipynb)
+- [Start from seed data](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/navigator-data-designer-sdk-sample-to-dataset.ipynb)
+- [Multi-turn conversation datasets](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/multi-turn-chat/navigator-data-designer-sdk-multi-turn-conversation.ipynb)
