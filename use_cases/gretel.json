@@ -21,7 +21,7 @@
     {
       "gtmId": "blueprint-notebook-multi-turn",
       "title": "[New] Generate multi-turn conversations from scratch",
-      "description": "Use Navigator Data Designer to quickly generate diverse conversational data to train AI agents.",
+      "description": "Use Navigator Data Designer to quickly generate diverse conversational data to train AI agents. Improve handling of edge cases and reduce user frustration.",
       "cardType": "Notebook",
       "icon": "navigator.png",
       "detailsFileName": "dd-multi-turn-conversations.md",
