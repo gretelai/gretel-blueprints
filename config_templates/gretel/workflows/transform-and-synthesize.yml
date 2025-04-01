@@ -68,4 +68,9 @@ steps:
       params:
         num_input_records_to_sample: auto
       privacy_params: {}
-  
+- name: evaluate
+  task: evaluate_ss_dataset
+  config: {}
+  inputs:
+    - transform
+    - tabular-ft
