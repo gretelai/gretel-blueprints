@@ -1,8 +1,8 @@
 schema_version: "1.0"
-name: "redact-pii-ner"
-models:
-  - transform_v2:
-      data_source: "_"
+name: default
+task:
+  name: transform
+  config:
       globals:
         classify:
           enable: true
