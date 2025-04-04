@@ -131,14 +131,11 @@
       "detailsFileName": "tabular-ft-dp.md",
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
-      "modelActions": [
-        {
-          "modelType": "navigator_ft",
-          "modelCategory": "synthetics",
-          "defaultConfig": "config_templates/gretel/tasks/tabular_ft__differential-privacy.yaml"
-        }
-      ],
+      "defaultConfig": "config_templates/gretel/workflows/tabular-ft-dp.yml",
+      "button1": {
+        "label": "SDK Notebook",
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navft-dp/navft-dp-sample.ipynb"
+      },
       "sampleDataset": {
         "fileName": "womens_clothing_reviews.csv",
         "description": "This dataset contains reviews, ratings, and categories for women's clothing.",
