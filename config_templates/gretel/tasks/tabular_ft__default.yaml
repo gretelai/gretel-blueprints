@@ -37,6 +37,6 @@ task:
           rope_scaling_factor: 1
 
       generate:
-        num_records: 5000
+        num_records: 1000
 
 

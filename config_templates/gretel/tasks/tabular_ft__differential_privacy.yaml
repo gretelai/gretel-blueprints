@@ -48,7 +48,7 @@ task:
           batch_size: 4
 
       generate:
-        num_records: 5000
+        num_records: 1000
 
         # With DP, enabling structured generation can help with
         # increasing the percentage of valid records.

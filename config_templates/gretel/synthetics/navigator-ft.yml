@@ -17,7 +17,7 @@ models:
       order_training_examples_by: null
 
       generate:
-        num_records: 5000
+        num_records: 1000
 
       params:
         # The parameter below is a proxy for training time.
