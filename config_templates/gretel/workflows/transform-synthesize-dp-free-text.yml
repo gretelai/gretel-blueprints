@@ -1,0 +1,103 @@
+version: "2"
+inputs: {}
+steps:
+  - name: sample-data-read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/ontonotes5_reduced.csv
+  - name: holdout
+    task: holdout
+    config: {}
+  - name: transform
+    task: transform
+    config:
+      globals:
+        classify:
+          enable: true
+          entities:
+            - first_name
+            - last_name
+            - name
+            - street_address
+            - city
+            - state
+            - postcode
+            - country
+            - address
+            - latitude
+            - longitude
+            - coordinate
+            - age
+            - phone_number
+            - fax_number
+            - email
+            - ssn
+            - unique_identifier
+            - medical_record_number
+            - health_plan_beneficiary_number
+            - account_number
+            - certificate_license_number
+            - vehicle_identifier
+            - license_plate
+            - device_identifier
+            - biometric_identifier
+            - url
+            - ipv4
+            - ipv6
+            - national_id
+            - tax_id
+            - bank_routing_number
+            - swift_bic
+            - credit_debit_card
+            - cvv
+            - pin
+            - employee_id
+            - api_key
+            - coordinate
+            - customer_id
+            - user_name
+            - password
+            - mac_address
+            - http_cookie
+        ner:
+          ner_threshold: 0.3
+        locales:
+          - en_US
+      steps:
+        - vars:
+            row_seed: random.random()
+          rows:
+            update:
+              - condition: column.entity is none and column.type == "text"
+                value: this | fake_entities
+  - task: text_ft
+    name: text_ft
+    config:
+      train:
+        pretrained_model: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+        column_name: null
+        params:
+          batch_size: 16
+          gradient_accumulation_steps: 8
+          epochs: 3
+          weight_decay: 0.01
+          warmup_steps: 100
+          lr_scheduler: linear
+          learning_rate: 0.001
+          max_tokens: 128
+        peft_params:
+          lora_r: 8
+          lora_alpha_over_r: 1
+        privacy_params:
+          dp: true
+          epsilon: 5
+          delta: auto
+      generate:
+        num_records: 1000
+        maximum_text_length: 128
+  - name: evaluate
+    task: evaluate_ss_dataset
+    inputs:
+    - text_ft
+    - holdout
+    config: {}

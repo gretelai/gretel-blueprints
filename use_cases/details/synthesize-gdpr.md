@@ -1,4 +1,4 @@
-![Synthesize HIPAA-protected healthcare data](https://blueprints.gretel.cloud/use_cases/images/tabular-ft.png "Synthesize HIPAA-protected healthcare data")
+![Create GDPR-ready synthetic customer data](https://blueprints.gretel.cloud/use_cases/images/tabular-ft.png "Create GDPR-ready synthetic customer data")
 
 This blueprint helps you achieve GDPR compliance with your European customer data in minutes. First, we'll transform your original dataset by identifying and protecting personal information like names, addresses, and identifiers. Then, we'll synthesize a new dataset that maintains the analytical value while implementing appropriate privacy safeguards.
 
