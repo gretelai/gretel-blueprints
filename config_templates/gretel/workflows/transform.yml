@@ -128,7 +128,7 @@ steps:
               - condition: column.entity is none and column.type == "text"
                 value: this | fake_entities
   - name: evaluate
-    task: evaluate_ss_dataset
+    task: evaluate_safe_synthetics_dataset
     inputs:
     - transform
     - sample_data_read

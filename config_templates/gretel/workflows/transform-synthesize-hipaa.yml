@@ -98,7 +98,7 @@ steps:
     generate:
       num_records: 1000
 - name: evaluate
-  task: evaluate_ss_dataset
+  task: evaluate_safe_synthetics_dataset
   inputs:
   - tabular-ft
   - holdout

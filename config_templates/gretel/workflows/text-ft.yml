@@ -24,7 +24,7 @@ steps:
         num_records: 80
         maximum_text_length: 100
   - name: evaluate
-    task: evaluate_ss_dataset
+    task: evaluate_safe_synthetics_dataset
     inputs:
     - text_ft
     - holdout

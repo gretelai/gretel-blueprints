@@ -62,7 +62,7 @@ steps:
         # increasing the percentage of valid records.
         use_structured_generation: true
   - name: evaluate
-    task: evaluate_ss_dataset
+    task: evaluate_safe_synthetics_dataset
     inputs:
     - tabular_ft
     - holdout
