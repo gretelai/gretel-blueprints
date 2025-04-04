@@ -219,7 +219,7 @@
       "detailsFileName": "tabular-gan.md",
       "modelType": "actgan",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/synthetics/tabular_actgan.yml",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular-actgan.yml",
       "modelActions": [
         {
           "modelType": "actgan",
