@@ -81,7 +81,7 @@
       "detailsFileName": "transform.md",
       "modelType": "transform_v2",
       "modelCategory": "transform",
-      "defaultConfig": "config_templates/gretel/tasks/transform__default.yaml",
+      "defaultConfig": "config_templates/gretel/transform/default.yml",
       "modelActions": [
         {
           "modelType": "transform_v2",
@@ -119,7 +119,7 @@
       "detailsFileName": "tabular-ft-dp.md",
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/tasks/tabular_ft__differential-privacy.yaml",
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
       "modelActions": [
         {
           "modelType": "navigator_ft",
@@ -167,7 +167,7 @@
       "detailsFileName": "tabular-ft.md",
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/tasks/tabular_ft__default.yaml",
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft.yml",
       "modelActions": [
         {
           "modelType": "navigator_ft",
@@ -193,7 +193,7 @@
       "detailsFileName": "text-ft-dp.md",
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/tasks/text_ft__differential-privacy.yaml",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language-differential-privacy.yml",
       "modelActions": [
         {
           "modelType": "gpt_x",
@@ -219,7 +219,7 @@
       "detailsFileName": "tabular-gan.md",
       "modelType": "actgan",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/tasks/tabular_gan__default.yaml",
+      "defaultConfig": "config_templates/gretel/synthetics/tabular_actgan.yml",
       "modelActions": [
         {
           "modelType": "actgan",
@@ -245,7 +245,7 @@
       "detailsFileName": "text-ft.md",
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/tasks/text_ft__default.yaml",
+      "defaultConfig": "config_templates/gretel/synthetics/natural-language.yml",
       "modelActions": [
         {
           "modelType": "gpt_x",
