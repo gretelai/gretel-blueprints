@@ -1,6 +1,6 @@
-![RAG Evaluation with Synthetic Data](https://blueprints.gretel.cloud/use_cases/images/navigator.png "RAG Evaluation with Synthetic Data")
+![RAG Evaluation with Synthetic Data](https://blueprints.gretel.cloud/use_cases/images/data-designer.png "RAG Evaluation with Synthetic Data")
 
-Create tailored evaluation datasets for your Retrieval-Augmented Generation systems with Gretel Navigator Data Designer. This blueprint helps you generate domain-specific reference documents, queries, and ground truth answers that match your real-world use cases and evaluation needs.
+Create tailored evaluation datasets for your Retrieval-Augmented Generation systems with Gretel Data Designer. This blueprint helps you generate domain-specific reference documents, queries, and ground truth answers that match your real-world use cases and evaluation needs.
 
 Unlike generic benchmarks, these custom datasets let you test how your RAG system handles your specific information domains, question types, and edge cases. Control document complexity, create multi-hop reasoning challenges, and measure performance across retrieval accuracy and answer quality metrics. Generate everything from simple factual queries to complex scenarios requiring information synthesis across multiple documents.
 
