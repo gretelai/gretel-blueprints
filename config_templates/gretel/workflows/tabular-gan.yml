@@ -1,0 +1,30 @@
+version: "2"
+inputs: {}
+steps:
+  - name: sample-data-read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/sample-synthetic-healthcare.csv
+  - name: holdout
+    task: holdout
+    config: {}
+  - task: tabular_gan
+    name: tabular_gan
+    config:
+      train:
+        params:
+          epochs: auto
+          generator_dim: [1024, 1024]
+          discriminator_dim: [1024, 1024]
+          generator_lr: 0.0001
+          discriminator_lr: .00033
+          batch_size: auto
+          auto_transform_datetimes: False
+      generate:
+        num_records: 5000
+  - name: evaluate
+    task: evaluate_safe_synthetics_dataset
+    inputs:
+    - tabular_gan
+    - holdout
+    config: {}
