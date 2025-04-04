@@ -123,6 +123,32 @@
       }
     },
     {
+      "gtmId": "use-case-tabular-ft-dp",
+      "title": "Create synthetic data with provable privacy guarantees",
+      "description": "Build realistic synthetic datasets with differential privacy protection - perfect for regulatory compliance or when mathematical privacy guarantees are required.",
+      "cardType": "Console",
+      "icon": "tabular-ft-dp.png",
+      "detailsFileName": "tabular-ft-dp.md",
+      "modelType": "navigator_ft",
+      "modelCategory": "synthetics",
+      "defaultConfig": "config_templates/gretel/synthetics/navigator-ft-differential-privacy.yml",
+      "modelActions": [
+        {
+          "modelType": "navigator_ft",
+          "modelCategory": "synthetics",
+          "defaultConfig": "config_templates/gretel/tasks/tabular_ft__differential-privacy.yaml"
+        }
+      ],
+      "sampleDataset": {
+        "fileName": "womens_clothing_reviews.csv",
+        "description": "This dataset contains reviews, ratings, and categories for women's clothing.",
+        "records": 20641,
+        "fields": 8,
+        "trainingTime": "46 mins",
+        "bytes": 3260007
+      }
+    },
+    {
       "gtmId": "blueprint-gdpr-controls",
       "title": "Create GDPR-ready synthetic customer data",
       "description": "Develop privacy-protected synthetic versions of customer datasets containing personal identifiers. Transform sensitive fields and generate realistic synthetic data that maintains analytical utility while implementing GDPR privacy principles.",
