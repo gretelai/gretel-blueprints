@@ -1,5 +1,5 @@
 schema_version: "1.0"
-name: default
+name: ner_only
 task:
   name: transform
   config:
