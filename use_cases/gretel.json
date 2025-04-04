@@ -42,7 +42,7 @@
       "icon": "text-ft-dp.png",
       "detailsFileName": "safe-synthetics-free-text-dp.md",
       "modelCategory": "synthetics",
-      "defaultConfig": "config_templates/gretel/workflows/transform-synthesize-free-text-dp.yml",
+      "defaultConfig": "config_templates/gretel/workflows/transform-synthesize-dp-free-text.yml",
       "button1": {
         "label": "Try the Notebook",
         "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/safe-synthetics/free-text-transform-synthesize-dp.ipynb"
