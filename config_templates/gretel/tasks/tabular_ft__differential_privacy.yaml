@@ -35,6 +35,15 @@ task:
           # experiment with is 25,000.
           num_input_records_to_sample: auto
 
+          # Scale the base LLM's context length by this factor
+          # using RoPE scaling to handle datasets with more
+          # columns, or datasets containing groups with more
+          # than a few records. You can try increasing the
+          # rope_scaling_factor (you could first try the value 2)
+          # if you hit an error for maximum tokens. It must be
+          # an integer value. The default is 1 and maximum is 6. 
+          rope_scaling_factor: 1
+
           # You can try increasing this until you run out-of-memory.
           batch_size: 4
 

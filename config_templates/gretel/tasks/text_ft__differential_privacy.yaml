@@ -15,7 +15,6 @@ task:
         lr_scheduler: "linear"
         learning_rate: 0.001 # Initial learning rate for training
         max_tokens: 128  # Increase to allow for longer sequences
-        rope_scaling_factor: 1 # Increase (int; max 6) if getting maximum tokens error
       peft_params:
         lora_r: 8
         lora_alpha_over_r: 1
