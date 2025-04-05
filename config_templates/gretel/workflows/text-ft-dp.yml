@@ -8,8 +8,8 @@ steps:
   - name: holdout
     task: holdout
     config: {}
-  - task: text_ft
-    name: text_ft
+  - name: text_ft
+    task: text_ft
     config:
       train:
         pretrained_model: TinyLlama/TinyLlama-1.1B-Chat-v1.0
