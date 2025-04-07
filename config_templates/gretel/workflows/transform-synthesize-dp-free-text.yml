@@ -70,8 +70,8 @@ steps:
             update:
               - condition: column.entity is none and column.type == "text"
                 value: this | fake_entities
-  - task: text_ft
-    name: text_ft
+  - name: text_ft
+    task: text_ft
     config:
       train:
         pretrained_model: TinyLlama/TinyLlama-1.1B-Chat-v1.0
