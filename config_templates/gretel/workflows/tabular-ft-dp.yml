@@ -8,8 +8,8 @@ steps:
   - name: holdout
     task: holdout
     config: {}
-  - task: tabular_ft
-    name: tabular_ft
+  - name: tabular_ft
+    task: tabular_ft
     config:
       train:
         # Optionally group records by the column(s) set below.

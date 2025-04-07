@@ -8,8 +8,8 @@ steps:
   - name: holdout
     task: holdout
     config: {}
-  - task: tabular_gan
-    name: tabular_gan
+  - name: tabular_gan
+    task: tabular_gan
     config:
       train:
         params:
