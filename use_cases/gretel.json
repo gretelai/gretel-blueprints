@@ -100,7 +100,7 @@
       "detailsFileName": "dd-rag-evals.md",
       "button1": {
         "label": "Launch Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/rag-evals/data_designer_sdk_rag_evals.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/rag-examples/generate-rag-evaluation-dataset.ipynb"
       }
     },
     {
