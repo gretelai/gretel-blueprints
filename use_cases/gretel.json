@@ -23,15 +23,15 @@
       }
     },
     {
-      "gtmId": "blueprint-notebook-multi-turn",
-      "title": "[New] Generate multi-turn conversations from scratch",
-      "description": "Use Data Designer to quickly generate diverse conversational data to train AI agents. Improve handling of edge cases and reduce user frustration.",
+      "gtmId": "blueprint-notebook-getting-started",
+      "title": "[New] Get started wtih Data Designer",
+      "description": "Learn how to use Data Designer to build high quality synthetic datasets for your use case.",
       "cardType": "Notebook",
       "icon": "data-designer.png",
-      "detailsFileName": "dd-multi-turn-conversations.md",
+      "detailsFileName": "dd-getting-started-101.md",
       "button1": {
         "label": "Launch Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/navigator-data-designer-sdk-multi-turn-conversation.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/getting-started/data-designer-101.ipynb"
       }
     },
     {
