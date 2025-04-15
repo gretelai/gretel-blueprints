@@ -152,7 +152,7 @@ steps:
       order_training_examples_by: null
       params:
         num_input_records_to_sample: 5000
-        rope_scalaing_factor: 1
+        rope_scaling_factor: 1
     generate:
       num_records: 1000
 - name: evaluate
