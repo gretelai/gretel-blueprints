@@ -31,7 +31,7 @@
       "detailsFileName": "dd-getting-started-101.md",
       "button1": {
         "label": "Launch Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/data-designer-101/1-the-basics.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/data-designer-101/1-the-basics.ipynb"
       }
     },
     {
@@ -65,11 +65,11 @@
       "detailsFileName": "dd-text-to-code.md",
       "button1": {
         "label": "Text to Python",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/text-to-code/text-to-python.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/text-to-code/text-to-python.ipynb"
       },
       "button2": {
         "label": "Text to SQL",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/text-to-code/text-to-sql.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/text-to-code/text-to-sql.ipynb"
       }
     },
     {
@@ -100,7 +100,7 @@
       "detailsFileName": "dd-rag-evals.md",
       "button1": {
         "label": "Launch Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/rag-examples/generate-rag-evaluation-dataset.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/rag-examples/generate-rag-evaluation-dataset.ipynb"
       }
     },
     {
