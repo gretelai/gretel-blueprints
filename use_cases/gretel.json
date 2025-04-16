@@ -31,7 +31,7 @@
       "detailsFileName": "dd-getting-started-101.md",
       "button1": {
         "label": "Launch Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/getting-started/data-designer-101.ipynb"
+        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/data-designer-101/1-the-basics.ipynb"
       }
     },
     {
