@@ -1,8 +1,16 @@
-schema_version: "1.0"
-name: differential_privacy
-task:
-  name: tabular_ft
-  config:
+version: "2"
+inputs: {}
+steps:
+  - name: sample-data-read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/womens_clothing_reviews.csv
+  - name: holdout
+    task: holdout
+    config: {}
+  - name: tabular_ft
+    task: tabular_ft
+    config:
       train:
         # Optionally group records by the column(s) set below.
         # This is useful if you need to maintain correlations
@@ -53,5 +61,9 @@ task:
         # With DP, enabling structured generation can help with
         # increasing the percentage of valid records.
         use_structured_generation: true
-
-
+  - name: evaluate
+    task: evaluate_safe_synthetics_dataset
+    inputs:
+    - tabular_ft
+    - holdout
+    config: {}

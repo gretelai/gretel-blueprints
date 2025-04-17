@@ -1,8 +1,13 @@
-schema_version: "1.0"
-name: gdpr
-task:
-  name: transform
-  config:
+version: "2"
+inputs: {}
+steps:
+  - name: sample-data-read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/patients_notes.csv
+  - task: transform
+    name: transform
+    config:
       globals:
         classify:
           enable: true
@@ -122,3 +127,9 @@ task:
 
               - condition: column.entity is none and column.type == "text"
                 value: this | fake_entities
+  - name: evaluate
+    task: evaluate_safe_synthetics_dataset
+    inputs:
+    - transform
+    - sample-data-read
+    config: {}

@@ -1,8 +1,16 @@
-schema_version: "1.0"
-name: differential_privacy
-task:
-  name: tabular_ft
-  config:
+version: "2"
+inputs: {}
+steps:
+  - name: sample-data-read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/financial_transactions.csv
+  - name: holdout
+    task: holdout
+    config: {}
+  - name: tabular_ft
+    task: tabular_ft
+    config:
       train:
         # Optionally group records by the column(s) set below.
         # This is useful if you need to maintain correlations
@@ -15,14 +23,6 @@ task:
         # Note that this parameter can only be used when
         # your records are grouped using the above parameter.
         order_training_examples_by: null
-
-        privacy_params:
-            dp: true
-
-            # Defines the privacy budget - the larger the value, the
-            # less privacy we get. A value between 2 and 8 is deemed
-            # reasonable, usually.
-            epsilon: 8
 
         params:
           # The parameter below is a proxy for training time.
@@ -44,14 +44,11 @@ task:
           # an integer value. The default is 1 and maximum is 6. 
           rope_scaling_factor: 1
 
-          # You can try increasing this until you run out-of-memory.
-          batch_size: 4
-
       generate:
         num_records: 1000
-
-        # With DP, enabling structured generation can help with
-        # increasing the percentage of valid records.
-        use_structured_generation: true
-
-
+  - name: evaluate
+    task: evaluate_safe_synthetics_dataset
+    inputs:
+    - tabular_ft
+    - holdout
+    config: {}
