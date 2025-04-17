@@ -24,7 +24,7 @@
     },
     {
       "gtmId": "blueprint-notebook-getting-started",
-      "title": "[New] Get started wtih Data Designer",
+      "title": "[New] Get started with Data Designer",
       "description": "Learn how to use Data Designer to build high quality synthetic datasets for your use case.",
       "cardType": "Notebook",
       "icon": "data-designer.png",
