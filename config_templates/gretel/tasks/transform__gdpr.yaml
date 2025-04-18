@@ -119,6 +119,5 @@ task:
                 value: column.entity | fake
               - condition: column.entity == "mac_address" and not (this | isna)
                 value: column.entity | fake
-
               - condition: column.entity is none and column.type == "text"
                 value: this | fake_entities
