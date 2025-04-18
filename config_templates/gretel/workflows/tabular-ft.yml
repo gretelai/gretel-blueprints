@@ -49,6 +49,6 @@ steps:
   - name: evaluate
     task: evaluate_safe_synthetics_dataset
     inputs:
-    - tabular_ft
-    - holdout
+      - tabular_ft
+      - holdout
     config: {}

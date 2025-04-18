@@ -130,6 +130,6 @@ steps:
   - name: evaluate
     task: evaluate_safe_synthetics_dataset
     inputs:
-    - transform
-    - sample-data-read
+      - transform
+      - sample-data-read
     config: {}
