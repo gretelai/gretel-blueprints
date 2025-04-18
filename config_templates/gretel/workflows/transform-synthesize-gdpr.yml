@@ -158,6 +158,6 @@ steps:
 - name: evaluate
   task: evaluate_safe_synthetics_dataset
   inputs:
-  - tabular-ft
-  - holdout
+    - tabular-ft
+    - holdout
   config: {}

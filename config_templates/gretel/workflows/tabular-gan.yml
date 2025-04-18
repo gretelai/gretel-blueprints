@@ -25,6 +25,6 @@ steps:
   - name: evaluate
     task: evaluate_safe_synthetics_dataset
     inputs:
-    - tabular_gan
-    - holdout
+      - tabular_gan
+      - holdout
     config: {}
