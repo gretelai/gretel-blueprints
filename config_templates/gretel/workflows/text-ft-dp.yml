@@ -1,7 +1,7 @@
 version: "2"
 inputs: {}
 steps:
-  - name: sample-data-read
+  - name: sample_data_read
     task: data_source
     config:
       data_source: https://blueprints-dev.gretel.cloud/sample_data/clinical_notes.csv
@@ -36,6 +36,6 @@ steps:
   - name: evaluate
     task: evaluate_safe_synthetics_dataset
     inputs:
-    - text_ft
-    - holdout
+      - text_ft
+      - holdout
     config: {}
