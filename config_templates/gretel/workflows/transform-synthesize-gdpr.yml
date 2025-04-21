@@ -1,7 +1,7 @@
 version: "2"
 inputs: {}
 steps:
-- name: sample-data-read
+- name: sample_data_read
   task: data_source
   config:
     data_source: https://blueprints-dev.gretel.cloud/sample_data/ecommerce_customers.csv
@@ -144,7 +144,7 @@ steps:
               value: column.entity | fake
             - condition: column.entity is none and column.type == "text"
               value: this | fake_entities
-- name: tabular-ft
+- name: tabular_ft
   task: tabular_ft
   config: 
     train:
@@ -158,6 +158,6 @@ steps:
 - name: evaluate
   task: evaluate_safe_synthetics_dataset
   inputs:
-  - tabular-ft
-  - holdout
+    - tabular_ft
+    - holdout
   config: {}
