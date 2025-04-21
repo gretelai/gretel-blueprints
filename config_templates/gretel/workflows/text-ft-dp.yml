@@ -1,7 +1,7 @@
 version: "2"
 inputs: {}
 steps:
-  - name: sample-data-read
+  - name: sample_data_read
     task: data_source
     config:
       data_source: https://blueprints-dev.gretel.cloud/sample_data/clinical_notes.csv
