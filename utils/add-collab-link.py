@@ -14,7 +14,6 @@ def main(file_path: str):
     with open(file_path, encoding="utf-8") as f:
         notebook = nbformat.read(f, as_version=4)
         # _parent means same window, different tab
-        # Note, this is to "develop" for the develop branch
         collab_link = f"""<a target="_parent" href="https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/{file_path}">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>"""
