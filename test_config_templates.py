@@ -38,12 +38,20 @@ _configs = list((Path(__file__).parent / "config_templates").glob("**/*.yml"))
 )
 def test_configs(_config_file, project: Project):
     _config_dict = yaml.safe_load(open(_config_file).read())
-    resp = requests.post(
-        f"{_cloud_url}/projects/{project.name}/models",
-        json=_config_dict,
-        params={"dry_run": "yes"},
-        headers={"Authorization": _api_key},
-    )
+
+    if _config_dict.get("version") == 2:
+        resp = requests.post(
+                f"{_cloud_url}/v2/workflows/validate",
+                json=_config_dict,
+                headers={"Authorization": _api_key},
+            )
+    else:
+        resp = requests.post(
+            f"{_cloud_url}/projects/{project.name}/models",
+            json=_config_dict,
+            params={"dry_run": "yes"},
+            headers={"Authorization": _api_key},
+        )
     if resp.status_code != 200:
         print(f"Error for {_cloud_url}, got response: {resp.text}")
     assert resp.status_code == 200
