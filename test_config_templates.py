@@ -54,7 +54,7 @@ def test_configs(_config_file, project: Project):
         )
     if resp.status_code != 200:
         print(f"Error for {_cloud_url}, got response: {resp.text}")
-    assert resp.status_code == 200
+    assert resp.status_code == 200 and "error" not in resp.json()
 
 
     
@@ -76,7 +76,7 @@ def test_task_configs(_config_file, project: Project):
 
     if resp.status_code != 200:
         print(f"Error for {_cloud_url}, got response: {resp.text}")
-    assert resp.status_code == 200
+    assert resp.status_code == 200 and "error" not in resp.json()
 
 
 @pytest.mark.parametrize(
