@@ -25,7 +25,7 @@ def project() -> Project:
         yield project
 
 
-_configs = list((Path(__file__).parent / "config_templates").glob("**/*.yml"))
+_configs = list((Path(__file__).parent / "config_templates").glob("**/*.yml")) + list((Path(__file__).parent / "config_templates").glob("**/*.yaml"))
 
 
 @pytest.mark.parametrize(
@@ -33,13 +33,13 @@ _configs = list((Path(__file__).parent / "config_templates").glob("**/*.yml"))
     [
         "/".join(str(_config).split("/")[-4:])
         for _config in _configs
-        if _config.parent.name != "tuner"
+        if _config.parent.name != "tuner" and _config.parent.name != "tasks"
     ],
 )
 def test_configs(_config_file, project: Project):
     _config_dict = yaml.safe_load(open(_config_file).read())
-
-    if _config_dict.get("version") == 2:
+    if _config_dict.get("version") == "2":
+        _config_dict.setdefault("name", "test-workflow")
         resp = requests.post(
                 f"{_cloud_url}/v2/workflows/validate",
                 json=_config_dict,
@@ -52,6 +52,28 @@ def test_configs(_config_file, project: Project):
             params={"dry_run": "yes"},
             headers={"Authorization": _api_key},
         )
+    if resp.status_code != 200:
+        print(f"Error for {_cloud_url}, got response: {resp.text}")
+    assert resp.status_code == 200
+
+
+    
+@pytest.mark.parametrize(
+    "_config_file",
+    [
+        "/".join(str(_config).split("/")[-4:])
+        for _config in _configs
+        if _config.parent.name == "tasks"
+    ],
+)
+def test_task_configs(_config_file, project: Project):
+    _config_dict = yaml.safe_load(open(_config_file).read())
+    resp = requests.post(
+            f"{_cloud_url}/v2/workflows/validate",
+            json=_config_dict.get("task"),
+            headers={"Authorization": _api_key},
+        )
+
     if resp.status_code != 200:
         print(f"Error for {_cloud_url}, got response: {resp.text}")
     assert resp.status_code == 200
