@@ -1,0 +1,69 @@
+version: "2"
+inputs: {}
+steps:
+  - name: sample_data_read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/womens_clothing_reviews.csv
+  - name: holdout
+    task: holdout
+    config: {}
+  - name: tabular_ft
+    task: tabular_ft
+    config:
+      train:
+        # Optionally group records by the column(s) set below.
+        # This is useful if you need to maintain correlations
+        # across multiple records. Otherwise, the training
+        # assumes records are independent.
+        group_training_examples_by: null
+
+        # Optionally order records by the column set below.
+        # This is useful if your records are sequential.
+        # Note that this parameter can only be used when
+        # your records are grouped using the above parameter.
+        order_training_examples_by: null
+
+        privacy_params:
+            dp: true
+
+            # Defines the privacy budget - the larger the value, the
+            # less privacy we get. A value between 2 and 8 is deemed
+            # reasonable, usually.
+            epsilon: 8
+
+        params:
+          # The parameter below is a proxy for training time.
+          # If set to 'auto', we will automatically choose an
+          # appropriate value. An integer value will set the
+          # number of records from the input dataset that the
+          # model will see during training. It can be smaller
+          # (we downsample), larger (we resample), or the same
+          # size as your input dataset. A starting value to
+          # experiment with is 25,000.
+          num_input_records_to_sample: auto
+
+          # Scale the base LLM's context length by this factor
+          # using RoPE scaling to handle datasets with more
+          # columns, or datasets containing groups with more
+          # than a few records. You can try increasing the
+          # rope_scaling_factor (you could first try the value 2)
+          # if you hit an error for maximum tokens. It must be
+          # an integer value. The default is 1 and maximum is 6. 
+          rope_scaling_factor: 1
+
+          # You can try increasing this until you run out-of-memory.
+          batch_size: 4
+
+      generate:
+        num_records: 1000
+
+        # With DP, enabling structured generation can help with
+        # increasing the percentage of valid records.
+        use_structured_generation: true
+  - name: evaluate
+    task: evaluate_safe_synthetics_dataset
+    inputs:
+      - tabular_ft
+      - holdout
+    config: {}
