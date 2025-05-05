@@ -1,163 +1,208 @@
 version: "2"
 inputs: {}
 steps:
-- name: sample_data_read
-  task: data_source
-  config:
-    data_source: https://blueprints-dev.gretel.cloud/sample_data/ecommerce_customers.csv
-- name: holdout
-  task: holdout
-  config: {}
-- name: transform
-  task: transform
-  config:
-    globals:
-      classify:
-        enable: true
-        entities:
-          - first_name
-          - last_name
-          - name
-          - street_address
-          - city
-          - state
-          - postcode
-          - country
-          - address
-          - latitude
-          - longitude
-          - coordinate
-          - age
-          - phone_number
-          - fax_number
-          - email
-          - ssn
-          - unique_identifier
-          - medical_record_number
-          - health_plan_beneficiary_number
-          - account_number
-          - certificate_license_number
-          - vehicle_identifier
-          - license_plate
-          - device_identifier
-          - biometric_identifier
-          - url
-          - ipv4
-          - ipv6
-          - national_id
-          - tax_id
-          - bank_routing_number
-          - swift_bic
-          - credit_debit_card
-          - cvv
-          - pin
-          - employee_id
-          - api_key
-          - coordinate
-          - customer_id
-          - user_name
-          - password
-          - mac_address
-          - http_cookie
-          - date
-          - date_time
-          - blood_type
-          - gender
-          - sexuality
-          - political_view
-          - race
-          - ethnicity
-          - religious_belief
-          - language
-          - education
-          - job_title
-          - employment_status
-          - company_name
-      ner:
-        ner_threshold: 0.3
-      locales:
-        - en_US
-    steps:
-      - vars:
-          row_seed: random.random()
-        rows:
-          update:
-            - condition: column.entity == "first_name" and not (this | isna)
-              value: fake.persona(row_index=vars.row_seed + index).first_name
-            - condition: column.entity == "last_name" and not (this | isna)
-              value: fake.persona(row_index=vars.row_seed + index).last_name
-            - condition: column.entity == "name" and not (this | isna)
-              value: column.entity | fake
-            - condition: (column.entity == "street_address" or column.entity == "city" or
-                column.entity == "state" or column.entity == "postcode" or
-                column.entity == "address") and not (this | isna)
-              value: column.entity | fake
-            - condition: column.entity == "latitude" and not (this | isna)
-              value: fake.location_on_land()[0]
-            - condition: column.entity == "longitude" and not (this | isna)
-              value: fake.location_on_land()[1]
-            - condition: column.entity == "coordinate" and not (this | isna)
-              value: fake.location_on_land()
-            - condition: column.entity == "email" and not (this | isna)
-              value: fake.persona(row_index=vars.row_seed + index).email
-            - condition: column.entity == "ssn" and not (this | isna)
-              value: column.entity | fake
-            - condition: column.entity == "phone_number" and not (this | isna)
-              value: (fake.random_number(digits=3) | string) + "-" +
-                (fake.random_number(digits=3) | string) + "-" +
-                (fake.random_number(digits=4) | string)
-            - condition: column.entity == "fax_number" and not (this | isna)
-              value: (fake.random_number(digits=3) | string) + "-" +
-                (fake.random_number(digits=3) | string) + "-" +
-                (fake.random_number(digits=4) | string)
-            - condition: column.entity == "vehicle_identifier" and not (this | isna)
-              value: fake.vin()
-            - condition: column.entity == "license_plate" and not (this | isna)
-              value: column.entity | fake
-            - condition: (column.entity == "unique_identifier" or column.entity ==
-                "medical_record_number" or column.entity ==
-                "health_plan_beneficiary_number" or column.entity ==
-                "account_number" or column.entity ==
-                "certificate_license_number" or column.entity ==
-                "device_identifier" or column.entity == "biometric_identifier"
-                or column.entity == "bank_routing_number" or column.entity ==
-                "swift_bic" or column.entity == "employee_id" or column.entity
-                == "api_key" or column.entity == "customer_id" or
-                column.entity == "user_name" or column.entity == "password" or
-                column.entity == "http_cookie") and not (this | isna)
-              value: fake.bothify(re.sub("\\d", "#", re.sub("[A-Z]", "?", (this | string))))
-            - condition: (column.entity == "url" or column.entity == "ipv4" or column.entity
-                == "ipv6") and not (this | isna)
-              value: column.entity | fake
-            - condition: c(olumn.entity == "national_id" or column.entity == "tax_id") and not
-                (this | isna)
-              value: fake.itin()
-            - condition: column.entity == "credit_debit_card" and not (this | isna)
-              value: fake.credit_card_number()
-            - condition: column.entity == "cvv" and not (this | isna)
-              value: fake.credit_card_security_code()
-            - condition: column.entity == "pin" and not (this | isna)
-              value: fake.random_number(digits=4) | string
-            - condition: column.entity == "coordinate" and not (this | isna)
-              value: column.entity | fake
-            - condition: column.entity == "mac_address" and not (this | isna)
-              value: column.entity | fake
-            - condition: column.entity is none and column.type == "text"
-              value: this | fake_entities
-- name: tabular_ft
-  task: tabular_ft
-  config: 
-    train:
-      group_training_examples_by: null
-      order_training_examples_by: null
-      params:
-        num_input_records_to_sample: 5000
-        rope_scaling_factor: 1
-    generate:
-      num_records: 1000
-- name: evaluate
-  task: evaluate_safe_synthetics_dataset
-  inputs:
-    - tabular_ft
-    - holdout
-  config: {}
+  - name: sample_data_read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/ecommerce_customers.csv
+  - name: holdout
+    task: holdout
+    config: {}
+  - name: transform
+    task: transform
+    config:
+      globals:
+        classify:
+          enable: true
+          entities:
+            - first_name
+            - last_name
+            - name
+            - street_address
+            - city
+            - state
+            - postcode
+            - country
+            - address
+            - latitude
+            - longitude
+            - coordinate
+            - age
+            - phone_number
+            - fax_number
+            - email
+            - ssn
+            - unique_identifier
+            - medical_record_number
+            - health_plan_beneficiary_number
+            - account_number
+            - certificate_license_number
+            - vehicle_identifier
+            - license_plate
+            - device_identifier
+            - biometric_identifier
+            - url
+            - ipv4
+            - ipv6
+            - national_id
+            - tax_id
+            - bank_routing_number
+            - swift_bic
+            - credit_debit_card
+            - cvv
+            - pin
+            - employee_id
+            - api_key
+            - coordinate
+            - customer_id
+            - user_name
+            - password
+            - mac_address
+            - http_cookie
+            - date
+            - date_time
+            - blood_type
+            - gender
+            - sexuality
+            - political_view
+            - race
+            - ethnicity
+            - religious_belief
+            - language
+            - education
+            - job_title
+            - employment_status
+            - company_name
+        ner:
+          ner_threshold: 0.3
+          entities:
+            - first_name
+            - last_name
+            - name
+            - street_address
+            - city
+            - state
+            - postcode
+            - country
+            - address
+            - latitude
+            - longitude
+            - coordinate
+            - age
+            - phone_number
+            - fax_number
+            - email
+            - ssn
+            - unique_identifier
+            - medical_record_number
+            - health_plan_beneficiary_number
+            - account_number
+            - certificate_license_number
+            - vehicle_identifier
+            - license_plate
+            - device_identifier
+            - biometric_identifier
+            - url
+            - ipv4
+            - ipv6
+            - national_id
+            - tax_id
+            - bank_routing_number
+            - swift_bic
+            - credit_debit_card
+            - cvv
+            - pin
+            - employee_id
+            - api_key
+            - coordinate
+            - customer_id
+            - user_name
+            - password
+            - mac_address
+            - http_cookie
+        locales:
+          - en_US
+      steps:
+        - vars:
+            row_seed: random.random()
+          rows:
+            update:
+              - condition: column.entity == "first_name" and not (this | isna)
+                value: fake.persona(row_index=vars.row_seed + index).first_name
+              - condition: column.entity == "last_name" and not (this | isna)
+                value: fake.persona(row_index=vars.row_seed + index).last_name
+              - condition: column.entity == "name" and not (this | isna)
+                value: column.entity | fake
+              - condition: (column.entity == "street_address" or column.entity == "city" or
+                  column.entity == "state" or column.entity == "postcode" or
+                  column.entity == "address") and not (this | isna)
+                value: column.entity | fake
+              - condition: column.entity == "latitude" and not (this | isna)
+                value: fake.location_on_land()[0]
+              - condition: column.entity == "longitude" and not (this | isna)
+                value: fake.location_on_land()[1]
+              - condition: column.entity == "coordinate" and not (this | isna)
+                value: fake.location_on_land()
+              - condition: column.entity == "email" and not (this | isna)
+                value: fake.persona(row_index=vars.row_seed + index).email
+              - condition: column.entity == "ssn" and not (this | isna)
+                value: column.entity | fake
+              - condition: column.entity == "phone_number" and not (this | isna)
+                value: (fake.random_number(digits=3) | string) + "-" +
+                  (fake.random_number(digits=3) | string) + "-" +
+                  (fake.random_number(digits=4) | string)
+              - condition: column.entity == "fax_number" and not (this | isna)
+                value: (fake.random_number(digits=3) | string) + "-" +
+                  (fake.random_number(digits=3) | string) + "-" +
+                  (fake.random_number(digits=4) | string)
+              - condition: column.entity == "vehicle_identifier" and not (this | isna)
+                value: fake.vin()
+              - condition: column.entity == "license_plate" and not (this | isna)
+                value: column.entity | fake
+              - condition: (column.entity == "unique_identifier" or column.entity ==
+                  "medical_record_number" or column.entity ==
+                  "health_plan_beneficiary_number" or column.entity ==
+                  "account_number" or column.entity ==
+                  "certificate_license_number" or column.entity ==
+                  "device_identifier" or column.entity == "biometric_identifier"
+                  or column.entity == "bank_routing_number" or column.entity ==
+                  "swift_bic" or column.entity == "employee_id" or column.entity
+                  == "api_key" or column.entity == "customer_id" or
+                  column.entity == "user_name" or column.entity == "password" or
+                  column.entity == "http_cookie") and not (this | isna)
+                value: fake.bothify(re.sub("\\d", "#", re.sub("[A-Z]", "?", (this | string))))
+              - condition: (column.entity == "url" or column.entity == "ipv4" or column.entity
+                  == "ipv6") and not (this | isna)
+                value: column.entity | fake
+              - condition: c(olumn.entity == "national_id" or column.entity == "tax_id") and not
+                  (this | isna)
+                value: fake.itin()
+              - condition: column.entity == "credit_debit_card" and not (this | isna)
+                value: fake.credit_card_number()
+              - condition: column.entity == "cvv" and not (this | isna)
+                value: fake.credit_card_security_code()
+              - condition: column.entity == "pin" and not (this | isna)
+                value: fake.random_number(digits=4) | string
+              - condition: column.entity == "coordinate" and not (this | isna)
+                value: column.entity | fake
+              - condition: column.entity == "mac_address" and not (this | isna)
+                value: column.entity | fake
+              - condition: column.entity is none and column.type == "text"
+                value: this | fake_entities
+  - name: tabular_ft
+    task: tabular_ft
+    config:
+      train:
+        group_training_examples_by: null
+        order_training_examples_by: null
+        params:
+          num_input_records_to_sample: 5000
+          rope_scaling_factor: 1
+      generate:
+        num_records: 1000
+  - name: evaluate
+    task: evaluate_safe_synthetics_dataset
+    inputs:
+      - tabular_ft
+      - holdout
+    config: {}
