@@ -70,6 +70,52 @@ task:
           - company_name
       ner:
         ner_threshold: 0.3
+        entities:
+          # True identifiers
+          - first_name
+          - last_name
+          - name
+          - street_address
+          - city
+          - state
+          - postcode
+          - country
+          - address
+          - latitude
+          - longitude
+          - coordinate
+          - age
+          - phone_number
+          - fax_number
+          - email
+          - ssn
+          - unique_identifier
+          - medical_record_number
+          - health_plan_beneficiary_number
+          - account_number
+          - certificate_license_number
+          - vehicle_identifier
+          - license_plate
+          - device_identifier
+          - biometric_identifier
+          - url
+          - ipv4
+          - ipv6
+          - national_id
+          - tax_id
+          - bank_routing_number
+          - swift_bic
+          - credit_debit_card
+          - cvv
+          - pin
+          - employee_id
+          - api_key
+          - coordinate
+          - customer_id
+          - user_name
+          - password
+          - mac_address
+          - http_cookie
       locales: [en_US]
     steps:
         - vars:

@@ -113,10 +113,6 @@
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/workflows/tabular-ft-dp.yml",
-      "button1": {
-        "label": "SDK Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navft-dp/navft-dp-sample.ipynb"
-      },
       "sampleDataset": {
         "fileName": "womens_clothing_reviews.csv",
         "description": "This dataset contains reviews, ratings, and categories for women's clothing.",
@@ -158,10 +154,6 @@
       "modelType": "navigator_ft",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/workflows/tabular-ft.yml",
-      "button1": {
-        "label": "SDK Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator-fine-tuning-intro-tutorial.ipynb"
-      },
       "sampleDataset": {
         "fileName": "financial_transactions.csv",
         "description": "This financial dataset contains transaction ID, date, payment, currency, type, and description for banking transactions. It includes numeric, categorical, and free text tabular data.",
@@ -181,10 +173,6 @@
       "modelType": "gpt_x",
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/workflows/text-ft-dp.yml",
-      "button1": {
-        "label": "SDK Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/generate_differentially_private_synthetic_text.ipynb"
-      },
       "sampleDataset": {
         "fileName": "clinical_notes.csv",
         "description": "This clinical notes dataset contains medical observations written by healthcare providers during patient care. It includes personally identifiable information which needs to be redacted before the dataset can be shared or used to train ML models.",
@@ -211,14 +199,6 @@
         "fields": 18,
         "trainingTime": "6 mins",
         "bytes": 830021
-      },
-      "button1": {
-        "label": "Gretel 101 Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_101_Blueprint.ipynb"
-      },
-      "button2": {
-        "label": "Advanced Examples Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Advanced_Tabular_Blueprint.ipynb"
       }
     },
     {
@@ -238,14 +218,6 @@
         "fields": 1,
         "trainingTime": "15 mins",
         "bytes": 117475
-      },
-      "button1": {
-        "label": "Text Generation Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Text_Generation_Blueprint.ipynb"
-      },
-      "button2": {
-        "label": "Zero-Shot Prompting Notebook",
-        "link": "https://gist.github.com/zredlined/3091bc76da6a43654e43abe5c46a799a"
       }
     }
   ]
