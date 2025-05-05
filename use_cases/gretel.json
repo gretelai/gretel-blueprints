@@ -222,14 +222,6 @@
         "fields": 18,
         "trainingTime": "6 mins",
         "bytes": 830021
-      },
-      "button1": {
-        "label": "Gretel 101 Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_101_Blueprint.ipynb"
-      },
-      "button2": {
-        "label": "Advanced Examples Notebook",
-        "link": "https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/sdk_blueprints/Gretel_Advanced_Tabular_Blueprint.ipynb"
       }
     },
     {
