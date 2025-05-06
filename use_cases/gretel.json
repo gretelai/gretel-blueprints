@@ -174,12 +174,12 @@
       "modelCategory": "synthetics",
       "defaultConfig": "config_templates/gretel/workflows/text-ft-dp.yml",
       "sampleDataset": {
-        "fileName": "clinical_notes.csv",
+        "fileName": "clinical_notes_truncated.csv",
         "description": "This clinical notes dataset contains medical observations written by healthcare providers during patient care. It includes personally identifiable information which needs to be redacted before the dataset can be shared or used to train ML models.",
         "records": 30000,
         "fields": 1,
-        "trainingTime": "2 hours",
-        "bytes": 103447682
+        "trainingTime": "1 hours",
+        "bytes": 14932124
       }
     },
     {
