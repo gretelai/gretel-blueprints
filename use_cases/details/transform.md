@@ -1,4 +1,4 @@
-![Transform unstructured data into AI-ready formats](https://blueprints.gretel.cloud/use_cases/images/boost-minority-class-hero.png "Transform unstructured data into AI-ready formats")
+![Transform unstructured data into AI-ready formats](https://blueprints.gretel.cloud/use_cases/images/tabular-gan.png "Transform unstructured data into AI-ready formats")
 
 Transform your data into privacy-safe formats without sacrificing utility. This blueprint provides a ready-to-use configuration for detecting and redacting personally identifiable information (PII) in both structured and unstructured data. Get started immediately with our sample dataset, or upload your own file to see how quickly you can create privacy-enhanced versions of your data.
 
