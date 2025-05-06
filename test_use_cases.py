@@ -11,7 +11,6 @@ card_schema = {
         "title": {"type": "string"},
         "description": {"type": "string"},
         "cardType": {"type": "string", "enum": ["Console", "Notebook"]},
-        "imageName": {"type": "string"},
         "icon": {"type": "string"},
         "tag": {
             "type": "string",
