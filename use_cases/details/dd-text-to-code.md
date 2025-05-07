@@ -9,6 +9,6 @@ Whether you're building a general-purpose coding assistant or domain-specific to
 [Check out our blog post here](https://gretel.ai/blog/build-high-quality-datasets-for-ai-using-gretel-navigator) or [read the documentation](https://docs.gretel.ai/create-synthetic-data/gretel-data-designer-beta) to learn more.
 
 Interested in other use cases? Here are a few more notebooks:
-- [RAG evaluation](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/rag-evals/data_designer_sdk_rag_evals.ipynb)
-- [Start from seed data](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/navigator-data-designer-sdk-sample-to-dataset.ipynb)
-- [Multi-turn conversation datasets](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/multi-turn-chat/navigator-data-designer-sdk-multi-turn-conversation.ipynb)
+- [RAG evaluation](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/rag-examples/generate-rag-evaluation-dataset.ipynb)
+- [Start from seed data](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/data-designer-101/3-seeding-with-a-dataset.ipynb)
+- [Multi-turn conversation datasets](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/multi-turn-chat/multi-turn-conversation.ipynb)

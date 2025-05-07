@@ -7,6 +7,6 @@ Unlike generic benchmarks, these custom datasets let you test how your RAG syste
 [Check out our blog post here](https://gretel.ai/blog/build-high-quality-datasets-for-ai-using-gretel-navigator) or [read the documentation](https://docs.gretel.ai/create-synthetic-data/gretel-data-designer-beta) to learn more.
 
 Here are some more notebooks if you'd like to try out other use cases:
-- [Multi-turn conversation datasets](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/multi-turn-chat/navigator-data-designer-sdk-multi-turn-conversation.ipynb)
-- [Start from seed data](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/navigator-data-designer-sdk-sample-to-dataset.ipynb)
-- [Text to SQL pairs](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/demo/navigator/text-to-code/navigator-data-designer-sdk-text-to-sql.ipynb)
+- [Multi-turn conversation datasets](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/multi-turn-chat/multi-turn-conversation.ipynb)
+- [Start from seed data](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/data-designer-101/3-seeding-with-a-dataset.ipynb)
+- [Text to SQL pairs](https://colab.research.google.com/github/gretelai/gretel-blueprints/blob/main/docs/notebooks/data-designer/text-to-code/text-to-sql.ipynb)
