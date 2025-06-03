@@ -21,7 +21,7 @@ steps:
           batch_size: auto
           auto_transform_datetimes: False
       generate:
-        num_records: 5000
+        num_records: 1000
   - name: evaluate
     task: evaluate_safe_synthetics_dataset
     inputs:
