@@ -20,9 +20,10 @@ steps:
           warmup_steps: 100
           lr_scheduler: "linear"
           learning_rate: 0.0001
+          max_tokens: 128
       generate:
         num_records: 1000
-        maximum_text_length: 100
+        maximum_text_length: 128
   - name: evaluate
     task: evaluate_safe_synthetics_dataset
     inputs:
