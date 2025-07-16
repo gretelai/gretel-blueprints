@@ -1,5 +1,5 @@
 schema_version: "1.0"
-name: default
+name: differential_privacy
 task:
   name: text_ft
   config:
@@ -23,5 +23,5 @@ task:
         epsilon: 5  # Privacy budget (lower values = stronger privacy)
         delta: auto  # Probability of privacy leakage (auto-calculated)
     generate:
-      num_records: 80  # Number of records to generate
+      num_records: 1000  # Number of records to generate
       maximum_text_length: 128  # Maximum length of generated texts in tokens

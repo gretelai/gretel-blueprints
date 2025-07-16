@@ -1,0 +1,31 @@
+version: "2"
+inputs: {}
+steps:
+  - name: sample_data_read
+    task: data_source
+    config:
+      data_source: https://blueprints-dev.gretel.cloud/sample_data/sample-banking-questions-intents.csv
+  - name: holdout
+    task: holdout
+    config: {}
+  - name: text_ft
+    task: text_ft
+    config:
+      train:
+        pretrained_model: "gretelai/gpt-auto"
+        params:
+          batch_size: 4
+          steps: 750
+          weight_decay: 0.01
+          warmup_steps: 100
+          lr_scheduler: "linear"
+          learning_rate: 0.0001
+      generate:
+        num_records: 1000
+        maximum_text_length: 100
+  - name: evaluate
+    task: evaluate_safe_synthetics_dataset
+    inputs:
+      - text_ft
+      - holdout
+    config: {}
