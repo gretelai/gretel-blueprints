@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gretel Data Designer Report</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.3.min.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+
+    <script>hljs.highlightAll();</script>
+
+    <style>
+        :root {
+    --primary: #25212B;
+    --secondary: #646071;
+    --grey: #CFD0DD;
+    --success: #E0F9F1;
+    --success-dark: #1D9F84;
+    --error: #FEE2E2;
+    --error-dark: #EF4444;
+    --border: #F6F6F9;
+    --header: #000000;
+    --accent: #5351DE;
+    --button-border: #E0E0E0;
+    --label: hsla(250, 16.7%, 92.9%);;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    color: var(--primary);
+    margin: 0;
+    letter-spacing: 0.5px;
+    background-color: white;
+}
+
+.header-class {
+    position: fixed;
+    overflow: hidden;
+    z-index: 100;
+    width: 100%;
+    top: 0;
+    background: white;
+    height: 75px;
+}
+
+.report-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 36px;
+    padding-right: 36px;
+    max-width: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.report-title {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.console-link {
+    padding: 8px;
+}
+
+.right-arrow {
+    padding-left: 8px;
+    align-items: center;
+}
+
+hr {
+    height: 4px;
+    background-color: var(--grey);
+    border: 0;
+    margin: 0;
+}
+
+.hr-vertical {
+    border-left: 1px solid var(--border);
+    height: 80%;
+    align-self: center;
+}
+
+#navbar {
+    position: fixed;
+    z-index: 100;
+    margin-top: 75px;
+    top: 0;
+    width: 10vw;
+    min-width: 240px;
+    background-color: white;
+}
+
+nav {
+    display: grid;
+    float: left;
+    padding: 0;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+nav a.level-1 {
+    font-weight: 700;
+    size: 14px;
+    line-height: 21px;
+    color: var(--secondary);
+    text-decoration: none;
+    padding-top: 12px;
+}
+
+nav a.level-2 {
+    font-weight: 400;
+    size: 12px;
+    line-height: 18px;
+    color: var(--secondary);
+    text-decoration: none;
+    margin-left: 10px;
+    padding-top: 8px;
+}
+
+nav a.level-1:active,
+nav a.level-2:active,
+nav a.level-1:focus,
+nav a.level-2:focus {
+    color: var(--header);
+}
+
+button#toggle-nav {
+    padding: unset;
+    margin-top: 20px;
+    line-height: unset;
+    position: absolute;
+    z-index: 10;
+    content: '';
+    height: 40px;
+    width: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: center;
+}
+
+.opened-nav-button-bg {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgICAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgICAgICBkPSJNMTUuNzg2MyA1TDkuMTYzMTcgMTEuNjIzMUM5LjExMTY2IDExLjY3MTQgOS4wNzA2MSAxMS43Mjk4IDkuMDQyNTQgMTEuNzk0NkM5LjAxNDQ4IDExLjg1OTUgOSAxMS45Mjk0IDkgMTJDOSAxMi4wNzA2IDkuMDE0NDggMTIuMTQwNSA5LjA0MjU0IDEyLjIwNTRDOS4wNzA2MSAxMi4yNzAyIDkuMTExNjYgMTIuMzI4NiA5LjE2MzE3IDEyLjM3NjlMMTUuNzg2MyAxOSIKICAgICAgICAgICAgICAgICAgICAgICAgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjwvcGF0aD4KICAgICAgICAgICAgICAgIDwvc3ZnPg==");
+}
+
+.closed-nav-button-bg {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB0cmFuc2Zvcm09Im1hdHJpeCgtMSwwLDAsLTEsMCwwKSI+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE1Ljc4NjMgNUw5LjE2MzE3IDExLjYyMzFDOS4xMTE2NiAxMS42NzE0IDkuMDcwNjEgMTEuNzI5OCA5LjA0MjU0IDExLjc5NDZDOS4wMTQ0OCAxMS44NTk1IDkgMTEuOTI5NCA5IDEyQzkgMTIuMDcwNiA5LjAxNDQ4IDEyLjE0MDUgOS4wNDI1NCAxMi4yMDU0QzkuMDcwNjEgMTIuMjcwMiA5LjExMTY2IDEyLjMyODYgOS4xNjMxNyAxMi4zNzY5TDE1Ljc4NjMgMTkiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8L3N2Zz4=");
+}
+
+div#nav-overlay {
+    display: grid;
+    position: relative;
+    justify-items: center;
+}
+
+.nav-hr-vertical {
+    border-left: 3px solid var(--border);
+    height: 100vh;
+}
+
+.main {
+    margin: 4rem auto;
+    width: 60vw;
+    min-width: 920px;
+    max-width: 70%;
+    min-width: 980px;
+}
+
+section {
+    padding: 24px;
+    width: 100%;
+    max-width: 100rem;
+    scroll-margin-top: 92px;
+}
+
+h1 {
+    color: var(--header);
+    font-weight: 700;
+    font-size: 32px;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.generic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    scroll-margin-top: 240px;
+    padding: 16px;
+}
+
+.score-desc-grid {
+    display: grid;
+    grid-template-columns: 0.3fr 1px 0.7fr;
+    grid-gap: 52px;
+    border-bottom: 1px solid var(--border);
+    padding: 36px;
+}
+
+.scores-3 {
+    display: grid;
+    grid-template-columns: 0.33fr 1px 0.33fr 1px 0.33fr;
+    border-bottom: 1px solid var(--border);
+    padding: 24px;
+}
+
+.scores-2 {
+    display: grid;
+    grid-template-columns: 0.5fr 1px 0.5fr;
+    border-bottom: 1px solid var(--border);
+    padding: 24px;
+}
+
+.generic-data {
+    display: grid;
+    grid-template-columns: 0.2fr 0.8fr;
+    align-self: center;
+    place-content: space-between;
+    color: var(--secondary);
+    min-width: 320px;
+    height: 160px;
+}
+
+.generic-data-v2 {
+    display: grid;
+    grid-template-columns: 1.0fr;
+    align-self: center;
+    place-content: space-between;
+    color: var(--secondary);
+    min-width: 320px;
+    height: 320px;
+}
+
+div.field {
+    display: inline;
+    font-weight: 700;
+    size: 16px;
+    line-height: 32px;
+}
+
+div.text {
+    display: inline;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+div.text-v2 {
+    display: inline;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+div.larger-text {
+    display: inline;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 32px;
+}
+
+.copy-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+button.copy-to-clipboard {
+    padding: 8px;
+    height: 32px;
+    line-height: normal;
+    margin: 0 24px 0 24px;
+}
+
+.score-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 12px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    flex-direction: column;
+}
+
+
+.score-chart.non-hovering .drag {
+    cursor: default !important;
+}
+
+.score-title {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18.31px;
+    color: var(--secondary);
+}
+
+.score-label {
+    display: inline-block;
+    font-size: 0.9375rem;
+    line-height: 1;
+    margin-bottom: 4px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1.25rem;
+    font-weight: 600;
+    background-color: var(--label);
+}
+
+.score-container .score-label,
+.score-desc-grid .score-label {
+    margin-top: -16px;
+    z-index: 10;
+}
+
+.score button {
+    margin-top: 16px;
+}
+
+.component {
+    margin-top: 60px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    scroll-margin-top: 120px;
+}
+
+.header {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.figure {
+    justify-items: center;
+}
+
+table {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+th {
+    font-family: 'Inter';
+    text-align: left;
+    padding: 8px;
+    background-color: white;
+}
+
+td {
+    padding: 8px;
+    vertical-align: baseline;
+}
+
+.first {
+    text-align: left;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding-left: 36px;
+}
+
+.last {
+    padding-right: 36px;
+}
+
+.tnum {
+    text-align: right;
+}
+
+tr:nth-child(even) {
+    background-color: var(--border);
+}
+
+#pii-replay tr:nth-child(odd) {
+    background-color: var(--border);
+}
+
+#pii-replay tr:nth-child(even) {
+    background-color: white;
+}
+
+.entity_count {
+    display: flex;
+    align-items: center;
+}
+
+.footer {
+    font-weight: 700;
+    size: 16px;
+    line-height: 32px;
+}
+
+.footer-main {
+    padding: 24px;
+}
+
+.tooltips {
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+    background-color: var(--border);
+    padding: 24px;
+}
+
+button {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: white;
+    border-radius: 8px;
+    border: 3px solid var(--button-border);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.info {
+    align-self: center;
+    content: '';
+    height: 22px;
+    width: 22px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjMiIHZpZXdCb3g9IjAgMCAyMiAyMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZD0iTTguNjkyMTQgMTYuMTE1NUgxMy4zMDc1TTEwLjk5OTkgMTYuMTE1M1YxMC43MzA3SDkuNDYxNDNNMTAuOTUgNy41NUgxMS4wNU0xMC45NSA3LjU1VjcuNDVNMTAuOTUgNy41NUwxMSA3LjVNMTEuMDUgNy41NUwxMS4wNSA3LjQ1TTExLjA1IDcuNTVMMTEgNy41TTExLjA1IDcuNDVIMTAuOTVNMTEuMDUgNy40NUwxMSA3LjVNMTAuOTUgNy40NUwxMSA3LjVNMTEgMjEuNUMxNi41MjI5IDIxLjUgMjEgMTcuMDIyOSAyMSAxMS41QzIxIDUuOTc3MTUgMTYuNTIyOSAxLjUgMTEgMS41QzUuNDc3MTUgMS41IDEgNS45NzcxNSAxIDExLjVDMSAxNy4wMjI5IDUuNDc3MTUgMjEuNSAxMSAyMS41WiIKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJva2U9IiM2NDYwNzEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvc3ZnPg==);
+}
+
+.info:hover {
+    cursor: pointer;
+}
+
+.score-description {
+    align-content: center;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 400;
+    min-width: 480px;
+}
+
+.link-text {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+ul {
+    padding-inline-start: 0px;
+}
+
+li {
+    list-style: none;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+li::before {
+    content: '';
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    margin-bottom: -5px;
+    margin-right: 12px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjMiIHZpZXdCb3g9IjAgMCAyMiAyMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTYuMzg0NTIgMTMuMDM4NEw5LjUzODM3IDE1LjU2MTRDOS42MjMwNyAxNS42MzEyIDkuNzIyMjUgMTUuNjgxMiA5LjgyODcgMTUuNzA3OEM5LjkzNTE1IDE1LjczNDQgMTAuMDQ2MiAxNS43MzcgMTAuMTUzOCAxNS43MTUzQzEwLjI2MjMgMTUuNjk0OSAxMC4zNjUzIDE1LjY1MTQgMTAuNDU1NSAxNS41ODc3QzEwLjU0NTggMTUuNTI0IDEwLjYyMTMgMTUuNDQxNiAxMC42NzY4IDE1LjM0NjFMMTUuNjE1MyA2Ljg4NDUyIiBmaWxsPSIjMUQ5Rjg0Ii8+CjxwYXRoIGQ9Ik0xMSAyMS41QzE2LjUyMjggMjEuNSAyMSAxNy4wMjI4IDIxIDExLjVDMjEgNS45NzcxNSAxNi41MjI4IDEuNSAxMSAxLjVDNS40NzcxNSAxLjUgMSA1Ljk3NzE1IDEgMTEuNUMxIDE3LjAyMjggNS40NzcxNSAyMS41IDExIDIxLjVaIiBmaWxsPSIjMUQ5Rjg0Ii8+CjxwYXRoIGQ9Ik02LjM4NDUyIDEzLjAzODRMOS41MzgzNyAxNS41NjE0QzkuNjIzMDcgMTUuNjMxMiA5LjcyMjI1IDE1LjY4MTIgOS44Mjg3IDE1LjcwNzhDOS45MzUxNSAxNS43MzQ0IDEwLjA0NjIgMTUuNzM3IDEwLjE1MzggMTUuNzE1M0MxMC4yNjIzIDE1LjY5NDkgMTAuMzY1MyAxNS42NTE0IDEwLjQ1NTUgMTUuNTg3N0MxMC41NDU4IDE1LjUyNCAxMC42MjEzIDE1LjQ0MTYgMTAuNjc2OCAxNS4zNDYxTDE1LjYxNTMgNi44ODQ1Mk0yMSAxMS41QzIxIDE3LjAyMjggMTYuNTIyOCAyMS41IDExIDIxLjVDNS40NzcxNSAyMS41IDEgMTcuMDIyOCAxIDExLjVDMSA1Ljk3NzE1IDUuNDc3MTUgMS41IDExIDEuNUMxNi41MjI4IDEuNSAyMSA1Ljk3NzE1IDIxIDExLjVaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=");
+}
+
+li.warn-option::before {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyNCAyMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjAwMDM1IDIwLjA5OTlDMi41MDAzNSAyMC4zOTk5IDMuMDAwMzUgMjAuNDk5OSAzLjUwMDM1IDIwLjQ5OTlIMjAuNTAwNEMyMS4zMDA0IDIwLjQ5OTkgMjIuMDAwNCAyMC4xOTk5IDIyLjUwMDQgMTkuNTk5OUMyMy4xMDA0IDE5LjA5OTkgMjMuNDAwNCAxOC4yOTk5IDIzLjQwMDQgMTcuNDk5OUMyMy40MDA0IDE2Ljk5OTkgMjMuMzAwNCAxNi40OTk5IDIzLjAwMDQgMTUuOTk5OUwxNC42MDA0IDEuODk5OUMxNC4xMDA0IDEuMTk5OSAxMy41MDA0IDAuNjk5OTAyIDEyLjcwMDQgMC40OTk5MDJDMTEuOTAwNCAwLjI5OTkwMiAxMS4xMDA0IDAuMzk5OTAyIDEwLjQwMDQgMC43OTk5MDJDMTAuMDAwNCAwLjk5OTkwMiA5LjcwMDM1IDEuMzk5OSA5LjQwMDM1IDEuNzk5OUwwLjkwMDM1MyAxNS45OTk5QzAuMTAwMzUzIDE3LjM5OTkgMC42MDAzNTMgMTkuMjk5OSAyLjAwMDM1IDIwLjA5OTlaTTExLjAwMDQgMTEuNDk5OUMxMS4wMDA0IDEyLjA5OTkgMTEuNDAwNCAxMi40OTk5IDEyLjAwMDQgMTIuNDk5OUMxMi42MDA0IDEyLjQ5OTkgMTMuMDAwNCAxMi4wOTk5IDEzLjAwMDQgMTEuNDk5OVY3LjQ5OTg4QzEzLjAwMDQgNi44OTk4OCAxMi42MDA0IDYuNDk5ODggMTIuMDAwNCA2LjQ5OTg4QzExLjQwMDQgNi40OTk4OCAxMS4wMDA0IDYuODk5ODggMTEuMDAwNCA3LjQ5OTg4VjExLjQ5OTlaTTExLjMwMDQgMTYuMTk5OUMxMS41MDA0IDE2LjM5OTkgMTEuNzAwNCAxNi40OTk5IDEyLjAwMDQgMTYuNDk5OUMxMi4zMDA0IDE2LjQ5OTkgMTIuNTAwNCAxNi4zOTk5IDEyLjgwMDQgMTYuMTk5OUMxMy4wMDA0IDE1Ljk5OTkgMTMuMTAwNCAxNS43OTk5IDEzLjEwMDQgMTUuNDk5OUMxMy4xMDA0IDE1LjQ0OTkgMTMuMDc1NCAxNS4zNzQ5IDEzLjA1MDQgMTUuMjk5OUMxMy4wMjU0IDE1LjIyNDkgMTMuMDAwNCAxNS4xNDk5IDEzLjAwMDQgMTUuMDk5OUMxMy4wMDA0IDE0Ljk5OTkgMTIuOTAwNCAxNC44OTk5IDEyLjgwMDQgMTQuNzk5OUMxMi43MDA0IDE0Ljc5OTkgMTIuNjAwNCAxNC42OTk5IDEyLjYwMDQgMTQuNjk5OUMxMi41NDI5IDE0LjY0MjQgMTIuNTE4NCAxNC42MTc5IDEyLjQ4OSAxNC42MDc2QzEyLjQ2NzMgMTQuNTk5OSAxMi40NDI5IDE0LjU5OTkgMTIuNDAwNCAxNC41OTk5QzEyLjM0MjkgMTQuNTQyNCAxMi4zMTg0IDE0LjUxNzkgMTIuMjg5IDE0LjUwNzZDMTIuMjY3MyAxNC40OTk5IDEyLjI0MjkgMTQuNDk5OSAxMi4yMDA0IDE0LjQ5OTlDMTIuMDAwNCAxNC40OTk5IDExLjgwMDQgMTQuNDk5OSAxMS42MDA0IDE0LjU5OTlDMTEuNTAwNCAxNC41OTk5IDExLjQwMDQgMTQuNjk5OSAxMS4zMDA0IDE0Ljc5OTlDMTEuMjUwNCAxNC44NDk5IDExLjIyNTQgMTQuODk5OSAxMS4yMDA0IDE0Ljk0OTlDMTEuMTc1NCAxNC45OTk5IDExLjE1MDQgMTUuMDQ5OSAxMS4xMDA0IDE1LjA5OTlDMTEuMDAwNCAxNS4xOTk5IDExLjAwMDQgMTUuMzk5OSAxMS4wMDA0IDE1LjQ5OTlDMTEuMDAwNCAxNS43OTk5IDExLjEwMDQgMTUuOTk5OSAxMS4zMDA0IDE2LjE5OTlaIiBmaWxsPSIjRTVBMTFBIi8+Cjwvc3ZnPgo=");
+}
+
+.figure-desc {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    padding-left: 24px;
+}
+
+.column-name-link {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.dps {
+    justify-self: center;
+    display: flex;
+    height: 36px;
+    grid-gap: 20px;
+    padding: 8px;
+    border: 1px solid var(--grey);
+    border-radius: 0.5rem;
+    font-weight: 500;
+    place-items: center;
+}
+
+.dps-btn {
+    border-radius: 50px;
+    height: 32px;
+    position: relative;
+    text-align-last: right;
+    align-content: center;
+    padding-right: 16px;
+}
+
+.btn-on {
+    width: 49px;
+    background-color: var(--success);
+    color: var(--success-dark);
+}
+
+.btn-off {
+    width: 56px;
+    background-color: var(--error);
+    color: var(--error-dark);
+}
+
+.dps-btn::before {               
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
+    left: 8px;                  
+    content: "\25cf";
+    font-size: 1.5em;
+    pointer-events: none;       
+}
+
+.btn-on::before {  
+    color: var(--success-dark);
+}
+
+.btn-off::before {  
+    color: var(--error-dark);
+}
+
+.dps-value {
+    display: inline-block;
+    line-height: 24px;
+    margin: 4px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    background-color: var(--border);
+}
+
+.dps-title{
+    align-items: anchor-center;
+    display: flex;
+    column-gap: 20px;
+}
+        table {
+    font-weight: 400;
+}
+
+.sticky-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.sticky th, .sticky td {
+    min-width: 400px;
+}
+
+.sticky th:first-child, .sticky td:first-child, th.sticky, td.sticky {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    min-width: 250px;
+}
+
+.sticky tr:nth-child(odd) td:first-child {
+    background-color: rgba(255, 255, 255, 1.0);
+}
+
+.sticky tr:nth-child(even) td:first-child {
+    background-color: rgba(246, 246, 249, 1.0);
+}
+
+.column-distribution-cell {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.column-distribution-cell table {
+    width: 400px;
+}
+
+.column-distribution-cell figure {
+    margin-block: 0em;
+    margin-inline: 10px;
+}
+
+select {
+    appearance: none;
+    padding: 6px;
+    width: 100%;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper::after {
+    content: "▼";
+    font-size: 1rem;
+    top: 6px;
+    right: 10px;
+    position: absolute;
+}
+
+.quality td {
+    vertical-align: middle;
+}
+
+.quality + .quality {
+    margin-top: 2em;
+}
+
+.hljs {
+    background: none;
+}
+    </style>
+</head>
+
+<body>
+    <div class="header-class">
+        <div class="report-header fixed-div">
+            <div class="gretel-logo" onclick="window.location.href='https://gretel.ai/'">
+                <svg width="100" height="40" viewBox="0 0 181 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_849_78)">
+                        <path
+                            d="M53.4437 41.3178V53.5794H44.4782V18.8754H53.4437V27.0498C55.1339 21.1048 58.9552 18.1323 63.144 18.1323C65.3487 18.1323 67.2593 18.5782 68.8025 19.3956L67.2593 27.57C65.863 26.9011 64.0993 26.604 62.0417 26.604C56.3097 26.604 53.4437 31.5085 53.4437 41.3178Z"
+                            fill="#3B2ED0" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M103.383 45.9252C100.444 51.573 94.1975 54.3226 87.3631 54.3226C82.366 54.3226 78.1773 52.6134 74.7234 49.2693C71.2694 45.8509 69.5793 41.4664 69.5793 36.1159C69.5793 30.7654 71.2694 26.4553 74.7234 23.1112C78.1773 19.7671 82.366 18.1323 87.3631 18.1323C92.3603 18.1323 96.4755 19.7671 99.7824 23.1112C103.089 26.4553 104.78 30.7654 104.78 36.1159C104.78 37.019 104.715 37.987 104.647 39.0198L104.633 39.2371H78.4712C79.0591 43.7701 82.8805 46.6684 87.951 46.6684C91.5519 46.6684 95.0058 45.1078 96.549 42.2097L103.383 45.9252ZM78.3978 33.0691H96.0346C95.3733 28.3875 91.9194 25.7122 87.4366 25.7122C82.66 25.7122 79.0591 28.5361 78.3978 33.0691Z"
+                            fill="#3B2ED0" />
+                        <path
+                            d="M121.87 26.158V53.5794H112.979V26.158H106.732V18.8754H112.979V5.64777H121.87V18.8754H129.146V26.158H121.87Z"
+                            fill="#3B2ED0" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M164.903 45.9252C161.963 51.573 155.716 54.3226 148.882 54.3226C143.885 54.3226 139.696 52.6134 136.242 49.2693C132.789 45.8509 131.098 41.4664 131.098 36.1159C131.098 30.7654 132.789 26.4553 136.242 23.1112C139.696 19.7671 143.885 18.1323 148.882 18.1323C153.879 18.1323 157.994 19.7671 161.301 23.1112C164.609 26.4553 166.299 30.7654 166.299 36.1159C166.299 37.0174 166.235 37.9834 166.167 39.0141L166.152 39.2371H139.99C140.578 43.7701 144.399 46.6684 149.47 46.6684C153.072 46.6684 156.525 45.1078 158.069 42.2097L164.903 45.9252ZM139.917 33.0691H157.554C156.893 28.3875 153.439 25.7122 148.956 25.7122C144.179 25.7122 140.578 28.5361 139.917 33.0691Z"
+                            fill="#3B2ED0" />
+                        <path d="M180.597 0V53.5794H171.631V0H180.597Z" fill="#3B2ED0" />
+                        <path
+                            d="M27.1716 19.3782C27.1716 14.947 30.7321 11.3548 35.1241 11.3548V19.3782C35.1764 19.3959 27.1716 19.3782 27.1716 19.3782Z"
+                            fill="#3B2ED0" />
+                        <path
+                            d="M34.7984 54.5253C34.7984 64.11 27.2527 71.9206 17.8936 71.9206C8.62804 71.9206 1.13987 64.2655 0.991031 54.8122L0.988777 54.5253H8.94397C8.94397 59.7209 12.9737 63.8921 17.8936 63.8921C22.746 63.8921 26.7325 59.8342 26.8409 54.7381L26.8431 54.5253H34.7984Z"
+                            fill="#3B2ED0" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M35.7872 36.4522C35.7872 26.4724 27.7758 18.3822 17.8936 18.3822C8.01121 18.3822 0 26.4724 0 36.4522C0 46.4322 8.01121 54.5224 17.8936 54.5224C27.7758 54.5224 35.7872 46.4322 35.7872 36.4522ZM8.61542 36.4522C8.61542 31.2775 12.7694 27.0826 17.8936 27.0826C23.0178 27.0826 27.1716 31.2775 27.1716 36.4522C27.1716 41.6271 23.0178 45.822 17.8936 45.822C12.7694 45.822 8.61542 41.6271 8.61542 36.4522Z"
+                            fill="#3B2ED0" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_849_78">
+                            <rect width="181" height="72" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <div class="report-title">
+                Data Designer Report
+            </div>
+            <button class="console-link" onclick="window.location.href='https://console.gretel.ai/login'">
+                Gretel Sign In
+                <span class="right-arrow">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.58923 0.577391C7.2638 0.251954 6.73616 0.251954 6.41072 0.577391C6.08529 0.902828 6.08529 1.43047 6.41072 1.7559L10.8215 6.16665H1.16665C0.706409 6.16665 0.333313 6.53974 0.333313 6.99998C0.333313 7.46022 0.706409 7.83331 1.16665 7.83331H10.8215L6.41072 12.2441C6.08529 12.5695 6.08529 13.0971 6.41072 13.4226C6.73616 13.748 7.2638 13.748 7.58923 13.4226L13.4226 7.58923C13.748 7.2638 13.748 6.73616 13.4226 6.41072L7.58923 0.577391Z"
+                            fill="#25212B" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+        <hr class="divider">
+    </div>
+
+    <div id="navbar">
+        <nav id="fixed-nav">
+            <a href="#overview" class="level-1">Overview</a>
+            <a href="#dataset-preview" class="level-2">Dataset Preview</a>
+            <a href="#dataset-schema" class="level-2">Dataset Schema</a>
+            <a href="#dataset-statistics" class="level-2">Dataset Statistics</a>
+            <a href="#column-distributions" class="level-2">Column Distributions</a>
+            
+            <a href="#correlations" class="level-2">Correlations</a>
+            
+
+            
+            <a href="#outlier-analysis" class="level-2">Outlier Analysis</a>
+            
+
+            
+
+            
+
+            
+        </nav>
+        <div id="nav-overlay" onclick="toggleNav()">
+            <div class="nav-hr-vertical"></div>
+            <button id="toggle-nav" class="opened-nav-button-bg"></button>
+        </div>
+    </div>
+
+    <section class="main">
+        <section id="overview">
+            <a href="#overview"></a>
+            <h1>Dataset Overview & Exploration</h1>
+
+            <a href="#dataset-preview"></a>
+            <div class="component" id="dataset-preview">
+                <div class="header">
+                    Dataset Preview
+                    <span data-toggle data-for="dataset-preview-info" class="info"></span>
+                </div>
+
+                <div class="tooltips" id="dataset-preview-info" hidden>
+                    
+The Dataset Preview provides a quick glimpse of five representative samples from the dataset, allowing for immediate visual inspection of data structure, formatting, and content before deeper analysis.
+
+                </div>
+                
+                <div class="sticky-table-container">
+                <table class="sticky" id="js-dataset-preview-table">
+                  <tr>
+                    <th>Column</th>
+                    
+                      <th>Sample 1</th>
+                    
+                      <th>Sample 2</th>
+                    
+                      <th>Sample 3</th>
+                    
+                      <th>Sample 4</th>
+                    
+                      <th>Sample 5</th>
+                    
+                  </tr>
+
+                  
+                    <tr id="js-preview-row-1">
+                      <td>bank_id</td>
+                      
+                        
+                            <td>
+                                964c1df701544534aabf9b13cbbec6e5
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                1866b23f4c954042bfb4bc88788df681
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                a2f21d07fea14584adf99f6fd212c1e1
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                48ac30a704b446ffa810ffd778d34c88
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                24815f9daa4941589bf1a514985d869c
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-2">
+                      <td>country</td>
+                      
+                        
+                            <td>
+                                Australia
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                France
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                France
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                France
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                France
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-3">
+                      <td>region</td>
+                      
+                        
+                            <td>
+                                Africa
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                Asia Pacific
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                Asia Pacific
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                Europe
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                Africa
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-4">
+                      <td>risk_score</td>
+                      
+                        
+                            <td>
+                                76
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                73
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                60
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                6
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                43
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-5">
+                      <td>market_share_percent</td>
+                      
+                        
+                            <td>
+                                16.25
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                3.28
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                5.55
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                6.51
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                10.88
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-6">
+                      <td>aml_compliance_flag</td>
+                      
+                        
+                            <td>
+                                compliant
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                non_compliant
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                compliant
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                compliant
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                under_review
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-7">
+                      <td>kyc_compliance_flag</td>
+                      
+                        
+                            <td>
+                                compliant
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                compliant
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                compliant
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                under_review
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                compliant
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-8">
+                      <td>regulatory_oversight_flag</td>
+                      
+                        
+                            <td>
+                                none
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                low
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                none
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                low
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                low
+                            </td>
+                        
+                      
+                    </tr>
+                  
+                    <tr id="js-preview-row-9">
+                      <td>bank_name</td>
+                      
+                        
+                            <td>
+                                Africa Bank
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                Pacific Bank of France
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                BNP Pacific Banque
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                Banque de l'Union Européenne
+                            </td>
+                        
+                      
+                        
+                            <td>
+                                Banque de l'Océan
+                            </td>
+                        
+                      
+                    </tr>
+                  
+
+                  
+                </table>
+                </div>
+            </div>
+
+            <a href="#dataset-schema"></a>
+            <div class="component" id="dataset-schema">
+                <div class="header">
+                    Dataset Schema
+                    <span data-toggle data-for="dataset-schema-info" class="info"></span>
+                </div>
+
+                <div class="tooltips" id="dataset-schema-info" hidden>
+                    
+The Dataset Schema presents a comprehensive overview of each column in the dataset, including data types, null value percentages, average character length, token count (using tiktoken's cl100k_base encoding), and average word count per field. This information helps identify potential processing needs and complexity of each column.
+
+                </div>
+
+                <table>
+                  <tr>
+                    <th>Column Name</th>
+                    <th>Data Type</th>
+                    <th class="tnum">% Null</th>
+                    <th class="tnum">Avg Len</th>
+                    <th class="tnum">Avg Tokens</th>
+                    <th class="tnum">Cardinality</th>
+                    <th class="tnum">Avg Word Count</th>
+                    <th>Column Type</th>
+                  </tr>
+
+                  
+                    
+                    <tr>
+                      <td>bank_id</td>
+                      <td>object</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">NA</td>
+                      <td class="tnum">18.3</td>
+                      <td class="tnum">50</td>
+                      <td class="tnum">0.0</td>
+                      <td>Other</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>country</td>
+                      <td>object</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">8.5</td>
+                      <td class="tnum">1.2</td>
+                      <td class="tnum">8</td>
+                      <td class="tnum">1.2</td>
+                      <td>Categorical</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>region</td>
+                      <td>object</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">10.6</td>
+                      <td class="tnum">1.7</td>
+                      <td class="tnum">6</td>
+                      <td class="tnum">1.7</td>
+                      <td>Categorical</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>risk_score</td>
+                      <td>int64</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">NA</td>
+                      <td class="tnum">1.0</td>
+                      <td class="tnum">40</td>
+                      <td class="tnum">0.0</td>
+                      <td>Numeric</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>market_share_percent</td>
+                      <td>float64</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">NA</td>
+                      <td class="tnum">7.1</td>
+                      <td class="tnum">50</td>
+                      <td class="tnum">0.0</td>
+                      <td>Numeric</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>aml_compliance_flag</td>
+                      <td>object</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">9.5</td>
+                      <td class="tnum">2.1</td>
+                      <td class="tnum">3</td>
+                      <td class="tnum">1.0</td>
+                      <td>Categorical</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>kyc_compliance_flag</td>
+                      <td>object</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">9.3</td>
+                      <td class="tnum">2.0</td>
+                      <td class="tnum">3</td>
+                      <td class="tnum">1.0</td>
+                      <td>Categorical</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>regulatory_oversight_flag</td>
+                      <td>object</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">3.9</td>
+                      <td class="tnum">1.0</td>
+                      <td class="tnum">4</td>
+                      <td class="tnum">1.0</td>
+                      <td>Categorical</td>
+                    </tr>
+                  
+                    
+                    <tr>
+                      <td>bank_name</td>
+                      <td>object</td>
+                      <td class="tnum">0.0%</td>
+                      <td class="tnum">22.1</td>
+                      <td class="tnum">4.8</td>
+                      <td class="tnum">48</td>
+                      <td class="tnum">3.5</td>
+                      <td>Text</td>
+                    </tr>
+                  
+
+                  
+
+                </table>
+            </div>
+
+            <a href="#dataset-statistics"></a>
+            <div class="component" id="dataset-statistics">
+                <div class="header">
+                    Dataset Statistics
+                    <span data-toggle data-for="dataset-statistics-info" class="info"></span>
+                </div>
+
+                <div class="tooltips" id="dataset-statistics-info" hidden>
+                    
+Dataset Statistics offer critical high-level metrics including data completeness (percentage of non-null values), token counts across the dataset, row and column counts, and semantic uniqueness of rows (indicating data diversity). These metrics provide a foundation for understanding dataset size and complexity. All token metrics utilize tiktoken's cl100k_base encoding.
+
+                </div>
+
+                <table>
+                  <tr>
+                    <th>Metric</th>
+                    <th class="tnum">Value</th>
+                  </tr>
+                  <tr>
+                    <td>Data Completeness</td>
+                    <td class="tnum">100.0%</td>
+                  </tr>
+                  <tr>
+                    <td>Total Tokens</td>
+                    <td class="tnum">1957</td>
+                  </tr>
+                </table>
+                <p>
+                <table>
+                  <tr>
+                    <th colspan=2>Rows</th>
+                  </tr>
+                  <tr>
+                    <td>Number of Rows</td>
+                    <td class="tnum">50</td>
+                  </tr>
+                  <tr>
+                    <td>Unique Rows</td>
+                    <td class="tnum">100.0%</td>
+                  </tr>
+                  <tr>
+                    <td>Semantically Unique Rows</td>
+                    <td class="tnum">64.0%</td>
+                  </tr>
+
+                  
+
+                </table>
+                <p>
+                <table>
+                  <tr>
+                    <th colspan=2>Columns</th>
+                  </tr>
+                  <tr>
+                    <td>Number of Columns</td>
+                    <td class="tnum">9</td>
+                  </tr>
+                  <tr>
+                    <td>Categorical Columns</td>
+                    <td class="tnum">5</td>
+                  </tr>
+                  <tr>
+                    <td>Text Columns</td>
+                    <td class="tnum">1</td>
+                  </tr>
+                  <tr>
+                    <td>Numerical Columns</td>
+                    <td class="tnum">2</td>
+                  </tr>
+                </table>
+            </div>
+
+            <a href="#column-distributions"></a>
+            <div class="component" id="column-distributions">
+                <div class="header">
+                    Column Distributions
+                    <span data-toggle data-for="column-distributions-info" class="info"></span>
+                </div>
+
+                <div class="tooltips" id="column-distributions-info" hidden>
+                    
+Column Distributions visualize the frequency and range of values across numeric and categorical columns, revealing patterns, central tendencies, and potential imbalances in the data. These visualizations help identify dominant categories, unusual distributions, and potential processing needs.
+
+                </div>
+
+                <div class="column-distribution-cell">
+
+                    <div class="select-wrapper">
+                        <select name="select-columns" id="select-columns">
+                        
+                            <option value="country">country</option>
+                        
+                            <option value="region">region</option>
+                        
+                            <option value="risk_score">risk_score</option>
+                        
+                            <option value="market_share_percent">market_share_percent</option>
+                        
+                            <option value="aml_compliance_flag">aml_compliance_flag</option>
+                        
+                            <option value="kyc_compliance_flag">kyc_compliance_flag</option>
+                        
+                            <option value="regulatory_oversight_flag">regulatory_oversight_flag</option>
+                        
+                        </select>
+                    </div>
+
+                    
+
+                        
+                            
+                            
+                        
+
+                        <table  class="js-select-target" id="country-table">
+                          <tr>
+                            <th>Category</th>
+                            <th class="tnum">Count</th>
+                            <th class="tnum">Percentage</th>
+                          </tr>
+
+                          
+                            <tr>
+                              <td>France</td>
+                              <td class="tnum">11</td>
+                              <td class="tnum">22.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>United Kingdom</td>
+                              <td class="tnum">8</td>
+                              <td class="tnum">16.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Australia</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Singapore</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Germany</td>
+                              <td class="tnum">5</td>
+                              <td class="tnum">10.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Japan</td>
+                              <td class="tnum">5</td>
+                              <td class="tnum">10.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Canada</td>
+                              <td class="tnum">4</td>
+                              <td class="tnum">8.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>United States</td>
+                              <td class="tnum">3</td>
+                              <td class="tnum">6.0%</td>
+                            </tr>
+                          
+
+                            
+
+                        </table>
+                    
+
+                        
+                            
+                            
+                        
+
+                        <table hidden class="js-select-target" id="region-table">
+                          <tr>
+                            <th>Category</th>
+                            <th class="tnum">Count</th>
+                            <th class="tnum">Percentage</th>
+                          </tr>
+
+                          
+                            <tr>
+                              <td>North America</td>
+                              <td class="tnum">12</td>
+                              <td class="tnum">24.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Asia Pacific</td>
+                              <td class="tnum">9</td>
+                              <td class="tnum">18.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Latin America</td>
+                              <td class="tnum">8</td>
+                              <td class="tnum">16.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Middle East</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Europe</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>Africa</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+
+                            
+
+                        </table>
+                    
+
+                        
+                            
+                            
+                        
+
+                        <table hidden class="js-select-target" id="risk_score-table">
+                          <tr>
+                            <th>Category</th>
+                            <th class="tnum">Count</th>
+                            <th class="tnum">Percentage</th>
+                          </tr>
+
+                          
+                            <tr>
+                              <td>2.00-16.00</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>16.00-30.00</td>
+                              <td class="tnum">9</td>
+                              <td class="tnum">18.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>30.00-44.00</td>
+                              <td class="tnum">3</td>
+                              <td class="tnum">6.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>44.00-58.00</td>
+                              <td class="tnum">8</td>
+                              <td class="tnum">16.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>58.00-72.00</td>
+                              <td class="tnum">6</td>
+                              <td class="tnum">12.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>72.00-86.00</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>86.00-100.00</td>
+                              <td class="tnum">10</td>
+                              <td class="tnum">20.0%</td>
+                            </tr>
+                          
+
+                            
+
+                        </table>
+                    
+
+                        
+                            
+                            
+                        
+
+                        <table hidden class="js-select-target" id="market_share_percent-table">
+                          <tr>
+                            <th>Category</th>
+                            <th class="tnum">Count</th>
+                            <th class="tnum">Percentage</th>
+                          </tr>
+
+                          
+                            <tr>
+                              <td>0.30-3.81</td>
+                              <td class="tnum">6</td>
+                              <td class="tnum">12.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>3.81-7.33</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>7.33-10.84</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>10.84-14.35</td>
+                              <td class="tnum">9</td>
+                              <td class="tnum">18.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>14.35-17.86</td>
+                              <td class="tnum">7</td>
+                              <td class="tnum">14.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>17.86-21.38</td>
+                              <td class="tnum">10</td>
+                              <td class="tnum">20.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>21.38-24.89</td>
+                              <td class="tnum">4</td>
+                              <td class="tnum">8.0%</td>
+                            </tr>
+                          
+
+                            
+
+                        </table>
+                    
+
+                        
+                            
+                            
+                        
+
+                        <table hidden class="js-select-target" id="aml_compliance_flag-table">
+                          <tr>
+                            <th>Category</th>
+                            <th class="tnum">Count</th>
+                            <th class="tnum">Percentage</th>
+                          </tr>
+
+                          
+                            <tr>
+                              <td>compliant</td>
+                              <td class="tnum">42</td>
+                              <td class="tnum">84.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>under_review</td>
+                              <td class="tnum">5</td>
+                              <td class="tnum">10.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>non_compliant</td>
+                              <td class="tnum">3</td>
+                              <td class="tnum">6.0%</td>
+                            </tr>
+                          
+
+                            
+
+                        </table>
+                    
+
+                        
+                            
+                            
+                        
+
+                        <table hidden class="js-select-target" id="kyc_compliance_flag-table">
+                          <tr>
+                            <th>Category</th>
+                            <th class="tnum">Count</th>
+                            <th class="tnum">Percentage</th>
+                          </tr>
+
+                          
+                            <tr>
+                              <td>compliant</td>
+                              <td class="tnum">45</td>
+                              <td class="tnum">90.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>under_review</td>
+                              <td class="tnum">4</td>
+                              <td class="tnum">8.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>non_compliant</td>
+                              <td class="tnum">1</td>
+                              <td class="tnum">2.0%</td>
+                            </tr>
+                          
+
+                            
+
+                        </table>
+                    
+
+                        
+                            
+                            
+                        
+
+                        <table hidden class="js-select-target" id="regulatory_oversight_flag-table">
+                          <tr>
+                            <th>Category</th>
+                            <th class="tnum">Count</th>
+                            <th class="tnum">Percentage</th>
+                          </tr>
+
+                          
+                            <tr>
+                              <td>none</td>
+                              <td class="tnum">22</td>
+                              <td class="tnum">44.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>low</td>
+                              <td class="tnum">18</td>
+                              <td class="tnum">36.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>medium</td>
+                              <td class="tnum">6</td>
+                              <td class="tnum">12.0%</td>
+                            </tr>
+                          
+                            <tr>
+                              <td>high</td>
+                              <td class="tnum">4</td>
+                              <td class="tnum">8.0%</td>
+                            </tr>
+                          
+
+                            
+
+                        </table>
+                    
+
+                </div>
+
+                <div class="column-distribution-cell">
+                    
+                        <figure class="figure js-select-target"  id="country-figure">
+                            <div>                            <div id="8d06679e-2680-4f63-9ee0-b193b8510f2d" class="plotly-graph-div" style="height:100%; width:450px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("8d06679e-2680-4f63-9ee0-b193b8510f2d")) {                    Plotly.newPlot(                        "8d06679e-2680-4f63-9ee0-b193b8510f2d",                        [{"marker":{"color":"#A051FA"},"name":"Distribution Count","opacity":0.75,"text":["11","8","7","7","5","5","4","3"],"width":[],"x":["France","United Kingdom","Australia","Singapore","Germany","Japan","Canada","United States"],"y":[11,8,7,7,5,5,4,3],"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#A051FA","opacity":0},"name":"Distribution Percentage","opacity":0.75,"width":[],"x":["France","United Kingdom","Australia","Singapore","Germany","Japan","Canada","United States"],"y":[22.0,16.0,14.0,14.0,10.0,10.0,8.0,6.0],"type":"bar","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Percentage"}},"title":{"text":"Distribution","x":0.5},"showlegend":false,"width":450},                        {"responsive": true}                    )                };                            </script>        </div>
+                        </figure>
+                    
+                        <figure class="figure js-select-target" hidden id="region-figure">
+                            <div>                            <div id="ebdf76ae-9150-43e4-ab2d-01bdf4845a32" class="plotly-graph-div" style="height:100%; width:450px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("ebdf76ae-9150-43e4-ab2d-01bdf4845a32")) {                    Plotly.newPlot(                        "ebdf76ae-9150-43e4-ab2d-01bdf4845a32",                        [{"marker":{"color":"#A051FA"},"name":"Distribution Count","opacity":0.75,"text":["12","9","8","7","7","7"],"width":[],"x":["North America","Asia Pacific","Latin America","Middle East","Europe","Africa"],"y":[12,9,8,7,7,7],"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#A051FA","opacity":0},"name":"Distribution Percentage","opacity":0.75,"width":[],"x":["North America","Asia Pacific","Latin America","Middle East","Europe","Africa"],"y":[24.0,18.0,16.0,14.0,14.0,14.0],"type":"bar","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Percentage"}},"title":{"text":"Distribution","x":0.5},"showlegend":false,"width":450},                        {"responsive": true}                    )                };                            </script>        </div>
+                        </figure>
+                    
+                        <figure class="figure js-select-target" hidden id="risk_score-figure">
+                            <div>                            <div id="d749786b-1bed-4acd-8793-a4f4af013cba" class="plotly-graph-div" style="height:100%; width:450px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("d749786b-1bed-4acd-8793-a4f4af013cba")) {                    Plotly.newPlot(                        "d749786b-1bed-4acd-8793-a4f4af013cba",                        [{"marker":{"color":"#A051FA"},"name":"Distribution Count","opacity":0.75,"text":["7","9","3","8","6","7","10"],"width":[],"x":["2.00-16.00","16.00-30.00","30.00-44.00","44.00-58.00","58.00-72.00","72.00-86.00","86.00-100.00"],"y":[7,9,3,8,6,7,10],"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#A051FA","opacity":0},"name":"Distribution Percentage","opacity":0.75,"width":[],"x":["2.00-16.00","16.00-30.00","30.00-44.00","44.00-58.00","58.00-72.00","72.00-86.00","86.00-100.00"],"y":[14.0,18.0,6.0,16.0,12.0,14.0,20.0],"type":"bar","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Percentage"}},"title":{"text":"Distribution","x":0.5},"showlegend":false,"width":450},                        {"responsive": true}                    )                };                            </script>        </div>
+                        </figure>
+                    
+                        <figure class="figure js-select-target" hidden id="market_share_percent-figure">
+                            <div>                            <div id="98e8005d-d7be-45c2-b2b8-e35243fd4ed0" class="plotly-graph-div" style="height:100%; width:450px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("98e8005d-d7be-45c2-b2b8-e35243fd4ed0")) {                    Plotly.newPlot(                        "98e8005d-d7be-45c2-b2b8-e35243fd4ed0",                        [{"marker":{"color":"#A051FA"},"name":"Distribution Count","opacity":0.75,"text":["6","7","7","9","7","10","4"],"width":[],"x":["0.30-3.81","3.81-7.33","7.33-10.84","10.84-14.35","14.35-17.86","17.86-21.38","21.38-24.89"],"y":[6,7,7,9,7,10,4],"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#A051FA","opacity":0},"name":"Distribution Percentage","opacity":0.75,"width":[],"x":["0.30-3.81","3.81-7.33","7.33-10.84","10.84-14.35","14.35-17.86","17.86-21.38","21.38-24.89"],"y":[12.0,14.0,14.0,18.0,14.0,20.0,8.0],"type":"bar","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Percentage"}},"title":{"text":"Distribution","x":0.5},"showlegend":false,"width":450},                        {"responsive": true}                    )                };                            </script>        </div>
+                        </figure>
+                    
+                        <figure class="figure js-select-target" hidden id="aml_compliance_flag-figure">
+                            <div>                            <div id="57d676cc-264d-4362-bee2-86dcfa174f4c" class="plotly-graph-div" style="height:100%; width:450px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("57d676cc-264d-4362-bee2-86dcfa174f4c")) {                    Plotly.newPlot(                        "57d676cc-264d-4362-bee2-86dcfa174f4c",                        [{"marker":{"color":"#A051FA"},"name":"Distribution Count","opacity":0.75,"text":["42","5","3"],"width":[],"x":["compliant","under_review","non_compliant"],"y":[42,5,3],"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#A051FA","opacity":0},"name":"Distribution Percentage","opacity":0.75,"width":[],"x":["compliant","under_review","non_compliant"],"y":[84.0,10.0,6.0],"type":"bar","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Percentage"}},"title":{"text":"Distribution","x":0.5},"showlegend":false,"width":450},                        {"responsive": true}                    )                };                            </script>        </div>
+                        </figure>
+                    
+                        <figure class="figure js-select-target" hidden id="kyc_compliance_flag-figure">
+                            <div>                            <div id="24dca5fe-7323-48c6-8f0f-d5f333fcb88d" class="plotly-graph-div" style="height:100%; width:450px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("24dca5fe-7323-48c6-8f0f-d5f333fcb88d")) {                    Plotly.newPlot(                        "24dca5fe-7323-48c6-8f0f-d5f333fcb88d",                        [{"marker":{"color":"#A051FA"},"name":"Distribution Count","opacity":0.75,"text":["45","4","1"],"width":[],"x":["compliant","under_review","non_compliant"],"y":[45,4,1],"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#A051FA","opacity":0},"name":"Distribution Percentage","opacity":0.75,"width":[],"x":["compliant","under_review","non_compliant"],"y":[90.0,8.0,2.0],"type":"bar","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Percentage"}},"title":{"text":"Distribution","x":0.5},"showlegend":false,"width":450},                        {"responsive": true}                    )                };                            </script>        </div>
+                        </figure>
+                    
+                        <figure class="figure js-select-target" hidden id="regulatory_oversight_flag-figure">
+                            <div>                            <div id="7eca55f0-74e4-4e77-9050-8e5b977169eb" class="plotly-graph-div" style="height:100%; width:450px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("7eca55f0-74e4-4e77-9050-8e5b977169eb")) {                    Plotly.newPlot(                        "7eca55f0-74e4-4e77-9050-8e5b977169eb",                        [{"marker":{"color":"#A051FA"},"name":"Distribution Count","opacity":0.75,"text":["22","18","6","4"],"width":[],"x":["none","low","medium","high"],"y":[22,18,6,4],"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#A051FA","opacity":0},"name":"Distribution Percentage","opacity":0.75,"width":[],"x":["none","low","medium","high"],"y":[44.0,36.0,12.0,8.0],"type":"bar","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Percentage"}},"title":{"text":"Distribution","x":0.5},"showlegend":false,"width":450},                        {"responsive": true}                    )                };                            </script>        </div>
+                        </figure>
+                    
+                </div>
+
+            </div>
+
+            
+            <a href="#correlations"></a>
+            <div class="component" id="correlations">
+                <div class="header">
+                    Correlations
+                    <span data-toggle data-for="correlations-info" class="info"></span>
+                </div>
+
+                <div class="tooltips" id="correlations-info" hidden>
+                    
+Correlations measure the strength and direction of relationships between all non-text variables in the dataset. This analysis helps identify potential dependencies, redundancies, and interesting associations that might influence downstream model performance or reveal insights about the data domain. 
+
+Note: Correlations between categorical and numeric columns use Theil's U (uncertainty coefficient), which quantifies how much knowing one variable reduces the uncertainty about the other. This measure is asymmetric, so the correlation from column A to B may differ from B to A.
+
+                </div>
+
+                <figure class="figure">
+                    <div>                            <div id="53e7b469-a772-4992-9f95-aca1f480e98d" class="plotly-graph-div" style="height:600px; width:800px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("53e7b469-a772-4992-9f95-aca1f480e98d")) {                    Plotly.newPlot(                        "53e7b469-a772-4992-9f95-aca1f480e98d",                        [{"coloraxis":"coloraxis","name":"Final Output","x":["country","region","risk_score","market_share_p...","aml_compliance...","kyc_compliance...","regulatory_ove..."],"xgap":1,"y":["country","region","risk_score","market_share_p...","aml_compliance...","kyc_compliance...","regulatory_ove..."],"ygap":1,"z":[[1.0,0.23982600744232385,0.4823593909539859,0.5133437828778714,0.27823182090568804,0.3394929294133572,0.26154849003687475],[0.21139618701364815,1.0,0.4243247986320278,0.4524902010622935,0.2297361237580937,0.29557271071559144,0.08480653960604914],[0.8705326635021685,0.8687841209995113,1.0,0.1292400421389769,0.04611604251894114,0.22576834763265086,0.14601518650311832],[1.0,1.0,0.1292400421389769,1.0,0.32181468669418667,0.18611798723870435,0.1256225122187603],[0.07558015300377961,0.07079936878791201,0.04611604251894114,0.32181468669418667,1.0,0.04921993589992318,0.06473546307617109],[0.06341543410493093,0.06263653118594113,0.22576834763265086,0.18611798723870435,0.03384576315798739,1.0,0.030448924281635748],[0.15440091145655094,0.05679709368706323,0.14601518650311832,0.1256225122187603,0.1406821292711684,0.09622886442270852,1.0]],"type":"heatmap"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"coloraxis":{"colorscale":[[0.0,"#E8F3C6"],[0.25,"#94E2BA"],[0.5,"#31B8C0"],[0.75,"#4F78B3"],[1.0,"#76137F"]],"cmax":1.0,"cmin":0},"showlegend":false,"width":800,"height":600},                        {"responsive": true}                    )                };                            </script>        </div>
+                </figure>
+            </div>
+            
+
+            
+            <a href="#outlier-analysis"></a>
+            <div class="component" id="outlier-analysis">
+                <div class="header">
+                    Outlier Analysis
+                    <span data-toggle data-for="outlier-analysis-info" class="info"></span>
+                </div>
+
+                <div class="tooltips" id="outlier-analysis-info" hidden>
+                    
+Outlier Analysis uses an Isolation Forest algorithm to identify anomalous data points that deviate significantly from the overall patterns. These outliers might represent errors, rare events, or special cases requiring attention.
+
+                </div>
+
+                <figure class="figure">
+                    <div>                            <div id="64aced03-8867-4e08-a5b9-efdd60d6b3d9" class="plotly-graph-div" style="height:600px; width:800px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("64aced03-8867-4e08-a5b9-efdd60d6b3d9")) {                    Plotly.newPlot(                        "64aced03-8867-4e08-a5b9-efdd60d6b3d9",                        [{"hoverinfo":"skip","marker":{"color":"#A051FA","size":8},"mode":"markers","showlegend":false,"x":[-0.45309012811766786,2.17654769403967,-1.1548666880558847,-3.5768105456250496,-7.3202331068834114,7.062063046690109,-6.84907178254686,-0.06899841346573982,12.622759992882385,8.441078242296724,-1.1981324607858852,-7.6734822489244205,-0.310380883248971,-6.752607228430329,-6.544296602116059,-1.2617321993518917,-3.2885435504655214,-7.026653111298286,1.7859454435628914,7.855892649453826,0.9025365416269941,-6.979194332039766,4.245079139158552,1.2276600007593998,-6.401245907440724,2.026441990025366,10.593950772077951,3.9332799130113716,5.949990471826317,11.25336019638642,-5.376916972961856,12.134004648246616,-2.616539608087848,-8.19158643086245,-4.738680393530753,-7.562755113189923,-6.0751642332179605,9.034343352421885,-3.835117189242919,-7.584788870571279,-2.214141409033237,8.83603103254284,4.900116970902696,-2.2169665459103713,-7.854775356724364,-7.146689826124768,2.208419737341859,-0.45614694485617346,4.692797850221604,10.847308397634883],"y":[-6.124183576804745,-1.7683690342090699,5.921143415961385,-3.0798997453835057,2.0555099833531236,-5.423273212174548,1.0301667239776249,-1.9436238797288992,-15.238064105265574,5.389511099462277,-2.9343982893223735,4.216752792179355,-5.112929443584947,2.993714062203131,1.901269863985804,-2.39253340215594,-13.023009667980173,0.7871513137911268,-7.034385950123021,1.2883642544764564,-3.2350369097592306,1.2203389819155512,-2.3706696630750748,-4.938970269100854,0.8715308817703908,-4.434133976550326,3.950210335100859,-6.611368683788839,9.62309521650355,5.444705122077203,4.311304764224946,9.242904800467617,-1.6997436374177641,6.376038148704467,6.720678670596622,0.62296695680696,-0.2764700246281732,5.284865221612995,7.64499767720029,3.472958642680051,-4.600239390074054,3.0558909321662333,4.095806875939711,-4.501998184162197,0.8938009584870592,1.2829480407835565,-6.559875218804552,-6.015788395049036,1.3393648894028047,8.280974033311736],"type":"scatter"},{"hovertemplate":"%{hovertext}<extra></extra>","hovertext":["Dataset index: 8","Dataset index: 16","Dataset index: 26","Dataset index: 27","Dataset index: 29","Dataset index: 31","Dataset index: 33","Dataset index: 49"],"marker":{"color":"#18E7AA","size":8},"mode":"markers","showlegend":false,"x":[12.622759992882385,-3.2885435504655214,10.593950772077951,3.9332799130113716,11.25336019638642,12.134004648246616,-8.19158643086245,10.847308397634883],"y":[-15.238064105265574,-13.023009667980173,3.950210335100859,-6.611368683788839,5.444705122077203,9.242904800467617,6.376038148704467,8.280974033311736],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"matches":"x","title":{"text":"pc1"}},"yaxis":{"matches":"y","title":{"text":"pc2"}},"hovermode":"closest","width":800,"height":600},                        {"responsive": true}                    )                };                            </script>        </div>
+                </figure>
+
+                
+                <div class="header">Outlier Records</div>
+                <div class="sticky-table-container">
+                    <table class="sticky" id="js-outlier-records-table">
+                        <tr>
+                            <th>Column</th>
+                            
+                            <th>Index 8</th>
+                            
+                            <th>Index 16</th>
+                            
+                            <th>Index 26</th>
+                            
+                            <th>Index 27</th>
+                            
+                            <th>Index 29</th>
+                            
+                            <th>Index 31</th>
+                            
+                            <th>Index 33</th>
+                            
+                            <th>Index 49</th>
+                            
+                        </tr>
+
+                        
+                        <tr id="js-outlier-row-1">
+                            <td>bank_id</td>
+                            
+                            
+                            <td>
+                                964c1df701544534aabf9b13cbbec6e5
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                aef8dcefa5944f18b88b0db528da7ae3
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                773e142936274f48ac9e1cc22560e4ca
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                d3f961e5aac34a1b961e77bc912e11c3
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                323597377a8b4b318316552fe7e30754
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                267ab88dae9b4162ae53c52f944997c2
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                d0d23007eee849d38a05f7f9bb9535cb
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                d9105bf37391455d81bfa2930b642884
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-2">
+                            <td>country</td>
+                            
+                            
+                            <td>
+                                Australia
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                United Kingdom
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Singapore
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                United Kingdom
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Australia
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Singapore
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Singapore
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Australia
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-3">
+                            <td>region</td>
+                            
+                            
+                            <td>
+                                Africa
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                North America
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Europe
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Middle East
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Europe
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Asia Pacific
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Latin America
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Asia Pacific
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-4">
+                            <td>risk_score</td>
+                            
+                            
+                            <td>
+                                76
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                47
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                63
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                20
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                85
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                79
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                48
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                90
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-5">
+                            <td>market_share_percent</td>
+                            
+                            
+                            <td>
+                                16.25
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                21.33
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                24.89
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                20.69
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                20.31
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                5.93
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                11.34
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                7.88
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-6">
+                            <td>aml_compliance_flag</td>
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                under_review
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                under_review
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-7">
+                            <td>kyc_compliance_flag</td>
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                compliant
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-8">
+                            <td>regulatory_oversight_flag</td>
+                            
+                            
+                            <td>
+                                none
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                low
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                none
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                none
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                none
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                none
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                none
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                none
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                        <tr id="js-outlier-row-9">
+                            <td>bank_name</td>
+                            
+                            
+                            <td>
+                                Africa Bank
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Northern Trust
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                EuroAsia Singapore Bank
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                United Arab Emirates Bank
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                EuroPacific Bank
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Asian Pacific Bank
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Banco LatinoSing
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                Pacific Horizon Bank
+                            </td>
+                            
+                            
+                        </tr>
+                        
+                    </table>
+                </div>
+                           
+            </div>
+            
+        </section>
+
+        
+
+        
+
+
+
+    </section>
+
+    <script>
+        function handleEvent(event) {
+    const element = document.getElementById(event.currentTarget.dataset.for);
+    if (element.hasAttribute("hidden")) {
+        element.removeAttribute("hidden");
+    }
+    else {
+        element.setAttribute("hidden", true);
+    }
+}
+
+function toggleElement(event) {
+    event.preventDefault();
+    handleEvent(event);
+}
+
+function eraseMessage() {
+    setTimeout(() => {
+        document.getElementById("copied_message").innerHTML = ""
+    }, 2000)
+}
+
+function copyModelOrWorkflowID() {
+    // Get the model or workflow run id field
+    var uid = document.getElementById("model_id") || document.getElementById("workflow_run_id");
+    navigator.clipboard.writeText(uid.textContent.split(" "));
+
+    document.getElementById("copied_message").innerHTML = "Copied"
+
+    eraseMessage();
+}
+
+function toggleNav() {
+    const navbar = document.getElementById("navbar");
+    const nav = document.getElementById("fixed-nav");
+    const navOverlayItems = document.getElementById("nav-overlay");
+    const navBtn = document.getElementById("toggle-nav");
+    if (nav.style.visibility === "hidden") {
+        nav.style.visibility = "visible";
+        navOverlayItems.style.left = 0 + "px";
+        navbar.style.backgroundColor = "white";
+        navBtn.className = "opened-nav-button-bg";
+    }
+    else {
+        nav.style.visibility = "hidden";
+        navOverlayItems.style.left = -nav.offsetWidth + "px";
+        navbar.style.backgroundColor = "transparent";
+        navBtn.className = "closed-nav-button-bg";
+    }
+}
+
+const toggles = document.querySelectorAll("[data-toggle]");
+toggles.forEach(toggle => { toggle.onclick = toggleElement });
+    </script>
+    <script>
+        function showElement(id) {
+    let element = document.getElementById(id);
+    if (element && element.hasAttribute("hidden")) {
+        element.removeAttribute("hidden");
+    }
+}
+
+const htmlSelectElement = document.getElementById("select-columns");
+const hideables = document.querySelectorAll('.js-select-target');
+htmlSelectElement.addEventListener('change', function() {
+    let selectedValue = htmlSelectElement.value;
+    document
+        .querySelectorAll('.js-select-target')
+        .forEach(hideable => hideable.setAttribute("hidden", true));
+    showElement(`${selectedValue}-table`);
+    showElement(`${selectedValue}-figure`);
+});
+
+function showTableRows(cls) {
+    let rows = document.querySelectorAll(cls);
+    rows.forEach(row => {
+        if (row && row.hasAttribute("hidden")  && !row.id.endsWith('full')) {
+            row.removeAttribute("hidden");
+        }
+    });
+}
+
+function hideTableRows(cls) {
+    let rows = document.querySelectorAll(cls);
+    rows.forEach(row => row.setAttribute("hidden", true));
+}
+
+const showMoreLinks = document.querySelectorAll('.js-show-more-link');
+showMoreLinks.forEach(
+    showMoreLink => showMoreLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        let linkId = showMoreLink.id;
+        let rowClass = `.${linkId}-row`;
+        if (showMoreLink.innerHTML.startsWith('Show more')) {
+            showTableRows(rowClass);
+            showMoreLink.innerHTML = showMoreLink.innerHTML.replace('more', 'less');
+        } else {
+            hideTableRows(rowClass);
+            showMoreLink.innerHTML = showMoreLink.innerHTML.replace('less', 'more');
+        }
+    })
+);
+
+const expandableRows = document.querySelectorAll('table#js-dataset-preview-table tr, table#js-outlier-records-table tr');
+expandableRows.forEach(
+    row => row.addEventListener('click', function() {
+        if (row.id) {
+            document.querySelectorAll(`tr#${row.id} span.js-preview-span`).forEach(span => {
+                if (span.hasAttribute("hidden")) {
+                    span.removeAttribute("hidden");
+                } else {
+                    span.setAttribute("hidden", true);
+                }
+            });
+        }
+    })
+);
+
+const hljsElts = document.querySelectorAll('code.hljs');
+hljsElts.forEach(elt => { elt.style.removeProperty('backgroundColor'); });
+    </script>
+
+</body>
+
+</html>
