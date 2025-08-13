@@ -27,7 +27,7 @@ jobs:
         if: ${{ github.base_ref != 'main' }}
         env:
           GRETEL_API_KEY: ${{ secrets.GRETEL_DEV_API_KEY }}
-          GRETEL_CLOUD_URL: "https://api-dev.gretel.cloud"
+          GRETEL_CLOUD_URL: "https://api.dev.gretel.ai"
 
       # Run tests in PROD
       - name: Unit tests
